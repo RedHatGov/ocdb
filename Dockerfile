@@ -15,7 +15,7 @@ RUN buffalo build --static -o /bin/app
 RUN cp -a ./config /
 
 FROM alpine
-RUN apk add --no-cache bash
+RUN apk add --no-cache bash git
 RUN apk add --no-cache ca-certificates
 
 WORKDIR /bin/config
