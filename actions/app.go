@@ -10,6 +10,7 @@ import (
 	csrf "github.com/gobuffalo/mw-csrf"
 	i18n "github.com/gobuffalo/mw-i18n"
 	"github.com/gobuffalo/packr/v2"
+	"github.com/isimluk/ocdb/actions/api"
 )
 
 // ENV is used to help switch settings based on where the
@@ -57,8 +58,8 @@ func App() *buffalo.App {
 		app.Use(translations())
 
 		app.GET("/", HomeHandler)
-		api := app.Group("/api/v1/")
-		api.GET("/standards", APIHandler)
+		apiV1 := app.Group("/api/v1/")
+		apiV1.GET("/standards", api.Handler)
 
 		app.ServeFiles("/", assetsBox) // serve files from the public directory
 	}
