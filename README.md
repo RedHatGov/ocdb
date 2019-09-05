@@ -1,5 +1,9 @@
 # Open Controls Database
 
+## Demo
+```
+podman run -it -p "3000:3000" quay.io/slukasik/ocdb
+```
 
 ## Developer Setup
 
