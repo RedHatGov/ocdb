@@ -19,11 +19,9 @@ func (v StandardsResource) List(c buffalo.Context) error {
 // Show default implementation.
 func (v StandardsResource) Show(c buffalo.Context) error {
 	ms := masonry.GetInstance()
-	standardID := c.Param("standard_id")
-	for _, s := range (*ms).GetAllStandards() {
-		if s.GetName() == standardID {
-			return c.Render(200, r.JSON(s))
-		}
+	standard, found := (*ms).GetStandard(c.Param("standard_id"))
+	if found {
+		return c.Render(200, r.JSON(standard))
 	}
 	return c.Render(404, r.JSON("Not found"))
 }
