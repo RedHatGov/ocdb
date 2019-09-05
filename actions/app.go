@@ -12,6 +12,7 @@ import (
 	i18n "github.com/gobuffalo/mw-i18n"
 	"github.com/gobuffalo/packr/v2"
 	"github.com/isimluk/ocdb/models"
+	"github.com/isimluk/ocdb/pkg/masonry"
 )
 
 // ENV is used to help switch settings based on where the
@@ -62,6 +63,11 @@ func App() *buffalo.App {
 		app.GET("/api", APIHandler)
 
 		app.ServeFiles("/", assetsBox) // serve files from the public directory
+
+		err := masonry.BuildCache()
+		if err != nil {
+			panic(err)
+		}
 	}
 
 	return app
