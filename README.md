@@ -10,7 +10,7 @@
 ## Developer Setup
 
   * install golang
-  * acquire buffallo tool - `go get -u -v -tags sqlite github.com/gobuffalo/buffalo/buffalo`
+  * acquire buffallo tool - `go get -u -v github.com/gobuffalo/buffalo/buffalo`
   * optionally consider installing bash completion: https://gobuffalo.io/en/docs/getting-started/integrations
   * setup database - `buffalo pop create -a` (amend database.yml if needed)
   * run server `buffalo dev`
