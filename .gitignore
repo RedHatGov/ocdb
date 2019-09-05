@@ -24,4 +24,5 @@ jhw.*
 dist/
 generated/
 .vendor/
+/.masonry_cache
 
