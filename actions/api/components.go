@@ -19,7 +19,7 @@ func (v ComponentsResource) List(c buffalo.Context) error {
 // Show default implementation.
 func (v ComponentsResource) Show(c buffalo.Context) error {
 	ms := masonry.GetInstance()
-	component, found := (*ms).GetStandard(c.Param("component_id"))
+	component, found := (*ms).GetComponent(c.Param("component_id"))
 	if found {
 		return c.Render(200, r.JSON(component))
 	}
