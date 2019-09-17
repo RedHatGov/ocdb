@@ -1,13 +1,31 @@
 {
   "compilerOptions": {
-      "outDir": "./assets/built",
-      "allowJs": true,
-      "target": "es6",
-      "module": "commonjs",
-      "noImplicitAny" : true
+    "baseUrl": ".",
+    "rootDir": ".",
+    "outDir": "dist",
+    "module": "esnext",
+    "target": "es5",
+    "lib": ["es6", "dom"],
+    "sourceMap": true,
+    "jsx": "react",
+    "moduleResolution": "node",
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitAny": false,
+    "allowJs": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "resolveJsonModule": true,
+    "paths": {
+      "@app/*": ["assets/src/app/*"],
+      "@assets/*": ["node_modules/@patternfly/react-core/dist/styles/assets/*"]
+    },
   },
   "include": [
-      "./assets/src/**/*"
+    "**/*.ts",
+    "**/*.tsx"
   ],
-  "compileOnSave": true
+  "exclude": ["node_modules"]
 }
