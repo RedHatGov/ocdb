@@ -1,23 +1,22 @@
 const Webpack = require("webpack");
 const Glob = require("glob");
+const path = require('path');
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const ManifestPlugin = require("webpack-manifest-plugin");
 const CleanObsoleteChunks = require('webpack-clean-obsolete-chunks');
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const LiveReloadPlugin = require('webpack-livereload-plugin');
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 const configurator = {
   entries: function(){
     var entries = {
-      application: [
-        './node_modules/jquery-ujs/src/rails.js',
-        './assets/css/application.scss',
-      ],
-    }
+      app: path.resolve(__dirname, 'assets', 'src', 'index.tsx'),
+    };
 
     Glob.sync("./assets/*/*.*").forEach((entry) => {
-      if (entry === './assets/css/application.scss') {
+      if (entry === './assets/css/application.scss' || entry === './assets/src/typings.d.ts') {
         return
       }
 
@@ -57,15 +56,16 @@ const configurator = {
           use: [
             MiniCssExtractPlugin.loader,
             { loader: "css-loader", options: {sourceMap: true}},
-            { loader: "sass-loader", options: {sourceMap: true}}
+            { loader: "sass-loader", options: {sourceMap: true, includePaths: [ "/node_modules/@patternfly/patternfly/" ]}}
           ]
         },
         { test: /\.tsx?$/, use: "ts-loader", exclude: /node_modules/},
         { test: /\.jsx?$/,loader: "babel-loader",exclude: /node_modules/ },
-        { test: /\.(woff|woff2|ttf|svg)(\?v=\d+\.\d+\.\d+)?$/,use: "url-loader"},
+        { test: /\.(woff|woff2|ttf|svg|png|jpg)(\?v=\d+\.\d+\.\d+)?$/,use: "url-loader"},
         { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,use: "file-loader" },
         { test: require.resolve("jquery"),use: "expose-loader?jQuery!expose-loader?$"},
-        { test: /\.go$/, use: "gopherjs-loader"}
+        { test: /\.go$/, use: "gopherjs-loader"},
+        { test: /\.css$/, use: ["style-loader", "css-loader"] }
       ]
     }
   },
@@ -83,7 +83,12 @@ const configurator = {
       plugins: configurator.plugins(),
       module: configurator.moduleOptions(),
       resolve: {
-        extensions: ['.ts', '.js', '.json']
+          extensions: ['.ts', '.js', '.json', '.tsx'],
+          plugins: [
+              new TsconfigPathsPlugin({
+                  configFile: path.resolve(__dirname, './tsconfig.json')
+              })
+          ]
       }
     }
 
