@@ -1,11 +1,13 @@
 const Webpack = require("webpack");
 const Glob = require("glob");
+const path = require('path');
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const ManifestPlugin = require("webpack-manifest-plugin");
 const CleanObsoleteChunks = require('webpack-clean-obsolete-chunks');
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const LiveReloadPlugin = require('webpack-livereload-plugin');
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 const configurator = {
   entries: function(){
@@ -83,7 +85,12 @@ const configurator = {
       plugins: configurator.plugins(),
       module: configurator.moduleOptions(),
       resolve: {
-        extensions: ['.ts', '.js', '.json']
+          extensions: ['.ts', '.js', '.json'],
+          plugins: [
+              new TsconfigPathsPlugin({
+                  configFile: path.resolve(__dirname, './tsconfig.json')
+              })
+          ]
       }
     }
 
