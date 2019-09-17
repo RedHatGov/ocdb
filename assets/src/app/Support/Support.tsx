@@ -3,7 +3,6 @@ import nistLogo from '@app/assets/images/nist-logo-2x.png';
 import { CubesIcon } from '@patternfly/react-icons';
 
 import { Breadcrumb, BreadcrumbItem, BreadcrumbHeading } from '@patternfly/react-core';
-import { ChartPie, ChartThemeColor } from '@patternfly/react-charts';
 import { Card, CardHeader, CardBody, CardFooter } from '@patternfly/react-core';
 import { Accordion, AccordionItem, AccordionContent, AccordionToggle } from '@patternfly/react-core';
 import {
