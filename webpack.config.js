@@ -57,7 +57,7 @@ const configurator = {
           use: [
             MiniCssExtractPlugin.loader,
             { loader: "css-loader", options: {sourceMap: true}},
-            { loader: "sass-loader", options: {sourceMap: true}}
+            { loader: "sass-loader", options: {sourceMap: true, includePaths: [ "/node_modules/@patternfly/patternfly/" ]}}
           ]
         },
         { test: /\.tsx?$/, use: "ts-loader", exclude: /node_modules/},
