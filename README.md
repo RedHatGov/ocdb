@@ -15,3 +15,6 @@
   * setup database - `buffalo pop create -a` (amend database.yml if needed)
   * run server `buffalo dev`
   * point your browser to [http://127.0.0.1:3000](http://127.0.0.1:3000)
+
+## Links
+  * [latest builds](https://quay.io/repository/slukasik/ocdb)
