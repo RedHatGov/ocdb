@@ -85,7 +85,7 @@ const configurator = {
       plugins: configurator.plugins(),
       module: configurator.moduleOptions(),
       resolve: {
-          extensions: ['.ts', '.js', '.json'],
+          extensions: ['.ts', '.js', '.json', '.tsx'],
           plugins: [
               new TsconfigPathsPlugin({
                   configFile: path.resolve(__dirname, './tsconfig.json')
