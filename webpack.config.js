@@ -12,11 +12,8 @@ const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const configurator = {
   entries: function(){
     var entries = {
-      application: [
-        './node_modules/jquery-ujs/src/rails.js',
-        './assets/css/application.scss',
-      ],
-    }
+      app: path.resolve(__dirname, 'assets', 'src', 'index.tsx'),
+    };
 
     Glob.sync("./assets/*/*.*").forEach((entry) => {
       if (entry === './assets/css/application.scss' || entry === './assets/src/typings.d.ts') {

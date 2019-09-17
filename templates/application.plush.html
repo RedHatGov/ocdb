@@ -1,21 +1,17 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <head>
+        <meta id="appName" name="application-name" content="Patternfly Seed">
+        <base href="/">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
-    <title>Buffalo - Ocdb</title>
-    <%= stylesheetTag("application.css") %>
+    <title>Ocdb</title>
     <meta name="csrf-param" content="authenticity_token" />
     <meta name="csrf-token" content="<%= authenticity_token %>" />
     <link rel="icon" href="<%= assetPath("images/favicon.ico") %>">
+    <%= javascriptTag("app.js") %>
   </head>
   <body>
-
-    <div class="container">
-      <%= partial("flash.html") %>
-      <%= yield %>
-    </div>
-
-    <%= javascriptTag("application.js") %>
+    <div id="root"></div>
   </body>
 </html>
