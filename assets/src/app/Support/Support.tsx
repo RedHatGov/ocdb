@@ -57,7 +57,7 @@ class SortableTable extends React.Component {
   }
 
   onSort(_event, index, direction) {
-    const sortedRows = this.state.rows.sort((a, b) => (a[index] < b[index] ? -1 : a[index] > b[index] ? 1 : 0));
+    const sortedRows = this.state['rows'].sort((a, b) => (a[index] < b[index] ? -1 : a[index] > b[index] ? 1 : 0));
     this.setState({
       sortBy: {
         index,
@@ -68,7 +68,9 @@ class SortableTable extends React.Component {
   }
 
   render() {
-    const { columns, rows, sortBy } = this.state;
+      const columns = this.state['columns'];
+          const rows = this.state['rows'];
+          const sortBy = this.state['sortBy'];
 
     return (
       <Table sortBy={sortBy} onSort={this.onSort} cells={columns} rows={rows}>
