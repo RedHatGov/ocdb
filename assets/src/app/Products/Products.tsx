@@ -3,10 +3,8 @@ import { PageSection, Title, PageSectionVariants } from '@patternfly/react-core'
 import {
   Accordion, AccordionItem, AccordionContent, AccordionToggle, Page,
   PageHeader,
-  PageSection,
   Gallery,
   GalleryItem,
-  PageSectionVariants,
   TextContent,
   Text,
   Card,
