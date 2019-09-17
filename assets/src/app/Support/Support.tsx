@@ -95,8 +95,8 @@ const Support: React.FunctionComponent<any> = (props) => {
       <Card>
         <CardHeader>
           <TextContent>
-            <center><img src={nistLogo} alt="NIST Logo" height="20%" /></center>
-            <Text component={TextVariants.h1}><center><b>NIST Special Publication 800-53 revision 4<br />Contingency Planning Control Family</b></center></Text>
+            <img src={nistLogo} alt="NIST Logo" height="20%" />
+            <Text component={TextVariants.h1}><b>NIST Special Publication 800-53 revision 4<br />Contingency Planning Control Family</b></Text>
           </TextContent>
         </CardHeader>
         <CardBody>
@@ -108,12 +108,12 @@ const Support: React.FunctionComponent<any> = (props) => {
       <Card isHoverable>
         <CardHeader>
           <TextContent>
-            <Text component={TextVariants.h1}><center><b>CP-12: Safe Mode</b></center></Text>
+            <Text component={TextVariants.h1}><b>CP-12: Safe Mode</b></Text>
           </TextContent>
         </CardHeader>
         <CardBody>
           <TextContent>
-            <Text component={TextVariants.h2}><center>“The information system, when [Assignment: organization-defined conditions] are detected, enters a safe mode of operation with [Assignment: organization-defined restrictions of safe mode of operation].”</center></Text>
+            <Text component={TextVariants.h2}>“The information system, when [Assignment: organization-defined conditions] are detected, enters a safe mode of operation with [Assignment: organization-defined restrictions of safe mode of operation].”</Text>
           </TextContent>
           <p>
             <br /><hr /><br/>

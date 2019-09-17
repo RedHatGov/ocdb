@@ -40,7 +40,7 @@ const Products: React.FunctionComponent<any> = (props) => {
               <CardHead>
                 <img src={ansibleTowerLogo} />
               </CardHead>
-              <CardHeader><center>Ansible Tower</center></CardHeader>
+              <CardHeader>Ansible Tower</CardHeader>
             </Card>
           </GalleryItem>
           <GalleryItem>
@@ -48,7 +48,7 @@ const Products: React.FunctionComponent<any> = (props) => {
               <CardHead>
                 <img src={coreosLogo} />
               </CardHead>
-              <CardHeader><center>CoreOS 4.x</center></CardHeader>
+              <CardHeader>CoreOS 4.x</CardHeader>
             </Card>
           </GalleryItem>
           <GalleryItem>
@@ -56,7 +56,7 @@ const Products: React.FunctionComponent<any> = (props) => {
               <CardHead>
                 <img src={openshiftLogo} />
               </CardHead>              
-              <CardHeader><center>OpenShift 3.x</center></CardHeader>
+              <CardHeader>OpenShift 3.x</CardHeader>
             </Card>
           </GalleryItem>
           <GalleryItem>
@@ -64,7 +64,7 @@ const Products: React.FunctionComponent<any> = (props) => {
               <CardHead>
                 <img src={openstackLogo} />
               </CardHead>
-              <CardHeader><center>OpenStack 13</center></CardHeader>
+              <CardHeader>OpenStack 13</CardHeader>
             </Card>
           </GalleryItem>
     
