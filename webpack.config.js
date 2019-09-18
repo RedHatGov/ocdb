@@ -10,24 +10,6 @@ const LiveReloadPlugin = require('webpack-livereload-plugin');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 const configurator = {
-  entries: function(){
-    var entries = {
-        app: [path.resolve(__dirname, 'assets', 'src', 'index.tsx')]
-    };
-
-    Glob.sync("./assets/src/**/*.*").forEach((entry) => {
-      if((/typings.d.ts$/).test(entry)) {
-          return;
-      }
-      if((/(ts|tsx|js|s[ac]ss|go)$/i).test(entry) == false) {
-          return;
-      }
-
-      entries.app.push(entry);
-    });
-    return entries;
-  },
-
   plugins() {
     var plugins = [
       new CleanObsoleteChunks(),
@@ -71,7 +53,7 @@ const configurator = {
 
     var config = {
       mode: env,
-      entry: configurator.entries(),
+      entry: { app: path.resolve(__dirname, 'assets', 'src', 'index.tsx') },
       output: {filename: "[name].[hash].js", path: `${__dirname}/public/assets`},
       plugins: configurator.plugins(),
       module: configurator.moduleOptions(),
