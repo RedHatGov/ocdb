@@ -35,7 +35,7 @@ const AppLayout: React.FunctionComponent<IAppLayout> = ({children}) => {
   };
   const Header = (
     <PageHeader
-      logo="Patternfly"
+      logo="Red Hat's ATO PathWays"
       logoProps={logoProps}
       toolbar="Toolbar"
       showNavToggle={true}
