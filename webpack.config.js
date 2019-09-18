@@ -12,27 +12,20 @@ const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const configurator = {
   entries: function(){
     var entries = {
-      app: path.resolve(__dirname, 'assets', 'src', 'index.tsx'),
+        app: [path.resolve(__dirname, 'assets', 'src', 'index.tsx')]
     };
 
-    Glob.sync("./assets/*/*.*").forEach((entry) => {
-      if (entry === './assets/css/application.scss' || entry === './assets/src/typings.d.ts') {
-        return
+    Glob.sync("./assets/src/**/*.*").forEach((entry) => {
+      if((/typings.d.ts$/).test(entry)) {
+          return;
+      }
+      if((/(ts|tsx|js|s[ac]ss|go)$/i).test(entry) == false) {
+          return;
       }
 
-      let key = entry.replace(/(\.\/assets\/(src|js|css|go)\/)|\.(ts|js|s[ac]ss|go)/g, '')
-      if(key.startsWith("_") || (/(ts|js|s[ac]ss|go)$/i).test(entry) == false) {
-        return
-      }
-
-      if( entries[key] == null) {
-        entries[key] = [entry]
-        return
-      }
-
-      entries[key].push(entry)
-    })
-    return entries
+      entries.app.push(entry);
+    });
+    return entries;
   },
 
   plugins() {
