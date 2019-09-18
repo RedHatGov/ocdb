@@ -58,6 +58,7 @@ func App() *buffalo.App {
 		app.Use(translations())
 
 		app.GET("/", HomeHandler)
+		app.GET("/ato/{whatever}", HomeHandler)
 		apiV1 := app.Group("/api/v1/")
 		apiV1.Resource("/standards", api.StandardsResource{&buffalo.BaseResource{}})
 		apiV1.Resource("/components", api.ComponentsResource{&buffalo.BaseResource{}})
