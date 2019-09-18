@@ -5,6 +5,7 @@ import { DynamicImport } from '@app/DynamicImport';
 import { accessibleRouteChangeHandler } from '@app/utils/utils';
 import { Dashboard } from '@app/Dashboard/Dashboard';
 import { Products } from '@app/Products/Products';
+import { GettingStarted } from '@app/ato/GettingStarted';
 import { NotFound } from '@app/NotFound/NotFound';
 import DocumentTitle from 'react-document-title';
 import { LastLocationProvider, useLastLocation } from 'react-router-last-location';
@@ -77,6 +78,14 @@ const routes: IAppRoute[] = [
     label: 'Dashboard',
     path: '/',
     title: 'Main Dashboard Title'
+  },
+  {
+    component: GettingStarted,
+    exact: true,
+    icon: null,
+    label: 'Getting Started',
+    path: '/ato/getting_started',
+    title: 'Getting Started',
   },
   {
     component: Products,
