@@ -1,8 +1,7 @@
 import * as React from 'react';
-import { PageSection, Title, PageSectionVariants } from '@patternfly/react-core';
+import { PageSection, PageSectionVariants } from '@patternfly/react-core';
 import {
-  Accordion, AccordionItem, AccordionContent, AccordionToggle, Page,
-  PageHeader,
+  Page,
   Gallery,
   GalleryItem,
   TextContent,
@@ -11,10 +10,9 @@ import {
   CardBody,
   CardHead,
   CardHeader,
-  TextVariants } from '@patternfly/react-core';
+} from '@patternfly/react-core';
 import { Spinner } from '@patternfly/react-core/dist/esm/experimental';
 
-import nistLogo from '@app/assets/images/nist-logo-2x.png';
 import ansibleTowerLogo from '@app/assets/images/ansible-tower-logo.png';
 import coreosLogo from '@app/assets/images/coreos-logo.png';
 import openshiftLogo from '@app/assets/images/openshift-logo.png';
