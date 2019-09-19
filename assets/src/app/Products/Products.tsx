@@ -63,43 +63,6 @@ class Products extends React.Component {
                         })))}
                     </Gallery>
                 </PageSection>
-
-                <PageSection>
-                    <Gallery gutter="md">
-                        <GalleryItem>
-                            <Card isHoverable>
-                                <CardHead>
-                                    <img src={ansibleTowerLogo} />
-                                </CardHead>
-                                <CardHeader>Ansible Tower</CardHeader>
-                            </Card>
-                        </GalleryItem>
-                        <GalleryItem>
-                            <Card isHoverable>
-                                <CardHead>
-                                    <img src={coreosLogo} />
-                                </CardHead>
-                                <CardHeader>CoreOS 4.x</CardHeader>
-                            </Card>
-                        </GalleryItem>
-                        <GalleryItem>
-                            <Card isHoverable>
-                                <CardHead>
-                                    <img src={openshiftLogo} />
-                                </CardHead>
-                                <CardHeader>OpenShift 3.x</CardHeader>
-                            </Card>
-                        </GalleryItem>
-                        <GalleryItem>
-                            <Card isHoverable>
-                                <CardHead>
-                                    <img src={openstackLogo} />
-                                </CardHead>
-                                <CardHeader>OpenStack 13</CardHeader>
-                            </Card>
-                        </GalleryItem>
-                    </Gallery>
-                </PageSection>
             </Page>
         );
     }
