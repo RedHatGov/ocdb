@@ -94,7 +94,7 @@ const routes: IAppRoute[] = [
     isAsync: true,
     label: 'Products',
     path: '/ato/products',
-    title: 'Main Products Title'
+    title: 'Product Documents'
   },
   {
     component: Support,
