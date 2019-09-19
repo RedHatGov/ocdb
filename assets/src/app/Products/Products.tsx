@@ -20,6 +20,17 @@ import coreosLogo from '@app/assets/images/coreos-logo.png';
 import openshiftLogo from '@app/assets/images/openshift-logo.png';
 import openstackLogo from '@app/assets/images/openstack-logo.png';
 
+const ProductGalleryItem: React.FunctionComponent<any> = (props) => {
+    console.log(props);
+    return (
+        <GalleryItem>
+            <Card isHoverable>
+                <CardHeader>{props['product']['name']}</CardHeader>
+            </Card>
+        </GalleryItem>
+    )
+};
+
 
 class Products extends React.Component {
     render(){
@@ -35,7 +46,7 @@ class Products extends React.Component {
                 <PageSection>
                     <Gallery gutter="md">
                         { (this.state['isLoading'] ? <Spinner/> : this.state['products'].map((function(object, i){
-                            return (<Text component="p">{i}</Text>);
+                            return (<ProductGalleryItem key={object['key']} product={object} />);
                         })))}
                     </Gallery>
                 </PageSection>
