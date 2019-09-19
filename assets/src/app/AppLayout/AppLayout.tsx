@@ -8,7 +8,10 @@ import {
   Page,
   PageHeader,
   PageSidebar,
-  SkipToContent
+  SkipToContent,
+  Toolbar,
+  ToolbarGroup,
+  ToolbarItem,
 } from '@patternfly/react-core';
 import { routes } from '@app/routes';
 
@@ -33,16 +36,26 @@ const AppLayout: React.FunctionComponent<IAppLayout> = ({children}) => {
   const onPageResize = (props: { mobileView: boolean; windowSize: number }) => {
     setIsMobileView(props.mobileView);
   };
-  const Header = (
-    <PageHeader
-      logo="Red Hat's ATO PathWays"
-      logoProps={logoProps}
-      toolbar="Toolbar"
-      showNavToggle={true}
-      isNavOpen={isNavOpen}
-      onNavToggle={isMobileView ? onNavToggleMobile : onNavToggle}
-    />
-  );
+
+    const pageToolbar = (
+        <Toolbar>
+            <ToolbarGroup>
+                <ToolbarItem>
+                </ToolbarItem>
+            </ToolbarGroup>
+        </Toolbar>
+    );
+
+    const Header = (
+        <PageHeader
+            logo="Red Hat's ATO PathWays"
+            logoProps={logoProps}
+            toolbar={pageToolbar}
+            showNavToggle={true}
+            isNavOpen={isNavOpen}
+            onNavToggle={isMobileView ? onNavToggleMobile : onNavToggle}
+        />
+    );
 
   const Navigation = (
     <Nav id="nav-primary-simple">
