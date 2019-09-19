@@ -19,13 +19,26 @@ import ansibleTowerLogo from '@app/assets/images/ansible-tower-logo.png';
 import coreosLogo from '@app/assets/images/coreos-logo.png';
 import openshiftLogo from '@app/assets/images/openshift-logo.png';
 import openstackLogo from '@app/assets/images/openstack-logo.png';
+import redhatLogo from '@app/assets/images/red-hat-logo-a.png';
+
+const images = {
+    'ansible-tower': ansibleTowerLogo,
+    coreos4: coreosLogo,
+    ocp3: openshiftLogo,
+    osp13: openstackLogo,
+};
 
 const ProductGalleryItem: React.FunctionComponent<any> = (props) => {
-    console.log(props);
+    var productId = props['product']['key'];
+    var logo = images[productId] || redhatLogo;
     return (
         <GalleryItem>
             <Card isHoverable>
+                <CardHead>
+                    <img src={logo} />
+                </CardHead>
                 <CardHeader>{props['product']['name']}</CardHeader>
+                <CardBody><Text component="small">{props['product']['satisfies'].length} controls defined</Text></CardBody>
             </Card>
         </GalleryItem>
     )
