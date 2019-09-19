@@ -57,8 +57,8 @@ func App() *buffalo.App {
 		// Setup and use translations:
 		app.Use(translations())
 
-		app.GET("/", HomeHandler)
-		app.GET("/ato/{whatever}", HomeHandler)
+		app.GET("/", PatternflyReactHandler)
+		app.GET("/ato/{whatever}", PatternflyReactHandler)
 		apiV1 := app.Group("/api/v1/")
 		apiV1.Resource("/standards", api.StandardsResource{&buffalo.BaseResource{}})
 		apiV1.Resource("/components", api.ComponentsResource{&buffalo.BaseResource{}})
