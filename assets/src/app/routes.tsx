@@ -93,7 +93,7 @@ const routes: IAppRoute[] = [
     icon: null,
     isAsync: true,
     label: 'Products',
-    path: '/products',
+    path: '/ato/products',
     title: 'Main Products Title'
   },
   {
