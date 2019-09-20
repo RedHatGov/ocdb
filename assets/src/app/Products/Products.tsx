@@ -12,6 +12,7 @@ import {
   CardHeader,
 } from '@patternfly/react-core';
 import { Spinner } from '@patternfly/react-core/dist/esm/experimental';
+import { NavLink } from 'react-router-dom';
 
 import ansibleTowerLogo from '@app/assets/images/ansible-tower-logo.png';
 import coreosLogo from '@app/assets/images/coreos-logo.png';
@@ -31,13 +32,15 @@ const ProductGalleryItem: React.FunctionComponent<any> = (props) => {
     var logo = images[productId] || redhatLogo;
     return (
         <GalleryItem>
-            <Card isHoverable>
-                <CardHead>
-                    <img src={logo} />
-                </CardHead>
-                <CardHeader>{props['product']['name']}</CardHeader>
-                <CardBody><Text component="small">{props['product']['satisfies'].length} controls defined</Text></CardBody>
-            </Card>
+            <NavLink exact={true} to={"/ato/products/" + productId}>
+                <Card isHoverable>
+                    <CardHead>
+                        <img src={logo} />
+                    </CardHead>
+                    <CardHeader>{props['product']['name']}</CardHeader>
+                    <CardBody><Text component="small">{props['product']['satisfies'].length} controls defined</Text></CardBody>
+                </Card>
+            </NavLink>
         </GalleryItem>
     )
 };
