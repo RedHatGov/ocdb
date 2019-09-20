@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { PageSection, PageSectionVariants } from '@patternfly/react-core';
 import {
+  Alert,
   Page,
   TextContent,
   Text,
@@ -20,6 +21,7 @@ class Product extends React.Component {
                           <Text component="p">TBD lorem.</Text>
                           <Text component="h2">OpenControls</Text>
                           <Text component="p">{JSON.stringify(this.state['product']['controls'])}</Text>
+                          { this.state['product']['errors'].length == 0 ? ' ' : <Alert  variant="warning" title="Minor problem found">{this.state['product']['errors']}</Alert> }
                       </TextContent>
                     }
                 </PageSection>
