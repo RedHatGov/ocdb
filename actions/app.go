@@ -59,6 +59,7 @@ func App() *buffalo.App {
 
 		app.GET("/", PatternflyReactHandler)
 		app.GET("/ato/{whatever}", PatternflyReactHandler)
+		app.GET("/ato/{whatever}/{whatever}", PatternflyReactHandler)
 		apiV1 := app.Group("/api/v1/")
 		apiV1.Resource("/standards", api.StandardsResource{&buffalo.BaseResource{}})
 		apiV1.Resource("/components", api.ComponentsResource{&buffalo.BaseResource{}})
