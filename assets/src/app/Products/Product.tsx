@@ -19,7 +19,7 @@ class Product extends React.Component {
                           <Text component="h2">Product-specific security documentation.</Text>
                           <Text component="p">TBD lorem.</Text>
                           <Text component="h2">OpenControls</Text>
-                          <Text component="p">{JSON.stringify(this.state['product']['satisfies'])}</Text>
+                          <Text component="p">{JSON.stringify(this.state['product']['controls'])}</Text>
                       </TextContent>
                     }
                 </PageSection>
@@ -36,7 +36,7 @@ class Product extends React.Component {
             productId: productId,
             product: null
         };
-        fetch('/api/v1/components/' + productId)
+        fetch('/api/v1/components/' + productId + '/controls')
             .then(response => response.json())
             .then(data => this.setState({product: data, isLoading: false}))
     }
