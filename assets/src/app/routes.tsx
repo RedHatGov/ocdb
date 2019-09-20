@@ -87,7 +87,7 @@ const routes: IAppRoute[] = [
     exact: true,
     icon: null,
     isAsync: true,
-    label: 'Support',
+    label: 'Delme Wireframe',
     path: '/support',
     title: 'Support Page Title'
   }
