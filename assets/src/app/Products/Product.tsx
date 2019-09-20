@@ -2,14 +2,8 @@ import * as React from 'react';
 import { PageSection, PageSectionVariants } from '@patternfly/react-core';
 import {
   Page,
-  Gallery,
-  GalleryItem,
   TextContent,
   Text,
-  Card,
-  CardBody,
-  CardHead,
-  CardHeader,
 } from '@patternfly/react-core';
 import { Spinner } from '@patternfly/react-core/dist/esm/experimental';
 
@@ -18,10 +12,13 @@ class Product extends React.Component {
         return (
             <Page>
                 <PageSection variant={PageSectionVariants.light}>
-                    <TextContent>
-                        <Text component="h1">Product Documents</Text>
-                        <Text component="p">Product-specific security documentation.</Text>
-                    </TextContent>
+                    { this.state['isLoading'] ?
+                      <Spinner/> :
+                      <TextContent>
+                          <Text component="h1">{this.state['product']['name']}</Text>
+                          <Text component="p">Product-specific security documentation.</Text>
+                      </TextContent>
+                    }
                 </PageSection>
             </Page>
         );
@@ -29,15 +26,16 @@ class Product extends React.Component {
 
     constructor(props) {
         super(props);
+        const productId = props['computedMatch'].params.productId;
 
-        console.log(props)
         this.state = {
             isLoading: true,
-            products: []
+            productId: productId,
+            product: null
         };
-        fetch('/api/v1/components')
+        fetch('/api/v1/components/' + productId)
             .then(response => response.json())
-            .then(data => this.setState({products: data, isLoading: false}));
+            .then(data => this.setState({product: data, isLoading: false}))
     }
 }
 
