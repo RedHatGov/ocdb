@@ -4,6 +4,7 @@ import { Alert, PageSection } from '@patternfly/react-core';
 import { DynamicImport } from '@app/DynamicImport';
 import { accessibleRouteChangeHandler } from '@app/utils/utils';
 import { Dashboard } from '@app/Dashboard/Dashboard';
+import { Product } from '@app/Products/Product';
 import { Products } from '@app/Products/Products';
 import { GettingStarted } from '@app/ato/GettingStarted';
 import { NotFound } from '@app/NotFound/NotFound';
@@ -68,6 +69,7 @@ export interface IAppRoute {
   path: string;
   title: string;
   isAsync?: boolean;
+  hidden?: boolean;
 }
 
 const routes: IAppRoute[] = [
@@ -96,6 +98,16 @@ const routes: IAppRoute[] = [
     path: '/ato/products',
     title: 'Product Documents'
   },
+    {
+        component: Product,
+        exact: true,
+        icon: null,
+        isAsync: true,
+        label: 'Product',
+        path: '/ato/products/:productId',
+        title: 'Product Document',
+        hidden: true,
+    },
   {
     component: Support,
     exact: true,

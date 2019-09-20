@@ -57,10 +57,14 @@ const AppLayout: React.FunctionComponent<IAppLayout> = ({children}) => {
         />
     );
 
+  const links = routes.filter((route) => {
+      return (route.hidden != true)
+  });
+
   const Navigation = (
     <Nav id="nav-primary-simple">
       <NavList id="nav-list-simple" variant={NavVariants.simple}>
-        {routes.map((route, idx) => {
+        {links.map((route, idx) => {
           return (
             <NavItem key={`${route.label}-${idx}`} id={`${route.label}-${idx}`}>
               <NavLink exact={true} to={route.path} activeClassName="pf-m-current">{route.label}</NavLink>
