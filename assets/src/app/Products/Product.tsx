@@ -16,7 +16,10 @@ class Product extends React.Component {
                       <Spinner/> :
                       <TextContent>
                           <Text component="h1">{this.state['product']['name']}</Text>
-                          <Text component="p">Product-specific security documentation.</Text>
+                          <Text component="h2">Product-specific security documentation.</Text>
+                          <Text component="p">TBD lorem.</Text>
+                          <Text component="h2">OpenControls</Text>
+                          <Text component="p">{JSON.stringify(this.state['product']['satisfies'])}</Text>
                       </TextContent>
                     }
                 </PageSection>
