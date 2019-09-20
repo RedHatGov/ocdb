@@ -1,6 +1,8 @@
 package api
 
 import (
+	"fmt"
+
 	"github.com/gobuffalo/buffalo"
 	"github.com/isimluk/ocdb/pkg/masonry"
 	"github.com/opencontrol/compliance-masonry/pkg/lib/common"
@@ -27,9 +29,11 @@ func (v ComponentsResource) Show(c buffalo.Context) error {
 	return c.Render(404, r.JSON("Not found"))
 }
 
+// CustomControl is object that ties together information from standard with product specific "satisfaction" description
 type CustomControl struct {
-	Key     string
-	Control common.Control
+	Key       string
+	Control   common.Control
+	Satisfies common.Satisfies
 }
 
 func standardToLogicalView(s common.Standard) map[string][]CustomControl {
@@ -48,11 +52,12 @@ func standardToLogicalView(s common.Standard) map[string][]CustomControl {
 	return result
 }
 
-func logicalView(ms *common.Workspace, c common.Component) map[string]interface{} {
-	result := make(map[string]interface{})
+func logicalView(ms *common.Workspace, c common.Component) (map[string]map[string][]CustomControl, []string) {
+	result := make(map[string]map[string][]CustomControl)
+	var problems []string
 
-	for _, implementation := range c.GetAllSatisfies() {
-		standardKey := implementation.GetStandardKey()
+	for _, satisfy := range c.GetAllSatisfies() {
+		standardKey := satisfy.GetStandardKey()
 		_, ok := result[standardKey]
 		if !ok {
 			standard, found := (*ms).GetStandard(standardKey)
@@ -61,9 +66,31 @@ func logicalView(ms *common.Workspace, c common.Component) map[string]interface{
 			}
 
 		}
+		found := false
+		for groupId, group := range result[standardKey] {
+			for i, cc := range group {
+				if cc.Key == satisfy.GetControlKey() {
+					if cc.Satisfies != nil {
+						problems = append(problems, fmt.Sprintf("Found duplicate item: %s", cc.Key))
+					}
+
+					result[standardKey][groupId][i].Satisfies = satisfy
+					found = true
+					break
+				}
+
+			}
+			if found {
+				break
+			}
+		}
+		if !found {
+			problems = append(problems, fmt.Sprintf("Could not found reference %s in the standard %s", satisfy.GetControlKey(), standardKey))
+
+		}
 	}
 
-	return result
+	return result, problems
 }
 
 // ComponentControlsHandler gives logical human readable view of open control items available.
@@ -71,8 +98,13 @@ func ComponentControlsHandler(c buffalo.Context) error {
 	ms := masonry.GetInstance()
 	component, found := (*ms).GetComponent(c.Param("component_id"))
 	if found {
-		r.JSON(component)
-		return c.Render(200, r.JSON(logicalView(ms, component)))
+		lv, problems := logicalView(ms, component)
+		result := make(map[string]interface{})
+		result["name"] = component.GetName()
+		result["controls"] = lv
+		result["errors"] = problems
+
+		return c.Render(200, r.JSON(result))
 	}
 	return c.Render(404, r.JSON("Not found"))
 }
