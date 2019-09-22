@@ -6,7 +6,7 @@ import {
   TextContent,
   Text,
 } from '@patternfly/react-core';
-import { IRow, Table, TableBody, TableHeader, TableVariant,} from '@patternfly/react-table'
+import { expandable, ICell, IRow, Table, TableBody, TableHeader, TableVariant,} from '@patternfly/react-table'
 import { Spinner } from '@patternfly/react-core/dist/esm/experimental';
 
 export interface RTMProps {
@@ -15,26 +15,51 @@ export interface RTMProps {
 }
 
 export interface RTMState {
-    columns: string[];
-    rows: (string[] | IRow)[];
+    columns: (ICell | string)[];
+    rows: IRow[];
 }
 
 class RTM extends React.Component<RTMProps, RTMState> {
     constructor(props) {
         super(props);
 
-        var rows = props.content.map(function(c, _idx) {
+        var rows = props.content.map(function(c, idx) {
             console.log(c)
             var implementation_status = c.Satisfies ? c.Satisfies.implementation_status : "unknown";
-            return {cells: [c.Key, c.Control.name, implementation_status]};
-        })
+            return [
+                {
+                    isOpen: false,
+                    cells: [c.Key, c.Control.name, implementation_status]
+                },
+                {
+                    parent: idx * 2,
+                    fullWidth: true,
+                    cells: ['TBD']
+                }
+            ];
+        }).flat(1);
 
         this.state = {
             columns: [
-                'Control', 'Name', 'Status'
+                { title: 'Control', cellFormatters: [expandable] },
+                'Name',
+                'Status'
             ],
             rows: rows,
         }
+        this.onCollapse = this.onCollapse.bind(this);
+    }
+
+    onCollapse(event, rowKey, isOpen) {
+        const rows = this.state.rows;
+        /**
+         * Please do not use rowKey as row index for more complex tables.
+         * Rather use some kind of identifier like ID passed with each row.
+         */
+        rows[rowKey].isOpen = isOpen;
+        this.setState({
+            rows
+        });
     }
 
     render(){
@@ -43,6 +68,7 @@ class RTM extends React.Component<RTMProps, RTMState> {
                 <Text component="h3">{this.props.groupName}</Text>
                 <Table caption="Requirements Traceability Matrix"
                         variant={TableVariant.compact}
+                        onCollapse={this.onCollapse}
                         rows={this.state.rows}
                         cells={this.state.columns}>
                     <TableHeader />
