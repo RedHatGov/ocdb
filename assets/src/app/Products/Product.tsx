@@ -9,6 +9,41 @@ import {
 import { expandable, ICell, IRow, Table, TableBody, TableHeader, TableVariant,} from '@patternfly/react-table'
 import { Spinner } from '@patternfly/react-core/dist/esm/experimental';
 
+export interface Narative {
+    key: string,
+    text: string
+}
+
+export interface Satisfies {
+    narative: Narative[];
+}
+
+export interface Control {
+    name: string,
+    description: string,
+}
+export interface CustomControl {
+    Key: string,
+    Control: Control,
+    Satisfies: Satisfies,
+}
+export interface RTMDetailProps {
+    control: CustomControl;
+}
+
+class RTMDetail extends React.Component<RTMDetailProps, {}> {
+    render() {
+        var c = this.props.control;
+        console.log(c);
+        return (
+            <TextContent>
+                <Text component="h3">{c.Key}: {c.Control.name}</Text>
+                <Text component="p">{c.Control.description}</Text>
+            </TextContent>
+        );
+    }
+}
+
 export interface RTMProps {
     content: string;
     groupName: string;
@@ -24,7 +59,6 @@ class RTM extends React.Component<RTMProps, RTMState> {
         super(props);
 
         var rows = props.content.map(function(c, idx) {
-            console.log(c)
             var implementation_status = c.Satisfies ? c.Satisfies.implementation_status : "unknown";
             return [
                 {
@@ -34,7 +68,7 @@ class RTM extends React.Component<RTMProps, RTMState> {
                 {
                     parent: idx * 2,
                     fullWidth: true,
-                    cells: ['TBD']
+                    cells: [<React.Fragment><RTMDetail control={c} /></React.Fragment>]
                 }
             ];
         }).flat(1);
