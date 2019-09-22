@@ -54,7 +54,7 @@ func standardToLogicalView(s common.Standard) map[string][]CustomControl {
 
 func logicalView(ms *common.Workspace, c common.Component) (map[string]map[string][]CustomControl, []string) {
 	result := make(map[string]map[string][]CustomControl)
-	var problems []string
+	problems := make([]string, 0)
 
 	for _, satisfy := range c.GetAllSatisfies() {
 		standardKey := satisfy.GetStandardKey()
