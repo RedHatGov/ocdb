@@ -48,12 +48,13 @@ export interface IAppRoute {
 
 const routes: IAppRoute[] = [
   {
-    component: Dashboard,
+    component: GettingStarted,
     exact: true,
     icon: null,
-    label: 'Dashboard',
+    label: 'Getting Started',
     path: '/',
-    title: 'Main Dashboard Title'
+    title: 'Getting Started',
+    hidden: true,
   },
   {
     component: GettingStarted,
