@@ -5,7 +5,6 @@ import { Product } from '@app/Products/Product';
 import { Products } from '@app/Products/Products';
 import { GettingStarted } from '@app/ato/GettingStarted';
 import { NotFound } from '@app/NotFound/NotFound';
-import { Support } from '@app/Support/Support';
 import DocumentTitle from 'react-document-title';
 import { LastLocationProvider, useLastLocation } from 'react-router-last-location';
 let routeFocusTimer: number;
@@ -82,15 +81,6 @@ const routes: IAppRoute[] = [
         title: 'Product Document',
         hidden: true,
     },
-  {
-    component: Support,
-    exact: true,
-    icon: null,
-    isAsync: true,
-    label: 'Delme Wireframe',
-    path: '/support',
-    title: 'Support Page Title'
-  }
 ];
 
 const AppRoutes = () => (
