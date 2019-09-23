@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Route, RouteComponentProps, Switch } from 'react-router-dom';
 import { accessibleRouteChangeHandler } from '@app/utils/utils';
-import { Dashboard } from '@app/Dashboard/Dashboard';
 import { Product } from '@app/Products/Product';
 import { Products } from '@app/Products/Products';
 import { GettingStarted } from '@app/ato/GettingStarted';
