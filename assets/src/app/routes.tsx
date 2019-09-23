@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Route, RouteComponentProps, Switch } from 'react-router-dom';
 import { accessibleRouteChangeHandler } from '@app/utils/utils';
-import { Product } from '@app/Products/Product';
-import { Products } from '@app/Products/Products';
+import { Product } from '@app/ato/Products/Product';
+import { Products } from '@app/ato/Products/Products';
 import { GettingStarted } from '@app/ato/GettingStarted';
 import { NotFound } from '@app/NotFound/NotFound';
 import DocumentTitle from 'react-document-title';
