@@ -43,7 +43,9 @@ class SatisfiesAccordion extends React.Component<CustomControlProps, CustomContr
     constructor(props) {
         super(props);
         this.state = {
-            expanded: []
+            expanded: props.satisfies == null ? [] : props.satisfies.narrative.map(function(_, idx) {
+                return 'toggle' + (idx + 1);
+            })
         };
     }
 
@@ -65,7 +67,7 @@ class SatisfiesAccordion extends React.Component<CustomControlProps, CustomContr
         return (
             <Accordion asDefinitionList={false}>
                 { this.props.satisfies.narrative.map(function(n, idx) {
-                    const id = 'ex2-toggle' + (idx + 1);
+                    const id = 'toggle' + (idx + 1);
                     return (
                         <AccordionItem>
                             <AccordionToggle
