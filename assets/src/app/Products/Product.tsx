@@ -1,21 +1,23 @@
 import * as React from 'react';
 import { PageSection, PageSectionVariants } from '@patternfly/react-core';
 import {
-  Alert,
-  Page,
-  TextContent,
-  Text,
+    Accordion, AccordionItem, AccordionContent, AccordionToggle,
+    Alert,
+    Card,CardBody, CardHeader,
+    Page,
+    TextContent,
+    Text,
 } from '@patternfly/react-core';
 import { expandable, ICell, IRow, Table, TableBody, TableHeader, TableVariant,} from '@patternfly/react-table'
 import { Spinner } from '@patternfly/react-core/dist/esm/experimental';
 
 export interface Narative {
-    key: string,
+    key?: string,
     text: string
 }
 
 export interface Satisfies {
-    narative: Narative[];
+    narrative: Narative[];
 }
 
 export interface Control {
@@ -27,6 +29,69 @@ export interface CustomControl {
     Control: Control,
     Satisfies: Satisfies,
 }
+
+
+export interface CustomControlState {
+    expanded: string[],
+}
+
+export interface CustomControlProps {
+    satisfies: Satisfies;
+}
+
+class SatisfiesAccordion extends React.Component<CustomControlProps, CustomControlState> {
+    constructor(props) {
+        super(props);
+        this.state = {
+            expanded: []
+        };
+    }
+
+    render() {
+        if (this.props.satisfies == null) {
+            return (<Text component="p">Not available</Text>);
+        }
+
+        const expanded = this.state.expanded;
+
+        const toggle = id => {
+            const expanded = this.state.expanded;
+            const index = expanded.indexOf(id);
+            const newExpanded =
+                index >= 0 ? [...expanded.slice(0, index), ...expanded.slice(index + 1, expanded.length)] : [...expanded, id];
+            this.setState(() => ({ expanded: newExpanded }));
+        };
+
+        return (
+            <Accordion asDefinitionList={false}>
+                { this.props.satisfies.narrative.map(function(n, idx) {
+                    const id = 'ex2-toggle' + (idx + 1);
+                    return (
+                        <AccordionItem>
+                            <AccordionToggle
+                                onClick={() => toggle(id) }
+                                isExpanced={expanded.includes(id)}
+                                id={id}>
+                                {n.key}
+                            </AccordionToggle>
+                            <AccordionContent
+                                id={id}
+                                isHidden={!expanded.includes(id)}
+                                isFixed
+                            >
+                                <p>
+                                    {n.text}
+                                </p>
+                            </AccordionContent>
+                        </AccordionItem>
+                    )
+                })}
+            </Accordion>
+        )
+    }
+}
+
+
 export interface RTMDetailProps {
     control: CustomControl;
 }
@@ -34,12 +99,26 @@ export interface RTMDetailProps {
 class RTMDetail extends React.Component<RTMDetailProps, {}> {
     render() {
         var c = this.props.control;
-        console.log(c);
         return (
-            <TextContent>
-                <Text component="h3">{c.Key}: {c.Control.name}</Text>
-                <Text component="p">{c.Control.description}</Text>
-            </TextContent>
+            <PageSection>
+                <Card>
+                    <CardHeader>
+                        <TextContent>
+                            <Text component="h3">{c.Key}: {c.Control.name}</Text>
+                        </TextContent>
+                    </CardHeader>
+                    <CardBody>
+                        <TextContent>
+                            <Text component="p">{c.Control.description}</Text>
+                        </TextContent>
+                        <br/>
+                        <TextContent>
+                            <Text component="h4">{c.Key}: What is the solution and how is it implemented?</Text>
+                        </TextContent>
+                        <SatisfiesAccordion satisfies={c.Satisfies} />
+                    </CardBody>
+                </Card>
+            </PageSection>
         );
     }
 }
