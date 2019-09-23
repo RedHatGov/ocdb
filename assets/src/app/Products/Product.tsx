@@ -70,7 +70,7 @@ class SatisfiesAccordion extends React.Component<CustomControlProps, CustomContr
                         <AccordionItem>
                             <AccordionToggle
                                 onClick={() => toggle(id) }
-                                isExpanced={expanded.includes(id)}
+                                isExpanded={expanded.includes(id)}
                                 id={id}>
                                 {n.key}
                             </AccordionToggle>
