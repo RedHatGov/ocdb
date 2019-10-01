@@ -1,9 +1,6 @@
 package masonry
 
 import (
-	"os"
-	"path/filepath"
-
 	"github.com/opencontrol/compliance-masonry/pkg/cli/get/resources"
 	"github.com/opencontrol/compliance-masonry/pkg/lib/common"
 	"github.com/opencontrol/compliance-masonry/pkg/lib/opencontrol"
@@ -12,11 +9,7 @@ import (
 
 // BuildCache of opencontrols as defined in opencontrol.yaml
 func BuildCache() error {
-	wd, err := os.Getwd()
-	if err != nil {
-		return err
-	}
-	destination := filepath.Join(wd, ".masonry_cache")
+	destination := "/tmp/.masonry_cache"
 
 	repo := make([]common.RemoteSource, 1)
 	repo[0] = schema.VCSEntry{
