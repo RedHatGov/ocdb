@@ -16,7 +16,7 @@ func GetInstance() *common.Workspace {
 		if err != nil {
 			panic(err)
 		}
-		data, errors := lib.LoadData("/tmp/.masonry_cache", ".masonry_cache/certifications/dhs-4300a.yaml")
+		data, errors := lib.LoadData("/tmp/.masonry_cache", "/tmp/.masonry_cache/certifications/dhs-4300a.yaml")
 		if errors != nil {
 			panic(errors)
 		}
