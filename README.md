@@ -9,10 +9,15 @@
 
 ## Developer Setup
 
-  * install golang
-  * acquire buffallo tool - `go get -u -v github.com/gobuffalo/buffalo/buffalo`
-  * optionally consider installing bash completion: https://gobuffalo.io/en/docs/getting-started/integrations
-  * setup database - `buffalo pop create -a` (amend database.yml if needed)
+  * install golang `dnf install golang`
+  * acquire ocdb - `go get -u -v github.com/isimluk/ocdb`
+  * change dir to the source location - `cd ~/go/src/github.com/isimluk/ocdb`
+  * acquire buffallo tool - `go get -v github.com/gobuffalo/buffalo/buffalo`
+    * optionally consider installing bash completion: https://gobuffalo.io/en/docs/getting-started/integrations
+  * build front-end pipeline
+    * install npm `dnf install -y npm`
+    * install yarn `npm install -g yarn`
+    * install frontend dependencies `yarn install`
   * run server `buffalo dev`
   * point your browser to [http://127.0.0.1:3000](http://127.0.0.1:3000)
 
