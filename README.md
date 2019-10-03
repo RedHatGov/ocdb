@@ -11,7 +11,9 @@
 
   * install golang
   * acquire buffallo tool - `go get -u -v github.com/gobuffalo/buffalo/buffalo`
-  * acquire buffalo-pop - `buffalo plugins install github.com/gobuffalo/buffalo-pop`
+  * acquire buffalo-pop:
+    * `buffalo plugins install github.com/gobuffalo/buffalo-pop`; or,
+    * `go get -u -v github.com/gobuffalo/buffalo-pop`
   * optionally consider installing bash completion: https://gobuffalo.io/en/docs/getting-started/integrations
   * setup database - `buffalo pop create -a` (amend database.yml if needed)
   * run server `buffalo dev`
