@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { NavLink } from 'react-router-dom';
+import { SimpleAboutModal } from '@app/AppLayout/About'
 import {
   Nav,
   NavList,
@@ -41,6 +42,7 @@ const AppLayout: React.FunctionComponent<IAppLayout> = ({children}) => {
         <Toolbar>
             <ToolbarGroup>
                 <ToolbarItem>
+                    <SimpleAboutModal/>
                 </ToolbarItem>
             </ToolbarGroup>
         </Toolbar>
