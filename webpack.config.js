@@ -35,12 +35,15 @@ const configurator = {
           ]
         },
         { test: /\.tsx?$/, use: "ts-loader", exclude: /node_modules/},
-        { test: /\.jsx?$/,loader: "babel-loader",exclude: /node_modules/ },
+        { test: /\.jsx?$/, loader: "babel-loader",exclude: /node_modules/ },
         { test: /\.(woff|woff2|ttf|svg|png|jpg)(\?v=\d+\.\d+\.\d+)?$/,use: "url-loader"},
         { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,use: "file-loader" },
         { test: require.resolve("jquery"),use: "expose-loader?jQuery!expose-loader?$"},
         { test: /\.go$/, use: "gopherjs-loader"},
-        { test: /\.css$/, use: ["style-loader", "css-loader"] }
+        { test: /\.css$/, use: ["style-loader", "css-loader"] },
+        { test: /\.md$/, use: [
+            "raw-loader"
+        ]}
       ]
     }
   },
@@ -58,7 +61,7 @@ const configurator = {
       plugins: configurator.plugins(),
       module: configurator.moduleOptions(),
       resolve: {
-          extensions: ['.ts', '.js', '.json', '.tsx'],
+          extensions: ['.ts', '.js', '.json', '.tsx', '.md'],
           plugins: [
               new TsconfigPathsPlugin({
                   configFile: path.resolve(__dirname, './tsconfig.json')
