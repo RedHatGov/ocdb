@@ -5,10 +5,6 @@ import { Page,
          Text,
 } from '@patternfly/react-core';
 
-const ReactMarkdown = require('react-markdown');
-
-
-const markdown = '# This is a header\n\nAnd this is a paragraph. **This is bold**';
 
 const ATODocuments: React.FunctionComponent<any> = (props) => {
     return (
@@ -25,7 +21,6 @@ const ATODocuments: React.FunctionComponent<any> = (props) => {
                     <Text component="p">
                         Many of these documents are undergoing prepublication review for open source release.
                         As that happens they will be posted here!</Text>
-                    <ReactMarkdown source={markdown}/>
                 </TextContent>
             </PageSection>
         </Page>
