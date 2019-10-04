@@ -1,10 +1,16 @@
 import * as React from 'react';
 import { PageSection, PageSectionVariants } from '@patternfly/react-core';
 import { Page,
+         Card,
+         CardBody,
+         CardHeader,
+         Gallery,
+         GalleryItem,
          TextContent,
          Text,
 } from '@patternfly/react-core';
-
+import { NavLink } from 'react-router-dom';
+import { GhostIcon } from '@patternfly/react-icons';
 
 const ATODocuments: React.FunctionComponent<any> = (props) => {
     return (
@@ -23,6 +29,25 @@ const ATODocuments: React.FunctionComponent<any> = (props) => {
                         As that happens they will be posted here!</Text>
                 </TextContent>
             </PageSection>
+
+            <PageSection>
+                <Gallery gutter="md">
+                    <GalleryItem>
+                        <Card isHoverable>
+                            <CardHeader>
+                                <GhostIcon/>&nbsp;
+                                <NavLink exact={true} to="/ato/documents/vulnerability-management-plan">
+                                    Vulnerability Management Plan
+                                </NavLink>
+                            </CardHeader>
+                            <CardBody>
+                                The vulnerability management process begins with vulnerabilities being identified or reported to Red Hat’s Product Security team.
+                            </CardBody>
+                        </Card>
+                    </GalleryItem>
+                </Gallery>
+            </PageSection>
+
         </Page>
     );
 }
