@@ -41,9 +41,7 @@ const configurator = {
         { test: require.resolve("jquery"),use: "expose-loader?jQuery!expose-loader?$"},
         { test: /\.go$/, use: "gopherjs-loader"},
         { test: /\.css$/, use: ["style-loader", "css-loader"] },
-        { test: /\.md$/, use: [
-            "raw-loader"
-        ]}
+        { test: /\.mdx?$/, use: ['babel-loader', '@mdx-js/loader']},
       ]
     }
   },
