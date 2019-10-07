@@ -8,8 +8,13 @@ import {
     TextContent,
     Text,
 } from '@patternfly/react-core';
-import { expandable, ICell, IRow, Table, TableBody, TableHeader, TableVariant,} from '@patternfly/react-table'
+import { ICell, IRow, Table, TableBody, TableHeader, TableVariant,} from '@patternfly/react-table'
 import { Spinner } from '@patternfly/react-core/dist/esm/experimental';
+
+import {ExpandableRowContent, IFormatterValueType, IRowData } from '@patternfly/react-table'
+export const expandable = (data?: IFormatterValueType, rowData? : IRowData) =>
+    rowData && rowData.hasOwnProperty('parent') ? <ExpandableRowContent>{data}</ExpandableRowContent> : (data ? data : '');
+
 
 export interface Narative {
     key?: string,
