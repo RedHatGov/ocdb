@@ -9,7 +9,6 @@ const pfMapping = {
 }
 
 const Markdown: React.FunctionComponent<any> = (props) => {
-    console.log(props);
     return (
         <MDXProvider components={pfMapping}>
             <TextContent>
