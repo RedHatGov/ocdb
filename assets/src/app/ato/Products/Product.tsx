@@ -11,6 +11,7 @@ import {
 import { ICell, IRow, Table, TableBody, TableHeader, TableVariant,} from '@patternfly/react-table'
 import { Spinner } from '@patternfly/react-core/dist/esm/experimental';
 
+import * as Api from '@app/lib/api'
 import {ExpandableRowContent, IFormatterValueType, IRowData } from '@patternfly/react-table'
 export const expandable = (data?: IFormatterValueType, rowData? : IRowData) =>
     rowData && rowData.hasOwnProperty('parent') ? <ExpandableRowContent>{data}</ExpandableRowContent> : (data ? data : '');
@@ -241,8 +242,7 @@ class Product extends React.Component {
             productId: productId,
             product: null
         };
-        fetch('/api/v1/components/' + productId + '/controls')
-            .then(response => response.json())
+        Api.componentControls(productId)
             .then(data => this.setState({product: data, isLoading: false}))
     }
 }
