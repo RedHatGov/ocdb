@@ -81,6 +81,15 @@ const routes: IAppRoute[] = [
         title: 'Vulnerability Management Plan',
         hidden: true,
     },
+    {
+        component: ATOTrainingPlan,
+        exact: true,
+        icon: null,
+        label: 'Security Awareness and Training Plan',
+        path: '/ato/documents/security-awareness-and-training-plan',
+        title: 'Security Awareness and Training Plan',
+        hidden: true,
+    },
   {
     component: Products,
     exact: true,
