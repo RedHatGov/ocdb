@@ -14,6 +14,7 @@ import {
 import { Spinner } from '@patternfly/react-core/dist/esm/experimental';
 import { NavLink } from 'react-router-dom';
 
+import * as Api from '@app/lib/api'
 import ansibleTowerLogo from '@app/assets/images/ansible-tower-logo.png';
 import coreosLogo from '@app/assets/images/coreos-logo.png';
 import openshiftLogo from '@app/assets/images/openshift-logo.png';
@@ -75,8 +76,7 @@ class Products extends React.Component {
             isLoading: true,
             products: []
         };
-        fetch('/api/v1/components')
-            .then(response => response.json())
+        Api.components()
             .then(data => this.setState({products: data, isLoading: false}));
     }
 }
