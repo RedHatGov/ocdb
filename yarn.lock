@@ -911,12 +911,12 @@
   resolved "https://registry.yarnpkg.com/@mdx-js/util/-/util-1.5.0.tgz#4915de47ae55ae62bb26eef073b8e022ea506e14"
   integrity sha512-+mJxrZfDoZ1TX/BVxBaDtYfZFS95r6Z6u5CnYNZJYZdcELUaBX0D7FMM9Up/sb9OTq1sfxHkEkud8sohqrIT/Q==
 
-"@patternfly/patternfly@2.31.6":
-  version "2.31.6"
-  resolved "https://registry.yarnpkg.com/@patternfly/patternfly/-/patternfly-2.31.6.tgz#32ded5693ed2dca64c50f2d74fa83f514bb452e5"
-  integrity sha512-XRug8EvEnLjO03w4TU9fRiJ7ZPcWdr9CzWKUkXTsjVNdP8Gf29zArTqLr8InoLDuYi2449KVkwqV7zReeiY0iw==
+"@patternfly/patternfly@2.33.5":
+  version "2.33.5"
+  resolved "https://registry.yarnpkg.com/@patternfly/patternfly/-/patternfly-2.33.5.tgz#e8abad22510d32de4933a42d7f567b152ccc0e6d"
+  integrity sha512-/4S19Ln2BY62nUP/Ow+j4gzCKm4e3HYehW92R+iaREaBgatfq55G50QdPsXDvTvLeTp9lS6YfXJlLz7OTIHnhw==
 
-"@patternfly/react-core@^3.104.0":
+"@patternfly/react-core@^3.104.0", "@patternfly/react-core@^3.112.3":
   version "3.112.3"
   resolved "https://registry.yarnpkg.com/@patternfly/react-core/-/react-core-3.112.3.tgz#b0af9746581091446052881537106022ed0bbd03"
   integrity sha512-szN9UtDU3k3X5/UAWb4kv2Z4+UrB9Pd1vYg09Cr7TpjZPGtAVxNVJ6+TzUj58PLwTlS4TYO/+lWl3wjmUukbyQ==
@@ -929,14 +929,14 @@
     focus-trap-react "^4.0.1"
     tippy.js "3.4.1"
 
-"@patternfly/react-icons@^3.14.2", "@patternfly/react-icons@^3.14.7":
+"@patternfly/react-icons@^3.14.7":
   version "3.14.8"
   resolved "https://registry.yarnpkg.com/@patternfly/react-icons/-/react-icons-3.14.8.tgz#9aa526999c3720378fb071a38e611cf846495760"
   integrity sha512-jd0idsG1s3uvD8mZy/WYEFIyRKN6V/jTzgGYzfJrROedBlhwrmjVX0ANrWtd1LEiMq17uWTdtTlpb8JdzUYZXQ==
   dependencies:
     "@fortawesome/free-brands-svg-icons" "^5.8.1"
 
-"@patternfly/react-styles@^3.5.22", "@patternfly/react-styles@^3.5.27":
+"@patternfly/react-styles@^3.5.27":
   version "3.5.27"
   resolved "https://registry.yarnpkg.com/@patternfly/react-styles/-/react-styles-3.5.27.tgz#a513495932ebe64ecb013d8fb1589d746ac7ea1e"
   integrity sha512-nDhWOR+7W/oQgIw+4nwvGpoS2OgarfxlIEkFQaNdete6QyKwp2erPxDBNnj2gOGaB/+CKDWvTWD6JPhiuU56ew==
@@ -956,20 +956,20 @@
     typescript "3.4.5"
 
 "@patternfly/react-table@^2.20.15":
-  version "2.20.15"
-  resolved "https://registry.yarnpkg.com/@patternfly/react-table/-/react-table-2.20.15.tgz#48a82906e551a059fd50676fc242336900ffddb3"
-  integrity sha512-Imq8Xra4PK2ZZwunsSYWp4TCEOHkOZ4q/UGEf8y3JEn5MPaUdaz+UVKlVUyR/Qf0yOxXmH+Zo1mKpXHFpe54Sg==
+  version "2.22.19"
+  resolved "https://registry.yarnpkg.com/@patternfly/react-table/-/react-table-2.22.19.tgz#ad2aedfcf0575473b749c8a3ea00be947d9b96cb"
+  integrity sha512-pYHYqBth2c5hCkWQNJKx5l5GBfVcDtN9d8kVGNDlbvOuqfBzG64QVB0zdpSXo8tiSgmOuvyRN7ElNVZRA95QrQ==
   dependencies:
-    "@patternfly/patternfly" "2.31.6"
-    "@patternfly/react-core" "^3.104.0"
-    "@patternfly/react-icons" "^3.14.2"
-    "@patternfly/react-styles" "^3.5.22"
-    "@patternfly/react-tokens" "^2.6.26"
+    "@patternfly/patternfly" "2.33.5"
+    "@patternfly/react-core" "^3.112.3"
+    "@patternfly/react-icons" "^3.14.7"
+    "@patternfly/react-styles" "^3.5.27"
+    "@patternfly/react-tokens" "^2.6.31"
     classnames "^2.2.5"
     exenv "^1.2.2"
-    lodash "^4.2.1"
+    lodash "^4.17.15"
 
-"@patternfly/react-tokens@^2.6.26", "@patternfly/react-tokens@^2.6.31":
+"@patternfly/react-tokens@^2.6.31":
   version "2.6.31"
   resolved "https://registry.yarnpkg.com/@patternfly/react-tokens/-/react-tokens-2.6.31.tgz#3fab62e9ccf4d81f6c10edbcf66836264362b3d3"
   integrity sha512-K9semfLIdf2vECefAbheXPVwZqq8nXY0Hf/VkWh6OBCL6R4FekxajpSBgobeoTQUotmvz5boMngqhkUjE7yChA==
@@ -4655,7 +4655,7 @@ lodash.uniq@4.5.0:
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
   integrity sha1-0CJTc662Uq3BvILklFM5qEJ1R3M=
 
-"lodash@>=3.5 <5", lodash@^4.0.0, lodash@^4.15.0, lodash@^4.17.11, lodash@^4.17.12, lodash@^4.17.13, lodash@^4.17.4, lodash@^4.2.1, lodash@~4.17.10:
+"lodash@>=3.5 <5", lodash@^4.0.0, lodash@^4.15.0, lodash@^4.17.11, lodash@^4.17.12, lodash@^4.17.13, lodash@^4.17.15, lodash@^4.17.4, lodash@~4.17.10:
   version "4.17.15"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
   integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
