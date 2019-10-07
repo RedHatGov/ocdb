@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { Route, RouteComponentProps, Switch } from 'react-router-dom';
 import { accessibleRouteChangeHandler } from '@app/utils/utils';
+import { ATODocuments } from '@app/ato/Documents/Overview';
+import { ATOVulnerabilityManagementPlan } from '@app/ato/Documents/VulnerabilityManagementPlan';
 import { Product } from '@app/ato/Products/Product';
 import { Products } from '@app/ato/Products/Products';
 import { GettingStarted } from '@app/ato/GettingStarted';
@@ -62,6 +64,23 @@ const routes: IAppRoute[] = [
     path: '/ato/getting_started',
     title: 'Getting Started',
   },
+    {
+        component: ATODocuments,
+        exact: true,
+        icon: null,
+        label: 'ATO Documents',
+        path: '/ato/documents',
+        title: 'ATO Documents',
+    },
+    {
+        component: ATOVulnerabilityManagementPlan,
+        exact: true,
+        icon: null,
+        label: 'Vulnerability Management Plan',
+        path: '/ato/documents/vulnerability-management-plan',
+        title: 'Vulnerability Management Plan',
+        hidden: true,
+    },
   {
     component: Products,
     exact: true,

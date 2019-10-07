@@ -11,3 +11,7 @@ declare module '*.rdf';
 declare module '*.ttl';
 declare module '*.pdf';
 declare module 'react-document-title';
+declare module '*.md' {
+    let MDXComponent: (props: any) => JSX.Element
+    export default MDXComponent
+}

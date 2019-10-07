@@ -1,0 +1,55 @@
+import * as React from 'react';
+import { PageSection, PageSectionVariants } from '@patternfly/react-core';
+import { Page,
+         Card,
+         CardBody,
+         CardHeader,
+         Gallery,
+         GalleryItem,
+         TextContent,
+         Text,
+} from '@patternfly/react-core';
+import { NavLink } from 'react-router-dom';
+import { GhostIcon } from '@patternfly/react-icons';
+
+const ATODocuments: React.FunctionComponent<any> = (props) => {
+    return (
+        <Page>
+            <PageSection variant={PageSectionVariants.light}>
+                <TextContent>
+                    <Text component="h1">ATO Documents</Text>
+                    <Text component="h2">A&amp;A Templates</Text>
+                    <Text component="p">
+                        Red Hat Public Sector is in the process of open sourcing ATO artifacts.
+                        Developed with US Government agencies and system integrators, these templates are
+                        tailored for the operation of Red Hat technologies and complement
+                        organizational-level policies and procedures.</Text>
+                    <Text component="p">
+                        Many of these documents are undergoing prepublication review for open source release.
+                        As that happens they will be posted here!</Text>
+                </TextContent>
+            </PageSection>
+
+            <PageSection>
+                <Gallery gutter="md">
+                    <GalleryItem>
+                        <Card isHoverable>
+                            <CardHeader>
+                                <GhostIcon/>&nbsp;
+                                <NavLink exact={true} to="/ato/documents/vulnerability-management-plan">
+                                    Vulnerability Management Plan
+                                </NavLink>
+                            </CardHeader>
+                            <CardBody>
+                                The vulnerability management process begins with vulnerabilities being identified or reported to Red Hat’s Product Security team.
+                            </CardBody>
+                        </Card>
+                    </GalleryItem>
+                </Gallery>
+            </PageSection>
+
+        </Page>
+    );
+}
+
+export { ATODocuments };
