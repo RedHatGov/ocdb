@@ -1,11 +1,10 @@
 import * as React from 'react';
-import { NavLink } from 'react-router-dom';
 import { SimpleAboutModal } from '@app/AppLayout/About'
 import {
   Nav,
   NavList,
   NavItem,
-  NavVariants,
+  NavExpandable,
   Page,
   PageHeader,
   PageSidebar,
@@ -14,31 +13,88 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-import { routes } from '@app/routes';
 
 interface IAppLayout {
   children: React.ReactNode;
 }
 
-class Navigation extends React.Component {
-    links = routes.filter((route) => {
-        return (route.hidden != true)
-    });
+interface MyRoute {
+    label: string;
+    to: string;
+}
+interface RouterGroup {
+    label: string;
+    routes: MyRoute[];
+}
+
+interface NavigationState {
+    activeGroup: string;
+    activeItem: string;
+    links: (MyRoute | RouterGroup)[];
+}
+
+
+class Navigation extends React.Component<{}, NavigationState> {
+    onSelect(result) {
+        this.setState({
+            activeGroup: result.groupId,
+            activeItem: result.itemId
+        });
+    };
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            activeGroup: '',
+            activeItem: 'itm-1',
+            links: [
+                {label: 'Getting Started', to: '/ato/getting_started'},
+                {label: 'Documents', routes: [
+                    {label: 'Overview', to: '/ato/documents'},
+                    {label: 'Vulnerability Management Plan', to: '/ato/documents/vulnerability-management-plan'},
+                    {label: 'Training Plan', to: '/ato/documents/vulnerability-management-plan'}]},
+                {label: 'Products', routes: [
+                    {label: 'Overview', to: '/ato/products'},
+                ]}
+            ],
+        };
+        this.onSelect = this.onSelect.bind(this);
+    }
 
     render() {
+        const { activeGroup, activeItem } = this.state;
         return (
-        <Nav id="nav-primary-simple">
-           <NavList id="nav-list-simple" variant={NavVariants.simple}>
-                {this.links.map((route, idx) => {
-                     return (
-                         <NavItem key={`${route.label}-${idx}`} id={`${route.label}-${idx}`}>
-                             <NavLink exact={true} to={route.path} activeClassName="pf-m-current">{route.label}</NavLink>
-                         </NavItem>
-                     );
-                })}
-            </NavList>
-        </Nav>
-    );
+            <Nav onSelect={this.onSelect} theme="dark">
+                <NavList>
+                    { this.state.links.map((function(l1, i){
+                          if ((l1 as any).to !== undefined) {
+                              var id = 'itm-' + i;
+                              return (
+                                  <NavItem to={(l1 as MyRoute).to} itemId={id} isActive={activeItem === id} key={id}>
+                                      {l1.label}
+                                  </NavItem>
+                              );
+                          } else {
+                              var groupId = 'grp-' + i;
+                              return (
+                                  <NavExpandable title={l1.label} groupId={groupId} isActive={activeGroup === groupId} key={groupId}>
+                                      {
+                                          (l1 as RouterGroup).routes.map((function(l2, j) {
+                                              var id = groupId + '_itm-' + j;
+                                              return (
+                                                  <NavItem to={l2.to} groupId={groupId} itemId={id} isActive={activeItem === id} key={id}>
+                                                      {l2.label}
+                                                  </NavItem>
+                                              );
+                                          }))
+                                      }
+                                  </NavExpandable>
+                              );
+                          }
+                      }))}
+                </NavList>
+            </Nav>
+        );
     }
 }
 
@@ -84,7 +140,7 @@ const AppLayout: React.FunctionComponent<IAppLayout> = ({children}) => {
   const Sidebar = (
     <PageSidebar
       nav={<Navigation/>}
-      isNavOpen={isMobileView ? isNavOpenMobile : isNavOpen} />
+      isNavOpen={isMobileView ? isNavOpenMobile : isNavOpen} theme="dark" />
   );
   const PageSkipToContent = (
     <SkipToContent href="#primary-app-container">
