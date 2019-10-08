@@ -37,8 +37,8 @@ const staticNavigation:(MyRoute | RouterGroup)[] = [
     {label: 'Getting Started', to: '/ato/getting_started'},
     {label: 'Documents', routes: [
         {label: 'Overview', to: '/ato/documents'},
-        {label: 'Vulnerability Management Plan', to: '/ato/documents/vulnerability-management-plan'},
-        {label: 'Training Plan', to: '/ato/documents/security-awareness-and-training-plan'}]},
+        {label: 'Vulnerability Management', to: '/ato/documents/vulnerability-management-plan'},
+        {label: 'Security Awareness', to: '/ato/documents/security-awareness-and-training-plan'}]},
     {label: 'Products', routes: [
         {label: 'Overview', to: '/ato/products'}]}
 ];
