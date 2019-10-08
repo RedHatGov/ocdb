@@ -77,7 +77,7 @@ class Navigation extends React.Component<{}, NavigationState> {
                           } else {
                               var groupId = 'grp-' + i;
                               return (
-                                  <NavExpandable title={l1.label} groupId={groupId} isActive={activeGroup === groupId} key={groupId}>
+                                  <NavExpandable title={l1.label} groupId={groupId} isActive={activeGroup === groupId} key={groupId} isExpanded>
                                       {
                                           (l1 as RouterGroup).routes.map((function(l2, j) {
                                               var id = groupId + '_itm-' + j;
