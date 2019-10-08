@@ -13,6 +13,7 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
+import * as Api from '@app/lib/api'
 
 interface IAppLayout {
   children: React.ReactNode;
@@ -60,6 +61,17 @@ class Navigation extends React.Component<{}, NavigationState> {
             links: staticNavigation
         };
         this.onSelect = this.onSelect.bind(this);
+        Api.components().then(data => this.finalizeMenu(data));
+    }
+
+    finalizeMenu(components) {
+        var links = staticNavigation;
+        (links[2] as RouterGroup).routes = (links[2] as RouterGroup).routes.concat(
+            components.map((function(c, _) {
+                return { label: c['name'], to: '/ato/products/' + c['key'] };
+            }))
+        );
+        this.setState({links: links});
     }
 
     render() {
