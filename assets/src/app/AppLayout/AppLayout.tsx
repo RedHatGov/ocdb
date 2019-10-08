@@ -57,7 +57,7 @@ class Navigation extends React.Component<{}, NavigationState> {
         super(props);
         this.state = {
             activeGroup: '',
-            activeItem: 'itm-1',
+            activeItem: 'itm-0',
             links: staticNavigation
         };
         this.onSelect = this.onSelect.bind(this);
