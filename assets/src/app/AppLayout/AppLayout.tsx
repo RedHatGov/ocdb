@@ -20,6 +20,28 @@ interface IAppLayout {
   children: React.ReactNode;
 }
 
+class Navigation extends React.Component {
+    render() {
+        const links = routes.filter((route) => {
+            return (route.hidden != true)
+        });
+
+        return (
+        <Nav id="nav-primary-simple">
+           <NavList id="nav-list-simple" variant={NavVariants.simple}>
+                {links.map((route, idx) => {
+                     return (
+                         <NavItem key={`${route.label}-${idx}`} id={`${route.label}-${idx}`}>
+                             <NavLink exact={true} to={route.path} activeClassName="pf-m-current">{route.label}</NavLink>
+                         </NavItem>
+                     );
+                })}
+            </NavList>
+        </Nav>
+    );
+    }
+}
+
 const AppLayout: React.FunctionComponent<IAppLayout> = ({children}) => {
   const logoProps = {
     href: '/',
@@ -59,26 +81,9 @@ const AppLayout: React.FunctionComponent<IAppLayout> = ({children}) => {
         />
     );
 
-  const links = routes.filter((route) => {
-      return (route.hidden != true)
-  });
-
-  const Navigation = (
-    <Nav id="nav-primary-simple">
-      <NavList id="nav-list-simple" variant={NavVariants.simple}>
-        {links.map((route, idx) => {
-          return (
-            <NavItem key={`${route.label}-${idx}`} id={`${route.label}-${idx}`}>
-              <NavLink exact={true} to={route.path} activeClassName="pf-m-current">{route.label}</NavLink>
-            </NavItem>
-          );
-        })}
-      </NavList>
-    </Nav>
-  );
   const Sidebar = (
     <PageSidebar
-      nav={Navigation}
+      nav={<Navigation/>}
       isNavOpen={isMobileView ? isNavOpenMobile : isNavOpen} />
   );
   const PageSkipToContent = (
