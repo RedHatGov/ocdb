@@ -33,6 +33,16 @@ interface NavigationState {
     links: (MyRoute | RouterGroup)[];
 }
 
+const staticNavigation:(MyRoute | RouterGroup)[] = [
+    {label: 'Getting Started', to: '/ato/getting_started'},
+    {label: 'Documents', routes: [
+        {label: 'Overview', to: '/ato/documents'},
+        {label: 'Vulnerability Management Plan', to: '/ato/documents/vulnerability-management-plan'},
+        {label: 'Training Plan', to: '/ato/documents/vulnerability-management-plan'}]},
+    {label: 'Products', routes: [
+        {label: 'Overview', to: '/ato/products'}]}
+];
+
 
 class Navigation extends React.Component<{}, NavigationState> {
     onSelect(result) {
@@ -47,16 +57,7 @@ class Navigation extends React.Component<{}, NavigationState> {
         this.state = {
             activeGroup: '',
             activeItem: 'itm-1',
-            links: [
-                {label: 'Getting Started', to: '/ato/getting_started'},
-                {label: 'Documents', routes: [
-                    {label: 'Overview', to: '/ato/documents'},
-                    {label: 'Vulnerability Management Plan', to: '/ato/documents/vulnerability-management-plan'},
-                    {label: 'Training Plan', to: '/ato/documents/vulnerability-management-plan'}]},
-                {label: 'Products', routes: [
-                    {label: 'Overview', to: '/ato/products'},
-                ]}
-            ],
+            links: staticNavigation
         };
         this.onSelect = this.onSelect.bind(this);
     }
