@@ -43,7 +43,6 @@ export interface IAppRoute {
   path: string;
   title: string;
   isAsync?: boolean;
-  hidden?: boolean;
 }
 
 const routes: IAppRoute[] = [
@@ -54,7 +53,6 @@ const routes: IAppRoute[] = [
     label: 'Getting Started',
     path: '/',
     title: 'Getting Started',
-    hidden: true,
   },
   {
     component: GettingStarted,
@@ -79,7 +77,6 @@ const routes: IAppRoute[] = [
         label: 'Vulnerability Management Plan',
         path: '/ato/documents/vulnerability-management-plan',
         title: 'Vulnerability Management Plan',
-        hidden: true,
     },
     {
         component: ATOTrainingPlan,
@@ -88,7 +85,6 @@ const routes: IAppRoute[] = [
         label: 'Security Awareness and Training Plan',
         path: '/ato/documents/security-awareness-and-training-plan',
         title: 'Security Awareness and Training Plan',
-        hidden: true,
     },
   {
     component: Products,
@@ -107,7 +103,6 @@ const routes: IAppRoute[] = [
         label: 'Product',
         path: '/ato/products/:productId',
         title: 'Product Document',
-        hidden: true,
     },
 ];
 
