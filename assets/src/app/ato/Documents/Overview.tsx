@@ -37,7 +37,7 @@ const ATODocuments: React.FunctionComponent<any> = (props) => {
                             <CardHeader>
                                 <GhostIcon/>&nbsp;
                                 <NavLink exact={true} to="/ato/documents/vulnerability-management-plan">
-                                    Vulnerability Management Plan
+                                    Vulnerability Management
                                 </NavLink>
                             </CardHeader>
                             <CardBody>
@@ -51,7 +51,7 @@ const ATODocuments: React.FunctionComponent<any> = (props) => {
                             <CardHeader>
                                 <BookReaderIcon/>&nbsp;
         <NavLink exact={true} to="/ato/documents/security-awareness-and-training-plan">
-            Security Awareness and Training Plan
+            Security Awareness
         </NavLink>
                             </CardHeader>
                             <CardBody>
