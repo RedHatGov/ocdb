@@ -494,18 +494,22 @@ class Product extends React.Component {
                 <PageSection variant={PageSectionVariants.light}>
                     { this.state['isLoading'] ?
                       <Spinner/> :
-                      <TextContent>
-                          <Text component="h1">{this.state['product']['name']}</Text>
-                          <Text component="h2">Product-specific security documentation.</Text>
-                          <Text component="p">TBD lorem.</Text>
-                          <Text component="h2">Requirements Traceability Matrix</Text>
+                      <React.Fragment>
+                          <TextContent>
+                              <Text component="h1">{this.state['product']['name']}</Text>
+                              <Text component="h2">Product-specific security documentation.</Text>
+                              <Text component="p">TBD lorem.</Text>
+                              { this.state['product']['errors'].length == 0 ? ' ' : <Alert  variant="warning" title="Metadata Warnings">
+                                  {this.state['product']['errors'].map((function(error, i) {
+                                       return <Text component="p" key={i}>{error}</Text>;
+                                   }))}
+                              </Alert> }
+                              <Text component="h2">Requirements Traceability Matrix</Text>
+                          </TextContent>
+
                           { this.renderControls() }
-                          { this.state['product']['errors'].length == 0 ? ' ' : <Alert  variant="warning" title="Metadata Warnings">
-                              {this.state['product']['errors'].map((function(error, i) {
-                                   return <Text component="p" key={i}>{error}</Text>;
-                               }))}
-                          </Alert> }
-                      </TextContent>
+
+                      </React.Fragment>
                     }
                 </PageSection>
             </Page>
