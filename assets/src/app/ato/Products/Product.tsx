@@ -75,7 +75,7 @@ class SatisfiesAccordion extends React.Component<CustomControlProps, CustomContr
                 { this.props.satisfies.narrative.map(function(n, idx) {
                     const id = 'toggle' + (idx + 1);
                     return (
-                        <AccordionItem>
+                        <AccordionItem key={id}>
                             <AccordionToggle
                                 onClick={() => toggle(id) }
                                 isExpanded={expanded.includes(id)}
