@@ -417,7 +417,9 @@ class RTM extends React.Component<RTMProps, RTMState> {
 
     onExpandToggle(isChecked) {
         this.state.rows.forEach((function(r, i) {
-            r.isOpen = isChecked;
+            if (i % 2 == 0) {
+               r.isOpen = isChecked;
+            }
         }));
         this.setState({rows: this.state.rows});
     }
