@@ -193,6 +193,8 @@ class RTMToolbar extends React.Component<RTMToolbarProps, RTMToolbarState> {
         { value: 'Available' },
         { value: 'Not available' }
     ];
+    onExpandToggle(isChecked){};
+
     constructor(props) {
         super(props);
         this.state = {
@@ -211,7 +213,7 @@ class RTMToolbar extends React.Component<RTMToolbarProps, RTMToolbarState> {
         this.onSolutionToggle = this.onSolutionToggle.bind(this);
         this.onSolutionSelect = this.onSolutionSelect.bind(this);
         this.onDelete = this.onDelete.bind(this);
-        this.onExpandToggle = this.onExpandToggle.bind(this);
+        this.onExpandToggle = this.props.view.onExpandToggle.bind(this.props.view);
     }
 
     onSelect(type, event, selection) {
@@ -278,10 +280,6 @@ class RTMToolbar extends React.Component<RTMToolbarProps, RTMToolbarState> {
             })
         }
     }
-    onExpandToggle(isChecked) {
-        // TODO
-    }
-
 
     render() {
         const { sectionIsExpanded, statusIsExpanded, solutionIsExpanded, filters, expanded } = this.state;
@@ -415,6 +413,13 @@ class RTM extends React.Component<RTMProps, RTMState> {
             allRows: rows,
         }
         this.onCollapse = this.onCollapse.bind(this);
+    }
+
+    onExpandToggle(isChecked) {
+        this.state.rows.forEach((function(r, i) {
+            r.isOpen = isChecked;
+        }));
+        this.setState({rows: this.state.rows});
     }
 
     onCollapse(event, rowKey, isOpen) {
