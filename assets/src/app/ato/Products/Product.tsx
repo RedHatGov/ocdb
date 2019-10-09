@@ -219,16 +219,16 @@ class RTMToolbar extends React.Component<RTMToolbarProps, RTMToolbarState> {
     onSelect(type, event, selection) {
         const checked = event.target.checked;
         this.setState((prevState) => {
-        const prevSelections = prevState.filters[type];
-        return {
-          filters: {
-            ...prevState.filters,
-            [type]: checked
-              ? [...prevSelections, selection]
-              : prevSelections.filter(value => value !== selection)
-          }
-        };
-      });
+            const prevSelections = prevState.filters[type];
+            return {
+                filters: {
+                    ...prevState.filters,
+                    [type]: checked
+                        ? [...prevSelections, selection]
+                        : prevSelections.filter(value => value !== selection)
+                }
+            };
+        });
     }
 
     onSectionToggle(isExpanded) {
