@@ -218,17 +218,16 @@ class RTMToolbar extends React.Component<RTMToolbarProps, RTMToolbarState> {
 
     onSelect(type, event, selection) {
         const checked = event.target.checked;
-        this.setState((prevState) => {
-            const prevSelections = prevState.filters[type];
-            return {
-                filters: {
-                    ...prevState.filters,
-                    [type]: checked
-                        ? [...prevSelections, selection]
-                        : prevSelections.filter(value => value !== selection)
-                }
-            };
-        });
+        const prevState = this.state;
+        const prevSelections = prevState.filters[type];
+        var filters = {
+            ...prevState.filters,
+            [type]: checked
+            ? [...prevSelections, selection]
+            : prevSelections.filter(value => value !== selection)
+        };
+        this.props.view.recomputeFilters(filters);
+        this.setState({filters: filters});
     }
 
     onSectionToggle(isExpanded) {
@@ -432,8 +431,36 @@ class RTM extends React.Component<RTMProps, RTMState> {
          */
         rows[rowKey].isOpen = isOpen;
         this.setState({
-            rows
+            rows: rows
         });
+    }
+    recomputeFilters(filters) {
+        const rowMatchesFilters = function(row, filters) {
+            // calculate lastMatched on parent only
+            if (filters.section.length != 0) {
+                return filters.section.some((function(selection) {
+                    return row.cells[0].startsWith(selection);
+                }));
+            }
+
+            return false; // TODO
+        }
+
+        var lastMatched = false;
+        var matchedParents = -1;
+        this.setState({rows: this.state.allRows.filter((function(row, i, arr) {
+                if (!row.hasOwnProperty('parent')) {
+                    lastMatched = rowMatchesFilters(row, filters);
+                    if (lastMatched) {
+                        matchedParents++;
+                    }
+                } else {
+                    // update parent index
+                    arr[i].parent = matchedParents * 2;
+                }
+
+                return lastMatched;
+        }))});
     }
 
     render(){
