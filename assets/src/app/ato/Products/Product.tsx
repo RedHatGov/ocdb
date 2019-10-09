@@ -391,7 +391,8 @@ class RTM extends React.Component<RTMProps, RTMState> {
             return [
                 {
                     isOpen: false,
-                    cells: [c.Key, c.Control.name, implementation_status]
+                    cells: [c.Key, c.Control.name, implementation_status],
+                    _custom: c.Satisfies
                 },
                 {
                     parent: idx * 2,
@@ -445,9 +446,23 @@ class RTM extends React.Component<RTMProps, RTMState> {
             }
 
             if (filters.status.length != 0) {
-                return filters.status.some((function(selection) {
+                if (filters.status.some((function(selection) {
                     return row.cells[2] == selection;
-                }));
+                })) == false) {
+                    return false;
+                }
+            }
+
+            if (filters.solution.length != 0) {
+                if (filters.solution.some((function(selection) {
+                    if (selection == 'Available') {
+                        return (row._custom && row._custom.narrative && row._custom.narrative.length > 0);
+                    } else {
+                        return !(row._custom) || !(row._custom.narrative) || row._custom.narrative.length == 0;
+                    }
+                })) == false) {
+                    return false;
+                }
             }
 
             return true; // TODO
