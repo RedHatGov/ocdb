@@ -157,8 +157,11 @@ export interface RTMToolbarState {
     userSearch: string;
     expanded: boolean;
 }
+interface RTMToolbarProps {
+    view: RTM;
+}
 
-class RTMToolbar extends React.Component<{}, RTMToolbarState> {
+class RTMToolbar extends React.Component<RTMToolbarProps, RTMToolbarState> {
     sectionOptions = [
         { value: 'AC'},
         { value: 'AT'},
@@ -428,7 +431,7 @@ class RTM extends React.Component<RTMProps, RTMState> {
         return (
             <TextContent>
                 <Table
-                        caption={<RTMToolbar/>}
+                        caption={<RTMToolbar view={this} />}
                         variant={TableVariant.compact}
                         onCollapse={this.onCollapse}
                         rows={this.state.rows}
