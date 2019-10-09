@@ -182,12 +182,12 @@ class RTMToolbar extends React.Component<RTMToolbarProps, RTMToolbarState> {
         { value: 'SI'},
     ];
     statusOptions = [
-        { value: 'complete', disabled: false },
-        { value: 'partial', disabled: false },
-        { value: 'not applicable', disabled: false },
-        { value: 'planned', disabled: false },
-        { value: 'unsatisfied', disabled: false },
-        { value: 'unknown', disabled: false },
+        { value: 'complete'},
+        { value: 'partial'},
+        { value: 'not applicable'},
+        { value: 'planned'},
+        { value: 'unsatisfied'},
+        { value: 'unknown'},
     ];
     solutionOptions = [
         { value: 'Available' },
