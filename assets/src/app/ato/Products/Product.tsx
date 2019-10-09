@@ -3,16 +3,23 @@ import { PageSection, PageSectionVariants } from '@patternfly/react-core';
 import {
     Accordion, AccordionItem, AccordionContent, AccordionToggle,
     Alert,
+    Button, ButtonVariant,
     Card,CardBody, CardHeader,
+    InputGroup,
     Page,
+    Select, SelectOption, SelectVariant,
+    Switch,
     TextContent,
     Text,
+    TextInput,
 } from '@patternfly/react-core';
 import { ICell, IRow, Table, TableBody, TableHeader, TableVariant,} from '@patternfly/react-table'
-import { Spinner } from '@patternfly/react-core/dist/esm/experimental';
+import { DataToolbar, DataToolbarContent, DataToolbarFilter, DataToolbarGroup, DataToolbarItem, Spinner } from '@patternfly/react-core/dist/esm/experimental';
 
 import * as Api from '@app/lib/api'
 import {ExpandableRowContent, IFormatterValueType, IRowData } from '@patternfly/react-table'
+import { SearchIcon } from '@patternfly/react-icons'
+
 export const expandable = (data?: IFormatterValueType, rowData? : IRowData) =>
     rowData && rowData.hasOwnProperty('parent') ? <ExpandableRowContent>{data}</ExpandableRowContent> : (data ? data : '');
 
@@ -131,6 +138,200 @@ class RTMDetail extends React.Component<RTMDetailProps, {}> {
     }
 }
 
+export interface RTMToolbarFilters {
+    section: string[];
+    status: string[];
+}
+
+export interface RTMToolbarState {
+    sectionIsExpanded: boolean;
+    statusIsExpanded: boolean;
+    filters: RTMToolbarFilters;
+    userSearch: string;
+    expanded: boolean;
+}
+
+class RTMToolbar extends React.Component<{}, RTMToolbarState> {
+    sectionOptions = [
+        { value: 'AC'},
+        { value: 'AT'},
+        { value: 'AU'},
+        { value: 'CA'},
+        { value: 'CM'},
+        { value: 'CP'},
+        { value: 'IA'},
+        { value: 'IR'},
+        { value: 'MA'},
+        { value: 'MP'},
+        { value: 'PE'},
+        { value: 'PL'},
+        { value: 'PS'},
+        { value: 'RA'},
+        { value: 'SA'},
+        { value: 'SC'},
+        { value: 'SI'},
+    ];
+    statusOptions = [
+        { value: 'complete', disabled: false },
+        { value: 'partial', disabled: false },
+        { value: 'not applicable', disabled: false },
+        { value: 'planned', disabled: false },
+        { value: 'unsatisfied', disabled: false },
+        { value: 'unknown', disabled: false },
+    ];
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            sectionIsExpanded: false,
+            statusIsExpanded: false,
+            filters: {section: [], status: []},
+            userSearch: '',
+            expanded: false,
+        };
+        this.onSearchInputChange = this.onSearchInputChange.bind(this);
+        this.onSectionToggle = this.onSectionToggle.bind(this);
+        this.onSectionSelect = this.onSectionSelect.bind(this);
+        this.onStatusToggle = this.onStatusToggle.bind(this);
+        this.onStatusSelect = this.onStatusSelect.bind(this);
+        this.onDelete = this.onDelete.bind(this);
+        this.onExpandToggle = this.onExpandToggle.bind(this);
+    }
+
+    onSelect(type, event, selection) {
+        const checked = event.target.checked;
+        this.setState((prevState) => {
+        const prevSelections = prevState.filters[type];
+        return {
+          filters: {
+            ...prevState.filters,
+            [type]: checked
+              ? [...prevSelections, selection]
+              : prevSelections.filter(value => value !== selection)
+          }
+        };
+      });
+    }
+
+    onSectionToggle(isExpanded) {
+        this.setState({
+            sectionIsExpanded: isExpanded
+        });
+    };
+    onSectionSelect(event, selection) {
+        this.onSelect('section', event, selection);
+    };
+
+    onStatusToggle(isExpanded) {
+        this.setState({
+            statusIsExpanded: isExpanded
+        });
+    };
+    onStatusSelect(event, selection) {
+        this.onSelect('status', event, selection);
+    };
+
+    onSearchInputChange(newValue) {
+        this.setState({userSearch: newValue});
+    }
+
+    onDelete(type="", id="") {
+        if (type) {
+            this.setState((prevState) => {
+                prevState.filters[type.toLowerCase()] = prevState.filters[type.toLowerCase()].filter(s => s !== id);
+                return {
+                    filters: prevState.filters,
+                }
+            });
+        } else {
+            this.setState({
+                filters: {
+                    section: [],
+                    status: [],
+                }
+            })
+        }
+    }
+    onExpandToggle(isChecked) {
+        // TODO
+    }
+
+
+    render() {
+        const { sectionIsExpanded, statusIsExpanded, filters, expanded } = this.state;
+        const searchGroupItems = <React.Fragment>
+            <DataToolbarItem variant="label" id="stacked-example-resource-select">Search</DataToolbarItem>
+            <DataToolbarItem>
+                <InputGroup>
+                    <TextInput name="textInput1" id="textInput1" type="search" aria-label="search input example" onChange={this.onSearchInputChange} />
+                    <Button variant={ButtonVariant.tertiary} aria-label="search button for search input">
+                        <SearchIcon />
+                    </Button>
+                </InputGroup>
+            </DataToolbarItem>
+        </React.Fragment>
+
+        const filterGroupItems = <React.Fragment>
+            <DataToolbarFilter chips={filters.section} deleteChip={this.onDelete} categoryName="Section">
+                <Select
+                    variant={SelectVariant.checkbox}
+                    aria-label="Section"
+                    onToggle={this.onSectionToggle}
+                    onSelect={this.onSectionSelect}
+                    selections={filters.section}
+                    isExpanded={sectionIsExpanded}
+                    placeholderText="Section"
+                >
+                    {this.sectionOptions.map((option, index) => (
+                        <SelectOption
+                            key={index}
+                            value={option.value}
+                        />
+                    ))}
+                </Select>
+            </DataToolbarFilter>
+            <DataToolbarFilter chips={filters.status} deleteChip={this.onDelete} categoryName="Status">
+                <Select
+                    variant={SelectVariant.checkbox}
+                    aria-label="Status"
+                    onToggle={this.onStatusToggle}
+                    onSelect={this.onStatusSelect}
+                    selections={filters.status}
+                    isExpanded={statusIsExpanded}
+                    placeholderText="Status"
+                >
+                    {this.statusOptions.map((option, index) => (
+                        <SelectOption
+                            key={index}
+                            value={option.value}
+                        />
+                    ))}
+                </Select>
+            </DataToolbarFilter>
+        </React.Fragment>;
+
+        const buttonGroupItems = <React.Fragment>
+            <DataToolbarItem variant="separator"></DataToolbarItem>
+            <DataToolbarItem>
+                <Switch id="simple-switch" label="Collapse All" labelOff="Expand All" onChange={this.onExpandToggle} isChecked={expanded} />
+            </DataToolbarItem>
+        </React.Fragment>;
+
+        const toolbarItems = <React.Fragment>
+            <DataToolbarGroup variant="search-group">{searchGroupItems}</DataToolbarGroup>
+            <DataToolbarGroup variant="filter-group">{filterGroupItems}</DataToolbarGroup>
+            <DataToolbarGroup variant="button-group">{buttonGroupItems}</DataToolbarGroup>
+        </React.Fragment>;
+
+        return <DataToolbar
+                   id="data-toolbar-with-chip-groups"
+                   clearAllFilters={this.onDelete}
+                   showClearFiltersButton={filters.section.length !== 0 || filters.status.length !== 0 }>
+                   <DataToolbarContent>{toolbarItems}</DataToolbarContent>
+               </DataToolbar>;
+    }
+}
+
 export interface RTMProps {
     content: any;
 }
@@ -185,7 +386,8 @@ class RTM extends React.Component<RTMProps, RTMState> {
     render(){
         return (
             <TextContent>
-                <Table caption="Requirements Traceability Matrix"
+                <Table
+                        caption={<RTMToolbar/>}
                         variant={TableVariant.compact}
                         onCollapse={this.onCollapse}
                         rows={this.state.rows}
@@ -216,7 +418,7 @@ class Product extends React.Component {
                           <Text component="h1">{this.state['product']['name']}</Text>
                           <Text component="h2">Product-specific security documentation.</Text>
                           <Text component="p">TBD lorem.</Text>
-                          <Text component="h2">OpenControls</Text>
+                          <Text component="h2">Requirements Traceability Matrix</Text>
                           { this.renderControls() }
                           { this.state['product']['errors'].length == 0 ? ' ' : <Alert  variant="warning" title="Minor problem found">{this.state['product']['errors']}</Alert> }
                       </TextContent>
