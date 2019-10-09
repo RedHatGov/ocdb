@@ -76,6 +76,15 @@ func logicalView(ms *common.Workspace, c common.Component) (map[string]map[strin
 
 					result[standardKey][groupId][i].Satisfies = satisfy
 					found = true
+
+					switch satisfy.GetImplementationStatus() {
+					case "complete", "partial", "not applicable", "planned", "unsatisfied", "unknown", "none":
+						break
+					default:
+						problems = append(problems, fmt.Sprintf("Found non-standard implementation_status: %s.", satisfy.GetImplementationStatus()))
+						break
+					}
+
 					break
 				}
 
