@@ -500,7 +500,11 @@ class Product extends React.Component {
                           <Text component="p">TBD lorem.</Text>
                           <Text component="h2">Requirements Traceability Matrix</Text>
                           { this.renderControls() }
-                          { this.state['product']['errors'].length == 0 ? ' ' : <Alert  variant="warning" title="Minor problem found">{this.state['product']['errors']}</Alert> }
+                          { this.state['product']['errors'].length == 0 ? ' ' : <Alert  variant="warning" title="Metadata Warnings">
+                              {this.state['product']['errors'].map((function(error, i) {
+                                   return <Text component="p" key={i}>{error}</Text>;
+                               }))}
+                          </Alert> }
                       </TextContent>
                     }
                 </PageSection>
