@@ -438,12 +438,20 @@ class RTM extends React.Component<RTMProps, RTMState> {
         const rowMatchesFilters = function(row, filters) {
             // calculate lastMatched on parent only
             if (filters.section.length != 0) {
-                return filters.section.some((function(selection) {
+                if (filters.section.some((function(selection) {
                     return row.cells[0].startsWith(selection);
+                })) == false) {
+                    return false;
+                }
+            }
+
+            if (filters.status.length != 0) {
+                return filters.status.some((function(selection) {
+                    return row.cells[2] == selection;
                 }));
             }
 
-            return false; // TODO
+            return true; // TODO
         }
 
         var lastMatched = false;
