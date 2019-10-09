@@ -146,11 +146,13 @@ class RTMDetail extends React.Component<RTMDetailProps, {}> {
 export interface RTMToolbarFilters {
     section: string[];
     status: string[];
+    solution: string[];
 }
 
 export interface RTMToolbarState {
     sectionIsExpanded: boolean;
     statusIsExpanded: boolean;
+    solutionIsExpanded: boolean;
     filters: RTMToolbarFilters;
     userSearch: string;
     expanded: boolean;
@@ -184,13 +186,17 @@ class RTMToolbar extends React.Component<{}, RTMToolbarState> {
         { value: 'unsatisfied', disabled: false },
         { value: 'unknown', disabled: false },
     ];
-
+    solutionOptions = [
+        { value: 'Available' },
+        { value: 'Not available' }
+    ];
     constructor(props) {
         super(props);
         this.state = {
             sectionIsExpanded: false,
             statusIsExpanded: false,
-            filters: {section: [], status: []},
+            solutionIsExpanded: false,
+            filters: {section: [], status: [], solution: []},
             userSearch: '',
             expanded: false,
         };
@@ -199,6 +205,8 @@ class RTMToolbar extends React.Component<{}, RTMToolbarState> {
         this.onSectionSelect = this.onSectionSelect.bind(this);
         this.onStatusToggle = this.onStatusToggle.bind(this);
         this.onStatusSelect = this.onStatusSelect.bind(this);
+        this.onSolutionToggle = this.onSolutionToggle.bind(this);
+        this.onSolutionSelect = this.onSolutionSelect.bind(this);
         this.onDelete = this.onDelete.bind(this);
         this.onExpandToggle = this.onExpandToggle.bind(this);
     }
@@ -236,6 +244,15 @@ class RTMToolbar extends React.Component<{}, RTMToolbarState> {
         this.onSelect('status', event, selection);
     };
 
+    onSolutionToggle(isExpanded) {
+        this.setState({
+            solutionIsExpanded: isExpanded
+        });
+    };
+    onSolutionSelect(event, selection) {
+        this.onSelect('solution', event, selection);
+    };
+
     onSearchInputChange(newValue) {
         this.setState({userSearch: newValue});
     }
@@ -253,6 +270,7 @@ class RTMToolbar extends React.Component<{}, RTMToolbarState> {
                 filters: {
                     section: [],
                     status: [],
+                    solution: []
                 }
             })
         }
@@ -263,7 +281,7 @@ class RTMToolbar extends React.Component<{}, RTMToolbarState> {
 
 
     render() {
-        const { sectionIsExpanded, statusIsExpanded, filters, expanded } = this.state;
+        const { sectionIsExpanded, statusIsExpanded, solutionIsExpanded, filters, expanded } = this.state;
         const searchGroupItems = <React.Fragment>
             <DataToolbarItem variant="label" id="stacked-example-resource-select">Search</DataToolbarItem>
             <DataToolbarItem>
@@ -306,6 +324,24 @@ class RTMToolbar extends React.Component<{}, RTMToolbarState> {
                     placeholderText="Status"
                 >
                     {this.statusOptions.map((option, index) => (
+                        <SelectOption
+                            key={index}
+                            value={option.value}
+                        />
+                    ))}
+                </Select>
+            </DataToolbarFilter>
+            <DataToolbarFilter chips={filters.solution} deleteChip={this.onDelete} categoryName="Solution">
+                <Select
+                    variant={SelectVariant.checkbox}
+                    aria-label="Solution"
+                    onToggle={this.onSolutionToggle}
+                    onSelect={this.onSolutionSelect}
+                    selections={filters.solution}
+                    isExpanded={solutionIsExpanded}
+                    placeholderText="Solution"
+                >
+                    {this.solutionOptions.map((option, index) => (
                         <SelectOption
                             key={index}
                             value={option.value}
