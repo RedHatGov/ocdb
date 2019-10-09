@@ -263,20 +263,19 @@ class RTMToolbar extends React.Component<RTMToolbarProps, RTMToolbarState> {
 
     onDelete(type="", id="") {
         if (type) {
-            this.setState((prevState) => {
-                prevState.filters[type.toLowerCase()] = prevState.filters[type.toLowerCase()].filter(s => s !== id);
-                return {
-                    filters: prevState.filters,
-                }
-            });
+            var filters = this.state.filters;
+            filters[type.toLowerCase()] = filters[type.toLowerCase()].filter(s => s !== id);
+            this.setState({filters: filters});
+            this.props.view.recomputeFilters(filters);
+
         } else {
-            this.setState({
-                filters: {
-                    section: [],
-                    status: [],
-                    solution: []
-                }
-            })
+            const filters = {
+                section: [],
+                status: [],
+                solution: []
+            }
+            this.props.view.recomputeFilters(filters);
+            this.setState({filters: filters})
         }
     }
 
