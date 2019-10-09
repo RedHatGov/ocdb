@@ -132,8 +132,7 @@ class RTMDetail extends React.Component<RTMDetailProps, {}> {
 }
 
 export interface RTMProps {
-    content: string;
-    groupName: string;
+    content: any;
 }
 
 export interface RTMState {
@@ -186,7 +185,6 @@ class RTM extends React.Component<RTMProps, RTMState> {
     render(){
         return (
             <TextContent>
-                <Text component="h3">{this.props.groupName}</Text>
                 <Table caption="Requirements Traceability Matrix"
                         variant={TableVariant.compact}
                         onCollapse={this.onCollapse}
@@ -204,13 +202,8 @@ class Product extends React.Component {
     renderControls() {
         var controls = this.state['product']['controls'];
         var nist80053 = controls['NIST-800-53'];
-        return (
-            <TextContent>
-            { Object.keys(nist80053).map(function(k, i) {
-                return (<RTM key={k} groupName={k} content={nist80053[k]}/>);
-            })}
-            </TextContent>
-        )
+        var requirements = Array.prototype.concat.apply([], Object.keys(nist80053).map(function(k, _) { return nist80053[k]; }));
+        return (<RTM content={requirements}/>);
     }
 
     render(){
