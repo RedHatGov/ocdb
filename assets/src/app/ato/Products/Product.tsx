@@ -188,6 +188,7 @@ class RTMToolbar extends React.Component<RTMToolbarProps, RTMToolbarState> {
         { value: 'planned'},
         { value: 'unsatisfied'},
         { value: 'unknown'},
+        { value: 'none'},
     ];
     solutionOptions = [
         { value: 'Available' },
