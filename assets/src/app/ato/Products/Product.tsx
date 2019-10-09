@@ -383,6 +383,7 @@ export interface RTMProps {
 export interface RTMState {
     columns: (ICell | string)[];
     rows: IRow[];
+    allRows: IRow[];
 }
 
 class RTM extends React.Component<RTMProps, RTMState> {
@@ -411,6 +412,7 @@ class RTM extends React.Component<RTMProps, RTMState> {
                 'Status'
             ],
             rows: rows,
+            allRows: rows,
         }
         this.onCollapse = this.onCollapse.bind(this);
     }
