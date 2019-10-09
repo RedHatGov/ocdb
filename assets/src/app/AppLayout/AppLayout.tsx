@@ -29,8 +29,8 @@ interface RouterGroup {
 }
 
 interface NavigationState {
-    activeGroup: string;
-    activeItem: string;
+    activeGroup?: string;
+    activeItem?: string;
     links: (MyRoute | RouterGroup)[];
 }
 
@@ -56,12 +56,11 @@ class Navigation extends React.Component<{}, NavigationState> {
     constructor(props) {
         super(props);
         this.state = {
-            activeGroup: '',
-            activeItem: 'itm-0',
             links: staticNavigation
         };
-        this.onSelect = this.onSelect.bind(this);
         Api.components().then(data => this.finalizeMenu(data));
+        this.onSelect = this.onSelect.bind(this);
+        this.highlightActiveMenuItem();
     }
 
     finalizeMenu(components) {
@@ -72,6 +71,34 @@ class Navigation extends React.Component<{}, NavigationState> {
             }))
         );
         this.setState({links: links});
+        this.highlightActiveMenuItem();
+    }
+
+    highlightActiveMenuItem() {
+        if (this.state.activeItem !== undefined) {
+            return
+        }
+
+        var activeGroup, activeItem;
+        const currentUrl = window.location.pathname;
+        this.state.links.forEach((function(l1, i) {
+            if ((l1 as any).to !== undefined) {
+                if ((l1 as MyRoute).to == currentUrl) {
+                    activeGroup = '';
+                    activeItem = 'itm-' + i;
+                }
+            } else {
+                (l1 as RouterGroup).routes.forEach((function(l2, j) {
+                    if (l2.to == currentUrl) {
+                        activeGroup = 'grp-' + i;
+                        activeItem = activeGroup + '_itm-' + j;
+                    }
+                }))
+            }
+        }));
+        if (activeItem !== undefined) {
+            this.setState({activeGroup: activeGroup, activeItem: activeItem});
+        }
     }
 
     render() {
