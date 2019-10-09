@@ -1,24 +1,29 @@
 import * as React from 'react';
-import { PageSection, PageSectionVariants } from '@patternfly/react-core';
 import {
     Accordion, AccordionItem, AccordionContent, AccordionToggle,
     Alert,
     Button, ButtonVariant,
     Card,CardBody, CardHeader,
     InputGroup,
-    Page,
+    Page, PageSection, PageSectionVariants,
     Select, SelectOption, SelectVariant,
     Switch,
     TextContent,
     Text,
     TextInput,
 } from '@patternfly/react-core';
-import { ICell, IRow, Table, TableBody, TableHeader, TableVariant,} from '@patternfly/react-table'
-import { DataToolbar, DataToolbarContent, DataToolbarFilter, DataToolbarGroup, DataToolbarItem, Spinner } from '@patternfly/react-core/dist/esm/experimental';
+import {
+    ExpandableRowContent,
+    ICell, IFormatterValueType, IRow, IRowData,
+    Table, TableBody, TableHeader, TableVariant,
+} from '@patternfly/react-table'
+import { SearchIcon } from '@patternfly/react-icons'
+import {
+    DataToolbar, DataToolbarContent, DataToolbarFilter, DataToolbarGroup, DataToolbarItem,
+    Spinner
+} from '@patternfly/react-core/dist/esm/experimental';
 
 import * as Api from '@app/lib/api'
-import {ExpandableRowContent, IFormatterValueType, IRowData } from '@patternfly/react-table'
-import { SearchIcon } from '@patternfly/react-icons'
 
 export const expandable = (data?: IFormatterValueType, rowData? : IRowData) =>
     rowData && rowData.hasOwnProperty('parent') ? <ExpandableRowContent>{data}</ExpandableRowContent> : (data ? data : '');
