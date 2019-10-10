@@ -8,6 +8,7 @@ import {
     Page, PageSection, PageSectionVariants,
     Select, SelectOption, SelectVariant,
     Switch,
+    Tab, Tabs,
     TextContent,
     Text,
     TextInput,
@@ -18,6 +19,7 @@ import {
     Table, TableBody, TableHeader, TableVariant,
 } from '@patternfly/react-table'
 import { SearchIcon } from '@patternfly/react-icons'
+import { OutlinedListAltIcon } from '@patternfly/react-icons'
 import {
     DataToolbar, DataToolbarContent, DataToolbarFilter, DataToolbarGroup, DataToolbarItem,
     Spinner
@@ -534,7 +536,15 @@ class RTM extends React.Component<RTMProps, RTMState> {
     }
 }
 
-class Product extends React.Component {
+
+interface ProductState {
+    isLoading: boolean;
+    productId: string;
+    product: any;
+    activeTabKey: number;
+};
+
+class Product extends React.Component<{}, ProductState> {
     renderControls() {
         var controls = this.state['product']['controls'];
         var nist80053 = controls['NIST-800-53'];
@@ -554,6 +564,41 @@ class Product extends React.Component {
         return '';
     }
 
+    renderTabs(){
+        return (
+            <Tabs activeKey={this.state.activeTabKey} onSelect={this.handleTabClick}>
+                <Tab eventKey={0} title="Overview">
+                    <br/>
+                    { this.renderOverview() }
+                </Tab>
+                <Tab eventKey={1} title={<React.Fragment>NIST-800-53 {this.state.isLoading ? <Spinner size="md"/> : <OutlinedListAltIcon/>} </React.Fragment>}>
+                    <br/>
+                    { this.state['isLoading'] ?
+                      <Spinner/> :
+                      <TextContent>
+                          { this.state['product']['errors'].length == 0 ?
+                            '' :
+                            <React.Fragment>
+                                <Text component="h2">OpenControls Developer Information</Text>
+                                <Alert  variant="warning" title="Metadata Warnings">
+                                    {this.state['product']['errors'].map((function(error, i) {
+                                         return <Text component="p" key={i}>{error}</Text>;
+                                     }))}
+                                </Alert>
+                                <br/>
+                                <Text component="p">Go fix the warning on <Text component='a' href="https://github.com/ComplianceAsCode/redhat">github</Text>.</Text>
+                            </React.Fragment>
+                          }
+                          <Text component="h2">Requirements Traceability Matrix</Text>
+
+                          { this.renderControls() }
+                      </TextContent>
+                    }
+                </Tab>
+            </Tabs>
+        );
+    }
+
     render(){
         return (
             <Page>
@@ -567,30 +612,9 @@ class Product extends React.Component {
                         </React.Fragment>
                     }
 
-                    { this.renderOverview() }
+                    { this.renderTabs() }
 
-            { this.state['isLoading'] ?
-              <Spinner/> :
-              <TextContent>
-                  { this.state['product']['errors'].length == 0 ?
-                    '' :
-                    <React.Fragment>
-                        <Text component="h2">OpenControls Developer Information</Text>
-                        <Alert  variant="warning" title="Metadata Warnings">
-                            {this.state['product']['errors'].map((function(error, i) {
-                                 return <Text component="p" key={i}>{error}</Text>;
-                             }))}
-                        </Alert>
-                        <br/>
-                        <Text component="p">Go fix the warning on <Text component='a' href="https://github.com/ComplianceAsCode/redhat">github</Text>.</Text>
-                    </React.Fragment>
-                  }
-                  <Text component="h2">Requirements Traceability Matrix</Text>
-
-                  { this.renderControls() }
-              </TextContent>
-            }
-            </PageSection>
+                </PageSection>
             </Page>
         );
     }
@@ -602,10 +626,16 @@ class Product extends React.Component {
         this.state = {
             isLoading: true,
             productId: productId,
-            product: null
+            product: null,
+            activeTabKey: 0,
         };
         Api.componentControls(productId)
             .then(data => this.setState({product: data, isLoading: false}))
+        this.handleTabClick = this.handleTabClick.bind(this);
+    }
+
+    handleTabClick(event, tabIndex) {
+        this.setState({activeTabKey: tabIndex});
     }
 }
 
