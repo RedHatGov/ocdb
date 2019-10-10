@@ -1,24 +1,19 @@
-import ansibleTowerLogo from '@app/assets/images/ansible-tower-logo.png';
-import coreosLogo from '@app/assets/images/coreos-logo.png';
-import openshiftLogo from '@app/assets/images/openshift-logo.png';
-import openstackLogo from '@app/assets/images/openstack-logo.png';
-
 export interface ProductTemplate {
     image?: string;
 };
 
 const ProductInfo: {[Identifier: string]: ProductTemplate } = {
     'ansible-tower': {
-        image: ansibleTowerLogo
+        image: require('@app/assets/images/ansible-tower-logo.png')
     },
     coreos4: {
-        image: coreosLogo
+        image: require('@app/assets/images/coreos-logo.png')
     },
     ocp3: {
-        image: openshiftLogo
+        image: require('@app/assets/images/openshift-logo.png')
     },
     osp13: {
-        image: openstackLogo
+        image: require('@app/assets/images/openstack-logo.png')
     },
 };
 
