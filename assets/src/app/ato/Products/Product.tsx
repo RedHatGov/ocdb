@@ -147,6 +147,7 @@ export interface RTMToolbarFilters {
     section: string[];
     status: string[];
     solution: string[];
+    search: string[];
 }
 
 export interface RTMToolbarState {
@@ -154,7 +155,6 @@ export interface RTMToolbarState {
     statusIsExpanded: boolean;
     solutionIsExpanded: boolean;
     filters: RTMToolbarFilters;
-    userSearch: string;
     expanded: boolean;
 }
 interface RTMToolbarProps {
@@ -202,8 +202,7 @@ class RTMToolbar extends React.Component<RTMToolbarProps, RTMToolbarState> {
             sectionIsExpanded: false,
             statusIsExpanded: false,
             solutionIsExpanded: false,
-            filters: {section: [], status: [], solution: []},
-            userSearch: '',
+            filters: {section: [], status: [], solution: [], search: []},
             expanded: false,
         };
         this.onSearchInputChange = this.onSearchInputChange.bind(this);
@@ -259,7 +258,16 @@ class RTMToolbar extends React.Component<RTMToolbarProps, RTMToolbarState> {
     };
 
     onSearchInputChange(newValue) {
-        this.setState({userSearch: newValue});
+        var filters = this.state.filters;
+        if (newValue.length > 3) {
+            filters.search = [newValue];
+            this.setState({filters: filters});
+            this.props.view.recomputeFilters(filters);
+        } else if (filters.search != []) {
+            filters.search = [];
+            this.setState({filters: filters});
+            this.props.view.recomputeFilters(filters);
+        }
     }
 
     onDelete(type="", id="") {
@@ -273,7 +281,8 @@ class RTMToolbar extends React.Component<RTMToolbarProps, RTMToolbarState> {
             const filters = {
                 section: [],
                 status: [],
-                solution: []
+                solution: [],
+                search: []
             }
             this.props.view.recomputeFilters(filters);
             this.setState({filters: filters})
@@ -284,14 +293,14 @@ class RTMToolbar extends React.Component<RTMToolbarProps, RTMToolbarState> {
         const { sectionIsExpanded, statusIsExpanded, solutionIsExpanded, filters, expanded } = this.state;
         const searchGroupItems = <React.Fragment>
             <DataToolbarItem variant="label" id="stacked-example-resource-select">Search</DataToolbarItem>
-            <DataToolbarItem>
+            <DataToolbarFilter chips={filters.search} deleteChip={this.onDelete} categoryName="Search">
                 <InputGroup>
-                    <TextInput name="textInput1" id="textInput1" type="search" aria-label="search input example" onChange={this.onSearchInputChange} />
+                    <TextInput name="textInput1" id="textInput1" type="search" aria-label="search input example" onChange={this.onSearchInputChange}/>
                     <Button variant={ButtonVariant.tertiary} aria-label="search button for search input">
                         <SearchIcon />
                     </Button>
                 </InputGroup>
-            </DataToolbarItem>
+            </DataToolbarFilter>
         </React.Fragment>
 
         const filterGroupItems = <React.Fragment>
@@ -367,7 +376,7 @@ class RTMToolbar extends React.Component<RTMToolbarProps, RTMToolbarState> {
         return <DataToolbar
                    id="data-toolbar-with-chip-groups"
                    clearAllFilters={this.onDelete}
-                   showClearFiltersButton={filters.section.length !== 0 || filters.status.length !== 0 }>
+                   showClearFiltersButton={filters.section.length !== 0 || filters.status.length !== 0 || filters.search.length !== 0 || filters.solution.length !== 0 }>
                    <DataToolbarContent>{toolbarItems}</DataToolbarContent>
                </DataToolbar>;
     }
@@ -393,7 +402,8 @@ class RTM extends React.Component<RTMProps, RTMState> {
                 {
                     isOpen: false,
                     cells: [c.Key, c.Control.name, implementation_status],
-                    _custom: c.Satisfies
+                    _custom: c.Satisfies,
+                    _text: JSON.stringify(c).toUpperCase()
                 },
                 {
                     parent: idx * 2,
@@ -465,8 +475,15 @@ class RTM extends React.Component<RTMProps, RTMState> {
                     return false;
                 }
             }
+            if (filters.search.length != 0) {
+                if (filters.search.some((function(selection) {
+                    return row._text.includes(selection.toUpperCase());
+                })) == false) {
+                    return false;
+                }
+            }
 
-            return true; // TODO
+            return true;
         }
 
         var lastMatched = false;
