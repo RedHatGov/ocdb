@@ -370,7 +370,7 @@ class RTMToolbar extends React.Component<RTMToolbarProps, RTMToolbarState> {
         const toolbarItems = <React.Fragment>
             <DataToolbarGroup variant="search-group">{searchGroupItems}</DataToolbarGroup>
             <DataToolbarGroup variant="filter-group">{filterGroupItems}</DataToolbarGroup>
-            <DataToolbarGroup variant="button-group">{buttonGroupItems}</DataToolbarGroup>
+            <DataToolbarGroup breakpointMods={[{modifier:"align-right"}]} variant="button-group">{buttonGroupItems}</DataToolbarGroup>
         </React.Fragment>;
 
         return <DataToolbar
