@@ -9,7 +9,8 @@ const ProductInfo: {[Identifier: string]: ProductTemplate } = {
         overviewText: require('@app/assets/markdown/products/ansible-tower.md').default
     },
     coreos4: {
-        image: require('@app/assets/images/coreos-logo.png')
+        image: require('@app/assets/images/coreos-logo.png'),
+        overviewText: require('@app/assets/markdown/products/coreos4.md').default
     },
     ocp3: {
         image: require('@app/assets/images/openshift-logo.png')
