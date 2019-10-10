@@ -1,10 +1,12 @@
 export interface ProductTemplate {
+    overviewText?: any
     image?: string;
 };
 
 const ProductInfo: {[Identifier: string]: ProductTemplate } = {
     'ansible-tower': {
-        image: require('@app/assets/images/ansible-tower-logo.png')
+        image: require('@app/assets/images/ansible-tower-logo.png'),
+        overviewText: require('@app/assets/markdown/products/ansible-tower.md').default
     },
     coreos4: {
         image: require('@app/assets/images/coreos-logo.png')

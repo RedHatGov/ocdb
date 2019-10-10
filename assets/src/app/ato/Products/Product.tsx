@@ -24,6 +24,8 @@ import {
 } from '@patternfly/react-core/dist/esm/experimental';
 
 import * as Api from '@app/lib/api'
+import { Markdown } from '@app/lib/markdown';
+import { ProductInfo } from '@app/ato/Products/Static.tsx'
 
 export const expandable = (data?: IFormatterValueType, rowData? : IRowData) =>
     rowData && rowData.hasOwnProperty('parent') ? <ExpandableRowContent>{data}</ExpandableRowContent> : (data ? data : '');
@@ -540,6 +542,18 @@ class Product extends React.Component {
         return (<RTM content={requirements}/>);
     }
 
+    renderOverview() {
+        if (ProductInfo[this.state['productId']] && ProductInfo[this.state['productId']].overviewText) {
+            const Element = ProductInfo[this.state['productId']].overviewText;
+            return <React.Fragment>
+                <Markdown><Element/></Markdown>
+                <br/>
+                <br/>
+            </React.Fragment>
+        }
+        return '';
+    }
+
     render(){
         return (
             <Page>
@@ -549,21 +563,34 @@ class Product extends React.Component {
                       <React.Fragment>
                           <TextContent>
                               <Text component="h1">{this.state['product']['name']}</Text>
-                              <Text component="h2">Product-specific security documentation.</Text>
-                              <Text component="p">TBD lorem.</Text>
-                              { this.state['product']['errors'].length == 0 ? ' ' : <Alert  variant="warning" title="Metadata Warnings">
-                                  {this.state['product']['errors'].map((function(error, i) {
-                                       return <Text component="p" key={i}>{error}</Text>;
-                                   }))}
-                              </Alert> }
-                              <Text component="h2">Requirements Traceability Matrix</Text>
                           </TextContent>
-
-                          { this.renderControls() }
-
-                      </React.Fragment>
+                        </React.Fragment>
                     }
-                </PageSection>
+
+                    { this.renderOverview() }
+
+            { this.state['isLoading'] ?
+              <Spinner/> :
+              <TextContent>
+                  { this.state['product']['errors'].length == 0 ?
+                    '' :
+                    <React.Fragment>
+                        <Text component="h2">OpenControls Developer Information</Text>
+                        <Alert  variant="warning" title="Metadata Warnings">
+                            {this.state['product']['errors'].map((function(error, i) {
+                                 return <Text component="p" key={i}>{error}</Text>;
+                             }))}
+                        </Alert>
+                        <br/>
+                        <Text component="p">Go fix the warning on <Text component='a' href="https://github.com/ComplianceAsCode/redhat">github</Text>.</Text>
+                    </React.Fragment>
+                  }
+                  <Text component="h2">Requirements Traceability Matrix</Text>
+
+                  { this.renderControls() }
+              </TextContent>
+            }
+            </PageSection>
             </Page>
         );
     }
