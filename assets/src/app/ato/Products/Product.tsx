@@ -546,15 +546,15 @@ interface ProductState {
 
 class Product extends React.Component<{}, ProductState> {
     renderControls() {
-        var controls = this.state['product']['controls'];
+        var controls = this.state.product['controls'];
         var nist80053 = controls['NIST-800-53'];
         var requirements = Array.prototype.concat.apply([], Object.keys(nist80053).map(function(k, _) { return nist80053[k]; }));
         return (<RTM content={requirements}/>);
     }
 
     renderOverview() {
-        if (ProductInfo[this.state['productId']] && ProductInfo[this.state['productId']].overviewText) {
-            const Element = ProductInfo[this.state['productId']].overviewText;
+        if (ProductInfo[this.state.productId] && ProductInfo[this.state.productId].overviewText) {
+            const Element = ProductInfo[this.state.productId].overviewText;
             return <React.Fragment>
                 <Markdown><Element/></Markdown>
                 <br/>
@@ -573,15 +573,15 @@ class Product extends React.Component<{}, ProductState> {
                 </Tab>
                 <Tab eventKey={1} title={<React.Fragment>NIST-800-53 {this.state.isLoading ? <Spinner size="md"/> : <OutlinedListAltIcon/>} </React.Fragment>}>
                     <br/>
-                    { this.state['isLoading'] ?
+                    { this.state.isLoading ?
                       <Spinner/> :
                       <TextContent>
-                          { this.state['product']['errors'].length == 0 ?
+                          { this.state.product['errors'].length == 0 ?
                             '' :
                             <React.Fragment>
                                 <Text component="h2">OpenControls Developer Information</Text>
                                 <Alert  variant="warning" title="Metadata Warnings">
-                                    {this.state['product']['errors'].map((function(error, i) {
+                                    {this.state.product.['errors'].map((function(error, i) {
                                          return <Text component="p" key={i}>{error}</Text>;
                                      }))}
                                 </Alert>
@@ -603,11 +603,11 @@ class Product extends React.Component<{}, ProductState> {
         return (
             <Page>
                 <PageSection variant={PageSectionVariants.light}>
-                    { this.state['isLoading'] ?
+                    { this.state.isLoading ?
                       <Spinner/> :
                       <React.Fragment>
                           <TextContent>
-                              <Text component="h1">{this.state['product']['name']}</Text>
+                              <Text component="h1">{this.state.product['name']}</Text>
                           </TextContent>
                         </React.Fragment>
                     }
