@@ -557,8 +557,6 @@ class Product extends React.Component<{}, ProductState> {
             const Element = ProductInfo[this.state.productId].overviewText;
             return <React.Fragment>
                 <Markdown><Element/></Markdown>
-                <br/>
-                <br/>
             </React.Fragment>
         }
         return '';
