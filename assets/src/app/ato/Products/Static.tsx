@@ -22,6 +22,9 @@ const ProductInfo: {[Identifier: string]: ProductTemplate } = {
         image: require('@app/assets/images/openshift-logo.png'),
         overviewText: require('@app/assets/markdown/products/ocp3.md').default
     },
+    'openshift-dedicated': {
+        overviewText: require('@app/assets/markdown/products/openshift-dedicated.md').default
+    },
     osp13: {
         image: require('@app/assets/images/openstack-logo.png')
     },
