@@ -12,6 +12,12 @@ const ProductInfo: {[Identifier: string]: ProductTemplate } = {
         image: require('@app/assets/images/coreos-logo.png'),
         overviewText: require('@app/assets/markdown/products/coreos4.md').default
     },
+    idm: {
+        overviewText: require('@app/assets/markdown/products/idm.md').default
+    },
+    insights: {
+        overviewText: require('@app/assets/markdown/products/insights.md').default
+    },
     ocp3: {
         image: require('@app/assets/images/openshift-logo.png'),
         overviewText: require('@app/assets/markdown/products/ocp3.md').default
