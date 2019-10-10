@@ -29,6 +29,9 @@ const ProductInfo: {[Identifier: string]: ProductTemplate } = {
         image: require('@app/assets/images/openstack-logo.png'),
         overviewText: require('@app/assets/markdown/products/osp13.md').default
     },
+    rhvh: {
+        overviewText: require('@app/assets/markdown/products/rhvh.md').default,
+    }
 };
 
 export { ProductInfo }
