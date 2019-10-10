@@ -13,7 +13,8 @@ const ProductInfo: {[Identifier: string]: ProductTemplate } = {
         overviewText: require('@app/assets/markdown/products/coreos4.md').default
     },
     ocp3: {
-        image: require('@app/assets/images/openshift-logo.png')
+        image: require('@app/assets/images/openshift-logo.png'),
+        overviewText: require('@app/assets/markdown/products/ocp3.md').default
     },
     osp13: {
         image: require('@app/assets/images/openstack-logo.png')
