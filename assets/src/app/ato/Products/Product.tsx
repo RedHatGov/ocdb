@@ -581,7 +581,7 @@ class Product extends React.Component<{}, ProductState> {
                             <React.Fragment>
                                 <Text component="h2">OpenControls Developer Information</Text>
                                 <Alert  variant="warning" title="Metadata Warnings">
-                                    {this.state.product.['errors'].map((function(error, i) {
+                                    {this.state.product['errors'].map((function(error, i) {
                                          return <Text component="p" key={i}>{error}</Text>;
                                      }))}
                                 </Alert>
