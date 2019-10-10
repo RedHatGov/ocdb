@@ -184,13 +184,13 @@ class RTMToolbar extends React.Component<RTMToolbarProps, RTMToolbarState> {
         { value: 'SI', label: 'System and Information Integrity'},
     ];
     statusOptions = [
-        { value: 'complete'},
-        { value: 'partial'},
-        { value: 'not applicable'},
-        { value: 'planned'},
-        { value: 'unsatisfied'},
-        { value: 'unknown'},
-        { value: 'none'},
+        { value: 'complete', label: 'Complete'},
+        { value: 'partial', label: 'Partial'},
+        { value: 'not applicable', label: 'Not Applicable'},
+        { value: 'planned', label: 'Planned'},
+        { value: 'unsatisfied', label: 'Unsatisfied'},
+        { value: 'unknown', label: 'Unknown'},
+        { value: 'none', label: 'None'},
     ];
     solutionOptions = [
         { value: 'Available' },
@@ -335,10 +335,9 @@ class RTMToolbar extends React.Component<RTMToolbarProps, RTMToolbarState> {
                     placeholderText="Status"
                 >
                     {this.statusOptions.map((option, index) => (
-                        <SelectOption
-                            key={index}
-                            value={option.value}
-                        />
+                        <SelectOption key={index} value={option.value}>
+                            {option.label}
+                        </SelectOption>
                     ))}
                 </Select>
             </DataToolbarFilter>
