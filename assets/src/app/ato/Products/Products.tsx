@@ -13,24 +13,14 @@ import {
 } from '@patternfly/react-core';
 import { Spinner } from '@patternfly/react-core/dist/esm/experimental';
 import { NavLink } from 'react-router-dom';
+import { ProductInfo } from '@app/ato/Products/Static.tsx'
 
 import * as Api from '@app/lib/api'
-import ansibleTowerLogo from '@app/assets/images/ansible-tower-logo.png';
-import coreosLogo from '@app/assets/images/coreos-logo.png';
-import openshiftLogo from '@app/assets/images/openshift-logo.png';
-import openstackLogo from '@app/assets/images/openstack-logo.png';
 import redhatLogo from '@app/assets/images/red-hat-logo-a.png';
-
-const images = {
-    'ansible-tower': ansibleTowerLogo,
-    coreos4: coreosLogo,
-    ocp3: openshiftLogo,
-    osp13: openstackLogo,
-};
 
 const ProductGalleryItem: React.FunctionComponent<any> = (props) => {
     var productId = props['product']['key'];
-    var logo = images[productId] || redhatLogo;
+    var logo = (ProductInfo[productId] && ProductInfo[productId].image) || redhatLogo;
     return (
         <GalleryItem>
             <NavLink exact={true} to={"/ato/products/" + productId}>
