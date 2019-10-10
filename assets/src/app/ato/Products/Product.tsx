@@ -165,23 +165,23 @@ interface RTMToolbarProps {
 
 class RTMToolbar extends React.Component<RTMToolbarProps, RTMToolbarState> {
     sectionOptions = [
-        { value: 'AC'},
-        { value: 'AT'},
-        { value: 'AU'},
-        { value: 'CA'},
-        { value: 'CM'},
-        { value: 'CP'},
-        { value: 'IA'},
-        { value: 'IR'},
-        { value: 'MA'},
-        { value: 'MP'},
-        { value: 'PE'},
-        { value: 'PL'},
-        { value: 'PS'},
-        { value: 'RA'},
-        { value: 'SA'},
-        { value: 'SC'},
-        { value: 'SI'},
+        { value: 'AC', label: 'Assess Control'},
+        { value: 'AT', label: 'Awareness and Training'},
+        { value: 'AU', label: 'Audit and Accountability'},
+        { value: 'CA', label: 'Security Assessment & Authorization'},
+        { value: 'CM', label: 'Configuration Management'},
+        { value: 'CP', label: 'Contingency Planning'},
+        { value: 'IA', label: 'Identification and Authentication'},
+        { value: 'IR', label: 'Incident Response'},
+        { value: 'MA', label: 'Maintenance'},
+        { value: 'MP', label: 'Media Protection'},
+        { value: 'PE', label: 'Physical & Environmental Protection'},
+        { value: 'PL', label: 'Planning'},
+        { value: 'PS', label: 'Personell Security'},
+        { value: 'RA', label: 'Risk Management'},
+        { value: 'SA', label: 'System and Services Acquisition'},
+        { value: 'SC', label: 'Systems and Communications Protection'},
+        { value: 'SI', label: 'System and Information Integrity'},
     ];
     statusOptions = [
         { value: 'complete'},
@@ -318,10 +318,9 @@ class RTMToolbar extends React.Component<RTMToolbarProps, RTMToolbarState> {
                     placeholderText="Section"
                 >
                     {this.sectionOptions.map((option, index) => (
-                        <SelectOption
-                            key={index}
-                            value={option.value}
-                        />
+                        <SelectOption key={index} value={option.value}>
+                            {option.value}: {option.label}
+                        </SelectOption>
                     ))}
                 </Select>
             </DataToolbarFilter>
