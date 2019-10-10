@@ -156,9 +156,11 @@ export interface RTMToolbarState {
     solutionIsExpanded: boolean;
     filters: RTMToolbarFilters;
     expanded: boolean;
+    matchedRows: number;
 }
 interface RTMToolbarProps {
     view: RTM;
+    rowCount: number;
 }
 
 class RTMToolbar extends React.Component<RTMToolbarProps, RTMToolbarState> {
@@ -204,6 +206,7 @@ class RTMToolbar extends React.Component<RTMToolbarProps, RTMToolbarState> {
             solutionIsExpanded: false,
             filters: {section: [], status: [], solution: [], search: []},
             expanded: false,
+            matchedRows: props.rowCount,
         };
         this.onSearchInputChange = this.onSearchInputChange.bind(this);
         this.onSectionToggle = this.onSectionToggle.bind(this);
@@ -226,8 +229,8 @@ class RTMToolbar extends React.Component<RTMToolbarProps, RTMToolbarState> {
             ? [...prevSelections, selection]
             : prevSelections.filter(value => value !== selection)
         };
-        this.props.view.recomputeFilters(filters);
-        this.setState({filters: filters});
+        const matchedRows = this.props.view.recomputeFilters(filters);
+        this.setState({filters: filters, matchedRows: matchedRows});
     }
 
     onSectionToggle(isExpanded) {
@@ -261,12 +264,12 @@ class RTMToolbar extends React.Component<RTMToolbarProps, RTMToolbarState> {
         var filters = this.state.filters;
         if (newValue.length > 3) {
             filters.search = [newValue];
-            this.setState({filters: filters});
-            this.props.view.recomputeFilters(filters);
+            const matchedRows = this.props.view.recomputeFilters(filters);
+            this.setState({filters: filters, matchedRows: matchedRows});
         } else if (filters.search != []) {
             filters.search = [];
-            this.setState({filters: filters});
-            this.props.view.recomputeFilters(filters);
+            const matchedRows = this.props.view.recomputeFilters(filters);
+            this.setState({filters: filters, matchedRows: matchedRows});
         }
     }
 
@@ -274,8 +277,8 @@ class RTMToolbar extends React.Component<RTMToolbarProps, RTMToolbarState> {
         if (type) {
             var filters = this.state.filters;
             filters[type.toLowerCase()] = filters[type.toLowerCase()].filter(s => s !== id);
-            this.setState({filters: filters});
-            this.props.view.recomputeFilters(filters);
+            const matchedRows = this.props.view.recomputeFilters(filters);
+            this.setState({filters: filters, matchedRows: matchedRows});
 
         } else {
             const filters = {
@@ -284,8 +287,8 @@ class RTMToolbar extends React.Component<RTMToolbarProps, RTMToolbarState> {
                 solution: [],
                 search: []
             }
-            this.props.view.recomputeFilters(filters);
-            this.setState({filters: filters})
+            const matchedRows = this.props.view.recomputeFilters(filters);
+            this.setState({filters: filters, matchedRows: matchedRows})
         }
     }
 
@@ -361,6 +364,16 @@ class RTMToolbar extends React.Component<RTMToolbarProps, RTMToolbarState> {
         </React.Fragment>;
 
         const buttonGroupItems = <React.Fragment>
+            <DataToolbarItem>
+                <strong>{this.state.matchedRows} </strong>
+                { this.props.rowCount == this.state.matchedRows ?
+                  "" :
+                  <React.Fragment>
+                      of <strong>{this.props.rowCount} </strong>
+                  </React.Fragment>
+                }
+                Items
+            </DataToolbarItem>
             <DataToolbarItem variant="separator"></DataToolbarItem>
             <DataToolbarItem>
                 <Switch id="simple-switch" label="Collapse All" labelOff="Expand All" onChange={this.onExpandToggle} isChecked={expanded} />
@@ -487,7 +500,7 @@ class RTM extends React.Component<RTMProps, RTMState> {
         }
 
         var lastMatched = false;
-        var matchedParents = -1;
+        var matchedParents = 0;
         this.setState({rows: this.state.allRows.filter((function(row, i, arr) {
                 if (!row.hasOwnProperty('parent')) {
                     lastMatched = rowMatchesFilters(row, filters);
@@ -496,18 +509,19 @@ class RTM extends React.Component<RTMProps, RTMState> {
                     }
                 } else {
                     // update parent index
-                    arr[i].parent = matchedParents * 2;
+                    arr[i].parent = (matchedParents - 1) * 2;
                 }
 
                 return lastMatched;
         }))});
+        return matchedParents;
     }
 
     render(){
         return (
             <TextContent>
                 <Table
-                        caption={<RTMToolbar view={this} />}
+                        caption={<RTMToolbar view={this} rowCount={this.state.allRows.length / 2} />}
                         variant={TableVariant.compact}
                         onCollapse={this.onCollapse}
                         rows={this.state.rows}
