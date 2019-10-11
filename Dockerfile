@@ -2,8 +2,8 @@
 # https://docs.docker.com/engine/userguide/eng-image/multistage-build/
 FROM gobuffalo/buffalo:v0.14.10 as builder
 
-RUN mkdir -p $GOPATH/src/github.com/isimluk/ocdb
-WORKDIR $GOPATH/src/github.com/isimluk/ocdb
+RUN mkdir -p $GOPATH/src/github.com/RedHatGov/ocdb
+WORKDIR $GOPATH/src/github.com/RedHatGov/ocdb
 
 # this will cache the npm install step, unless package.json changes
 ADD package.json .

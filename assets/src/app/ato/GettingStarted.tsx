@@ -57,7 +57,7 @@ const GettingStarted: React.FunctionComponent<any> = (props) => {
                   <Text component="p">This microsite, and resources contained within, are reflect open source projects on GitHub.</Text>
                   <TextList>
                       <TextListItem>
-                          <Text component={TextVariants.a} href="https://github.com/isimluk/ocdb">
+                          <Text component={TextVariants.a} href="https://github.com/RedHatGov/ocdb">
                               Open Controls Database
                           </Text>
                       </TextListItem>

@@ -2,7 +2,7 @@ package api
 
 import (
 	"github.com/gobuffalo/buffalo"
-	"github.com/isimluk/ocdb/pkg/masonry"
+	"github.com/RedHatGov/ocdb/pkg/masonry"
 )
 
 // StandardsResource show standards like defined by opencontrols

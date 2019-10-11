@@ -10,7 +10,7 @@ import (
 	csrf "github.com/gobuffalo/mw-csrf"
 	i18n "github.com/gobuffalo/mw-i18n"
 	"github.com/gobuffalo/packr/v2"
-	"github.com/isimluk/ocdb/actions/api"
+	"github.com/RedHatGov/ocdb/actions/api"
 )
 
 // ENV is used to help switch settings based on where the

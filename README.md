@@ -10,8 +10,8 @@
 ## Developer Setup
 
   * install golang `dnf install golang`
-  * acquire ocdb - `go get -u -v github.com/isimluk/ocdb`
-  * change dir to the source location - `cd ~/go/src/github.com/isimluk/ocdb`
+  * acquire ocdb - `go get -u -v github.com/RedHatGov/ocdb`
+  * change dir to the source location - `cd ~/go/src/github.com/RedHatGov/ocdb`
   * acquire buffallo tool - `go get -v github.com/gobuffalo/buffalo/buffalo`
     * optionally consider installing bash completion: https://gobuffalo.io/en/docs/getting-started/integrations
   * build front-end pipeline

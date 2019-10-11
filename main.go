@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 
-	"github.com/isimluk/ocdb/actions"
+	"github.com/RedHatGov/ocdb/actions"
 )
 
 // main is the starting point for your Buffalo application.

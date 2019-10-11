@@ -2,7 +2,7 @@ package grifts
 
 import (
 	"github.com/gobuffalo/buffalo"
-	"github.com/isimluk/ocdb/actions"
+	"github.com/RedHatGov/ocdb/actions"
 )
 
 func init() {

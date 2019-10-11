@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/gobuffalo/buffalo"
-	"github.com/isimluk/ocdb/pkg/masonry"
+	"github.com/RedHatGov/ocdb/pkg/masonry"
 	"github.com/opencontrol/compliance-masonry/pkg/lib/common"
 )
 

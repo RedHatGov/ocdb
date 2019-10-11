@@ -52,7 +52,7 @@ class SimpleAboutModal extends React.Component<{}, AboutState> {
                             <TextListItem component="dt">Open Controls</TextListItem>
                             <TextListItem component="dd"><Text component="a" href="https://github.com/ComplianceAsCode/redhat/"><EmptyStateIcon icon={GithubIcon}/></Text></TextListItem>
                             <TextListItem component="dt">Open Controls Database</TextListItem>
-                            <TextListItem component="dd"><Text component="a" href="https://github.com/isimluk/ocdb"><EmptyStateIcon icon={GithubIcon}/></Text></TextListItem>
+                            <TextListItem component="dd"><Text component="a" href="https://github.com/RedHatGov/ocdb"><EmptyStateIcon icon={GithubIcon}/></Text></TextListItem>
                         </TextList>
                     </TextContent>
                 </AboutModal>
