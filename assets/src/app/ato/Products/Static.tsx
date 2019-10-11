@@ -31,6 +31,9 @@ const ProductInfo: {[Identifier: string]: ProductTemplate } = {
     },
     rhvh: {
         overviewText: require('@app/assets/markdown/products/rhvh.md').default,
+    },
+    rhvm: {
+        overviewText: require('@app/assets/markdown/products/rhvm.md').default,
     }
 };
 
