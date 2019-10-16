@@ -15,6 +15,10 @@ const ProductInfo: {[Identifier: string]: ProductTemplate } = {
             {
                 name: 'Overview',
                 text: require('@app/assets/markdown/products/ansible-tower/Overview.md').default
+            },
+            {
+                name: 'ICS-500-27',
+                text: require('@app/assets/markdown/products/ansible-tower/ICS-500-27.md').default
             }
         ]
     },

@@ -552,9 +552,16 @@ class Product extends React.Component<{}, ProductState> {
         return (<RTM content={requirements}/>);
     }
 
+    texts() {
+        return ProductInfo[this.state.productId] ?
+               ProductInfo[this.state.productId].texts :
+               [];
+    }
+
     renderMarkdown(textPosition) {
-        if (ProductInfo[this.state.productId] && ProductInfo[this.state.productId].texts.length > textPosition ) {
-            const Element = ProductInfo[this.state.productId].texts[textPosition].text;
+        const texts = this.texts();
+        if (texts.length > textPosition ) {
+            const Element = texts[textPosition].text;
             return <React.Fragment>
                 <Markdown><Element/></Markdown>
             </React.Fragment>
@@ -563,6 +570,7 @@ class Product extends React.Component<{}, ProductState> {
     }
 
     renderTabs(){
+        const renderMarkdown = this.renderMarkdown;
         return (
             <Tabs activeKey={this.state.activeTabKey} onSelect={this.handleTabClick}>
                 <Tab eventKey={0} title="Overview">
@@ -593,6 +601,14 @@ class Product extends React.Component<{}, ProductState> {
                       </TextContent>
                     }
                 </Tab>
+                {
+                    this.texts().slice(1).map((function(text, id) {
+                        return <Tab key={id+2} eventKey={id + 2} title={text.name}>
+                            <br/>
+                            { renderMarkdown(id + 1) }
+                        </Tab>;
+                    }))
+                }
             </Tabs>
         );
     }
@@ -630,6 +646,7 @@ class Product extends React.Component<{}, ProductState> {
         Api.componentControls(productId)
             .then(data => this.setState({product: data, isLoading: false}))
         this.handleTabClick = this.handleTabClick.bind(this);
+        this.renderMarkdown = this.renderMarkdown.bind(this);
     }
 
     handleTabClick(event, tabIndex) {
