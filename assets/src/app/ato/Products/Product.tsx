@@ -552,9 +552,9 @@ class Product extends React.Component<{}, ProductState> {
         return (<RTM content={requirements}/>);
     }
 
-    renderOverview() {
-        if (ProductInfo[this.state.productId] && ProductInfo[this.state.productId].overviewText) {
-            const Element = ProductInfo[this.state.productId].overviewText;
+    renderMarkdown(textPosition) {
+        if (ProductInfo[this.state.productId] && ProductInfo[this.state.productId].texts.length > textPosition ) {
+            const Element = ProductInfo[this.state.productId].texts[textPosition].text;
             return <React.Fragment>
                 <Markdown><Element/></Markdown>
             </React.Fragment>
@@ -567,7 +567,7 @@ class Product extends React.Component<{}, ProductState> {
             <Tabs activeKey={this.state.activeTabKey} onSelect={this.handleTabClick}>
                 <Tab eventKey={0} title="Overview">
                     <br/>
-                    { this.renderOverview() }
+                    { this.renderMarkdown(0) }
                 </Tab>
                 <Tab eventKey={1} title={<React.Fragment>NIST-800-53 {this.state.isLoading ? <Spinner size="md"/> : <OutlinedListAltIcon/>} </React.Fragment>}>
                     <br/>
