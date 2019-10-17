@@ -121,14 +121,12 @@ func ComponentControlsHandler(c buffalo.Context) error {
 
 // ComponentFedrampHandler returns fedramp DOCX template filled in with current components info
 func ComponentFedrampHandler(c buffalo.Context) error {
-	ms := masonry.GetInstance()
-	_, found := (*ms).GetComponent(c.Param("component_id"))
-	if found {
-		errors := fedramp.Get(c.Param("component_id"))
+	document := fedramp.Get(c.Param("component_id"))
+	if document != nil {
 		result := make(map[string]interface{})
 
-		strErrors := make([]string, len(errors))
-		for i, err := range errors {
+		strErrors := make([]string, len(document.Errors))
+		for i, err := range document.Errors {
 			strErrors[i] = err.Error()
 		}
 		result["errors"] = strErrors
