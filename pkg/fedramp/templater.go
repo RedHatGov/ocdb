@@ -1,6 +1,7 @@
 package fedramp
 
 import (
+	"errors"
 	"github.com/RedHatGov/ocdb/pkg/masonry"
 	"github.com/opencontrol/fedramp-templater/opencontrols"
 	"github.com/opencontrol/fedramp-templater/ssp"
@@ -49,13 +50,13 @@ func buildFor(componentId string) ([]byte, []error) {
 		return nil, []error{err}
 	}
 
-	openControlData, errors := opencontrols.LoadFrom(fedrampPath)
-	if len(errors) != 0 {
-		return nil, errors
+	openControlData, errs := opencontrols.LoadFrom(fedrampPath)
+	if len(errs) != 0 {
+		return nil, errs
 	}
 	doc, err := ssp.Load(sspDocTemplate)
 	if err != nil {
-		return nil, []error{err}
+		return nil, []error{err, errors.New("Could not open FEDRAMP template: " + sspDocTemplate)}
 	}
 	defer doc.Close()
 
