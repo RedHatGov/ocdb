@@ -3,8 +3,9 @@ package api
 import (
 	"fmt"
 
-	"github.com/gobuffalo/buffalo"
+	"github.com/RedHatGov/ocdb/pkg/fedramp"
 	"github.com/RedHatGov/ocdb/pkg/masonry"
+	"github.com/gobuffalo/buffalo"
 	"github.com/opencontrol/compliance-masonry/pkg/lib/common"
 )
 
@@ -113,6 +114,24 @@ func ComponentControlsHandler(c buffalo.Context) error {
 		result["controls"] = lv
 		result["errors"] = problems
 
+		return c.Render(200, r.JSON(result))
+	}
+	return c.Render(404, r.JSON("Not found"))
+}
+
+// ComponentFedrampHandler returns fedramp DOCX template filled in with current components info
+func ComponentFedrampHandler(c buffalo.Context) error {
+	ms := masonry.GetInstance()
+	_, found := (*ms).GetComponent(c.Param("component_id"))
+	if found {
+		errors := fedramp.Get(c.Param("component_id"))
+		result := make(map[string]interface{})
+
+		strErrors := make([]string, len(errors))
+		for i, err := range errors {
+			strErrors[i] = err.Error()
+		}
+		result["errors"] = strErrors
 		return c.Render(200, r.JSON(result))
 	}
 	return c.Render(404, r.JSON("Not found"))

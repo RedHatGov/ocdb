@@ -7,10 +7,10 @@ import (
 	paramlogger "github.com/gobuffalo/mw-paramlogger"
 	"github.com/unrolled/secure"
 
+	"github.com/RedHatGov/ocdb/actions/api"
 	csrf "github.com/gobuffalo/mw-csrf"
 	i18n "github.com/gobuffalo/mw-i18n"
 	"github.com/gobuffalo/packr/v2"
-	"github.com/RedHatGov/ocdb/actions/api"
 )
 
 // ENV is used to help switch settings based on where the
@@ -65,6 +65,7 @@ func App() *buffalo.App {
 		apiV1.Resource("/standards", api.StandardsResource{&buffalo.BaseResource{}})
 		apiV1.Resource("/components", api.ComponentsResource{&buffalo.BaseResource{}})
 		apiV1.GET("/components/{component_id}/controls", api.ComponentControlsHandler)
+		apiV1.GET("/components/{component_id}/fedramp", api.ComponentFedrampHandler)
 
 		app.ServeFiles("/", assetsBox) // serve files from the public directory
 	}
