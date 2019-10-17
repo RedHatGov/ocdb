@@ -3,6 +3,7 @@ package fedramp
 import (
 	"errors"
 	"github.com/RedHatGov/ocdb/pkg/masonry"
+	"github.com/RedHatGov/ocdb/pkg/static"
 	"github.com/opencontrol/fedramp-templater/opencontrols"
 	"github.com/opencontrol/fedramp-templater/ssp"
 	"github.com/opencontrol/fedramp-templater/templater"
@@ -14,7 +15,7 @@ import (
 const masonryPath = "/tmp/.masonry_cache/"
 const fedrampPath = "/tmp/.fedramp_cache/"
 const fedrampDocPath = "/tmp/.fedramp_cache/fedramp.docx"
-const sspDocTemplate = "assets/FedRAMP-System-Security-Plan-Template-v2.1.docx"
+const sspDocTemplate = "FedRAMP-System-Security-Plan-Template-v2.1.docx"
 
 type FedrampDocument struct {
 	Bytes  []byte
@@ -29,6 +30,20 @@ func buildCache() *map[string]FedrampDocument {
 		result[component.GetKey()] = FedrampDocument{bytes, errors}
 	}
 	return &result
+}
+
+func fedrampTemplate() (*ssp.Document, []error) {
+	docBytes, err := static.AssetsBox.Find("assets/" + sspDocTemplate)
+	if err != nil {
+		return nil, []error{err, errors.New("Assets pack does not contain FEDRAMP template: " + sspDocTemplate)}
+	}
+	ioutil.WriteFile("/tmp/"+sspDocTemplate, docBytes, 0600)
+
+	doc, err := ssp.Load("/tmp/" + sspDocTemplate)
+	if err != nil {
+		return nil, []error{err, errors.New("Could not open FEDRAMP template: /tmp/" + sspDocTemplate)}
+	}
+	return doc, nil
 }
 
 // Get the fedramp document for given component
@@ -54,9 +69,9 @@ func buildFor(componentId string) ([]byte, []error) {
 	if len(errs) != 0 {
 		return nil, errs
 	}
-	doc, err := ssp.Load(sspDocTemplate)
-	if err != nil {
-		return nil, []error{err, errors.New("Could not open FEDRAMP template: " + sspDocTemplate)}
+	doc, errs := fedrampTemplate()
+	if len(errs) != 0 {
+		return nil, errs
 	}
 	defer doc.Close()
 
