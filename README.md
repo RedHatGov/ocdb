@@ -1,4 +1,4 @@
-# Open Controls Database
+# OpenControl Database
 
 ## Quick Demo
   * run demo in container
