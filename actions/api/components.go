@@ -1,8 +1,8 @@
 package api
 
 import (
+	"bytes"
 	"fmt"
-	"strings"
 
 	"github.com/RedHatGov/ocdb/pkg/fedramp"
 	"github.com/RedHatGov/ocdb/pkg/masonry"
@@ -126,9 +126,9 @@ func ComponentFedrampHandler(c buffalo.Context) error {
 	if document != nil {
 		if len(document.Bytes) > 0 {
 			return c.Render(200,
-				r.Download(nil,
+				r.Download(c,
 					"FedRAMP-"+c.Param("component_id")+".docx",
-					strings.NewReader(document.Bytes)))
+					bytes.NewReader(document.Bytes)))
 		}
 
 		strErrors := make([]string, len(document.Errors))
