@@ -4,7 +4,7 @@ FROM gobuffalo/buffalo:v0.14.10 as builder
 
 RUN mkdir -p $GOPATH/src/github.com/RedHatGov/ocdb
 WORKDIR $GOPATH/src/github.com/RedHatGov/ocdb
-RUN apt-get update && apt-get install -y libxml2-dev
+RUN apt-get update && apt-get install -y libxml2-dev zlib1g-dev liblzma-dev libicu-dev
 
 # this will cache the npm install step, unless package.json changes
 ADD package.json .
@@ -12,7 +12,7 @@ ADD yarn.lock .
 RUN yarn install --no-progress
 ADD . .
 RUN go get ./...
-RUN buffalo build --static -o /bin/app
+RUN buffalo build --ldflags '-linkmode external -extldflags "-static -lz -llzma -licuuc -licudata -ldl -lstdc++ -lm"' -o /bin/app
 
 FROM alpine
 RUN apk add --no-cache bash git
