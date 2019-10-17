@@ -4,6 +4,7 @@ FROM gobuffalo/buffalo:v0.14.10 as builder
 
 RUN mkdir -p $GOPATH/src/github.com/RedHatGov/ocdb
 WORKDIR $GOPATH/src/github.com/RedHatGov/ocdb
+RUN apt-get update && apt-get install -y libxml2-dev
 
 # this will cache the npm install step, unless package.json changes
 ADD package.json .
