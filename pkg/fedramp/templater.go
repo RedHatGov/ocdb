@@ -2,9 +2,9 @@ package fedramp
 
 import (
 	"github.com/RedHatGov/ocdb/pkg/masonry"
-	"github.com/isimluk/fedramp-templater/opencontrols"
-	"github.com/isimluk/fedramp-templater/ssp"
-	"github.com/isimluk/fedramp-templater/templater"
+	"github.com/opencontrol/fedramp-templater/opencontrols"
+	"github.com/opencontrol/fedramp-templater/ssp"
+	"github.com/opencontrol/fedramp-templater/templater"
 	"io/ioutil"
 	"os"
 	"path/filepath"
