@@ -2,6 +2,7 @@ package api
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/RedHatGov/ocdb/pkg/fedramp"
 	"github.com/RedHatGov/ocdb/pkg/masonry"
@@ -123,14 +124,19 @@ func ComponentControlsHandler(c buffalo.Context) error {
 func ComponentFedrampHandler(c buffalo.Context) error {
 	document := fedramp.Get(c.Param("component_id"))
 	if document != nil {
-		result := make(map[string]interface{})
+		if len(document.Bytes) > 0 {
+			return c.Render(200,
+				r.Download(nil,
+					"FedRAMP-"+c.Param("component_id")+".docx",
+					strings.NewReader(document.Bytes)))
+		}
 
 		strErrors := make([]string, len(document.Errors))
 		for i, err := range document.Errors {
 			strErrors[i] = err.Error()
 		}
-		result["errors"] = strErrors
-		return c.Render(200, r.JSON(result))
+		return c.Render(500, r.JSON(strErrors))
+
 	}
 	return c.Render(404, r.JSON("Not found"))
 }
