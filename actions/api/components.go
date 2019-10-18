@@ -135,7 +135,7 @@ func ComponentFedrampHandler(c buffalo.Context) error {
 		for i, err := range document.Errors {
 			strErrors[i] = err.Error()
 		}
-		return c.Render(500, r.JSON(strErrors))
+		return c.Render(404, r.JSON(strErrors))
 
 	}
 	return c.Render(404, r.JSON("Not found"))
