@@ -5,6 +5,7 @@ import {
     Button, ButtonVariant,
     Card,CardBody, CardHeader,
     InputGroup,
+    Modal,
     Page, PageSection, PageSectionVariants,
     Select, SelectOption, SelectVariant,
     Switch,
@@ -18,7 +19,7 @@ import {
     ICell, IFormatterValueType, IRow, IRowData,
     Table, TableBody, TableHeader, TableVariant,
 } from '@patternfly/react-table'
-import { SearchIcon } from '@patternfly/react-icons'
+import { FileWordIcon, SearchIcon } from '@patternfly/react-icons'
 import { OutlinedListAltIcon } from '@patternfly/react-icons'
 import {
     DataToolbar, DataToolbarContent, DataToolbarFilter, DataToolbarGroup, DataToolbarItem,
@@ -537,6 +538,66 @@ class RTM extends React.Component<RTMProps, RTMState> {
 }
 
 
+interface FedRAMPDownloadProp {
+    productId: string;
+}
+
+interface FedRAMPDownloadState {
+    isModalOpen: boolean;
+}
+
+class FedRAMPDownload extends React.Component<FedRAMPDownloadProp, FedRAMPDownloadState> {
+    handleModalToggle() {
+        this.setState(({ isModalOpen }) => ({
+            isModalOpen: !isModalOpen
+        }));
+    }
+    onSubmit() {
+        this.handleModalToggle();
+        window.location.assign('/api/v1/components/' + this.props.productId + '/fedramp');
+    }
+
+    constructor(props) {
+        super(props);
+        this.state = { isModalOpen: false };
+        this.handleModalToggle = this.handleModalToggle.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
+    }
+
+  render() {
+    const { isModalOpen } = this.state;
+
+    return (
+        <React.Fragment>
+            <Button variant="link" onClick={this.handleModalToggle} icon={<FileWordIcon/>} >
+                Download FedRAMP Template
+            </Button>
+            <br/>
+            <br/>
+            <Modal
+                isLarge
+                title="FedRAMP Template"
+                isOpen={isModalOpen}
+                onClose={this.handleModalToggle}
+                actions={[
+                    <Button key="confirm" variant="primary" onClick={this.onSubmit}>
+                        <FileWordIcon/> Download Docx Template
+                    </Button>,
+                    <Button key="cancel" variant="link" onClick={this.handleModalToggle}>
+                        Cancel
+                    </Button>
+                ]}
+                appendTo={document.body}
+                isFooterLeftAligned
+            >
+                The FedRAMP template is dynamically generated using the <Text component="a" href="https://github.com/opencontrol/fedramp-templater">OpenControl FedRAMP Templater</Text> tool, originally created by <Text component="a" href="https://18f.gsa.gov/">GSA's 18F</Text>. An automated build system incorporates <Text component="a" href="https://github.com/ComplianceAsCode/redhat">Red Hat's OpenControl Content</Text> directly into the FedRAMP Templates <Text component="a" href="https://www.fedramp.gov/templates/">provided by the GSA FedRAMP PMO</Text>.
+            </Modal>
+        </React.Fragment>
+    );
+  }
+}
+
+
 interface ProductState {
     isLoading: boolean;
     productId: string;
@@ -579,6 +640,7 @@ class Product extends React.Component<{}, ProductState> {
                 </Tab>
                 <Tab eventKey={1} title={<React.Fragment>NIST-800-53 {this.state.isLoading ? <Spinner size="md"/> : <OutlinedListAltIcon/>} </React.Fragment>}>
                     <br/>
+                    <FedRAMPDownload productId={this.state.productId}/>
                     { this.state.isLoading ?
                       <Spinner/> :
                       <TextContent>
