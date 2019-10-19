@@ -14,6 +14,7 @@ import {
   ToolbarItem,
 } from '@patternfly/react-core';
 import * as Api from '@app/lib/api'
+import { NavLink } from 'react-router-dom';
 
 interface IAppLayout {
   children: React.ReactNode;
@@ -110,8 +111,10 @@ class Navigation extends React.Component<{}, NavigationState> {
                           if ((l1 as any).to !== undefined) {
                               var id = 'itm-' + i;
                               return (
-                                  <NavItem to={(l1 as MyRoute).to} itemId={id} isActive={activeItem === id} key={id}>
-                                      {l1.label}
+                                  <NavItem itemId={id} isActive={activeItem === id} key={id}>
+                                      <NavLink exact={true} to={(l1 as MyRoute).to}>
+                                          {l1.label}
+                                      </NavLink>
                                   </NavItem>
                               );
                           } else {
@@ -122,8 +125,10 @@ class Navigation extends React.Component<{}, NavigationState> {
                                           (l1 as RouterGroup).routes.map((function(l2, j) {
                                               var id = groupId + '_itm-' + j;
                                               return (
-                                                  <NavItem to={l2.to} groupId={groupId} itemId={id} isActive={activeItem === id} key={id}>
-                                                      {l2.label}
+                                                  <NavItem groupId={groupId} itemId={id} isActive={activeItem === id} key={id}>
+                                                      <NavLink exact={true} to={l2.to}>
+                                                          {l2.label}
+                                                      </NavLink>
                                                   </NavItem>
                                               );
                                           }))
