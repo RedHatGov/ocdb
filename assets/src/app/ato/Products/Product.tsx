@@ -687,7 +687,7 @@ class Product extends React.Component<{}, ProductState> {
     static getDerivedStateFromProps(props, state) {
         const productId = props['computedMatch'].params.productId;
         if (state.productId == productId) {
-            return;
+            return null;
         }
         return {
             isLoading: true,
