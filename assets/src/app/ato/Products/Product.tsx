@@ -1,9 +1,9 @@
 import * as React from 'react';
 import {
-    Accordion, AccordionItem, AccordionContent, AccordionToggle,
     Alert,
     Button, ButtonVariant,
     Card,CardBody, CardHeader,
+    Expandable,
     InputGroup,
     Modal,
     Page, PageSection, PageSectionVariants,
@@ -55,64 +55,24 @@ export interface CustomControl {
 }
 
 
-export interface CustomControlState {
-    expanded: string[],
-}
-
 export interface CustomControlProps {
     satisfies: Satisfies;
 }
 
-class SatisfiesAccordion extends React.Component<CustomControlProps, CustomControlState> {
-    constructor(props) {
-        super(props);
-        this.state = {
-            expanded: props.satisfies == null ? [] : props.satisfies.narrative.map(function(_, idx) {
-                return 'toggle' + (idx + 1);
-            })
-        };
-    }
-
+class SatisfiesAccordion extends React.Component<CustomControlProps, {}> {
     render() {
         if (this.props.satisfies == null) {
             return (<Text component="p">Not available</Text>);
         }
 
-        const expanded = this.state.expanded;
-
-        const toggle = id => {
-            const expanded = this.state.expanded;
-            const index = expanded.indexOf(id);
-            const newExpanded =
-                index >= 0 ? [...expanded.slice(0, index), ...expanded.slice(index + 1, expanded.length)] : [...expanded, id];
-            this.setState(() => ({ expanded: newExpanded }));
-        };
-
         return (
-            <Accordion asDefinitionList={false}>
+            <React.Fragment>
                 { this.props.satisfies.narrative.map(function(n, idx) {
-                    const id = 'toggle' + (idx + 1);
                     return (
-                        <AccordionItem key={id}>
-                            <AccordionToggle
-                                onClick={() => toggle(id) }
-                                isExpanded={expanded.includes(id)}
-                                id={id}>
-                                {n.key}
-                            </AccordionToggle>
-                            <AccordionContent
-                                id={id}
-                                isHidden={!expanded.includes(id)}
-                                isFixed
-                            >
-                                <p>
-                                    {n.text}
-                                </p>
-                            </AccordionContent>
-                        </AccordionItem>
+                        <Expandable key={idx} toggleText={n.key} isExpanded>{n.text}</Expandable>
                     )
                 })}
-            </Accordion>
+            </React.Fragment>
         )
     }
 }
