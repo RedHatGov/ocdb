@@ -684,6 +684,24 @@ class Product extends React.Component<{}, ProductState> {
         );
     }
 
+    static getDerivedStateFromProps(props, state) {
+        const productId = props['computedMatch'].params.productId;
+        if (state.productId == productId) {
+            return;
+        }
+        return {
+            isLoading: true,
+            productId: productId,
+            product: null,
+        }
+    }
+    componentDidUpdate() {
+        if (this.state.isLoading) {
+            Api.componentControls(this.state.productId)
+               .then(data => this.setState({product: data, isLoading: false}))
+        }
+    }
+
     constructor(props) {
         super(props);
         const productId = props['computedMatch'].params.productId;
@@ -694,10 +712,10 @@ class Product extends React.Component<{}, ProductState> {
             product: null,
             activeTabKey: 0,
         };
-        Api.componentControls(productId)
-            .then(data => this.setState({product: data, isLoading: false}))
         this.handleTabClick = this.handleTabClick.bind(this);
         this.renderMarkdown = this.renderMarkdown.bind(this);
+        this.componentDidUpdate = this.componentDidUpdate.bind(this);
+        this.componentDidUpdate();
     }
 
     handleTabClick(event, tabIndex) {
