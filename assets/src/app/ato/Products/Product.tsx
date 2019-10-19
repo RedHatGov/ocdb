@@ -77,12 +77,24 @@ class SatisfiesAccordion extends React.Component<CustomControlProps, {}> {
     }
 }
 
+export interface RTMDetailState {
+    key: string;
+    enhancement?: string;
+}
 
 export interface RTMDetailProps {
     control: CustomControl;
 }
 
-class RTMDetail extends React.Component<RTMDetailProps, {}> {
+class RTMDetail extends React.Component<RTMDetailProps, RTMDetailState> {
+    constructor(props) {
+        super(props);
+        const parsed = props.control.Key.split(')')[0].split(' (');
+        this.state = {
+            key: parsed[0],
+            enhancement: parsed[1],
+        }
+    }
     render() {
         var c = this.props.control;
         return (
@@ -92,7 +104,7 @@ class RTMDetail extends React.Component<RTMDetailProps, {}> {
                         <TextContent>
                             <div style={{float: 'right'}}>
                                 <Tooltip position={TooltipPosition.top} content={"Detailed information about " + c.Key + " is available at NVD (National Vulnerability Database)."}>
-                                    <Text component="a" href={"https://nvd.nist.gov/800-53/Rev4/control/" + c.Key} target="_new">
+                                    <Text component="a" href={"https://nvd.nist.gov/800-53/Rev4/control/" + this.state.key + (this.state.enhancement ? ("#enhancement-" + this.state.enhancement) : "")} target="_new">
                                         <InfoAltIcon alt="Detailed Information at NVD (National Vulnerability Database)" />
                                     </Text>
                                 </Tooltip>
