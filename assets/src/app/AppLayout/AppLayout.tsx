@@ -14,7 +14,7 @@ import {
   ToolbarItem,
 } from '@patternfly/react-core';
 import * as Api from '@app/lib/api'
-import { NavLink } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 
 interface IAppLayout {
   children: React.ReactNode;
@@ -45,8 +45,7 @@ const staticNavigation:(MyRoute | RouterGroup)[] = [
         {label: 'Overview', to: '/ato/products'}]}
 ];
 
-
-class Navigation extends React.Component<{}, NavigationState> {
+class Navigation extends React.Component<any, NavigationState> {
     onSelect(result) {
         this.setState({
             activeGroup: result.groupId,
@@ -144,6 +143,7 @@ class Navigation extends React.Component<{}, NavigationState> {
         );
     }
 }
+const InteractiveNavigation = withRouter(Navigation);
 
 const AppLayout: React.FunctionComponent<IAppLayout> = ({children}) => {
   const logoProps = {
@@ -186,7 +186,7 @@ const AppLayout: React.FunctionComponent<IAppLayout> = ({children}) => {
 
   const Sidebar = (
     <PageSidebar
-      nav={<Navigation/>}
+      nav={<InteractiveNavigation/>}
       isNavOpen={isMobileView ? isNavOpenMobile : isNavOpen} theme="dark" />
   );
   const PageSkipToContent = (
