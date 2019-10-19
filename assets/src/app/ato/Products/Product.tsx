@@ -41,6 +41,7 @@ export interface Narative {
 }
 
 export interface Satisfies {
+    control_key: string;
     narrative: Narative[];
 }
 
@@ -68,11 +69,12 @@ class SatisfiesAccordion extends React.Component<CustomControlProps, {}> {
             return (<Text component="p">{this.props.satisfies.narrative[0].text}</Text>)
         }
 
+        const cKey = this.props.satisfies.control_key;
         return (
             <React.Fragment>
                 { this.props.satisfies.narrative.map(function(n, idx) {
                     return (
-                        <Expandable key={idx} toggleText={n.key} isExpanded>{n.text}</Expandable>
+                        <Expandable key={idx} toggleText={cKey + '(' + n.key + ')'} isExpanded>{n.text}</Expandable>
                     )
                 })}
             </React.Fragment>
