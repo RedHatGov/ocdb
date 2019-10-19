@@ -63,7 +63,7 @@ export interface CustomControlProps {
 
 class SatisfiesAccordion extends React.Component<CustomControlProps, {}> {
     render() {
-        if (this.props.satisfies == null) {
+        if (this.props.satisfies == null || (this.props.satisfies.narrative.length == 1 && this.props.satisfies.narrative[0].text == '')) {
             return (<Text component="p">Not available</Text>);
         }
         if (this.props.satisfies.narrative.length == 1 && this.props.satisfies.narrative[0].key == undefined) {
@@ -472,9 +472,9 @@ class RTM extends React.Component<RTMProps, RTMState> {
             if (filters.solution.length != 0) {
                 if (filters.solution.some((function(selection) {
                     if (selection == 'Available') {
-                        return (row._custom && row._custom.narrative && row._custom.narrative.length > 0);
+                        return (row._custom && row._custom.narrative && row._custom.narrative.length > 0 && row._custom.narrative[0].text != '');
                     } else {
-                        return !(row._custom) || !(row._custom.narrative) || row._custom.narrative.length == 0;
+                        return !(row._custom) || !(row._custom.narrative) || row._custom.narrative.length == 0 || (row._custom.narrative.length == 1 && row._custom.narrative[0].text == '');
                     }
                 })) == false) {
                     return false;
