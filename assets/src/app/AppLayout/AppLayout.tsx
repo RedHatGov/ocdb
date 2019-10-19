@@ -61,7 +61,7 @@ class Navigation extends React.Component<{}, NavigationState> {
         };
         Api.components().then(data => this.finalizeMenu(data));
         this.onSelect = this.onSelect.bind(this);
-        this.highlightActiveMenuItem();
+        this.highlightActiveMenuItem(false);
     }
 
     finalizeMenu(components) {
@@ -72,10 +72,10 @@ class Navigation extends React.Component<{}, NavigationState> {
             }))
         );
         this.setState({links: links});
-        this.highlightActiveMenuItem();
+        this.highlightActiveMenuItem(true);
     }
 
-    highlightActiveMenuItem() {
+    highlightActiveMenuItem(setStateAllowed: boolean) {
         if (this.state.activeItem !== undefined) {
             return
         }
@@ -98,7 +98,12 @@ class Navigation extends React.Component<{}, NavigationState> {
             }
         }));
         if (activeItem !== undefined) {
-            this.setState({activeGroup: activeGroup, activeItem: activeItem});
+            if (setStateAllowed) {
+                this.setState({activeGroup: activeGroup, activeItem: activeItem});
+            } else {
+                this.state = {links: this.state.links, activeGroup: activeGroup, activeItem: activeItem};
+            }
+
         }
     }
 
