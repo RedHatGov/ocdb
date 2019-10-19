@@ -33,6 +33,7 @@ interface NavigationState {
     activeGroup?: string;
     activeItem?: string;
     links: (MyRoute | RouterGroup)[];
+    lastUrl?: string;
 }
 
 const staticNavigation:(MyRoute | RouterGroup)[] = [
@@ -73,15 +74,15 @@ class Navigation extends React.Component<any, NavigationState> {
     }
 
     static getDerivedStateFromProps(props, state) {
-        if (state.activeItem !== undefined) {
-            return null;
-        }
-
-        var activeGroup, activeItem;
         var currentUrl = window.location.pathname;
         if (currentUrl == '/') {
             currentUrl = '/ato/getting_started'
         }
+        if (currentUrl == state.lastUrl && state.activeItem !== undefined) {
+            return null;
+        }
+
+        var activeGroup, activeItem;
         state.links.forEach((function(l1, i) {
             if ((l1 as any).to !== undefined) {
                 if ((l1 as MyRoute).to == currentUrl) {
