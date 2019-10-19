@@ -91,7 +91,7 @@ class RTMDetail extends React.Component<RTMDetailProps, {}> {
                     <CardHeader>
                         <TextContent>
                             <div style={{float: 'right'}}>
-                                <Tooltip position={TooltipPosition.top} content={"Detailed information about " + c.Key + "is available at NVD (National Vulnerability Database)."}>
+                                <Tooltip position={TooltipPosition.top} content={"Detailed information about " + c.Key + " is available at NVD (National Vulnerability Database)."}>
                                     <Text component="a" href={"https://nvd.nist.gov/800-53/Rev4/control/" + c.Key} target="_new">
                                         <InfoAltIcon alt="Detailed Information at NVD (National Vulnerability Database)" />
                                     </Text>
