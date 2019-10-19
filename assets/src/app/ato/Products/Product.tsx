@@ -28,6 +28,7 @@ import {
 } from '@patternfly/react-core/dist/esm/experimental';
 
 import * as Api from '@app/lib/api'
+import MDX from '@mdx-js/runtime'
 import { Markdown } from '@app/lib/markdown';
 import { ProductInfo } from '@app/ato/Products/Static.tsx'
 
@@ -74,7 +75,10 @@ class SatisfiesAccordion extends React.Component<CustomControlProps, {}> {
             <React.Fragment>
                 { this.props.satisfies.narrative.map(function(n, idx) {
                     return (
-                        <Expandable key={idx} toggleText={cKey + '(' + n.key + ')'} isExpanded>{n.text}</Expandable>
+                <Expandable key={idx} toggleText={cKey + '(' + n.key + ')'} isExpanded>
+                    <MDX>{n.text}</MDX>
+                    <br/>
+                </Expandable>
                     )
                 })}
             </React.Fragment>
