@@ -13,13 +13,14 @@ import {
     TextContent,
     Text,
     TextInput,
+    Tooltip, TooltipPosition
 } from '@patternfly/react-core';
 import {
     ExpandableRowContent,
     ICell, IFormatterValueType, IRow, IRowData,
     Table, TableBody, TableHeader, TableVariant,
 } from '@patternfly/react-table'
-import { FileWordIcon, SearchIcon } from '@patternfly/react-icons'
+import { FileWordIcon, InfoAltIcon, SearchIcon } from '@patternfly/react-icons'
 import { OutlinedListAltIcon } from '@patternfly/react-icons'
 import {
     DataToolbar, DataToolbarContent, DataToolbarFilter, DataToolbarGroup, DataToolbarItem,
@@ -129,6 +130,13 @@ class RTMDetail extends React.Component<RTMDetailProps, {}> {
                 <Card>
                     <CardHeader>
                         <TextContent>
+                            <div style={{margin: 'right'}}>
+                                <Tooltip position={TooltipPosition.top} content={"Detailed information about " + c.Key + "is available at NVD (National Vulnerability Database)."}>
+                                    <Text component="a" href={"https://nvd.nist.gov/800-53/Rev4/control/" + c.Key} target="_new">
+                                        <InfoAltIcon alt="Detailed Information at NVD (National Vulnerability Database)" />
+                                    </Text>
+                                </Tooltip>
+                            </div>
                             <Text component="h3">{c.Key}: {c.Control.name}</Text>
                         </TextContent>
                     </CardHeader>
