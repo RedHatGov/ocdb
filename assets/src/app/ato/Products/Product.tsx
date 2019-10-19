@@ -64,6 +64,9 @@ class SatisfiesAccordion extends React.Component<CustomControlProps, {}> {
         if (this.props.satisfies == null) {
             return (<Text component="p">Not available</Text>);
         }
+        if (this.props.satisfies.narrative.length == 1 && this.props.satisfies.narrative[0].key == undefined) {
+            return (<Text component="p">{this.props.satisfies.narrative[0].text}</Text>)
+        }
 
         return (
             <React.Fragment>
