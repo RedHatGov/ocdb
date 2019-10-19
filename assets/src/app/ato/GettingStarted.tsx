@@ -58,12 +58,12 @@ const GettingStarted: React.FunctionComponent<any> = (props) => {
                   <TextList>
                       <TextListItem>
                           <Text component={TextVariants.a} href="https://github.com/RedHatGov/ocdb">
-                              Open Controls Database
+                              OpenControl Database
                           </Text>
                       </TextListItem>
                       <TextListItem>
                           <Text component={TextVariants.a} href="https://github.com/ComplianceAsCode/redhat">
-                              Open Controls Content for Red Hat products
+                              OpenControl Content for Red Hat products
                           </Text>
                       </TextListItem>
                       <TextListItem>
