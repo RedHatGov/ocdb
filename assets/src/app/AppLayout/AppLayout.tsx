@@ -61,7 +61,6 @@ class Navigation extends React.Component<{}, NavigationState> {
         };
         Api.components().then(data => this.finalizeMenu(data));
         this.onSelect = this.onSelect.bind(this);
-        this.highlightActiveMenuItem(false);
     }
 
     finalizeMenu(components) {
@@ -72,12 +71,11 @@ class Navigation extends React.Component<{}, NavigationState> {
             }))
         );
         this.setState({links: links});
-        this.highlightActiveMenuItem(true);
     }
 
-    highlightActiveMenuItem(setStateAllowed: boolean) {
-        if (this.state.activeItem !== undefined) {
-            return
+    static getDerivedStateFromProps(props, state) {
+        if (state.activeItem !== undefined) {
+            return null;
         }
 
         var activeGroup, activeItem;
@@ -85,7 +83,7 @@ class Navigation extends React.Component<{}, NavigationState> {
         if (currentUrl == '/') {
             currentUrl = '/ato/getting_started'
         }
-        this.state.links.forEach((function(l1, i) {
+        state.links.forEach((function(l1, i) {
             if ((l1 as any).to !== undefined) {
                 if ((l1 as MyRoute).to == currentUrl) {
                     activeGroup = '';
@@ -101,13 +99,9 @@ class Navigation extends React.Component<{}, NavigationState> {
             }
         }));
         if (activeItem !== undefined) {
-            if (setStateAllowed) {
-                this.setState({activeGroup: activeGroup, activeItem: activeItem});
-            } else {
-                this.state = {links: this.state.links, activeGroup: activeGroup, activeItem: activeItem};
-            }
-
+            return {links: state.links, activeGroup: activeGroup, activeItem: activeItem};
         }
+        return null;
     }
 
     render() {
