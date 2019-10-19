@@ -65,7 +65,8 @@ const configurator = {
                   configFile: path.resolve(__dirname, './tsconfig.json')
               })
           ]
-      }
+      },
+      node: { fs: 'empty' },
     }
 
     if( env === "development" ){
