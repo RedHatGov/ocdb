@@ -101,7 +101,7 @@ const routes: IAppRoute[] = [
         icon: null,
         isAsync: true,
         label: 'Product',
-        path: '/ato/products/:productId',
+        path: '/ato/products/:productId/:tabId?',
         title: 'Product Document',
     },
 ];

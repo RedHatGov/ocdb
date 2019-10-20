@@ -602,10 +602,22 @@ class Product extends React.Component<{}, ProductState> {
         return (<RTM content={requirements}/>);
     }
 
+    static texts(productId: string) {
+        return ProductInfo[productId] ? ProductInfo[productId].texts : [];
+    }
+
     texts() {
-        return ProductInfo[this.state.productId] ?
-               ProductInfo[this.state.productId].texts :
-               [];
+        return Product.texts(this.state.productId);
+    }
+
+    static nameToTabId(productId: string, tabName: string) {
+        if (tabName == 'Overview') {
+            return 0;
+        } else if (tabName == 'NIST-800-53') {
+            return 1;
+        } else {
+            return 1 + Product.texts(productId).findIndex( ({ name }) => name == tabName );
+        }
     }
 
     renderMarkdown(textPosition) {
@@ -710,7 +722,7 @@ class Product extends React.Component<{}, ProductState> {
             isLoading: true,
             productId: productId,
             product: null,
-            activeTabKey: 0,
+            activeTabKey: Product.nameToTabId(productId, props['computedMatch'].params.tabId),
         };
         this.handleTabClick = this.handleTabClick.bind(this);
         this.renderMarkdown = this.renderMarkdown.bind(this);
