@@ -594,7 +594,7 @@ interface ProductState {
     activeTabKey: number;
 };
 
-class Product extends React.Component<{}, ProductState> {
+class Product extends React.Component<any, ProductState> {
     renderControls() {
         var controls = this.state.product['controls'];
         var nist80053 = controls['NIST-800-53'];
@@ -617,6 +617,15 @@ class Product extends React.Component<{}, ProductState> {
             return 1;
         } else {
             return 1 + Product.texts(productId).findIndex( ({ name }) => name == tabName );
+        }
+    }
+    tabIdToName(id) {
+        if (id == 0) {
+            return 'Overview';
+        } else if (id == 1) {
+            return 'NIST-800-53';
+        } else {
+            return this.texts()[id - 1].name;
         }
     }
 
@@ -727,10 +736,12 @@ class Product extends React.Component<{}, ProductState> {
         this.handleTabClick = this.handleTabClick.bind(this);
         this.renderMarkdown = this.renderMarkdown.bind(this);
         this.componentDidUpdate = this.componentDidUpdate.bind(this);
+        this.tabIdToName = this.tabIdToName.bind(this);
         this.componentDidUpdate();
     }
 
     handleTabClick(event, tabIndex) {
+        this.props.history.push('/ato/products/' + this.state.productId + '/' + this.tabIdToName(tabIndex));
         this.setState({activeTabKey: tabIndex});
     }
 }
