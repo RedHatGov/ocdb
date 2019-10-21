@@ -23,6 +23,7 @@ interface IAppLayout {
 interface MyRoute {
     label: string;
     to: string;
+    startsWithMatcher?: string;
 }
 interface RouterGroup {
     label: string;
@@ -67,7 +68,7 @@ class Navigation extends React.Component<any, NavigationState> {
         var links = staticNavigation;
         (links[2] as RouterGroup).routes = (links[2] as RouterGroup).routes.concat(
             components.map((function(c, _) {
-                return { label: c['name'], to: '/ato/products/' + c['key'] };
+                return { label: c['name'], to: '/ato/products/' + c['key'], startsWithMatcher: '/ato/products/' + c['key']};
             }))
         );
         this.setState({links: links});
@@ -91,7 +92,7 @@ class Navigation extends React.Component<any, NavigationState> {
                 }
             } else {
                 (l1 as RouterGroup).routes.forEach((function(l2, j) {
-                    if (l2.to == currentUrl) {
+                    if (l2.to == currentUrl || l2.startsWithMatcher != undefined && currentUrl.startsWith(l2.startsWithMatcher)) {
                         activeGroup = 'grp-' + i;
                         activeItem = activeGroup + '_itm-' + j;
                     }
