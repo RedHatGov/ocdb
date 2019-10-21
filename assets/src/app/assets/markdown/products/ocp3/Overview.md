@@ -1,3 +1,6 @@
+import { OutlinedFileWordIcon } from '@patternfly/react-icons'
+
+
 ## Common Criteria
 OpenShift Container Platform 3.x has not undergone Common Criteria certification. A future certification
 against the [NIAP Protection Profile for Application Software](https://www.niap-ccevs.org/Profile/Info.cfm?PPID=394&id=394) is being considered.
@@ -53,3 +56,16 @@ The following are known limitations of OpenShift 3.x's ability to meet NIST 800-
 | NIST 800-53 Control | Risk Determination | Description/Rationale |
 |:-------------------:|:------------------:|:---------------------------|
 | AC-7(b) | LOW | AC-7(b) requires that, upon exceeding consecutive failed logon attempt limits, the information system delays the next logon prompt by a selected amount of time. This capability is not present in OpenShift 3.x nor is it planned. The risk of Denial of Service attacks is mitigated through network settings, such as rate limiting through firewall configuration settings. If this capability is meaningful for your deployment, please open a feature request through your Red Hat account team.|
+
+
+## OpenShift Container Platform 3.x on Azure for Government
+Using the FedRAMP-provided System Security Plan for Moderate impact systems, Red Hat and Microsoft collaborated on the release of an Azure Blueprint. The document is designed to identify which controls are inherited from Azure's FedRAMP accreditation, which are satisfied through native Red Hat OpenShift Container Platform capabilities, and which security controls are the responsibility of the system operator (procedural controls).
+
+|                     | FedRAMP Moderate   |
+|:-------------------:|:------------------:|
+|OpenShift Container Platform 3.x on Azure for Government|[<OutlinedFileWordIcon/> .docx template](/assets/OpenShift_on_Azure_Blueprint-FedRAMP_Moderate.docx)|
+
+
+Other resources for deploying OpenShift on Azure include:
+ - <a href="https://access.redhat.com/articles/3030691">Deploying Red Hat OpenShift Container Platform on Microsoft Azure</a>' reference architecture
+ - <a href="https://github.com/openshift/openshift-ansible-contrib/tree/master/reference-architecture/azure-ansible">Deploying and Managing OpenShift on Azure</a>' Ansible Playbooks
