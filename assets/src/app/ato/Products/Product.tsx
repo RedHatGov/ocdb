@@ -211,6 +211,17 @@ class RTMToolbar extends React.Component<RTMToolbarProps, RTMToolbarState> {
         this.onSolutionSelect = this.onSolutionSelect.bind(this);
         this.onDelete = this.onDelete.bind(this);
         this.onExpandToggle = this.props.view.onExpandToggle.bind(this.props.view);
+        this.componentDidMount = this.componentDidMount.bind(this)
+    }
+
+    componentDidMount() {
+        // magic to fill in the search, when someone opens the page with the specific #anchor
+        const hash = window.location.hash.replace('#', '').replace('%20', ' ');
+        if (hash.length > 0) {
+            this.state.filters.search = [hash];
+            const matchedRows = this.props.view.recomputeFilters(this.state.filters);
+            this.setState({matchedRows: matchedRows, filters: this.state.filters});
+        }
     }
 
     onSelect(type, event, selection) {
