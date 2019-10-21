@@ -67,5 +67,5 @@ Using the FedRAMP-provided System Security Plan for Moderate impact systems, Red
 
 
 Other resources for deploying OpenShift on Azure include:
- - <a href="https://access.redhat.com/articles/3030691">Deploying Red Hat OpenShift Container Platform on Microsoft Azure</a>' reference architecture
- - <a href="https://github.com/openshift/openshift-ansible-contrib/tree/master/reference-architecture/azure-ansible">Deploying and Managing OpenShift on Azure</a>' Ansible Playbooks
+ - [Deploying Red Hat OpenShift Container Platform on Microsoft Azure](https://access.redhat.com/articles/3030691) reference architecture
+ - [Deploying and Managing OpenShift on Azure](https://github.com/openshift/openshift-ansible-contrib/tree/master/reference-architecture/azure-ansible) Ansible Playbooks
