@@ -104,6 +104,14 @@ const routes: IAppRoute[] = [
         path: '/ato/products/:productId/:tabId?',
         title: 'Product Document',
     },
+    {
+        component: Product,
+        exact: true,
+        icon: null,
+        isAsync: true,
+        label: 'Product',
+        path: '/product-documents/:productId/:tabId/:garbage/', // Maintain the same links that lead to the old site.
+        title: 'Product Document',
 ];
 
 const AppRoutes = () => (
