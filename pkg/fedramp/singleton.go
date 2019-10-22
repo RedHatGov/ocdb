@@ -4,11 +4,11 @@ import (
 	"sync"
 )
 
-var instance *map[string]FedrampDocument
+var instance *FedrampCache
 var once sync.Once
 
 // GetInstance gets memory representation of the masonry cache
-func getInstance() *map[string]FedrampDocument {
+func getInstance() *FedrampCache {
 	once.Do(func() {
 		instance = buildCache()
 
