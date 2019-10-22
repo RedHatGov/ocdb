@@ -565,6 +565,10 @@ class FedRAMPDownload extends React.Component<FedRAMPDownloadProp, FedRAMPDownlo
     }
 
   render() {
+    if (ProductInfo[this.props.productId].disableFedrampDownload) {
+        return '';
+    }
+
     const { isModalOpen } = this.state;
 
     return (

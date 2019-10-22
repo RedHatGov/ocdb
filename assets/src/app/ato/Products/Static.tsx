@@ -6,6 +6,7 @@ interface ProductText {
 export interface ProductTemplate {
     image?: string;
     texts: ProductText[];
+    disableFedrampDownload?: boolean,
 };
 
 const ProductInfo: {[Identifier: string]: ProductTemplate } = {
@@ -40,6 +41,7 @@ const ProductInfo: {[Identifier: string]: ProductTemplate } = {
         ]
     },
     insights: {
+        disableFedrampDownload: true,
         texts: [
             {
                 name: 'Overview',
@@ -57,6 +59,7 @@ const ProductInfo: {[Identifier: string]: ProductTemplate } = {
         ]
     },
     'openshift-dedicated': {
+        disableFedrampDownload: true,
         texts: [
             {
                 name: 'Overview',
