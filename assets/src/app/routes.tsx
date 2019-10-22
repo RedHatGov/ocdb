@@ -112,6 +112,7 @@ const routes: IAppRoute[] = [
         label: 'Product',
         path: '/product-documents/:productId/:tabId/:garbage/', // Maintain the same links that lead to the old site.
         title: 'Product Document',
+    },
 ];
 
 const AppRoutes = () => (
