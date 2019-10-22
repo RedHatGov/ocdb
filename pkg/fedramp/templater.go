@@ -22,6 +22,12 @@ type FedrampDocument struct {
 	Errors []error
 }
 
+type FedrampGuidance struct {
+	Low      FedrampDocument
+	Moderate FedrampDocument
+	High     FedrampDocument
+}
+
 func buildCache() *map[string]FedrampDocument {
 	ms := masonry.GetInstance()
 	result := make(map[string]FedrampDocument)
