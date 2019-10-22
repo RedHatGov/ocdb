@@ -40,16 +40,18 @@ func buildCache() *FedrampCache {
 }
 
 func fedrampTemplate() (*ssp.Document, []error) {
-	const sspDocTemplate = "FedRAMP-System-Security-Plan-Template-v2.1.docx"
-	docBytes, err := static.AssetsBox.Find("assets/" + sspDocTemplate)
-	if err != nil {
-		return nil, []error{err, errors.New("Assets pack does not contain FEDRAMP template: " + sspDocTemplate)}
-	}
-	ioutil.WriteFile("/tmp/"+sspDocTemplate, docBytes, 0600)
+	file := "FedRAMP-System-Security-Plan-Template-v2.1.docx"
+	path := "assets/" + file
 
-	doc, err := ssp.Load("/tmp/" + sspDocTemplate)
+	docBytes, err := static.AssetsBox.Find(path)
 	if err != nil {
-		return nil, []error{err, errors.New("Could not open FEDRAMP template: /tmp/" + sspDocTemplate)}
+		return nil, []error{err, errors.New("Assets pack does not contain FEDRAMP template: " + path)}
+	}
+	ioutil.WriteFile("/tmp/"+file, docBytes, 0600)
+
+	doc, err := ssp.Load("/tmp/" + file)
+	if err != nil {
+		return nil, []error{err, errors.New("Could not open FEDRAMP template: /tmp/" + file)}
 	}
 	return doc, nil
 }
