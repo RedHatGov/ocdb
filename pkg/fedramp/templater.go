@@ -15,7 +15,6 @@ import (
 const masonryPath = "/tmp/.masonry_cache/"
 const fedrampPath = "/tmp/.fedramp_cache/"
 const fedrampDocPath = "/tmp/.fedramp_cache/fedramp.docx"
-const sspDocTemplate = "FedRAMP-System-Security-Plan-Template-v2.1.docx"
 
 type FedrampDocument struct {
 	Bytes  []byte
@@ -41,6 +40,7 @@ func buildCache() *FedrampCache {
 }
 
 func fedrampTemplate() (*ssp.Document, []error) {
+	const sspDocTemplate = "FedRAMP-System-Security-Plan-Template-v2.1.docx"
 	docBytes, err := static.AssetsBox.Find("assets/" + sspDocTemplate)
 	if err != nil {
 		return nil, []error{err, errors.New("Assets pack does not contain FEDRAMP template: " + sspDocTemplate)}
