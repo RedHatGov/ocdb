@@ -552,16 +552,15 @@ class FedRAMPDownload extends React.Component<FedRAMPDownloadProp, FedRAMPDownlo
             isModalOpen: !isModalOpen
         }));
     }
-    onSubmit() {
+    onSubmit(level) {
         this.handleModalToggle();
-        window.location.assign('/api/v1/components/' + this.props.productId + '/fedramp/High');
+        window.location.assign('/api/v1/components/' + this.props.productId + '/fedramp/' + level);
     }
 
     constructor(props) {
         super(props);
         this.state = { isModalOpen: false };
         this.handleModalToggle = this.handleModalToggle.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
     }
 
   render() {
@@ -570,6 +569,9 @@ class FedRAMPDownload extends React.Component<FedRAMPDownloadProp, FedRAMPDownlo
     }
 
     const { isModalOpen } = this.state;
+    const onSubmitHigh = this.onSubmit.bind(this, "High");
+    const onSubmitModerate = this.onSubmit.bind(this, "Moderate");
+    const onSubmitLow = this.onSubmit.bind(this, "Low");
 
     return (
         <React.Fragment>
@@ -584,8 +586,14 @@ class FedRAMPDownload extends React.Component<FedRAMPDownloadProp, FedRAMPDownlo
                 isOpen={isModalOpen}
                 onClose={this.handleModalToggle}
                 actions={[
-                    <Button key="confirm" variant="primary" onClick={this.onSubmit}>
-                        <FileWordIcon/> Download Docx Template
+                    <Button key="confirm" variant="primary" onClick={onSubmitHigh}>
+                        <FileWordIcon/> Fedramp High
+                    </Button>,
+                    <Button key="confirm2" variant="primary" onClick={onSubmitModerate}>
+                        <FileWordIcon/> Fedramp Moderate
+                    </Button>,
+                    <Button key="confirm3" variant="primary" onClick={onSubmitLow}>
+                        <FileWordIcon/> Fedramp Low
                     </Button>,
                     <Button key="cancel" variant="link" onClick={this.handleModalToggle}>
                         Cancel
