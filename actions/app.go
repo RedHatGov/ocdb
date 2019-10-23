@@ -68,7 +68,7 @@ func App() *buffalo.App {
 		apiV1.Resource("/standards", api.StandardsResource{&buffalo.BaseResource{}})
 		apiV1.Resource("/components", api.ComponentsResource{&buffalo.BaseResource{}})
 		apiV1.GET("/components/{component_id}/controls", api.ComponentControlsHandler)
-		apiV1.GET("/components/{component_id}/fedramp", api.ComponentFedrampHandler)
+		apiV1.GET("/components/{component_id}/fedramp/{level}", api.ComponentFedrampHandler)
 
 		app.ServeFiles("/", static.AssetsBox) // serve files from the public directory
 	}

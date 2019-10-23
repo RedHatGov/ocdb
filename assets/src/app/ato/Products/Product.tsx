@@ -554,7 +554,7 @@ class FedRAMPDownload extends React.Component<FedRAMPDownloadProp, FedRAMPDownlo
     }
     onSubmit() {
         this.handleModalToggle();
-        window.location.assign('/api/v1/components/' + this.props.productId + '/fedramp');
+        window.location.assign('/api/v1/components/' + this.props.productId + '/fedramp/High');
     }
 
     constructor(props) {

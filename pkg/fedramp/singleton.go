@@ -17,6 +17,6 @@ func getInstance() *FedrampCache {
 }
 
 // Get returns Fedramp DOCX document for particular component
-func Get(componentId string) *FedrampDocument {
-	return (*getInstance()).get(componentId, "High")
+func Get(componentId string, fedrampLevel string) *FedrampDocument {
+	return (*getInstance()).get(componentId, fedrampLevel)
 }

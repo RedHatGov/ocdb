@@ -122,7 +122,13 @@ func ComponentControlsHandler(c buffalo.Context) error {
 
 // ComponentFedrampHandler returns fedramp DOCX template filled in with current components info
 func ComponentFedrampHandler(c buffalo.Context) error {
-	document := fedramp.Get(c.Param("component_id"))
+	fedrampLevel := c.Param("level")
+	if fedrampLevel != "High" && fedrampLevel != "Moderate" && fedrampLevel != "Low" {
+		return c.Render(404, r.JSON("Unknown level specified "+fedrampLevel+
+			". Please use High, Moderate, or Low"))
+	}
+
+	document := fedramp.Get(c.Param("component_id"), fedrampLevel)
 	if document != nil {
 		if len(document.Bytes) > 0 {
 			return c.Render(200,
