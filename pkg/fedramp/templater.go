@@ -39,9 +39,9 @@ func buildCache() *FedrampCache {
 	return &result
 }
 
-func fedrampTemplate() (*ssp.Document, []error) {
-	file := "FedRAMP-System-Security-Plan-Template-v2.1.docx"
-	path := "assets/" + file
+func fedrampTemplate(fedrampLevel string) (*ssp.Document, []error) {
+	file := "FedRAMP-SSP-" + fedrampLevel + "-Baseline-Template.docx"
+	path := "assets/fedramp_templates/" + file
 
 	docBytes, err := static.AssetsBox.Find(path)
 	if err != nil {
@@ -79,7 +79,7 @@ func buildFor(componentId string) ([]byte, []error) {
 	if len(errs) != 0 {
 		return nil, errs
 	}
-	doc, errs := fedrampTemplate()
+	doc, errs := fedrampTemplate("High")
 	if len(errs) != 0 {
 		return nil, errs
 	}
