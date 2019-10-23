@@ -27,14 +27,18 @@ type FedrampGuidance struct {
 	High     FedrampDocument
 }
 
+func newFedrampGuidance(componentId string) FedrampGuidance {
+	bytes, errors := buildFor(componentId)
+	return FedrampGuidance{High: FedrampDocument{bytes, errors}}
+}
+
 type FedrampCache = map[string]FedrampGuidance
 
 func newFedrampCache() *FedrampCache {
 	ms := masonry.GetInstance()
 	result := make(FedrampCache)
 	for _, component := range (*ms).GetAllComponents() {
-		bytes, errors := buildFor(component.GetKey())
-		result[component.GetKey()] = FedrampGuidance{High: FedrampDocument{bytes, errors}}
+		result[component.GetKey()] = newFedrampGuidance(component.GetKey())
 	}
 	return &result
 }
