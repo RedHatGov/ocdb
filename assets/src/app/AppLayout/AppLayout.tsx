@@ -42,7 +42,9 @@ const staticNavigation:(MyRoute | RouterGroup)[] = [
     {label: 'Documents', routes: [
         {label: 'Overview', to: '/ato/documents'},
         {label: 'Vulnerability Management', to: '/ato/documents/vulnerability-management-plan'},
-        {label: 'Security Awareness', to: '/ato/documents/security-awareness-and-training-plan'}]},
+        {label: 'Security Awareness', to: '/ato/documents/security-awareness-and-training-plan'},
+        {label: 'FedRAMP Templates', to: '/ato/documents/fedramp-templates'},
+    ]},
     {label: 'Products', routes: [
         {label: 'Overview', to: '/ato/products'}]}
 ];
