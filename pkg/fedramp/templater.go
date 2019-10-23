@@ -21,15 +21,13 @@ type FedrampDocument struct {
 	Errors []error
 }
 
-type FedrampGuidance struct {
-	Low      FedrampDocument
-	Moderate FedrampDocument
-	High     FedrampDocument
-}
+type FedrampGuidance map[string]FedrampDocument
 
 func newFedrampGuidance(componentId string) FedrampGuidance {
+	guidance := make(map[string]FedrampDocument)
 	bytes, errors := buildFor(componentId)
-	return FedrampGuidance{High: FedrampDocument{bytes, errors}}
+	guidance["High"] = FedrampDocument{bytes, errors}
+	return guidance
 }
 
 type FedrampCache struct {
@@ -47,7 +45,8 @@ func newFedrampCache() *FedrampCache {
 
 func (c *FedrampCache) get(componentId string) *FedrampDocument {
 	guidance := c.cache[componentId]
-	return &(guidance.High)
+	doc, _ := guidance["High"]
+	return &doc
 }
 
 func fedrampTemplate(fedrampLevel string) (*ssp.Document, []error) {
