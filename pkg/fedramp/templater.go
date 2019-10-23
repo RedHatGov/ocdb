@@ -24,10 +24,7 @@ type FedrampDocument struct {
 type FedrampGuidance map[string]FedrampDocument
 
 func newFedrampGuidance(componentId string) FedrampGuidance {
-	guidance := make(map[string]FedrampDocument)
-	bytes, errors := buildFor(componentId)
-	guidance["High"] = FedrampDocument{bytes, errors}
-	return guidance
+	return make(map[string]FedrampDocument)
 }
 
 type FedrampCache struct {
@@ -45,7 +42,12 @@ func newFedrampCache() *FedrampCache {
 
 func (c *FedrampCache) get(componentId string) *FedrampDocument {
 	guidance := c.cache[componentId]
-	doc, _ := guidance["High"]
+	doc, ok := guidance["High"]
+	if !ok {
+		bytes, errors := buildFor(componentId)
+		doc = FedrampDocument{bytes, errors}
+		guidance["High"] = doc
+	}
 	return &doc
 }
 
