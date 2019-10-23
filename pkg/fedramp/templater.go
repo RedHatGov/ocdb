@@ -23,10 +23,6 @@ type FedrampDocument struct {
 
 type FedrampGuidance map[string]FedrampDocument
 
-func newFedrampGuidance(componentId string) FedrampGuidance {
-	return make(map[string]FedrampDocument)
-}
-
 type FedrampCache struct {
 	cache map[string]FedrampGuidance
 }
@@ -35,7 +31,7 @@ func newFedrampCache() *FedrampCache {
 	ms := masonry.GetInstance()
 	result := FedrampCache{cache: make(map[string]FedrampGuidance)}
 	for _, component := range (*ms).GetAllComponents() {
-		result.cache[component.GetKey()] = newFedrampGuidance(component.GetKey())
+		result.cache[component.GetKey()] = make(FedrampGuidance)
 	}
 	return &result
 }
