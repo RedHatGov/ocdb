@@ -18,6 +18,6 @@ func getInstance() *FedrampCache {
 
 // Get returns Fedramp DOCX document for particular component
 func Get(componentId string) *FedrampDocument {
-	document := (*getInstance())[componentId]
-	return &document
+	guidance := (*getInstance())[componentId]
+	return &(guidance.High)
 }
