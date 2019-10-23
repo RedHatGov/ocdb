@@ -636,7 +636,7 @@ class Product extends React.Component<any, ProductState> {
     static nameToTabId(productId: string, tabName: string) {
         if (tabName == 'Overview') {
             return 0;
-        } else if (tabName == 'NIST-800-53' || 'nist-800-53') {
+        } else if (tabName == 'NIST-800-53' || tabName == 'nist-800-53') {
             return 1;
         } else {
             return 1 + Product.texts(productId).findIndex( ({ name }) => name == tabName );
