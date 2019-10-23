@@ -29,7 +29,7 @@ type FedrampGuidance struct {
 
 type FedrampCache = map[string]FedrampGuidance
 
-func buildCache() *FedrampCache {
+func newFedrampCache() *FedrampCache {
 	ms := masonry.GetInstance()
 	result := make(FedrampCache)
 	for _, component := range (*ms).GetAllComponents() {
