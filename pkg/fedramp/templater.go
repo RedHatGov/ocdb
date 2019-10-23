@@ -36,13 +36,13 @@ func newFedrampCache() *FedrampCache {
 	return &result
 }
 
-func (c *FedrampCache) get(componentId string) *FedrampDocument {
+func (c *FedrampCache) get(componentId string, fedrampLevel string) *FedrampDocument {
 	guidance := c.cache[componentId]
-	doc, ok := guidance["High"]
+	doc, ok := guidance[fedrampLevel]
 	if !ok {
-		bytes, errors := buildFor(componentId)
+		bytes, errors := buildFor(componentId, fedrampLevel)
 		doc = FedrampDocument{bytes, errors}
-		guidance["High"] = doc
+		guidance[fedrampLevel] = doc
 	}
 	return &doc
 }
@@ -65,7 +65,7 @@ func fedrampTemplate(fedrampLevel string) (*ssp.Document, []error) {
 }
 
 // Get the fedramp document for given component
-func buildFor(componentId string) ([]byte, []error) {
+func buildFor(componentId string, fedramLevel string) ([]byte, []error) {
 	err := os.RemoveAll(fedrampPath)
 	if err != nil {
 		return nil, []error{err}
@@ -87,7 +87,7 @@ func buildFor(componentId string) ([]byte, []error) {
 	if len(errs) != 0 {
 		return nil, errs
 	}
-	doc, errs := fedrampTemplate("High")
+	doc, errs := fedrampTemplate(fedramLevel)
 	if len(errs) != 0 {
 		return nil, errs
 	}
