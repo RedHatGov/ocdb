@@ -133,7 +133,7 @@ func ComponentFedrampHandler(c buffalo.Context) error {
 		if len(document.Bytes) > 0 {
 			return c.Render(200,
 				r.Download(c,
-					"FedRAMP-"+c.Param("component_id")+".docx",
+					"FedRAMP-"+fedrampLevel+"-"+c.Param("component_id")+".docx",
 					bytes.NewReader(document.Bytes)))
 		}
 
