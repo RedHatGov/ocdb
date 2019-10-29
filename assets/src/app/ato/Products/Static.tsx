@@ -23,7 +23,7 @@ const ProductInfo: {[Identifier: string]: ProductTemplate } = {
             }
         ]
     },
-    coreos4: {
+    'coreos-4': {
         image: require('@app/assets/images/coreos-logo.png'),
         texts: [
             {
@@ -32,7 +32,7 @@ const ProductInfo: {[Identifier: string]: ProductTemplate } = {
             }
         ]
     },
-    idm: {
+    'identity-management': {
         texts: [
             {
                 name: 'Overview',
@@ -49,7 +49,7 @@ const ProductInfo: {[Identifier: string]: ProductTemplate } = {
             }
         ]
     },
-    ocp3: {
+    'openshift-container-platform-3': {
         image: require('@app/assets/images/openshift-logo.png'),
         texts: [
             {
@@ -67,7 +67,7 @@ const ProductInfo: {[Identifier: string]: ProductTemplate } = {
             }
         ]
     },
-    osp13: {
+    'openstack-platform-13': {
         image: require('@app/assets/images/openstack-logo.png'),
         texts: [
             {
@@ -76,7 +76,7 @@ const ProductInfo: {[Identifier: string]: ProductTemplate } = {
             }
         ]
     },
-    rhvh: {
+    'virtualization-host': {
         texts: [
             {
                 name: 'Overview',
@@ -84,7 +84,7 @@ const ProductInfo: {[Identifier: string]: ProductTemplate } = {
             }
         ]
     },
-    rhvm: {
+    'virtualization-manager': {
         texts: [
             {
                 name: 'Overview',
