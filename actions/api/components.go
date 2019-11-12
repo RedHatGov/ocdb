@@ -96,7 +96,7 @@ func logicalView(ms *common.Workspace, c common.Component) (map[string]map[strin
 			}
 		}
 		if !found {
-			problems = append(problems, fmt.Sprintf("Could not found reference %s in the standard %s", satisfy.GetControlKey(), standardKey))
+			problems = append(problems, fmt.Sprintf("Could not find reference %s in the standard %s", satisfy.GetControlKey(), standardKey))
 
 		}
 	}
