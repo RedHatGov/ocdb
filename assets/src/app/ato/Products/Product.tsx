@@ -159,7 +159,7 @@ interface RTMToolbarProps {
 
 class RTMToolbar extends React.Component<RTMToolbarProps, RTMToolbarState> {
     sectionOptions = [
-        { value: 'AC', label: 'Assess Control'},
+        { value: 'AC', label: 'Access Control'},
         { value: 'AT', label: 'Awareness and Training'},
         { value: 'AU', label: 'Audit and Accountability'},
         { value: 'CA', label: 'Security Assessment & Authorization'},
@@ -171,7 +171,7 @@ class RTMToolbar extends React.Component<RTMToolbarProps, RTMToolbarState> {
         { value: 'MP', label: 'Media Protection'},
         { value: 'PE', label: 'Physical & Environmental Protection'},
         { value: 'PL', label: 'Planning'},
-        { value: 'PS', label: 'Personell Security'},
+        { value: 'PS', label: 'Personnel Security'},
         { value: 'RA', label: 'Risk Management'},
         { value: 'SA', label: 'System and Services Acquisition'},
         { value: 'SC', label: 'Systems and Communications Protection'},
