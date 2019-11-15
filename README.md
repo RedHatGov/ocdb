@@ -1,5 +1,7 @@
 # OpenControl Database
 
+[![Docker Repository on Quay](https://quay.io/repository/slukasik/ocdb/status "Docker Repository on Quay")](https://quay.io/repository/slukasik/ocdb)
+
 ## Quick Demo
   * run demo in container
   ```
