@@ -398,6 +398,10 @@ class RTMToolbar extends React.Component<RTMToolbarProps, RTMToolbarState> {
     }
 }
 
+const ImplementationStatus: React.FunctionComponent<any> = (props) => {
+    return (<TextContent>{props['status']}</TextContent>);
+}
+
 export interface RTMProps {
     content: any;
 }
@@ -414,10 +418,14 @@ class RTM extends React.Component<RTMProps, RTMState> {
 
         var rows = props.content.map(function(c, idx) {
             var implementation_status = c.Satisfies ? c.Satisfies.implementation_status : "unknown";
+            var implementation = <React.Fragment>
+                { implementation_status }
+            </React.Fragment>
+
             return [
                 {
                     isOpen: false,
-                    cells: [c.Key, c.Control.name, implementation_status],
+                    cells: [c.Key, c.Control.name, <React.Fragment><ImplementationStatus status={implementation_status} /></React.Fragment>],
                     _custom: c.Satisfies,
                     _text: JSON.stringify(c).toUpperCase()
                 },
