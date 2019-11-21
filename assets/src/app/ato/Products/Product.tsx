@@ -5,6 +5,7 @@ import {
     Card,CardBody, CardHeader,
     Expandable,
     InputGroup,
+    Label,
     Modal,
     Page, PageSection, PageSectionVariants,
     Select, SelectOption, SelectVariant,
@@ -398,8 +399,19 @@ class RTMToolbar extends React.Component<RTMToolbarProps, RTMToolbarState> {
     }
 }
 
+const StatusColor = {
+    'unknown': '#e31c3d',
+    'unsatisfied': '#e31c3d',
+    'none': '#e31c3d',
+    'not applicable': '#2e8540',
+    'complete': '#2e8540',
+    'partial': '#fdb81e',
+    'planned': '#02bfe7',
+};
+
 const ImplementationStatus: React.FunctionComponent<any> = (props) => {
-    return (<TextContent>{props['status']}</TextContent>);
+    var style : React.CSSProperties = { 'background-color': StatusColor[props['status']] } as any;
+    return (<Label isCompact style={style}>{props['status']}</Label>);
 }
 
 export interface RTMProps {
