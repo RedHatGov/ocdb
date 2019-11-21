@@ -482,7 +482,7 @@ class RTM extends React.Component<RTMProps, RTMState> {
 
             if (filters.status.length != 0) {
                 if (filters.status.some((function(selection) {
-                    return row.cells[2] == selection;
+                    return (selection == 'unknown' && row._custom == null) || (row._custom != null && row._custom.implementation_status == selection);
                 })) == false) {
                     return false;
                 }
