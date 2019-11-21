@@ -2,7 +2,6 @@ import * as React from 'react';
 import {
     Alert,
     Button, ButtonVariant,
-    Card,CardBody, CardHeader,
     Expandable,
     InputGroup,
     Label,
@@ -109,30 +108,24 @@ class RTMDetail extends React.Component<RTMDetailProps, RTMDetailState> {
         var c = this.props.control;
         return (
             <PageSection>
-                <Card>
-                    <CardHeader>
-                        <TextContent>
-                            <div style={{float: 'right'}}>
-                                <Tooltip position={TooltipPosition.top} content={"Detailed information about " + c.Key + " is available at NVD (National Vulnerability Database)."}>
-                                    <Text component="a" href={"https://nvd.nist.gov/800-53/Rev4/control/" + this.state.key + (this.state.enhancement ? ("#enhancement-" + this.state.enhancement) : "")} target="_new">
-                                        <InfoAltIcon alt="Detailed Information at NVD (National Vulnerability Database)" />
-                                    </Text>
-                                </Tooltip>
-                            </div>
-                            <Text component="h3">{c.Key}: {c.Control.name}</Text>
-                        </TextContent>
-                    </CardHeader>
-                    <CardBody>
-                        <TextContent>
-                            <Text component="p">{c.Control.description}</Text>
-                        </TextContent>
-                        <br/>
-                        <TextContent>
-                            <Text component="h4">{c.Key}: What is the solution and how is it implemented?</Text>
-                        </TextContent>
-                        <SatisfiesAccordion satisfies={c.Satisfies} />
-                    </CardBody>
-                </Card>
+                <TextContent>
+                    <div style={{float: 'right'}}>
+                        <Tooltip position={TooltipPosition.top} content={"Detailed information about " + c.Key + " is available at NVD (National Vulnerability Database)."}>
+                            <Text component="a" href={"https://nvd.nist.gov/800-53/Rev4/control/" + this.state.key + (this.state.enhancement ? ("#enhancement-" + this.state.enhancement) : "")} target="_new">
+                                <InfoAltIcon alt="Detailed Information at NVD (National Vulnerability Database)" />
+                            </Text>
+                        </Tooltip>
+                    </div>
+                    <Text component="h3">{c.Key}: {c.Control.name}</Text>
+                </TextContent>
+                <TextContent>
+                    <Text component="p">{c.Control.description}</Text>
+                </TextContent>
+                <br/>
+                <TextContent>
+                    <Text component="h4">{c.Key}: What is the solution and how is it implemented?</Text>
+                </TextContent>
+                <SatisfiesAccordion satisfies={c.Satisfies} />
             </PageSection>
         );
     }
