@@ -423,9 +423,6 @@ class RTM extends React.Component<RTMProps, RTMState> {
 
         var rows = props.content.map(function(c, idx) {
             var implementation_status = c.Satisfies ? c.Satisfies.implementation_status : "unknown";
-            var implementation = <React.Fragment>
-                { implementation_status }
-            </React.Fragment>
 
             return [
                 {
