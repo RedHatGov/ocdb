@@ -741,8 +741,11 @@ class Product extends React.Component<any, ProductState> {
         );
     }
 
+    static getId(props) {
+        return props['computedMatch'].params.productId;
+    }
     static getDerivedStateFromProps(props, state) {
-        const productId = props['computedMatch'].params.productId;
+        const productId = Product.getId(props);
         if (state.productId == productId) {
             return null;
         }
@@ -761,7 +764,7 @@ class Product extends React.Component<any, ProductState> {
 
     constructor(props) {
         super(props);
-        const productId = props['computedMatch'].params.productId;
+        const productId = Product.getId(props);
 
         this.state = {
             isLoading: true,
