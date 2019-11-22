@@ -1,4 +1,5 @@
 import * as React from 'react';
+import ReactDOM from 'react-dom';
 import {
     Alert,
     Button, ButtonVariant,
@@ -210,11 +211,12 @@ class RTMToolbar extends React.Component<RTMToolbarProps, RTMToolbarState> {
 
     componentDidMount() {
         // magic to fill in the search, when someone opens the page with the specific #anchor
-        const hash = window.location.hash.replace('#', '').replace('%20', ' ');
-        if (hash.length > 0) {
-            this.state.filters.search = [hash];
-            const matchedRows = this.props.view.recomputeFilters(this.state.filters);
-            this.setState({matchedRows: matchedRows, filters: this.state.filters});
+        const hash = window.location.hash.replace('%20', ' ');
+        if (hash.length > 1) {
+            const domElement = document.querySelector(hash);
+            if (domElement) {
+                domElement.scrollIntoView();
+            }
         }
     }
 
