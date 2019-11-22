@@ -30,7 +30,7 @@ import {
 import * as Api from '@app/lib/api'
 import MDX from '@mdx-js/runtime'
 import { Markdown } from '@app/lib/markdown';
-import { ProductInfo } from '@app/ato/Products/Static.tsx'
+import { ProductIdOverride, ProductInfo } from '@app/ato/Products/Static.tsx'
 
 export const expandable = (data?: IFormatterValueType, rowData? : IRowData) =>
     rowData && rowData.hasOwnProperty('parent') ? <ExpandableRowContent>{data}</ExpandableRowContent> : (data ? data : '');
@@ -742,7 +742,7 @@ class Product extends React.Component<any, ProductState> {
     }
 
     static getId(props) {
-        return props['computedMatch'].params.productId;
+        return ProductIdOverride(props['computedMatch'].params.productId);
     }
     static getDerivedStateFromProps(props, state) {
         const productId = Product.getId(props);

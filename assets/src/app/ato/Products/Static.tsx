@@ -1,3 +1,19 @@
+const idOverridesMap: {[Identifier: string]: string} = {
+    coreos4: 'coreos-4',
+    idm: 'identity-management',
+    ocp3: 'openshift-container-platform-3',
+    osp13: 'openstack-platform-13',
+    rhvh: 'virtualization-host',
+    rhvm: 'virtualization-manager'
+}
+
+function ProductIdOverride(id) {
+    // Previously our product content was published under different names.
+    // If user refers to the product by old name, we fetch the new name first.
+    return idOverridesMap[id] || id;
+}
+
+
 interface ProductText {
     name: string;
     text: any;
@@ -94,4 +110,4 @@ const ProductInfo: {[Identifier: string]: ProductTemplate } = {
     }
 };
 
-export { ProductInfo }
+export { ProductIdOverride, ProductInfo }
