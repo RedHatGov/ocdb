@@ -427,7 +427,9 @@ class RTM extends React.Component<RTMProps, RTMState> {
             return [
                 {
                     isOpen: false,
-                    cells: [c.Key, c.Control.name, <React.Fragment><ImplementationStatus status={implementation_status} /></React.Fragment>],
+                    cells: [<React.Fragment><div id={c.Key}>{c.Key}</div></React.Fragment>,
+                            c.Control.name,
+                            <React.Fragment><ImplementationStatus status={implementation_status} /></React.Fragment>],
                     _custom: c.Satisfies,
                     _text: JSON.stringify(c).toUpperCase()
                 },
