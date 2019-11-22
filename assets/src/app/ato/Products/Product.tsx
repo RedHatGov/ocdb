@@ -119,7 +119,7 @@ class RTMDetail extends React.Component<RTMDetailProps, RTMDetailState> {
                     <Text component="h3">{c.Key}: {c.Control.name}</Text>
                 </TextContent>
                 <TextContent>
-                    <Text component="p">{c.Control.description}</Text>
+                    <MDX>{c.Control.description}</MDX>
                 </TextContent>
                 <br/>
                 <TextContent>
