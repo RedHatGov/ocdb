@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { NavLink } from 'react-router-dom';
 import {
     Alert,
     Button, ButtonVariant,
@@ -428,7 +429,7 @@ class RTM extends React.Component<RTMProps, RTMState> {
             return [
                 {
                     isOpen: false,
-                    cells: [<React.Fragment><div id={c.Key}>{c.Key}</div></React.Fragment>,
+                    cells: [<React.Fragment><NavLink to={"#" + c.Key}><div id={c.Key}>{c.Key}</div></NavLink></React.Fragment>,
                             c.Control.name,
                             <React.Fragment><ImplementationStatus status={implementation_status} /></React.Fragment>],
                     _custom: c.Satisfies,
