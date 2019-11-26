@@ -214,6 +214,7 @@ class RTMToolbar extends React.Component<RTMToolbarProps, RTMToolbarState> {
         const hash = window.location.hash.replace('%20', ' ');
         if (hash.length > 1) {
             location.hash = hash;
+            this.props.view.expandAnchoredRow(hash);
         }
     }
 
@@ -430,6 +431,7 @@ class RTM extends React.Component<RTMProps, RTMState> {
                             c.Control.name,
                             <React.Fragment><ImplementationStatus status={implementation_status} /></React.Fragment>],
                     _custom: c.Satisfies,
+                    ID: c.Key,
                     _text: JSON.stringify(c).toUpperCase()
                 },
                 {
@@ -472,6 +474,18 @@ class RTM extends React.Component<RTMProps, RTMState> {
             rows: rows
         });
     }
+    expandAnchoredRow(anchor) {
+        const key = anchor.replace(/^#/, '');
+        this.state.rows.forEach(function(r, i) {
+            if (i % 2 == 0) {
+                if (key == r.ID) {
+                    r.isOpen = true;
+                }
+            }
+        })
+        this.setState({rows: this.state.rows})
+    }
+
     recomputeFilters(filters) {
         const rowMatchesFilters = function(row, filters) {
             // calculate lastMatched on parent only
