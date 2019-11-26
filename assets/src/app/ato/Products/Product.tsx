@@ -385,8 +385,7 @@ class RTMToolbar extends React.Component<RTMToolbarProps, RTMToolbarState> {
 
         return <DataToolbar
                    id="data-toolbar-with-chip-groups"
-                   clearAllFilters={this.onDelete}
-                   showClearFiltersButton={filters.section.length !== 0 || filters.status.length !== 0 || filters.search.length !== 0 || filters.solution.length !== 0 }>
+                   clearAllFilters={this.onDelete}>
                    <DataToolbarContent>{toolbarItems}</DataToolbarContent>
                </DataToolbar>;
     }
