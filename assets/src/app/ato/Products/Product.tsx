@@ -30,33 +30,12 @@ import {
 import * as Api from '@app/lib/api'
 import MDX from '@mdx-js/runtime'
 import { Markdown } from '@app/lib/markdown';
+import { Satisfies, CustomControl } from '@app/ato/Products/OpenControlStructs.tsx'
 import { ProductIdOverride, ProductInfo } from '@app/ato/Products/Static.tsx'
 import { FedRAMPDownload } from '@app/ato/Products/FedRAMPDownload.tsx'
 
 export const expandable = (data?: IFormatterValueType, rowData? : IRowData) =>
     rowData && rowData.hasOwnProperty('parent') ? <ExpandableRowContent>{data}</ExpandableRowContent> : (data ? data : '');
-
-
-export interface Narative {
-    key?: string,
-    text: string
-}
-
-export interface Satisfies {
-    control_key: string;
-    narrative: Narative[];
-}
-
-export interface Control {
-    name: string,
-    description: string,
-}
-export interface CustomControl {
-    Key: string,
-    Control: Control,
-    Satisfies: Satisfies,
-}
-
 
 export interface CustomControlProps {
     satisfies: Satisfies;
