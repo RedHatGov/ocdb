@@ -5,32 +5,23 @@ import MDX from '@mdx-js/runtime'
 import { CustomControl } from '@app/ato/Products/OpenControlStructs.tsx'
 import { SatisfiesAccordion } from '@app/ato/Products/SatisfiesAccordion.tsx'
 
-interface RTMDetailState {
-    key: string;
-    enhancement?: string;
-}
-
 interface RTMDetailProps {
     control: CustomControl;
 }
 
-class RTMDetail extends React.Component<RTMDetailProps, RTMDetailState> {
-    constructor(props) {
-        super(props);
-        const parsed = props.control.Key.split(')')[0].split(' (');
-        this.state = {
-            key: parsed[0],
-            enhancement: parsed[1],
-        }
-    }
+class RTMDetail extends React.Component<RTMDetailProps> {
     render() {
+        const parsed = this.props.control.Key.split(')')[0].split(' (');
+        const key = parsed[0]
+        const enhancement = parsed[1]
         var c = this.props.control;
+
         return (
             <PageSection>
                 <TextContent>
                     <div style={{float: 'right'}}>
                         <Tooltip position={TooltipPosition.top} content={"Detailed information about " + c.Key + " is available at NVD (National Vulnerability Database)."}>
-                            <Text component="a" href={"https://nvd.nist.gov/800-53/Rev4/control/" + this.state.key + (this.state.enhancement ? ("#enhancement-" + this.state.enhancement) : "")} target="_new">
+                            <Text component="a" href={"https://nvd.nist.gov/800-53/Rev4/control/" + key + (enhancement ? ("#enhancement-" + enhancement) : "")} target="_new">
                                 <InfoAltIcon alt="Detailed Information at NVD (National Vulnerability Database)" />
                             </Text>
                         </Tooltip>
