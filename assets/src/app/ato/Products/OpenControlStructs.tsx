@@ -1,11 +1,11 @@
-interface Narative {
+interface Narrative {
     key?: string,
     text: string
 }
 
 export interface Satisfies {
     control_key: string;
-    narrative: Narative[];
+    narrative: Narrative[];
 }
 
 interface Control {
