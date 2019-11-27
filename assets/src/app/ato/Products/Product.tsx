@@ -54,7 +54,7 @@ interface RTMToolbarProps {
     rowCount: number;
 }
 
-class RTMToolbar extends React.Component<RTMToolbarProps, RTMToolbarState> {
+class RTMToolbar extends React.PureComponent<RTMToolbarProps, RTMToolbarState> {
     sectionOptions = [
         { value: 'AC', label: 'Access Control'},
         { value: 'AT', label: 'Awareness and Training'},
