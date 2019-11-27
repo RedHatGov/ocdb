@@ -3,7 +3,6 @@ import { NavLink } from 'react-router-dom';
 import {
     Alert,
     Button, ButtonVariant,
-    Expandable,
     InputGroup,
     Label,
     Page, PageSection, PageSectionVariants,
@@ -30,41 +29,13 @@ import {
 import * as Api from '@app/lib/api'
 import MDX from '@mdx-js/runtime'
 import { Markdown } from '@app/lib/markdown';
-import { Satisfies, CustomControl } from '@app/ato/Products/OpenControlStructs.tsx'
+import { CustomControl } from '@app/ato/Products/OpenControlStructs.tsx'
 import { ProductIdOverride, ProductInfo } from '@app/ato/Products/Static.tsx'
 import { FedRAMPDownload } from '@app/ato/Products/FedRAMPDownload.tsx'
+import { SatisfiesAccordion } from '@app/ato/Products/SatisfiesAccordion.tsx'
 
 export const expandable = (data?: IFormatterValueType, rowData? : IRowData) =>
     rowData && rowData.hasOwnProperty('parent') ? <ExpandableRowContent>{data}</ExpandableRowContent> : (data ? data : '');
-
-export interface CustomControlProps {
-    satisfies: Satisfies;
-}
-
-class SatisfiesAccordion extends React.Component<CustomControlProps, {}> {
-    render() {
-        if (this.props.satisfies == null || (this.props.satisfies.narrative.length == 1 && this.props.satisfies.narrative[0].text == '')) {
-            return (<Text component="p">Not available</Text>);
-        }
-        if (this.props.satisfies.narrative.length == 1 && this.props.satisfies.narrative[0].key == undefined) {
-            return (<MDX>{this.props.satisfies.narrative[0].text}</MDX>)
-        }
-
-        const cKey = this.props.satisfies.control_key;
-        return (
-            <React.Fragment>
-                { this.props.satisfies.narrative.map(function(n, idx) {
-                    return (
-                <Expandable key={idx} toggleText={cKey + '(' + n.key + ')'} isExpanded>
-                    <MDX>{n.text}</MDX>
-                    <br/>
-                </Expandable>
-                    )
-                })}
-            </React.Fragment>
-        )
-    }
-}
 
 export interface RTMDetailState {
     key: string;
