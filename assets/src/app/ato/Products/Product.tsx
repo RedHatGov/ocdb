@@ -448,17 +448,15 @@ class RTM extends React.Component<RTMProps, RTMState> {
 
     render(){
         return (
-            <TextContent>
-                <Table
-                        caption={<RTMToolbar view={this} rowCount={this.state.allRows.length / 2} />}
-                        variant={TableVariant.compact}
-                        onCollapse={this.onCollapse}
-                        rows={this.state.rows}
-                        cells={this.state.columns}>
-                    <TableHeader />
-                    <TableBody />
-                </Table>
-            </TextContent>
+           <Table
+                   caption={<RTMToolbar view={this} rowCount={this.state.allRows.length / 2} />}
+                   variant={TableVariant.compact}
+                   onCollapse={this.onCollapse}
+                   rows={this.state.rows}
+                   cells={this.state.columns}>
+               <TableHeader />
+               <TableBody />
+           </Table>
         )
     }
 }
