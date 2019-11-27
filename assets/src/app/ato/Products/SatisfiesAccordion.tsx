@@ -7,7 +7,7 @@ interface CustomControlProps {
     satisfies: Satisfies;
 }
 
-const SatisfiesAccordion: React.FunctionComponent<CustomControlProps> = (props) => {
+const SatisfiesAccordion = React.memo((props: CustomControlProps) => {
     if (props.satisfies == null || (props.satisfies.narrative.length == 1 && props.satisfies.narrative[0].text == '')) {
         return (<Text component="p">Not available</Text>);
     }
@@ -28,6 +28,6 @@ const SatisfiesAccordion: React.FunctionComponent<CustomControlProps> = (props) 
             })}
         </React.Fragment>
     )
-}
+})
 
 export { SatisfiesAccordion }
