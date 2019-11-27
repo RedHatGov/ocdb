@@ -471,10 +471,7 @@ interface ProductState {
 
 class Product extends React.Component<any, ProductState> {
     renderControls() {
-        var controls = this.state.product['controls'];
-        var nist80053 = controls['NIST-800-53'];
-        var requirements = Array.prototype.concat.apply([], Object.keys(nist80053).map(function(k, _) { return nist80053[k]; }));
-        return (<RTM content={requirements}/>);
+        return (<RTM content={this.state.product['controls']}/>);
     }
 
     static texts(productId: string) {
@@ -597,7 +594,11 @@ class Product extends React.Component<any, ProductState> {
     componentDidUpdate() {
         if (this.state.isLoading) {
             Api.componentControls(this.state.productId)
-               .then(data => this.setState({product: data, isLoading: false}))
+               .then(data => {
+                   const nist80053 = data['controls']['NIST-800-53'];
+                   data['controls'] = Array.prototype.concat.apply([], Object.keys(nist80053).map(function(k, _) { return nist80053[k]; }));
+                   this.setState({product: data, isLoading: false})
+               })
         }
     }
 
