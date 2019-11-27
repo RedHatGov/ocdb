@@ -118,12 +118,7 @@ class RTMDetail extends React.Component<RTMDetailProps, RTMDetailState> {
                         </Tooltip>
                     </div>
                     <Text component="h3">{c.Key}: {c.Control.name}</Text>
-                </TextContent>
-                <TextContent>
                     <MDX>{c.Control.description}</MDX>
-                </TextContent>
-                <br/>
-                <TextContent>
                     <Text component="h4">{c.Key}: What is the solution and how is it implemented?</Text>
                 </TextContent>
                 <SatisfiesAccordion satisfies={c.Satisfies} />
