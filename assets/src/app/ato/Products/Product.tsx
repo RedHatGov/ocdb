@@ -12,14 +12,13 @@ import {
     TextContent,
     Text,
     TextInput,
-    Tooltip, TooltipPosition
 } from '@patternfly/react-core';
 import {
     ExpandableRowContent,
     ICell, IFormatterValueType, IRow, IRowData,
     Table, TableBody, TableHeader, TableVariant,
 } from '@patternfly/react-table'
-import { InfoAltIcon, SearchIcon } from '@patternfly/react-icons'
+import { SearchIcon } from '@patternfly/react-icons'
 import { OutlinedListAltIcon } from '@patternfly/react-icons'
 import {
     DataToolbar, DataToolbarContent, DataToolbarFilter, DataToolbarGroup, DataToolbarItem,
@@ -27,55 +26,13 @@ import {
 } from '@patternfly/react-core/dist/esm/experimental';
 
 import * as Api from '@app/lib/api'
-import MDX from '@mdx-js/runtime'
 import { Markdown } from '@app/lib/markdown';
-import { CustomControl } from '@app/ato/Products/OpenControlStructs.tsx'
 import { ProductIdOverride, ProductInfo } from '@app/ato/Products/Static.tsx'
 import { FedRAMPDownload } from '@app/ato/Products/FedRAMPDownload.tsx'
-import { SatisfiesAccordion } from '@app/ato/Products/SatisfiesAccordion.tsx'
+import { RTMDetail } from '@app/ato/Products/RTMDetail.tsx'
 
 export const expandable = (data?: IFormatterValueType, rowData? : IRowData) =>
     rowData && rowData.hasOwnProperty('parent') ? <ExpandableRowContent>{data}</ExpandableRowContent> : (data ? data : '');
-
-export interface RTMDetailState {
-    key: string;
-    enhancement?: string;
-}
-
-export interface RTMDetailProps {
-    control: CustomControl;
-}
-
-class RTMDetail extends React.Component<RTMDetailProps, RTMDetailState> {
-    constructor(props) {
-        super(props);
-        const parsed = props.control.Key.split(')')[0].split(' (');
-        this.state = {
-            key: parsed[0],
-            enhancement: parsed[1],
-        }
-    }
-    render() {
-        var c = this.props.control;
-        return (
-            <PageSection>
-                <TextContent>
-                    <div style={{float: 'right'}}>
-                        <Tooltip position={TooltipPosition.top} content={"Detailed information about " + c.Key + " is available at NVD (National Vulnerability Database)."}>
-                            <Text component="a" href={"https://nvd.nist.gov/800-53/Rev4/control/" + this.state.key + (this.state.enhancement ? ("#enhancement-" + this.state.enhancement) : "")} target="_new">
-                                <InfoAltIcon alt="Detailed Information at NVD (National Vulnerability Database)" />
-                            </Text>
-                        </Tooltip>
-                    </div>
-                    <Text component="h3">{c.Key}: {c.Control.name}</Text>
-                    <MDX>{c.Control.description}</MDX>
-                    <Text component="h4">{c.Key}: What is the solution and how is it implemented?</Text>
-                </TextContent>
-                <SatisfiesAccordion satisfies={c.Satisfies} />
-            </PageSection>
-        );
-    }
-}
 
 export interface RTMToolbarFilters {
     section: string[];
