@@ -355,6 +355,10 @@ class RTM extends React.Component<RTMProps, RTMState> {
         this.onCollapse = this.onCollapse.bind(this);
     }
 
+    shouldComponentUpdate(newProps, newState) {
+        return newState !== this.state;
+    }
+
     onExpandToggle(isChecked) {
         this.state.rows.forEach((function(r, i) {
             if (i % 2 == 0) {
