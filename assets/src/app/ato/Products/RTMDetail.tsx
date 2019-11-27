@@ -9,31 +9,29 @@ interface RTMDetailProps {
     control: CustomControl;
 }
 
-class RTMDetail extends React.Component<RTMDetailProps> {
-    render() {
-        const parsed = this.props.control.Key.split(')')[0].split(' (');
-        const key = parsed[0]
-        const enhancement = parsed[1]
-        var c = this.props.control;
+const RTMDetail = React.memo((props: RTMDetailProps) => {
+    const parsed = props.control.Key.split(')')[0].split(' (');
+    const key = parsed[0]
+    const enhancement = parsed[1]
+    var c = props.control;
 
-        return (
-            <PageSection>
-                <TextContent>
-                    <div style={{float: 'right'}}>
-                        <Tooltip position={TooltipPosition.top} content={"Detailed information about " + c.Key + " is available at NVD (National Vulnerability Database)."}>
-                            <Text component="a" href={"https://nvd.nist.gov/800-53/Rev4/control/" + key + (enhancement ? ("#enhancement-" + enhancement) : "")} target="_new">
-                                <InfoAltIcon alt="Detailed Information at NVD (National Vulnerability Database)" />
-                            </Text>
-                        </Tooltip>
-                    </div>
-                    <Text component="h3">{c.Key}: {c.Control.name}</Text>
-                    <MDX>{c.Control.description}</MDX>
-                    <Text component="h4">{c.Key}: What is the solution and how is it implemented?</Text>
-                </TextContent>
-                <SatisfiesAccordion satisfies={c.Satisfies} />
-            </PageSection>
-        );
-    }
-}
+    return (
+        <PageSection>
+            <TextContent>
+                <div style={{float: 'right'}}>
+                    <Tooltip position={TooltipPosition.top} content={"Detailed information about " + c.Key + " is available at NVD (National Vulnerability Database)."}>
+                        <Text component="a" href={"https://nvd.nist.gov/800-53/Rev4/control/" + key + (enhancement ? ("#enhancement-" + enhancement) : "")} target="_new">
+                            <InfoAltIcon alt="Detailed Information at NVD (National Vulnerability Database)" />
+                        </Text>
+                    </Tooltip>
+                </div>
+                <Text component="h3">{c.Key}: {c.Control.name}</Text>
+                <MDX>{c.Control.description}</MDX>
+                <Text component="h4">{c.Key}: What is the solution and how is it implemented?</Text>
+            </TextContent>
+            <SatisfiesAccordion satisfies={c.Satisfies} />
+        </PageSection>
+    );
+})
 
 export { RTMDetail }
