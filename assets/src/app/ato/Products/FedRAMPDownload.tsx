@@ -17,7 +17,7 @@ interface FedRAMPDownloadState {
     isModalOpen: boolean;
 }
 
-class FedRAMPDownload extends React.Component<FedRAMPDownloadProp, FedRAMPDownloadState> {
+class FedRAMPDownload extends React.PureComponent<FedRAMPDownloadProp, FedRAMPDownloadState> {
     handleModalToggle() {
         this.setState(({ isModalOpen }) => ({
             isModalOpen: !isModalOpen
