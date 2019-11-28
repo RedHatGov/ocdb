@@ -1,20 +1,7 @@
 import * as React from 'react';
 import { NavLink } from 'react-router-dom';
 import {
-    Alert,
     Button, ButtonVariant,
-    Flex,
-    InputGroup,
-    Label,
-    Page, PageSection, PageSectionVariants,
-    Select, SelectOption, SelectVariant,
-    Switch,
-    Tab, Tabs,
-    TextContent,
-    Text,
-    TextInput,
-
-
     DataList,
     DataListItem,
     DataListItemRow,
@@ -22,9 +9,13 @@ import {
     DataListToggle,
     DataListContent,
     DataListItemCells,
+    InputGroup,
+    Label,
+    Select, SelectOption, SelectVariant,
+    Switch,
+    TextInput,
 } from '@patternfly/react-core';
 import { SearchIcon } from '@patternfly/react-icons'
-import { OutlinedListAltIcon } from '@patternfly/react-icons'
 import {
     DataToolbar, DataToolbarContent, DataToolbarFilter, DataToolbarGroup, DataToolbarItem,
 } from '@patternfly/react-core/dist/esm/experimental';
