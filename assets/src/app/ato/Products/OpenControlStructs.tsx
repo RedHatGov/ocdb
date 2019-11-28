@@ -6,6 +6,7 @@ interface Narrative {
 export interface Satisfies {
     control_key: string;
     narrative: Narrative[];
+    implementation_status: string;
 }
 
 interface Control {
