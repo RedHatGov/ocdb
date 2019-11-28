@@ -30,6 +30,7 @@ import { Markdown } from '@app/lib/markdown';
 import { ProductIdOverride, ProductInfo } from '@app/ato/Products/Static.tsx'
 import { FedRAMPDownload } from '@app/ato/Products/FedRAMPDownload.tsx'
 import { RTMDetail } from '@app/ato/Products/RTMDetail.tsx'
+import { RTMDataList } from '@app/ato/Products/DataList.tsx'
 
 export const expandable = (data?: IFormatterValueType, rowData? : IRowData) =>
     rowData && rowData.hasOwnProperty('parent') ? <ExpandableRowContent>{data}</ExpandableRowContent> : (data ? data : '');
@@ -475,7 +476,7 @@ interface ProductState {
 
 class Product extends React.Component<any, ProductState> {
     renderControls() {
-        return (<RTM content={this.state.product['controls']}/>);
+        return (<RTMDataList content={this.state.product['controls']}/>);
     }
 
     static texts(productId: string) {
