@@ -311,7 +311,7 @@ interface RTMDataListItemState {
 class RTMDataListItem extends React.PureComponent<RTMDataListItemProps, RTMDataListItemState> {
     constructor(props) {
         super(props);
-        this.state = {expanded: false};
+        this.state = {expanded: props.content.Key == window.location.hash.replace('%20', ' ').replace('#','')};
     }
     toggle() {
         this.setState({expanded: !this.state.expanded})
