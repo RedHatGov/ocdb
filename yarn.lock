@@ -3921,11 +3921,6 @@ globule@^1.0.0:
     lodash "~4.17.10"
     minimatch "~3.0.2"
 
-gopherjs-loader@^0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/gopherjs-loader/-/gopherjs-loader-0.0.1.tgz#c9e25aa7693731de5daa0ea829a96b47f7e92668"
-  integrity sha1-yeJap2k3Md5dqg6oKalrR/fpJmg=
-
 graceful-fs@^4.1.11, graceful-fs@^4.1.15, graceful-fs@^4.1.2, graceful-fs@^4.1.6:
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.3.tgz#4a12ff1b60376ef09862c2093edd908328be8423"
