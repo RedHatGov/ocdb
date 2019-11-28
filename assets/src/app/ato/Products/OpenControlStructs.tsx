@@ -17,5 +17,5 @@ interface Control {
 export interface CustomControl {
     Key: string,
     Control: Control,
-    Satisfies: Satisfies,
+    Satisfies?: Satisfies,
 }

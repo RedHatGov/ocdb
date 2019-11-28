@@ -4,7 +4,7 @@ import MDX from '@mdx-js/runtime'
 import { Satisfies } from '@app/ato/Products/OpenControlStructs.tsx'
 
 interface CustomControlProps {
-    satisfies: Satisfies;
+    satisfies?: Satisfies;
 }
 
 const SatisfiesAccordion = React.memo((props: CustomControlProps) => {
