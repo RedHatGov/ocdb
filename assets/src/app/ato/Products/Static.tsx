@@ -27,7 +27,7 @@ export interface ProductTemplate {
 
 const ProductInfo: {[Identifier: string]: ProductTemplate } = {
     'ansible-tower': {
-        image: require('@app/assets/images/ansible-tower-logo.png'),
+        image: require('@app/assets/images/ansible-tower-logo.png').default,
         texts: [
             {
                 name: 'Overview',
@@ -40,7 +40,7 @@ const ProductInfo: {[Identifier: string]: ProductTemplate } = {
         ]
     },
     'coreos-4': {
-        image: require('@app/assets/images/coreos-logo.png'),
+        image: require('@app/assets/images/coreos-logo.png').default,
         texts: [
             {
                 name: 'Overview',
@@ -66,7 +66,7 @@ const ProductInfo: {[Identifier: string]: ProductTemplate } = {
         ]
     },
     'openshift-container-platform-3': {
-        image: require('@app/assets/images/openshift-logo.png'),
+        image: require('@app/assets/images/openshift-logo.png').default,
         texts: [
             {
                 name: 'Overview',
@@ -84,7 +84,7 @@ const ProductInfo: {[Identifier: string]: ProductTemplate } = {
         ]
     },
     'openstack-platform-13': {
-        image: require('@app/assets/images/openstack-logo.png'),
+        image: require('@app/assets/images/openstack-logo.png').default,
         texts: [
             {
                 name: 'Overview',
