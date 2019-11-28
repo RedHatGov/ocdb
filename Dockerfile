@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install -y libxml2-dev zlib1g-dev liblzma-dev libi
 # this will cache the npm install step, unless package.json changes
 ADD package.json .
 ADD yarn.lock .
-RUN yarn install --no-progress
+RUN yarn install --no-progress --production
 ADD . .
 RUN go get ./...
 RUN buffalo build --ldflags '-linkmode external -extldflags "-static -lz -llzma -licuuc -licudata -ldl -lstdc++ -lm"' -o /bin/app
