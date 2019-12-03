@@ -1,7 +1,7 @@
-vendor/
 **/*.log
 **/*.sqlite
 .idea/
+ocdb
 bin/
 tmp/
 node_modules/
