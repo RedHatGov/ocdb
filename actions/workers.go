@@ -1,7 +1,6 @@
 package actions
 
 import (
-	"fmt"
 	"github.com/RedHatGov/ocdb/pkg/masonry"
 	"github.com/gobuffalo/buffalo/worker"
 	"time"
