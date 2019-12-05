@@ -184,7 +184,6 @@ class RTMToolbar extends React.PureComponent<RTMToolbarProps, RTMToolbarState> {
     }
 
     render() {
-        console.log('Toolbar.render()')
         const { sectionIsExpanded, statusIsExpanded, solutionIsExpanded, filters, expanded } = this.state;
         const searchGroupItems = <React.Fragment>
             <DataToolbarItem variant="label" id="stacked-example-resource-select">Search</DataToolbarItem>
@@ -453,7 +452,6 @@ class RTMDataList extends React.Component<RTMProps, RTMState> {
     };
 
     render () {
-        console.log('RTMDataList.render() ------------- ');
         const expandAll = this.state.expandAll;
         return (
             <React.Fragment>
