@@ -11,11 +11,16 @@ var once sync.Once
 // GetInstance gets memory representation of the masonry cache
 func GetInstance() *common.Workspace {
 	once.Do(func() {
-		data, errors := build()
-		if errors != nil {
-			panic(errors)
-		}
-		instance = &data
+		Refresh()
 	})
 	return instance
+}
+
+// Refresh function refreshes masonry data
+func Refresh() {
+	data, errors := build()
+	if errors != nil {
+		panic(errors)
+	}
+	instance = &data
 }
