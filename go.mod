@@ -10,6 +10,7 @@ require (
 	github.com/gobuffalo/mw-i18n v0.0.0-20190224203426-337de00e4c33
 	github.com/gobuffalo/mw-paramlogger v0.0.0-20190224201358-0d45762ab655
 	github.com/gobuffalo/packr/v2 v2.7.1
+	github.com/gobuffalo/suite v2.8.2+incompatible
 	github.com/jbowtie/gokogiri v0.0.0-20190301021639-37f655d3078f // indirect
 	github.com/opencontrol/compliance-masonry v1.1.6
 	github.com/opencontrol/compliance-masonry/commands/docs v0.0.0-00010101000000-000000000000 // indirect
