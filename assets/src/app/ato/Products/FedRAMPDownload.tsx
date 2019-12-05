@@ -35,7 +35,7 @@ class FedRAMPDownload extends React.PureComponent<FedRAMPDownloadProp, FedRAMPDo
     }
 
   render() {
-    if (ProductInfo[this.props.productId].disableFedrampDownload) {
+    if (ProductInfo[this.props.productId] && ProductInfo[this.props.productId].disableFedrampDownload) {
         return '';
     }
 
