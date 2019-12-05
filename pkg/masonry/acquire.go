@@ -7,8 +7,7 @@ import (
 	"github.com/opencontrol/compliance-masonry/pkg/lib/opencontrol/versions/1.0.0"
 )
 
-// BuildCache of opencontrols as defined in opencontrol.yaml
-func BuildCache() error {
+func buildCache() error {
 	destination := "/tmp/.masonry_cache"
 
 	repo := make([]common.RemoteSource, 1)

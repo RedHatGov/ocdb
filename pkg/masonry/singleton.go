@@ -12,7 +12,7 @@ var once sync.Once
 // GetInstance gets memory representation of the masonry cache
 func GetInstance() *common.Workspace {
 	once.Do(func() {
-		err := BuildCache()
+		err := buildCache()
 		if err != nil {
 			panic(err)
 		}
