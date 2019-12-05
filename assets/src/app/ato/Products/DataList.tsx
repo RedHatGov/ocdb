@@ -295,7 +295,7 @@ const StatusColor = {
 
 const ImplementationStatus: React.FunctionComponent<any> = (props) => {
     var style : React.CSSProperties = { 'backgroundColor': StatusColor[props['status']] };
-    return (<Label isCompact style={style}>{props['status']}</Label>);
+    return (<Label style={style}>{props['status']}</Label>);
 }
 
 interface RTMDataListItemProps {
