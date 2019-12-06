@@ -89,7 +89,7 @@ class Product extends React.Component<any, ProductState> {
                                      }))}
                                 </Alert>
                                 <br/>
-                                <Text component="p">Go fix the warning on <Text component='a' href="https://github.com/ComplianceAsCode/redhat">github</Text>.</Text>
+                                <Text component="p">Go fix the warning on <Text component='a' href={"https://github.com/ComplianceAsCode/redhat/tree/master/" + this.state.productId}>github</Text>.</Text>
                             </React.Fragment>
                           }
                           <Text component="h2">Requirements Traceability Matrix</Text>
