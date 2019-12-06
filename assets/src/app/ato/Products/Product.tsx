@@ -50,10 +50,6 @@ class Product extends React.Component<any, ProductState> {
         }
     }
 
-    tabIdToName(id) {
-        return Product.tabIdToName(this.state.productId, id)
-    }
-
     renderMarkdown(textPosition) {
         const texts = this.texts();
         if (texts.length > textPosition ) {
@@ -169,7 +165,6 @@ class Product extends React.Component<any, ProductState> {
         this.setUrlLocation = this.setUrlLocation.bind(this);
         this.renderMarkdown = this.renderMarkdown.bind(this);
         this.componentDidUpdate = this.componentDidUpdate.bind(this);
-        this.tabIdToName = this.tabIdToName.bind(this);
         this.componentDidUpdate();
     }
 
@@ -178,7 +173,7 @@ class Product extends React.Component<any, ProductState> {
         this.setState({activeTabKey: tabIndex});
     }
     setUrlLocation(tabIndex) {
-        this.props.history.push('/ato/products/' + this.state.productId + '/' + this.tabIdToName(tabIndex));
+        this.props.history.push('/ato/products/' + this.state.productId + '/' + Product.tabIdToName(this.state.productId, tabIndex));
     }
 }
 
