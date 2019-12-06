@@ -49,7 +49,8 @@ class Product extends React.Component<any, ProductState> {
         } else if (tabId == 1) {
             return 'NIST-800-53';
         } else {
-            return this.texts(productId)[tabId - 1].name
+            const texts = Product.texts(productId)
+            return texts.length > tabId ? texts[tabId - 1].name : 'Overview';
         }
     }
 
@@ -136,7 +137,7 @@ class Product extends React.Component<any, ProductState> {
         if (state.productId == productId) {
             return null;
         }
-        this.setUrlLocation(state.activeTabKey)
+        Product.setUrlLocation(props, productId, state.activeTabKey)
         return {
             isLoading: true,
             productId: productId,
