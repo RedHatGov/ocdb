@@ -40,14 +40,18 @@ class Product extends React.Component<any, ProductState> {
             return 1 + Product.texts(productId).findIndex( ({ name }) => name == tabName );
         }
     }
-    tabIdToName(id) {
-        if (id == 0) {
+    static tabIdToName(productId: string, tabId: number) {
+        if (tabId == 0) {
             return 'Overview';
-        } else if (id == 1) {
+        } else if (tabId == 1) {
             return 'NIST-800-53';
         } else {
-            return this.texts()[id - 1].name;
+            return this.texts(productId)[tabId - 1].name
         }
+    }
+
+    tabIdToName(id) {
+        return Product.tabIdToName(this.state.productId, id)
     }
 
     renderMarkdown(textPosition) {
@@ -133,6 +137,7 @@ class Product extends React.Component<any, ProductState> {
         if (state.productId == productId) {
             return null;
         }
+        this.setUrlLocation(state.activeTabKey)
         return {
             isLoading: true,
             productId: productId,
