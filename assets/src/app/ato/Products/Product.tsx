@@ -23,6 +23,9 @@ interface ProductState {
 };
 
 class Product extends React.Component<any, ProductState> {
+    static setUrlLocation(props, productId, tabIndex) {
+        props.history.push('/ato/products/' + productId + '/' + Product.tabIdToName(productId, tabIndex));
+    }
     static texts(productId: string) {
         return ProductInfo[productId] ? ProductInfo[productId].texts : [];
     }
@@ -162,18 +165,14 @@ class Product extends React.Component<any, ProductState> {
             activeTabKey: Product.nameToTabId(productId, props['computedMatch'].params.tabId),
         };
         this.handleTabClick = this.handleTabClick.bind(this);
-        this.setUrlLocation = this.setUrlLocation.bind(this);
         this.renderMarkdown = this.renderMarkdown.bind(this);
         this.componentDidUpdate = this.componentDidUpdate.bind(this);
         this.componentDidUpdate();
     }
 
     handleTabClick(event, tabIndex) {
-        this.setUrlLocation(tabIndex)
+        Product.setUrlLocation(this.props, this.state.productId, tabIndex)
         this.setState({activeTabKey: tabIndex});
-    }
-    setUrlLocation(tabIndex) {
-        this.props.history.push('/ato/products/' + this.state.productId + '/' + Product.tabIdToName(this.state.productId, tabIndex));
     }
 }
 
