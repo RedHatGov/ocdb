@@ -23,10 +23,6 @@ interface ProductState {
 };
 
 class Product extends React.Component<any, ProductState> {
-    renderControls() {
-        return (<RTMDataList content={this.state.product['controls']}/>);
-    }
-
     static texts(productId: string) {
         return ProductInfo[productId] ? ProductInfo[productId].texts : [];
     }
@@ -93,8 +89,7 @@ class Product extends React.Component<any, ProductState> {
                             </React.Fragment>
                           }
                           <Text component="h2">Requirements Traceability Matrix</Text>
-
-                          { this.renderControls() }
+                          <RTMDataList content={this.state.product['controls']}/>
                       </TextContent>
                     }
                 </Tab>
