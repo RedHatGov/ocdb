@@ -166,6 +166,7 @@ class Product extends React.Component<any, ProductState> {
             activeTabKey: Product.nameToTabId(productId, props['computedMatch'].params.tabId),
         };
         this.handleTabClick = this.handleTabClick.bind(this);
+        this.setUrlLocation = this.setUrlLocation.bind(this);
         this.renderMarkdown = this.renderMarkdown.bind(this);
         this.componentDidUpdate = this.componentDidUpdate.bind(this);
         this.tabIdToName = this.tabIdToName.bind(this);
@@ -173,8 +174,11 @@ class Product extends React.Component<any, ProductState> {
     }
 
     handleTabClick(event, tabIndex) {
-        this.props.history.push('/ato/products/' + this.state.productId + '/' + this.tabIdToName(tabIndex));
+        this.setUrlLocation(tabIndex)
         this.setState({activeTabKey: tabIndex});
+    }
+    setUrlLocation(tabIndex) {
+        this.props.history.push('/ato/products/' + this.state.productId + '/' + this.tabIdToName(tabIndex));
     }
 }
 
