@@ -24,7 +24,7 @@ class ATOFedRAMPs extends React.Component<any, FedRAMPsState> {
     }
     buildRows(products) {
         this.setState({rows: products.filter(function(p) {
-            return ProductInfo[p.key].disableFedrampDownload != true
+            return ProductInfo[p.key] == undefined || ProductInfo[p.key].disableFedrampDownload != true
         }).map(function(p, idx) {
             return [
                 (<Text component="p" key={idx}>{p.name}</Text>),
