@@ -108,7 +108,6 @@ class RTMToolbar extends React.PureComponent<RTMToolbarProps, RTMToolbarState> {
         const hash = window.location.hash.replace('%20', ' ');
         if (hash.length > 1) {
             location.hash = hash;
-            this.props.view.expandAnchoredRow(hash);
         }
     }
 
@@ -436,7 +435,6 @@ class RTMDataList extends React.Component<RTMProps, RTMState> {
         this.setState({expandAll: isChecked});
     }
 
-    expandAnchoredRow(tbd) {}
     recomputeFilters(filters) {
         this.setState((prevState, prosp) => {
             var visibleRows = 0;
