@@ -334,7 +334,7 @@ class RTMDataListItem extends React.PureComponent<RTMDataListItemProps, RTMDataL
                             <DataListCell isIcon key="icon">
                             </DataListCell>,
                             <DataListCell key="primary content">
-                                <NavLink to={"#" + c.Key}><div id={c.Key}>{c.Key}</div></NavLink>
+                                <NavLink to={"#" + c.Key} onClick={() => this.toggle() }><div id={c.Key}>{c.Key}</div></NavLink>
                             </DataListCell>,
                             <DataListCell key="secondary content">
                                 {c.Control.name}
