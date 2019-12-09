@@ -13,7 +13,7 @@ func buildCache() error {
 
 	repo := make([]common.RemoteSource, 1)
 	repo[0] = schema.VCSEntry{
-		URL:      "https://github.com/isimluk/ComplianceAsCode_redhat",
+		URL:      "https://github.com/ComplianceAsCode/redhat",
 		Revision: "master",
 		Path:     ""}
 	getter := resources.NewVCSAndLocalGetter(opencontrol.YAMLParser{})
