@@ -17,7 +17,7 @@ interface ProductSelectorState {
     items: ProductSelection[];
 }
 
-class BaseProductSelector extends React.Component<any, ProductSelectorState> {
+class BaseProductSelector extends React.PureComponent<any, ProductSelectorState> {
     static visible() {
         return window.location.pathname.startsWith('/ato/products')
     }
