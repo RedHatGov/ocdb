@@ -1,11 +1,13 @@
 import * as React from 'react';
 import * as Api from '@app/lib/api'
 import { ContextSelector, ContextSelectorItem } from '@patternfly/react-core';
+import { withRouter } from 'react-router-dom';
 
 interface ProductSelection {
     id: string,
     name: string,
 }
+
 interface ProductSelectorState {
     visible: boolean;
     isOpen: boolean;
@@ -15,15 +17,13 @@ interface ProductSelectorState {
     items: ProductSelection[];
 }
 
-export class ProductSelector extends React.Component<{}, ProductSelectorState> {
+class BaseProductSelector extends React.Component<any, ProductSelectorState> {
     static visible() {
         return window.location.pathname.startsWith('/ato/products')
     }
 
     static getDerivedStateFromProps(props, state) {
-        console.log('getDerivedStateFromProps');
-        state.visible = ProductSelector.visible();
-        console.log(state.visible);
+        state.visible = BaseProductSelector.visible();
         return state;
     }
 
@@ -102,3 +102,5 @@ export class ProductSelector extends React.Component<{}, ProductSelectorState> {
       );
   }
 }
+
+export const ProductSelector = withRouter(BaseProductSelector);
