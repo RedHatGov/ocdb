@@ -41,6 +41,10 @@ class BaseProductSelector extends React.PureComponent<any, ProductSelectorState>
     };
 
     onSelect(event, value) {
+        const product = this.state.items.find((function(p, i) { return p.name === value }));
+        const productId = (product == undefined) ? '' : product.id;
+        this.props.history.push('/ato/products/' + productId);
+
         this.setState({
             selected: value,
             isOpen: !this.state.isOpen
