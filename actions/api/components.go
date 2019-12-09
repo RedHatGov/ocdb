@@ -54,6 +54,8 @@ func standardToLogicalView(s common.Standard) map[string][]CustomControl {
 	return result
 }
 
+var validImplementationStatuses = []string{"complete", "partial", "not applicable", "planned", "unsatisfied", "unknown", "none"}
+
 func logicalView(ms *common.Workspace, c common.Component) (map[string]map[string][]CustomControl, []string) {
 	result := make(map[string]map[string][]CustomControl)
 	problems := make([]string, 0)
@@ -83,7 +85,9 @@ func logicalView(ms *common.Workspace, c common.Component) (map[string]map[strin
 					case "complete", "partial", "not applicable", "planned", "unsatisfied", "unknown", "none":
 						break
 					default:
-						problems = append(problems, fmt.Sprintf("Found non-standard implementation_status: %s.", satisfy.GetImplementationStatus()))
+						problems = append(problems,
+							fmt.Sprintf("Found non-standard implementation_status: %s. Expected one of %s.",
+								satisfy.GetImplementationStatus(), validImplementationStatuses))
 						break
 					}
 
