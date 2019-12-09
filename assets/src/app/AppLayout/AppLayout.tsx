@@ -10,6 +10,7 @@ import {
   ToolbarItem,
 } from '@patternfly/react-core';
 import { InteractiveNavigation } from '@app/AppLayout/Navigation'
+import { ProductSelector } from '@app/AppLayout/ProductSelector'
 
 interface IAppLayout {
   children: React.ReactNode;
@@ -35,6 +36,11 @@ const AppLayout: React.FunctionComponent<IAppLayout> = ({children}) => {
 
     const pageToolbar = (
         <Toolbar>
+            <ToolbarGroup>
+                <ToolbarItem>
+                    <ProductSelector/>
+                </ToolbarItem>
+            </ToolbarGroup>
             <ToolbarGroup>
                 <ToolbarItem>
                     <SimpleAboutModal/>
