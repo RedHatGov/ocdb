@@ -7,6 +7,7 @@ interface ProductSelection {
     name: string,
 }
 interface ProductSelectorState {
+    visible: boolean;
     isOpen: boolean;
     selected?: string;
     searchValue: string;
@@ -15,6 +16,17 @@ interface ProductSelectorState {
 }
 
 export class ProductSelector extends React.Component<{}, ProductSelectorState> {
+    static visible() {
+        return window.location.pathname.startsWith('/ato/products')
+    }
+
+    static getDerivedStateFromProps(props, state) {
+        console.log('getDerivedStateFromProps');
+        state.visible = ProductSelector.visible();
+        console.log(state.visible);
+        return state;
+    }
+
     finalizeSelector(componets) {
         const items = componets.map((function(component, idx) {
             return { id: component['key'], name: component['name']};
@@ -52,6 +64,7 @@ export class ProductSelector extends React.Component<{}, ProductSelectorState> {
     constructor(props) {
         super(props);
         this.state = {
+            visible: false,
             isOpen: false,
             selected: undefined,
             searchValue: '',
@@ -63,10 +76,14 @@ export class ProductSelector extends React.Component<{}, ProductSelectorState> {
         this.onSelect = this.onSelect.bind(this);
         this.onSearchInputChange = this.onSearchInputChange.bind(this);
         this.onSearchButtonClick = this.onSearchButtonClick.bind(this);
-  }
+    }
 
   render() {
-      const { isOpen, selected, searchValue, filteredItems } = this.state;
+      const { isOpen, selected, searchValue, filteredItems, visible } = this.state;
+      if (!visible) {
+          return ''
+      }
+
       return (
         <ContextSelector
           toggleText={selected}
