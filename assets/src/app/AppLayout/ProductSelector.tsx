@@ -35,21 +35,18 @@ export class ProductSelector extends React.Component<{}, ProductSelectorState> {
         });
     };
 
+    filterItems(searchValue) {
+        return searchValue === ''
+             ? this.state.items
+             : this.state.items.filter(item => item.name.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1);
+    }
+
     onSearchInputChange(searchValue) {
-        const filteredItems =
-            searchValue === ''
-            ? this.state.items
-            : this.state.items.filter(item => item.name.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1);
-        this.setState({ searchValue, filteredItems });
+        this.setState({ searchValue, filteredItems: this.filterItems(searchValue) });
     };
 
     onSearchButtonClick(event) {
-        const filtered =
-            this.state.searchValue === ''
-            ? this.state.items
-            : this.state.items.filter(item => item.name.toLowerCase().indexOf(this.state.searchValue.toLowerCase()) !== -1);
-
-        this.setState({ filteredItems: filtered || [] });
+        this.setState({ filteredItems: this.filterItems(this.state.searchValue) });
     };
 
     constructor(props) {
