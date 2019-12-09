@@ -86,7 +86,7 @@ class BaseProductSelector extends React.PureComponent<any, ProductSelectorState>
 
       return (
         <ContextSelector
-          toggleText={selected}
+          toggleText={selected || 'Choose product'}
           onSearchInputChange={this.onSearchInputChange}
           isOpen={isOpen}
           searchInputValue={searchValue}
