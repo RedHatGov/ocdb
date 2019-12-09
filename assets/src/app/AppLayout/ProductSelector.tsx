@@ -12,6 +12,7 @@ interface ProductSelectorState {
     visible: boolean;
     isOpen: boolean;
     selected?: string;
+    selectedId?: string;
     searchValue: string;
     filteredItems: ProductSelection[];
     items: ProductSelection[];
@@ -21,9 +22,23 @@ class BaseProductSelector extends React.PureComponent<any, ProductSelectorState>
     static visible() {
         return window.location.pathname.startsWith('/ato/products')
     }
+    static getActiveProductIdFromUrl() {
+        if (window.location.pathname.startsWith('/ato/products/'))
+            return window.location.pathname.replace(/\/ato\/products\/([\w-]+).*/, '$1');
+        return undefined;
+    }
 
     static getDerivedStateFromProps(props, state) {
         state.visible = BaseProductSelector.visible();
+        const newProductId = BaseProductSelector.getActiveProductIdFromUrl();
+        if (newProductId != state.selectedId)
+            if (!newProductId) {
+                state.selectedId = newProductId
+                state.selected = undefined
+            } else if (state.items.length > 0) {
+                state.selectedId = newProductId;
+                state.selected = state.items.filter((function(p, i) { return p.id === newProductId; }))[0].name;
+        }
         return state;
     }
 
@@ -41,12 +56,16 @@ class BaseProductSelector extends React.PureComponent<any, ProductSelectorState>
     };
 
     onSelect(event, value) {
-        const product = this.state.items.find((function(p, i) { return p.name === value }));
-        const productId = (product == undefined) ? '' : product.id;
-        this.props.history.push('/ato/products/' + productId);
+        var productId = this.state.selectedId;
+        if (value != this.state.selected) {
+            const product = this.state.items.find((function(p, i) { return p.name === value }));
+            productId = (product == undefined) ? '' : product.id;
+            this.props.history.push('/ato/products/' + productId);
+        }
 
         this.setState({
             selected: value,
+            selectedId: productId,
             isOpen: !this.state.isOpen
         });
     };
