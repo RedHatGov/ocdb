@@ -35,8 +35,12 @@ export class ProductSelector extends React.Component<{}, ProductSelectorState> {
         });
     };
 
-    onSearchInputChange(value) {
-        this.setState({ searchValue: value });
+    onSearchInputChange(searchValue) {
+        const filteredItems =
+            searchValue === ''
+            ? this.state.items
+            : this.state.items.filter(item => item.name.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1);
+        this.setState({ searchValue, filteredItems });
     };
 
     onSearchButtonClick(event) {
