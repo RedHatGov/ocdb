@@ -7,6 +7,7 @@ import {
 } from '@patternfly/react-core';
 import * as Api from '@app/lib/api'
 import { NavLink, withRouter } from 'react-router-dom';
+import { UserIcon } from '@patternfly/react-icons'
 
 
 interface MyRoute {
@@ -24,6 +25,7 @@ interface NavigationState {
     activeItem?: string;
     links: (MyRoute | RouterGroup)[];
     lastUrl?: string;
+    showControlFamilies?: boolean;
 }
 
 const staticNavigation:(MyRoute | RouterGroup)[] = [
@@ -75,6 +77,7 @@ class Navigation extends React.Component<any, NavigationState> {
         }
 
         var activeGroup, activeItem;
+        var showControlFamilies = false;
         state.links.forEach((function(l1, i) {
             if ((l1 as any).to !== undefined) {
                 if ((l1 as MyRoute).to == currentUrl) {
@@ -86,18 +89,51 @@ class Navigation extends React.Component<any, NavigationState> {
                     if (l2.to == currentUrl || l2.startsWithMatcher != undefined && currentUrl.startsWith(l2.startsWithMatcher)) {
                         activeGroup = 'grp-' + i;
                         activeItem = activeGroup + '_itm-' + j;
+                        if (i == 2 && currentUrl.endsWith('/NIST-800-53')) {
+                            showControlFamilies = true;
+
+                        }
                     }
                 }))
             }
         }));
         if (activeItem !== undefined) {
-            return {links: state.links, activeGroup: activeGroup, activeItem: activeItem};
+            return {links: state.links, activeGroup: activeGroup, activeItem: activeItem, showControlFamilies: showControlFamilies};
         }
         return null;
     }
 
+    static renderControlFamilies(productUrl) {
+        productUrl += '/NIST-800-53';
+        return (
+            <Nav>
+                <NavList variant="default">
+                    <NavItem groupId="familiesGroup-AC" isActive={false} key={'AC'}>
+                        <NavLink exact={true} to={productUrl + '#ac'}>
+                            <UserIcon/> Access Control
+                        </NavLink>
+                    </NavItem>
+                    <NavItem groupId="familiesGroup-AT" isActive={false} key={'AT'}>
+                        <NavLink exact={true} to={productUrl + '#at'}>
+                            <UserIcon/> Awarness and Training
+                        </NavLink>
+                    </NavItem>
+                    <NavItem groupId="familiesGroup-AT" isActive={false} key={'AU'}>
+                        <NavLink exact={true} to={productUrl + '#au'}>
+                            <UserIcon/> Audit and Accountability
+                        </NavLink>
+                    </NavItem>
+                </NavList>
+            </Nav>
+        )
+    }
+
     render() {
-        const { activeGroup, activeItem } = this.state;
+        const { activeGroup, activeItem, showControlFamilies } = this.state;
+        console.log("activeGroup=", activeGroup, ", activeItem=", activeItem);
+        if (showControlFamilies) {
+            console.log("SHOW FAMILIES")
+        }
         return (
             <Nav onSelect={this.onSelect} theme="dark">
                 <NavList>
@@ -118,6 +154,14 @@ class Navigation extends React.Component<any, NavigationState> {
                                       {
                                           (l1 as RouterGroup).routes.map((function(l2, j) {
                                               var id = groupId + '_itm-' + j;
+                                              if (activeItem === id && showControlFamilies) {
+                                                  return (
+                                                      <NavExpandable title={l2.label} groupId="familiesGroup" isActive={true} key={id} isExpanded>
+                                                          { Navigation.renderControlFamilies(l2.to) }
+                                                      </NavExpandable>
+                                                  )
+
+                                              }
                                               return (
                                                   <NavItem groupId={groupId} itemId={id} isActive={activeItem === id} key={id}>
                                                       <NavLink exact={true} to={l2.to}>
