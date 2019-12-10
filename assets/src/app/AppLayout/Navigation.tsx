@@ -34,8 +34,9 @@ const staticNavigation:(MyRoute | RouterGroup)[] = [
         {label: 'Security Awareness', to: '/ato/documents/security-awareness-and-training-plan'},
         {label: 'FedRAMP Templates', to: '/ato/documents/fedramp-templates'},
     ]},
+    {label: 'Available Products', to: '/ato/products'},
     {label: 'Products', routes: [
-        {label: 'Overview', to: '/ato/products'}]}
+        ]}
 ];
 
 class Navigation extends React.Component<any, NavigationState> {
@@ -57,7 +58,7 @@ class Navigation extends React.Component<any, NavigationState> {
 
     finalizeMenu(components) {
         var links = staticNavigation;
-        (links[2] as RouterGroup).routes = (links[2] as RouterGroup).routes.concat(
+        (links[3] as RouterGroup).routes = (links[3] as RouterGroup).routes.concat(
             components.map((function(c, _) {
                 return { label: c['name'], to: '/ato/products/' + c['key'], startsWithMatcher: '/ato/products/' + c['key']};
             }))
