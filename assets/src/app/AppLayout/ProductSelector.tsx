@@ -67,7 +67,7 @@ class BaseProductSelector extends React.PureComponent<any, ProductSelectorState>
         if (value != this.state.selected) {
             const product = this.state.items.find((function(p, i) { return p.name === value }));
             productId = (product == undefined) ? '' : product.id;
-            this.props.history.push('/ato/products/' + productId);
+            this.props.history.push('/ato/products/' + productId + GetProductParamsFromUrl());
         }
 
         this.setState({
