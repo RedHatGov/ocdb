@@ -2,11 +2,9 @@ import * as React from 'react';
 import {
     Alert,
     Page, PageSection, PageSectionVariants,
-    Tab, Tabs,
     TextContent,
     Text,
 } from '@patternfly/react-core';
-import { OutlinedListAltIcon } from '@patternfly/react-icons'
 import { Spinner } from '@patternfly/react-core/dist/esm/experimental';
 
 import * as Api from '@app/lib/api'
@@ -68,14 +66,11 @@ class Product extends React.Component<any, ProductState> {
 
     renderTabs(){
         const renderMarkdown = this.renderMarkdown;
-        return (
-            <Tabs activeKey={this.state.activeTabKey} onSelect={this.handleTabClick}>
-                <Tab eventKey={0} title="Overview">
-                    <br/>
-                    { this.renderMarkdown(0) }
-                </Tab>
-                <Tab eventKey={1} title={<React.Fragment>NIST-800-53 {this.state.isLoading ? <Spinner size="md"/> : <OutlinedListAltIcon/>} </React.Fragment>}>
-                    <br/>
+        if (this.state.activeTabKey == 0) {
+            return this.renderMarkdown(0)
+        } else if (this.state.activeTabKey == 1) {
+            return (
+                <>
                     <FedRAMPDownload productId={this.state.productId}/>
                     { this.state.isLoading ?
                       <Spinner/> :
@@ -97,17 +92,11 @@ class Product extends React.Component<any, ProductState> {
                           <RTMDataList content={this.state.product['controls']}/>
                       </TextContent>
                     }
-                </Tab>
-                {
-                    this.texts().slice(1).map((function(text, id) {
-                        return <Tab key={id+2} eventKey={id + 2} title={text.name}>
-                            <br/>
-                            { renderMarkdown(id + 1) }
-                        </Tab>;
-                    }))
-                }
-            </Tabs>
-        );
+                </>
+            )
+        } else {
+            return renderMarkdown(this.state.activeTabKey - 1);
+        }
     }
 
     render(){
@@ -170,15 +159,9 @@ class Product extends React.Component<any, ProductState> {
             product: null,
             activeTabKey: Product.nameToTabId(productId, props['computedMatch'].params.tabId),
         };
-        this.handleTabClick = this.handleTabClick.bind(this);
         this.renderMarkdown = this.renderMarkdown.bind(this);
         this.componentDidUpdate = this.componentDidUpdate.bind(this);
         this.componentDidUpdate();
-    }
-
-    handleTabClick(event, tabIndex) {
-        Product.setUrlLocation(this.props, this.state.productId, tabIndex)
-        this.setState({activeTabKey: tabIndex});
     }
 }
 
