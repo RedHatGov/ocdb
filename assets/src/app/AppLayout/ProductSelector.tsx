@@ -32,7 +32,7 @@ class BaseProductSelector extends React.PureComponent<any, ProductSelectorState>
         state.visible = BaseProductSelector.visible();
         const newProductId = BaseProductSelector.getActiveProductIdFromUrl();
         if (newProductId != state.selectedId)
-            if (!newProductId) {
+            if (!newProductId || newProductId == 'select') {
                 state.selectedId = newProductId
                 state.selected = undefined
             } else if (state.items.length > 0) {
