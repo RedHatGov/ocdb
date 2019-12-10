@@ -18,32 +18,22 @@ interface ProductState {
     isLoading: boolean;
     productId: string;
     product: any;
-    activeTabKey: number;
+    activeTabKey: string;
 };
 
 class Product extends React.Component<any, ProductState> {
     static texts(productId: string) {
-        return ProductInfo[productId] ? ProductInfo[productId].texts : [];
+        return ProductInfo[productId] ? ProductInfo[productId].texts : {};
     }
 
     texts() {
         return Product.texts(this.state.productId);
     }
 
-    static nameToTabId(productId: string, tabName: string) {
-        if (tabName == 'Overview') {
-            return 0;
-        } else if (tabName == 'NIST-800-53' || tabName == 'nist-800-53') {
-            return 1;
-        } else {
-            return 1 + Product.texts(productId).findIndex( ({ name }) => name == tabName );
-        }
-    }
-
-    renderMarkdown(textPosition) {
+    renderMarkdown(textId) {
         const texts = this.texts();
-        if (texts.length > textPosition ) {
-            const Element = texts[textPosition].text;
+        const Element = texts[textId] as any;
+        if (Element) {
             return <React.Fragment>
                 <Markdown><Element/></Markdown>
             </React.Fragment>
@@ -52,10 +42,7 @@ class Product extends React.Component<any, ProductState> {
     }
 
     renderTabs(){
-        const renderMarkdown = this.renderMarkdown;
-        if (this.state.activeTabKey == 0) {
-            return this.renderMarkdown(0)
-        } else if (this.state.activeTabKey == 1) {
+        if (this.state.activeTabKey == 'NIST-800-53' || this.state.activeTabKey == 'nist-800-53') {
             return (
                 <>
                     <FedRAMPDownload productId={this.state.productId}/>
@@ -82,7 +69,8 @@ class Product extends React.Component<any, ProductState> {
                 </>
             )
         } else {
-            return renderMarkdown(this.state.activeTabKey - 1);
+            const renderMarkdown = this.renderMarkdown;
+            return renderMarkdown(this.state.activeTabKey);
         }
     }
 
@@ -115,7 +103,7 @@ class Product extends React.Component<any, ProductState> {
     }
     static getDerivedStateFromProps(props, state) {
         const productId = Product.getId(props);
-        const activeTabKey = Product.nameToTabId(productId, props['computedMatch'].params.tabId)
+        const activeTabKey = props['computedMatch'].params.tabId;
         if (state.productId != productId) {
             return {
                 isLoading: true,
@@ -148,7 +136,7 @@ class Product extends React.Component<any, ProductState> {
             isLoading: true,
             productId: productId,
             product: null,
-            activeTabKey: Product.nameToTabId(productId, props['computedMatch'].params.tabId),
+            activeTabKey: props['computedMatch'].params.tabId,
         };
         this.renderMarkdown = this.renderMarkdown.bind(this);
         this.componentDidUpdate = this.componentDidUpdate.bind(this);
