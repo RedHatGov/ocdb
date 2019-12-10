@@ -24,6 +24,13 @@ export function GetActiveProductIdFromUrl() {
     return undefined;
 }
 
+export function GetProductParamsFromUrl() {
+    if (window.location.pathname.startsWith('/ato/products/')) {
+        return window.location.pathname.replace(/\/ato\/products\/[\w-]+(\/.*)/, '$1');
+    }
+    return undefined;
+}
+
 class BaseProductSelector extends React.PureComponent<any, ProductSelectorState> {
     static visible() {
         return window.location.pathname.startsWith('/ato/products')

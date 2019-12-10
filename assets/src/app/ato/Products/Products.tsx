@@ -13,6 +13,7 @@ import {
 } from '@patternfly/react-core';
 import { Spinner } from '@patternfly/react-core/dist/esm/experimental';
 import { NavLink } from 'react-router-dom';
+import { GetProductParamsFromUrl } from '@app/AppLayout/ProductSelector'
 import { ProductInfo } from '@app/ato/Products/Static.tsx'
 
 import * as Api from '@app/lib/api'
@@ -23,7 +24,7 @@ const ProductGalleryItem: React.FunctionComponent<any> = (props) => {
     var logo = (ProductInfo[productId] && ProductInfo[productId].image) || redhatLogo;
     return (
         <GalleryItem>
-            <NavLink exact={true} to={"/ato/products/" + productId}>
+            <NavLink exact={true} to={"/ato/products/" + productId + props['params']}>
                 <Card isHoverable>
                     <CardHead>
                         <img src={logo} />
@@ -36,9 +37,9 @@ const ProductGalleryItem: React.FunctionComponent<any> = (props) => {
     )
 };
 
-
 class Products extends React.Component {
     render(){
+        const params = GetProductParamsFromUrl();
         return (
             <Page>
                 <PageSection variant={PageSectionVariants.light}>
@@ -51,7 +52,7 @@ class Products extends React.Component {
                 <PageSection>
                     <Gallery gutter="md">
                         { (this.state['isLoading'] ? <Spinner/> : this.state['products'].map((function(object, i){
-                            return (<ProductGalleryItem key={object['key']} product={object} />);
+                            return (<ProductGalleryItem key={object['key']} product={object} params={params} />);
                         })))}
                     </Gallery>
                 </PageSection>
