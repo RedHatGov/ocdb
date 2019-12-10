@@ -115,14 +115,19 @@ class Product extends React.Component<any, ProductState> {
     }
     static getDerivedStateFromProps(props, state) {
         const productId = Product.getId(props);
-        if (state.productId == productId) {
-            return null;
+        const activeTabKey = Product.nameToTabId(productId, props['computedMatch'].params.tabId)
+        if (state.productId != productId) {
+            return {
+                isLoading: true,
+                productId: productId,
+                product: null,
+                activeTabKey: activeTabKey,
+            }
         }
-        return {
-            isLoading: true,
-            productId: productId,
-            product: null,
+        if (state.activeTabKey != activeTabKey) {
+            return {activeTabKey};
         }
+        return null;
     }
     componentDidUpdate() {
         if (this.state.isLoading && this.state.productId != 'select') {
