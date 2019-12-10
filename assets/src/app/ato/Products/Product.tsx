@@ -150,7 +150,7 @@ class Product extends React.Component<any, ProductState> {
         }
     }
     componentDidUpdate() {
-        if (this.state.isLoading) {
+        if (this.state.isLoading && this.state.productId != 'select') {
             Api.componentControls(this.state.productId)
                .then(data => {
                    const nist80053 = data['controls']['NIST-800-53'];
