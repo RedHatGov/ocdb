@@ -14,6 +14,7 @@ import { Markdown } from '@app/lib/markdown';
 import { ProductIdOverride, ProductInfo } from '@app/ato/Products/Static.tsx'
 import { FedRAMPDownload } from '@app/ato/Products/FedRAMPDownload.tsx'
 import { RTMDataList } from '@app/ato/Products/DataList.tsx'
+import { Products } from '@app/ato/Products/Products'
 
 interface ProductState {
     isLoading: boolean;
@@ -110,6 +111,10 @@ class Product extends React.Component<any, ProductState> {
     }
 
     render(){
+        if (this.state.productId == 'select') {
+            return <Products/>
+        }
+
         return (
             <Page>
                 <PageSection variant={PageSectionVariants.light}>
