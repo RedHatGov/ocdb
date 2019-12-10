@@ -22,9 +22,6 @@ interface ProductState {
 };
 
 class Product extends React.Component<any, ProductState> {
-    static setUrlLocation(props, productId, tabIndex) {
-        props.history.push('/ato/products/' + productId + '/' + Product.tabIdToName(productId, tabIndex));
-    }
     static texts(productId: string) {
         return ProductInfo[productId] ? ProductInfo[productId].texts : [];
     }
@@ -40,16 +37,6 @@ class Product extends React.Component<any, ProductState> {
             return 1;
         } else {
             return 1 + Product.texts(productId).findIndex( ({ name }) => name == tabName );
-        }
-    }
-    static tabIdToName(productId: string, tabId: number) {
-        if (tabId == 0) {
-            return 'Overview';
-        } else if (tabId == 1) {
-            return 'NIST-800-53';
-        } else {
-            const texts = Product.texts(productId)
-            return texts.length > tabId ? texts[tabId - 1].name : 'Overview';
         }
     }
 
@@ -131,7 +118,6 @@ class Product extends React.Component<any, ProductState> {
         if (state.productId == productId) {
             return null;
         }
-        Product.setUrlLocation(props, productId, state.activeTabKey)
         return {
             isLoading: true,
             productId: productId,
