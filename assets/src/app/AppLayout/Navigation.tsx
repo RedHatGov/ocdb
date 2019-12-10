@@ -5,28 +5,65 @@ import {
   NavItem,
   NavExpandable,
 } from '@patternfly/react-core';
-import * as Api from '@app/lib/api'
 import { NavLink, withRouter } from 'react-router-dom';
-
+import { GetActiveProductIdFromUrl } from '@app/AppLayout/ProductSelector'
 
 interface MyRoute {
     label: string;
     to: string;
-    startsWithMatcher?: string;
 }
+
+function IsMyRoute(obj) {
+    return obj.to !== undefined
+}
+
+interface MyProductRoute {
+    label: string;
+    productTo: string;
+}
+
+function IsMyProductRoute(obj) {
+    return obj.productTo !== undefined
+}
+
 interface RouterGroup {
     label: string;
     routes: MyRoute[];
 }
 
+type MyRouterItem = MyRoute | MyProductRoute | RouterGroup;
+
+function DoesRouteMatches(route: (MyRoute | MyProductRoute), url : string) {
+    if (IsMyRoute(route)) {
+        return (route as MyRoute).to == url
+    } else {
+        const matcher = (route as MyProductRoute).productTo.replace('select', '[\\w-]+');
+        return url.search(matcher) != -1;
+    }
+}
+
+function RoutesTo(route : (MyRoute | MyProductRoute), productId:string|undefined) {
+    if (IsMyRoute(route)) {
+        return (route as MyRoute).to
+    } else {
+        if (productId) {
+            return (route as MyProductRoute).productTo.replace('select', productId)
+        } else {
+            return (route as MyProductRoute).productTo
+        }
+    }
+}
+
 interface NavigationState {
     activeGroup?: string;
     activeItem?: string;
-    links: (MyRoute | RouterGroup)[];
+    links: (MyRouterItem)[];
     lastUrl?: string;
+    productId?: string;
 }
 
-const staticNavigation:(MyRoute | RouterGroup)[] = [
+
+const staticNavigation:(MyRouterItem)[] = [
     {label: 'Getting Started', to: '/ato/getting_started'},
     {label: 'Documents', routes: [
         {label: 'Overview', to: '/ato/documents'},
@@ -34,9 +71,8 @@ const staticNavigation:(MyRoute | RouterGroup)[] = [
         {label: 'Security Awareness', to: '/ato/documents/security-awareness-and-training-plan'},
         {label: 'FedRAMP Templates', to: '/ato/documents/fedramp-templates'},
     ]},
-    {label: 'Available Products', to: '/ato/products'},
-    {label: 'Products', routes: [
-        ]}
+    {label: 'Product Overview', productTo: '/ato/products/select/Overview'},
+    {label: 'NIST-800-53', productTo: '/ato/products/select/NIST-800-53'},
 ];
 
 class Navigation extends React.Component<any, NavigationState> {
@@ -52,18 +88,7 @@ class Navigation extends React.Component<any, NavigationState> {
         this.state = {
             links: staticNavigation
         };
-        Api.components().then(data => this.finalizeMenu(data));
         this.onSelect = this.onSelect.bind(this);
-    }
-
-    finalizeMenu(components) {
-        var links = staticNavigation;
-        (links[3] as RouterGroup).routes = (links[3] as RouterGroup).routes.concat(
-            components.map((function(c, _) {
-                return { label: c['name'], to: '/ato/products/' + c['key'], startsWithMatcher: '/ato/products/' + c['key']};
-            }))
-        );
-        this.setState({links: links});
     }
 
     static getDerivedStateFromProps(props, state) {
@@ -74,40 +99,44 @@ class Navigation extends React.Component<any, NavigationState> {
         if (currentUrl == state.lastUrl && state.activeItem !== undefined) {
             return null;
         }
-
         var activeGroup, activeItem;
-        state.links.forEach((function(l1, i) {
-            if ((l1 as any).to !== undefined) {
-                if ((l1 as MyRoute).to == currentUrl) {
+        state.links.forEach((function(l1 : MyRouterItem, i) {
+            if (IsMyRoute(l1) || IsMyProductRoute(l1)) {
+                if (DoesRouteMatches(l1 as any, currentUrl)) {
                     activeGroup = '';
                     activeItem = 'itm-' + i;
                 }
             } else {
                 (l1 as RouterGroup).routes.forEach((function(l2, j) {
-                    if (l2.to == currentUrl || l2.startsWithMatcher != undefined && currentUrl.startsWith(l2.startsWithMatcher)) {
-                        activeGroup = 'grp-' + i;
-                        activeItem = activeGroup + '_itm-' + j;
+                    if (IsMyRoute(l2) || IsMyProductRoute(l2)) {
+                        if (DoesRouteMatches(l2 as any, currentUrl)) {
+                            activeGroup = 'grp-' + i;
+                            activeItem = activeGroup + '_itm-' + j;
+                        }
                     }
                 }))
             }
         }));
         if (activeItem !== undefined) {
-            return {links: state.links, activeGroup: activeGroup, activeItem: activeItem};
+            return {links: state.links,
+                    activeGroup: activeGroup,
+                    activeItem: activeItem,
+                    productId: GetActiveProductIdFromUrl()};
         }
         return null;
     }
 
     render() {
-        const { activeGroup, activeItem } = this.state;
+        const { activeGroup, activeItem, productId } = this.state;
         return (
             <Nav onSelect={this.onSelect} theme="dark">
                 <NavList>
                     { this.state.links.map((function(l1, i){
-                          if ((l1 as any).to !== undefined) {
+                          if (IsMyRoute(l1) || IsMyProductRoute(l1)) {
                               var id = 'itm-' + i;
                               return (
                                   <NavItem itemId={id} isActive={activeItem === id} key={id}>
-                                      <NavLink exact={true} to={(l1 as MyRoute).to}>
+                                      <NavLink exact={true} to={RoutesTo((l1 as any), productId)}>
                                           {l1.label}
                                       </NavLink>
                                   </NavItem>

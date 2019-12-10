@@ -18,19 +18,19 @@ interface ProductSelectorState {
     items: ProductSelection[];
 }
 
+export function GetActiveProductIdFromUrl() {
+    if (window.location.pathname.startsWith('/ato/products/'))
+        return window.location.pathname.replace(/\/ato\/products\/([\w-]+).*/, '$1');
+    return undefined;
+}
+
 class BaseProductSelector extends React.PureComponent<any, ProductSelectorState> {
     static visible() {
         return window.location.pathname.startsWith('/ato/products')
     }
-    static getActiveProductIdFromUrl() {
-        if (window.location.pathname.startsWith('/ato/products/'))
-            return window.location.pathname.replace(/\/ato\/products\/([\w-]+).*/, '$1');
-        return undefined;
-    }
-
     static getDerivedStateFromProps(props, state) {
         state.visible = BaseProductSelector.visible();
-        const newProductId = BaseProductSelector.getActiveProductIdFromUrl();
+        const newProductId = GetActiveProductIdFromUrl();
         if (newProductId != state.selectedId)
             if (!newProductId || newProductId == 'select') {
                 state.selectedId = newProductId
