@@ -42,32 +42,33 @@ class Product extends React.Component<any, ProductState> {
     }
 
     renderTabs(){
+        if (this.state.activeTabKey == 'FedRAMP') {
+            return <FedRAMPDownload productId={this.state.productId}/>
+        }
         if (this.state.activeTabKey == 'NIST-800-53' || this.state.activeTabKey == 'nist-800-53') {
-            return (
-                <>
-                    <FedRAMPDownload productId={this.state.productId}/>
-                    { this.state.isLoading ?
-                      <Spinner/> :
-                      <TextContent>
-                          { this.state.product['errors'].length == 0 ?
-                            '' :
-                            <React.Fragment>
-                                <Text component="h2">OpenControls Developer Information</Text>
-                                <Alert  variant="warning" title="Metadata Warnings">
-                                    {this.state.product['errors'].map((function(error, i) {
-                                         return <Text component="p" key={i}>{error}</Text>;
-                                     }))}
-                                </Alert>
-                                <br/>
-                                <Text component="p">Go fix the warning on <Text component='a' href={"https://github.com/ComplianceAsCode/redhat/tree/master/" + this.state.productId}>github</Text>.</Text>
-                            </React.Fragment>
-                          }
-                          <Text component="h2">Requirements Traceability Matrix</Text>
-                          <RTMDataList content={this.state.product['controls']}/>
-                      </TextContent>
-                    }
-                </>
-            )
+            if (this.state.isLoading) {
+                return <Spinner/>
+            } else {
+                return (
+                    <TextContent>
+                        { this.state.product['errors'].length == 0 ?
+                          '' :
+                          <React.Fragment>
+                              <Text component="h2">OpenControls Developer Information</Text>
+                              <Alert  variant="warning" title="Metadata Warnings">
+                                  {this.state.product['errors'].map((function(error, i) {
+                                       return <Text component="p" key={i}>{error}</Text>;
+                                   }))}
+                              </Alert>
+                              <br/>
+                              <Text component="p">Go fix the warning on <Text component='a' href={"https://github.com/ComplianceAsCode/redhat/tree/master/" + this.state.productId}>github</Text>.</Text>
+                          </React.Fragment>
+                        }
+                        <Text component="h2">Requirements Traceability Matrix</Text>
+                        <RTMDataList content={this.state.product['controls']}/>
+                    </TextContent>
+                )
+            }
         } else {
             const renderMarkdown = this.renderMarkdown;
             return renderMarkdown(this.state.activeTabKey);

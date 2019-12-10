@@ -73,6 +73,7 @@ const staticNavigation:(MyRouterItem)[] = [
     ]},
     {label: 'Product Overview', productTo: '/ato/products/select/Overview'},
     {label: 'NIST-800-53', productTo: '/ato/products/select/NIST-800-53'},
+    {label: 'FedRAMP', productTo: '/ato/products/select/FedRAMP'},
 ];
 
 class Navigation extends React.Component<any, NavigationState> {
