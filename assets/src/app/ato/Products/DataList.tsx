@@ -315,6 +315,15 @@ class RTMDataListItem extends React.PureComponent<RTMDataListItemProps, RTMDataL
         this.setState({expanded: !this.state.expanded})
     }
 
+    static getDerivedStateFromProps(props, state) {
+        const hash = window.location.hash.replace('%20', ' ');
+        if (props.content.Key == hash.replace('#','')) {
+            location.hash = hash;
+            return {expanded: true}
+        }
+        return null;
+    }
+
     render() {
         const c = this.props.content;
         const expanded = this.props.forceExpand || this.state.expanded;
