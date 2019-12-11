@@ -170,7 +170,7 @@ class Navigation extends React.Component<any, NavigationState> {
                     { this.state.links.map((function(l1, i){
                           if (IsMyRoute(l1) || IsMyProductRoute(l1)) {
                               var id = 'itm-' + i;
-                              if (IsMyProductRoute(l1) && (activeItem === id || activeGroup === 'grp-' + i) && (l1 as any).subRoutes !== undefined) {
+                              if (IsMyProductRoute(l1) && (activeItem === id || activeGroup === 'grp-' + i) && (l1 as any).subRoutes !== undefined && productId != 'select') {
                                   const groupId = 'grp-' + i;
                                   return (
                                       <NavExpandable title={l1.label} groupId={groupId} isActive={true} key={groupId} isExpanded>
