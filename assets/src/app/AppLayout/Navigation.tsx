@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {
   Nav,
+  NavGroup,
   NavList,
   NavItem,
   NavExpandable,
@@ -148,6 +149,7 @@ class Navigation extends React.Component<any, NavigationState> {
                           } else {
                               var groupId = 'grp-' + i;
                               return (
+                                  <>
                                   <NavExpandable title={l1.label} groupId={groupId} isActive={activeGroup === groupId} key={groupId} isExpanded>
                                       {
                                           (l1 as RouterGroup).routes.map((function(l2, j) {
@@ -162,6 +164,9 @@ class Navigation extends React.Component<any, NavigationState> {
                                           }))
                                       }
                                   </NavExpandable>
+                                  <br/>
+                                  <NavGroup title="Product Specific Assets"/>
+                                  </>
                               );
                           }
                       }))}
