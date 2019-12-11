@@ -329,7 +329,7 @@ class RTMDataListItem extends React.PureComponent<RTMDataListItemProps, RTMDataL
         const implementation_status = c.Satisfies ? c.Satisfies.implementation_status : "unknown";
 
         return (
-            <DataListItem aria-labelledby="ex-item1" isExpanded={expanded}>
+            <DataListItem aria-labelledby="ex-item1" isExpanded={expanded} id={c.Key}>
             <DataListItemRow>
             <DataListToggle
             onClick={() => this.toggle()}
@@ -342,7 +342,7 @@ class RTMDataListItem extends React.PureComponent<RTMDataListItemProps, RTMDataL
                             <DataListCell isIcon key="icon">
                             </DataListCell>,
                             <DataListCell key="primary content">
-                                <NavLink to={"#" + c.Key} onClick={() => this.toggle() }><div id={c.Key}>{c.Key}</div></NavLink>
+                                <NavLink to={"#" + c.Key} onClick={() => this.toggle() }>{c.Key}</NavLink>
                             </DataListCell>,
                             <DataListCell key="secondary content">
                                 {c.Control.name}
