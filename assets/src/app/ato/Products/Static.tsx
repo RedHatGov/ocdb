@@ -56,6 +56,10 @@ const ProductInfo: {[Identifier: string]: ProductTemplate } = {
             'Overview': require('@app/assets/markdown/products/ocp3/Overview.md').default
         }
     },
+    'openshift-container-platform-4': {
+        image: require('@app/assets/images/openshift-logo.png').default,
+        texts: {}
+    },
     'openshift-dedicated': {
         disableFedrampDownload: true,
         texts: {
