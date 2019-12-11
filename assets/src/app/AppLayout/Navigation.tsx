@@ -71,7 +71,7 @@ const staticNavigation:(MyRouterItem)[] = [
         {label: 'Security Awareness', to: '/ato/documents/security-awareness-and-training-plan'},
         {label: 'FedRAMP Templates', to: '/ato/documents/fedramp-templates'},
     ]},
-    {label: 'Product Overview', productTo: '/ato/products/select/Overview'},
+    {label: 'Overview', productTo: '/ato/products/select/Overview'},
     {label: 'NIST-800-53', productTo: '/ato/products/select/NIST-800-53'},
     {label: 'FedRAMP', productTo: '/ato/products/select/FedRAMP'},
 ];
