@@ -75,23 +75,23 @@ const staticNavigation:(MyRouterItem)[] = [
     ]},
     {label: 'Overview', productTo: '/ato/products/select/Overview'},
     {label: 'NIST-800-53', productTo: '/ato/products/select/NIST-800-53', subRoutes: [
-        {label: 'Access Control', productTo: '/ato/products/select/NIST-800-53#AC-1'},
-        {label: 'Awareness and Training', productTo: '/ato/products/select/NIST-800-53#AT-1'},
-        {label: 'Audit and Accountability', productTo: '/ato/products/select/NIST-800-53#AU-1'},
-        {label: 'Security Assessment & Authorization', productTo: '/ato/products/select/NIST-800-53#CA-1'},
-        {label: 'Configuration Management', productTo: '/ato/products/select/NIST-800-53#CM-1'},
-        {label: 'Contingency Planning', productTo: '/ato/products/select/NIST-800-53#CP-1'},
-        {label: 'Identification and Authentication', productTo: '/ato/products/select/NIST-800-53#IA-1'},
-        {label: 'Incident Response', productTo: '/ato/products/select/NIST-800-53#IR-1'},
-        {label: 'Maintenance', productTo: '/ato/products/select/NIST-800-53#MA-1'},
-        {label: 'Media Protection', productTo: '/ato/products/select/NIST-800-53#MP-1'},
-        {label: 'Physical & Environmental Protection', productTo: '/ato/products/select/NIST-800-53#PE-1'},
-        {label: 'Planning', productTo: '/ato/products/select/NIST-800-53#PL-1'},
-        {label: 'Personnel Security', productTo: '/ato/products/select/NIST-800-53#PS-1'},
-        {label: 'Risk Management', productTo: '/ato/products/select/NIST-800-53#RA-1'},
-        {label: 'System and Services Acquisition', productTo: '/ato/products/select/NIST-800-53#SA-1'},
-        {label: 'Systems and Communications Protection', productTo: '/ato/products/select/NIST-800-53#SC-1'},
-        {label: 'System and Information Integrity', productTo: '/ato/products/select/NIST-800-53#SI-1'},
+        {label: 'Access Control', productTo: '/ato/products/select/NIST-800-53#AC-'},
+        {label: 'Awareness and Training', productTo: '/ato/products/select/NIST-800-53#AT-'},
+        {label: 'Audit and Accountability', productTo: '/ato/products/select/NIST-800-53#AU-'},
+        {label: 'Security Assessment & Authorization', productTo: '/ato/products/select/NIST-800-53#CA-'},
+        {label: 'Configuration Management', productTo: '/ato/products/select/NIST-800-53#CM-'},
+        {label: 'Contingency Planning', productTo: '/ato/products/select/NIST-800-53#CP-'},
+        {label: 'Identification and Authentication', productTo: '/ato/products/select/NIST-800-53#IA-'},
+        {label: 'Incident Response', productTo: '/ato/products/select/NIST-800-53#IR-'},
+        {label: 'Maintenance', productTo: '/ato/products/select/NIST-800-53#MA-'},
+        {label: 'Media Protection', productTo: '/ato/products/select/NIST-800-53#MP-'},
+        {label: 'Physical & Environmental Protection', productTo: '/ato/products/select/NIST-800-53#PE-'},
+        {label: 'Planning', productTo: '/ato/products/select/NIST-800-53#PL-'},
+        {label: 'Personnel Security', productTo: '/ato/products/select/NIST-800-53#PS-'},
+        {label: 'Risk Management', productTo: '/ato/products/select/NIST-800-53#RA-'},
+        {label: 'System and Services Acquisition', productTo: '/ato/products/select/NIST-800-53#SA-'},
+        {label: 'Systems and Communications Protection', productTo: '/ato/products/select/NIST-800-53#SC-'},
+        {label: 'System and Information Integrity', productTo: '/ato/products/select/NIST-800-53#SI-'},
     ]},
     {label: 'FedRAMP', productTo: '/ato/products/select/FedRAMP'},
 ];
@@ -179,7 +179,7 @@ class Navigation extends React.Component<any, NavigationState> {
                                                   const id = groupId + '_itm-' + j;
                                                   return (
                                                       <NavItem groupId={groupId} itemId={id} isActive={activeItem === id} key={id}>
-                                                          <NavLink exact={true} to={RoutesTo(l2 as any, productId)}>
+                                                          <NavLink exact={true} to={RoutesTo(l2 as any, productId) + '1'}>
                                                               {l2.label}
                                                           </NavLink>
                                                       </NavItem>
