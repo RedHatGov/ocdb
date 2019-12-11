@@ -149,7 +149,7 @@ class Navigation extends React.Component<any, NavigationState> {
                           } else {
                               var groupId = 'grp-' + i;
                               return (
-                                  <>
+                                  <React.Fragment key={groupId}>
                                   <NavExpandable title={l1.label} groupId={groupId} isActive={activeGroup === groupId} key={groupId} isExpanded>
                                       {
                                           (l1 as RouterGroup).routes.map((function(l2, j) {
@@ -166,7 +166,7 @@ class Navigation extends React.Component<any, NavigationState> {
                                   </NavExpandable>
                                   <br/>
                                   <NavGroup title="Product Specific Assets"/>
-                                  </>
+                                  </React.Fragment>
                               );
                           }
                       }))}
