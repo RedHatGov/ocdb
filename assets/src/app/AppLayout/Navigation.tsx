@@ -21,6 +21,7 @@ function IsMyRoute(obj) {
 interface MyProductRoute {
     label: string;
     productTo: string;
+    subRoutes?: MyProductRoute[];
 }
 
 function IsMyProductRoute(obj) {
@@ -73,7 +74,25 @@ const staticNavigation:(MyRouterItem)[] = [
         {label: 'FedRAMP Templates', to: '/ato/documents/fedramp-templates'},
     ]},
     {label: 'Overview', productTo: '/ato/products/select/Overview'},
-    {label: 'NIST-800-53', productTo: '/ato/products/select/NIST-800-53'},
+    {label: 'NIST-800-53', productTo: '/ato/products/select/NIST-800-53', subRoutes: [
+        {label: 'Access Control', productTo: '/ato/products/select/NIST-800-53#AC-1'},
+        {label: 'Awareness and Training', productTo: '/ato/products/select/NIST-800-53#AT-1'},
+        {label: 'Audit and Accountability', productTo: '/ato/products/select/NIST-800-53#AU-1'},
+        {label: 'Security Assessment & Authorization', productTo: '/ato/products/select/NIST-800-53#CA-1'},
+        {label: 'Configuration Management', productTo: '/ato/products/select/NIST-800-53#CM-1'},
+        {label: 'Contingency Planning', productTo: '/ato/products/select/NIST-800-53#CP-1'},
+        {label: 'Identification and Authentication', productTo: '/ato/products/select/NIST-800-53#IA-1'},
+        {label: 'Incident Response', productTo: '/ato/products/select/NIST-800-53#IR-1'},
+        {label: 'Maintenance', productTo: '/ato/products/select/NIST-800-53#MA-1'},
+        {label: 'Media Protection', productTo: '/ato/products/select/NIST-800-53#MP-1'},
+        {label: 'Physical & Environmental Protection', productTo: '/ato/products/select/NIST-800-53#PE-1'},
+        {label: 'Planning', productTo: '/ato/products/select/NIST-800-53#PE-1'},
+        {label: 'Personnel Security', productTo: '/ato/products/select/NIST-800-53#PS-1'},
+        {label: 'Risk Management', productTo: '/ato/products/select/NIST-800-53#RA-1'},
+        {label: 'System and Services Acquisition', productTo: '/ato/products/select/NIST-800-53#SA-1'},
+        {label: 'Systems and Communications Protection', productTo: '/ato/products/select/NIST-800-53#SC-1'},
+        {label: 'System and Information Integrity', productTo: '/ato/products/select/NIST-800-53#SI-1'},
+    ]},
     {label: 'FedRAMP', productTo: '/ato/products/select/FedRAMP'},
 ];
 
@@ -139,6 +158,26 @@ class Navigation extends React.Component<any, NavigationState> {
                     { this.state.links.map((function(l1, i){
                           if (IsMyRoute(l1) || IsMyProductRoute(l1)) {
                               var id = 'itm-' + i;
+                              if (IsMyProductRoute(l1) && activeItem === id && (l1 as any).subRoutes !== undefined) {
+                                  const groupId = 'grp-' + i;
+                                  return (
+                                      <NavExpandable title={l1.label} groupId={groupId} isActive={true} key={groupId} isExpanded>
+                                          {
+                                          (l1 as any).subRoutes.map((function(l2, j) {
+                                                  const id = groupId + '_itm-' + j;
+                                                  return (
+                                                      <NavItem groupId={groupId} itemId={id} isActive={activeItem === id} key={id}>
+                                                          <NavLink exact={true} to={RoutesTo(l2 as any, productId)}>
+                                                              {l2.label}
+                                                          </NavLink>
+                                                      </NavItem>
+                                                  );
+                                              }
+                                          ))
+                                          }
+                                      </NavExpandable>
+                                  )
+                              }
                               return (
                                   <NavItem itemId={id} isActive={activeItem === id} key={id}>
                                       <NavLink exact={true} to={RoutesTo((l1 as any), productId)}>
