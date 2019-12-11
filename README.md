@@ -25,3 +25,11 @@
 
 ## Developer Links
   * [Patternfly 4 documentation](https://patternfly-react.surge.sh/patternfly-4/) or [slightly different version](https://www.patternfly.org/v4/documentation/react/overview/release-notes)
+
+## Deployment info
+
+How to pull new version manually in openshift?
+
+```
+    oc pull image ocdb
+```
