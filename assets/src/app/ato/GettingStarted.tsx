@@ -12,23 +12,6 @@ import { Page, Gallery, GalleryItem,
 } from '@patternfly/react-core';
 import {  RedhatIcon } from '@patternfly/react-icons';
 
-
-const SimpleEmptyState = () => (
-    <EmptyState variant={EmptyStateVariant.full}>
-        <EmptyStateIcon icon={RedhatIcon} />
-        <Title headingLevel="h5" size="lg">
-            Get started with Red Hat products
-        </Title>
-        <EmptyStateBody>
-            ATO artifacts are available for various products. Content on this site is open source.
-        </EmptyStateBody>
-        <Button href="/ato/products" variant="primary" component="a">Product documentation</Button>
-        <EmptyStateSecondaryActions>
-            <Button href="/ato/documents" variant="link" component="a">A&amp;A Templates</Button>
-        </EmptyStateSecondaryActions>
-    </EmptyState>
-);
-
 const GettingStarted: React.FunctionComponent<any> = (props) => {
   return (
       <Page>
@@ -74,10 +57,6 @@ const GettingStarted: React.FunctionComponent<any> = (props) => {
                   </TextList>
               </TextContent>
           </PageSection>
-          <PageSection>
-              <SimpleEmptyState/>
-          </PageSection>
-
       </Page>
   );
 }
