@@ -104,7 +104,6 @@ class RTMToolbar extends React.PureComponent<RTMToolbarProps, RTMToolbarState> {
     }
 
     componentDidMount() {
-        // magic to fill in the search, when someone opens the page with the specific #anchor
         const hash = window.location.hash.replace('%20', ' ');
         if (hash.length > 1) {
             location.hash = hash;
