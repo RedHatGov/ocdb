@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Route, RouteComponentProps, Switch } from 'react-router-dom';
+import { Route, RouteComponentProps, Switch, Redirect } from 'react-router-dom';
 import { accessibleRouteChangeHandler } from '@app/utils/utils';
 import { ATODocuments } from '@app/ato/Documents/Overview';
 import { ATOTrainingPlan, ATOVulnerabilityManagementPlan, ATOFedRAMPs } from '@app/ato/Documents/Documents';
@@ -9,6 +9,7 @@ import { GettingStarted } from '@app/ato/GettingStarted';
 import { NotFound } from '@app/NotFound/NotFound';
 import DocumentTitle from 'react-document-title';
 import { LastLocationProvider, useLastLocation } from 'react-router-last-location';
+import { ProductIdOverridesMap } from '@app/ato/Products/Static'
 let routeFocusTimer: number;
 
 
@@ -125,22 +126,32 @@ const routes: IAppRoute[] = [
 ];
 
 const AppRoutes = () => (
-  <LastLocationProvider>
-    <Switch>
-      {routes.map(({ path, exact, component, title, isAsync, icon }, idx) => (
-        <RouteWithTitleUpdates
-          path={path}
-          exact={exact}
-          component={component}
-          key={idx}
-          icon={icon}
-          title={title}
-          isAsync={isAsync}
-        />
-      ))}
-      <RouteWithTitleUpdates component={NotFound} title={'404 Page Not Found'} />
-    </Switch>
-  </LastLocationProvider>
+    <LastLocationProvider>
+        <Switch>
+            {routes.map(({ path, exact, component, title, isAsync, icon }, idx) => (
+                <RouteWithTitleUpdates
+                    path={path}
+                    exact={exact}
+                    component={component}
+                    key={idx}
+                    icon={icon}
+                    title={title}
+                    isAsync={isAsync}
+                />
+            ))}
+
+            {
+                Object.keys(ProductIdOverridesMap).map((function(key, i) {
+                    return (
+                        <Route path={"/product-documents/" + key} key={i}
+                               render={() => <Redirect to={'/ato/products/' + ProductIdOverridesMap[key] + '/Overview'} /> }
+                        />
+                    )
+                }))
+            }
+            <RouteWithTitleUpdates component={NotFound} title={'404 Page Not Found'} />
+        </Switch>
+    </LastLocationProvider>
 );
 
 export { AppRoutes, routes };

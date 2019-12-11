@@ -62,6 +62,9 @@ func App() *buffalo.App {
 		app.GET("/ato/{whatever}", PatternflyReactHandler)
 		app.GET("/ato/{whatever}/{whatever}", PatternflyReactHandler)
 		app.GET("/ato/{whatever}/{whatever}/{whatever}", PatternflyReactHandler)
+
+		// Support old links from v1 site
+		app.GET("/product-documents/{whatever}", PatternflyReactHandler)
 		app.GET("/product-documents/{whatever}/nist-800-53/{whatever}/", PatternflyReactHandler)
 
 		apiV1 := app.Group("/api/v1/")

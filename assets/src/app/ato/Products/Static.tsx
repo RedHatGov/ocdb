@@ -1,4 +1,4 @@
-const idOverridesMap: {[Identifier: string]: string} = {
+export const ProductIdOverridesMap: {[Identifier: string]: string} = {
     coreos4: 'coreos-4',
     idm: 'identity-management',
     ocp3: 'openshift-container-platform-3',
@@ -10,7 +10,7 @@ const idOverridesMap: {[Identifier: string]: string} = {
 function ProductIdOverride(id) {
     // Previously our product content was published under different names.
     // If user refers to the product by old name, we fetch the new name first.
-    return idOverridesMap[id] || id;
+    return ProductIdOverridesMap[id] || id;
 }
 
 
