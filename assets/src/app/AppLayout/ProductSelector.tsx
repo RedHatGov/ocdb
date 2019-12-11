@@ -26,7 +26,7 @@ export function GetActiveProductIdFromUrl() {
 
 export function GetProductParamsFromUrl() {
     if (window.location.pathname.startsWith('/ato/products/')) {
-        return window.location.pathname.replace(/\/ato\/products\/[\w-]+(\/.*)/, '$1');
+        return window.location.pathname.replace(/\/ato\/products\/[\w-]+(\/.*)/, '$1') + window.location.hash;
     }
     return undefined;
 }
