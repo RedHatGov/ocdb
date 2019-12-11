@@ -11,7 +11,7 @@
 
 ## Developer Setup
 
-  * install golang `dnf install golang`
+  * install golang `dnf install golang libxml2-devel`
   * acquire ocdb - `go get -u -v github.com/RedHatGov/ocdb`
   * change dir to the source location - `cd ~/go/src/github.com/RedHatGov/ocdb`
   * acquire buffallo tool - `go get -v github.com/gobuffalo/buffalo/buffalo`
