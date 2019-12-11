@@ -12,7 +12,7 @@ import * as Api from '@app/lib/api'
 interface FedRAMPsState {
     rows: IRow[];
 }
-class ATOFedRAMPs extends React.Component<any, FedRAMPsState> {
+class ComponentFedRAMPTemplates extends React.Component<any, FedRAMPsState> {
     columns = ['Product', 'FedRAMP Low', 'FedRAMP Moderate', 'FedRAMP High'];
     constructor(props) {
         super(props);
@@ -28,6 +28,11 @@ class ATOFedRAMPs extends React.Component<any, FedRAMPsState> {
         }).map(function(p, idx) {
             return [
                 (<Text component="p" key={idx}>{p.name}</Text>),
+                /* (<TextContent key={idx+'t'}>
+                <center>
+                    <Text component="a" href={'/api/v1/components/' + p.key + '/fedramp/Tailored'}><FileWordIcon/> .docx</Text>
+                </center>
+                </TextContent>), */
                 (<TextContent key={idx+'l'}>
                     <Text component="a" href={'/api/v1/components/' + p.key + '/fedramp/Low'}><FileWordIcon/> .docx</Text>
                 </TextContent>),
@@ -78,4 +83,4 @@ class ATOFedRAMPs extends React.Component<any, FedRAMPsState> {
     }
 }
 
-export { ATOFedRAMPs };
+export { ComponentFedRAMPTemplates };

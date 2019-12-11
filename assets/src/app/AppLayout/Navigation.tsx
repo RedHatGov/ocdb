@@ -67,11 +67,8 @@ interface NavigationState {
 
 const staticNavigation:(MyRouterItem)[] = [
     {label: 'Getting Started', to: '/ato/getting_started'},
-    {label: 'Documents', routes: [
-        {label: 'Overview', to: '/ato/documents'},
-        {label: 'Vulnerability Management', to: '/ato/documents/vulnerability-management-plan'},
-        {label: 'Security Awareness', to: '/ato/documents/security-awareness-and-training-plan'},
-        {label: 'FedRAMP Templates', to: '/ato/documents/fedramp-templates'},
+    {label: 'FedRAMP Resources', routes: [
+        {label: 'SSP Templates', to: '/ato/documents/fedramp-templates'},
     ]},
     {label: 'Overview', productTo: '/ato/products/select/Overview'},
     {label: 'NIST-800-53', productTo: '/ato/products/select/NIST-800-53', subRoutes: [
@@ -93,7 +90,6 @@ const staticNavigation:(MyRouterItem)[] = [
         {label: 'Systems and Communications Protection', productTo: '/ato/products/select/NIST-800-53#SC-'},
         {label: 'System and Information Integrity', productTo: '/ato/products/select/NIST-800-53#SI-'},
     ]},
-    {label: 'FedRAMP', productTo: '/ato/products/select/FedRAMP'},
 ];
 
 class Navigation extends React.Component<any, NavigationState> {

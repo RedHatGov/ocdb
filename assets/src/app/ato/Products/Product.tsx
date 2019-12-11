@@ -10,7 +10,6 @@ import { Spinner } from '@patternfly/react-core/dist/esm/experimental';
 import * as Api from '@app/lib/api'
 import { Markdown } from '@app/lib/markdown';
 import { ProductIdOverride, ProductInfo } from '@app/ato/Products/Static.tsx'
-import { FedRAMPDownload } from '@app/ato/Products/FedRAMPDownload.tsx'
 import { RTMDataList } from '@app/ato/Products/DataList.tsx'
 import { Products } from '@app/ato/Products/Products'
 
@@ -42,9 +41,6 @@ class Product extends React.Component<any, ProductState> {
     }
 
     renderTabs(){
-        if (this.state.activeTabKey == 'FedRAMP') {
-            return <FedRAMPDownload productId={this.state.productId}/>
-        }
         if (this.state.activeTabKey == 'NIST-800-53' || this.state.activeTabKey == 'nist-800-53') {
             if (this.state.isLoading) {
                 return <Spinner/>

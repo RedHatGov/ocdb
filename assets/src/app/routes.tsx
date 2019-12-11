@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Route, RouteComponentProps, Switch, Redirect } from 'react-router-dom';
 import { accessibleRouteChangeHandler } from '@app/utils/utils';
 import { ATODocuments } from '@app/ato/Documents/Overview';
-import { ATOTrainingPlan, ATOVulnerabilityManagementPlan, ATOFedRAMPs } from '@app/ato/Documents/Documents';
+import { ATOTrainingPlan, ATOVulnerabilityManagementPlan, ComponentFedRAMPTemplates } from '@app/ato/Documents/Documents';
 import { Product } from '@app/ato/Products/Product';
 import { Products } from '@app/ato/Products/Products';
 import { GettingStarted } from '@app/ato/GettingStarted';
@@ -88,12 +88,12 @@ const routes: IAppRoute[] = [
         title: 'Security Awareness and Training Plan',
     },
     {
-        component: ATOFedRAMPs,
+        component: ComponentFedRAMPTemplates,
         exact: true,
         icon: null,
         label: 'FedRAMP Templates',
-        path: '/ato/documents/fedramp-templates',
-        title: 'FedrampTemplates',
+        path: '/fedramp-templates',
+        title: 'FedRAMP Templates',
     },
 
   {

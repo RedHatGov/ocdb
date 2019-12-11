@@ -22,7 +22,6 @@ interface ProductText {
 export interface ProductTemplate {
     image?: string;
     texts: {[Identifier: string]:ProductText};
-    disableFedrampDownload?: boolean,
 };
 
 const ProductInfo: {[Identifier: string]: ProductTemplate } = {
@@ -45,7 +44,6 @@ const ProductInfo: {[Identifier: string]: ProductTemplate } = {
         }
     },
     insights: {
-        disableFedrampDownload: true,
         texts: {
             'Overview': require('@app/assets/markdown/products/insights/Overview.md').default
         }
@@ -61,7 +59,6 @@ const ProductInfo: {[Identifier: string]: ProductTemplate } = {
         texts: {}
     },
     'openshift-dedicated': {
-        disableFedrampDownload: true,
         texts: {
             'Overview': require('@app/assets/markdown/products/openshift-dedicated/Overview.md').default
         }
