@@ -86,7 +86,7 @@ const staticNavigation:(MyRouterItem)[] = [
         {label: 'Maintenance', productTo: '/ato/products/select/NIST-800-53#MA-1'},
         {label: 'Media Protection', productTo: '/ato/products/select/NIST-800-53#MP-1'},
         {label: 'Physical & Environmental Protection', productTo: '/ato/products/select/NIST-800-53#PE-1'},
-        {label: 'Planning', productTo: '/ato/products/select/NIST-800-53#PE-1'},
+        {label: 'Planning', productTo: '/ato/products/select/NIST-800-53#PL-1'},
         {label: 'Personnel Security', productTo: '/ato/products/select/NIST-800-53#PS-1'},
         {label: 'Risk Management', productTo: '/ato/products/select/NIST-800-53#RA-1'},
         {label: 'System and Services Acquisition', productTo: '/ato/products/select/NIST-800-53#SA-1'},
