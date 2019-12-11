@@ -2,15 +2,7 @@ import * as React from 'react';
 import { PageSection, PageSectionVariants } from '@patternfly/react-core';
 import { Page, Gallery, GalleryItem,
          TextContent, Text,TextList, TextListItem, TextVariants,
-         Title,
-         Button,
-         EmptyState,
-         EmptyStateVariant,
-         EmptyStateIcon,
-         EmptyStateBody,
-         EmptyStateSecondaryActions
 } from '@patternfly/react-core';
-import {  RedhatIcon } from '@patternfly/react-icons';
 
 const GettingStarted: React.FunctionComponent<any> = (props) => {
   return (
