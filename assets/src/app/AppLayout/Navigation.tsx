@@ -102,6 +102,9 @@ class Navigation extends React.Component<any, NavigationState> {
         }
         var activeGroup, activeItem;
         state.links.forEach((function(l1 : MyRouterItem, i) {
+            if (activeItem) {
+                return
+            }
             if (IsMyRoute(l1) || IsMyProductRoute(l1)) {
                 if (DoesRouteMatches(l1 as any, currentUrl)) {
                     activeGroup = '';
