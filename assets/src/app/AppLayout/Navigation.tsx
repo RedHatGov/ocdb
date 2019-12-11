@@ -126,6 +126,18 @@ class Navigation extends React.Component<any, NavigationState> {
                 return
             }
             if (IsMyRoute(l1) || IsMyProductRoute(l1)) {
+                if ((l1 as any).subRoutes !== undefined) {
+                    const subroute = currentUrl + window.location.hash;
+                    (l1 as any).subRoutes.forEach((function(l2, j) {
+                        if (DoesRouteMatches(l2 as any, subroute)) {
+                            activeGroup = 'grp-' + i;
+                            activeItem = activeGroup + '_itm-' + j;
+                        }
+                    }))
+                }
+                if (activeItem) {
+                    return
+                }
                 if (DoesRouteMatches(l1 as any, currentUrl)) {
                     activeGroup = '';
                     activeItem = 'itm-' + i;
@@ -158,7 +170,7 @@ class Navigation extends React.Component<any, NavigationState> {
                     { this.state.links.map((function(l1, i){
                           if (IsMyRoute(l1) || IsMyProductRoute(l1)) {
                               var id = 'itm-' + i;
-                              if (IsMyProductRoute(l1) && activeItem === id && (l1 as any).subRoutes !== undefined) {
+                              if (IsMyProductRoute(l1) && (activeItem === id || activeGroup === 'grp-' + i) && (l1 as any).subRoutes !== undefined) {
                                   const groupId = 'grp-' + i;
                                   return (
                                       <NavExpandable title={l1.label} groupId={groupId} isActive={true} key={groupId} isExpanded>
