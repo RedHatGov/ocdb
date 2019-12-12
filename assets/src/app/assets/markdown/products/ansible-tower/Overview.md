@@ -24,8 +24,7 @@ are retained:
 | Red Hat Enterprise Linux 7.x | NSS | 5.0 | [#3070](https://csrc.nist.gov/Projects/Cryptographic-Module-Validation-Program/Certificate/3070) | ACTIVE | 2/7/2023 |
 
 #### Known Issues with FIPS 140-2 Enablement
-Currently Ansible Tower is not supported on a FIPS-enabled operating system. Contact
-your Red Hat representative for roadmap information.
+As of Ansible Tower version 3.4, Tower can run on systems where FIPS mode is enabled, with some limitations. Refer to [the release notes](https://docs.ansible.com/ansible-tower/3.4.0/html/installandreference/install_notes_reqs.html#installing-tower-on-systems-with-fips-mode-enabled) for more information.
 
 ### USGv6 / IPv6
 Ansible Tower does not have any US Government IPv6 certifications.
