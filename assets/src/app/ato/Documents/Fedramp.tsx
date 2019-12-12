@@ -6,7 +6,6 @@ import {
 } from '@patternfly/react-core';
 import { FileWordIcon } from '@patternfly/react-icons'
 import { IRow, Table, TableBody, TableHeader, TableVariant } from '@patternfly/react-table'
-import { ProductInfo } from '@app/ato/Products/Static.tsx'
 import * as Api from '@app/lib/api'
 
 interface FedRAMPsState {
@@ -23,9 +22,7 @@ class ComponentFedRAMPTemplates extends React.Component<any, FedRAMPsState> {
         }
     }
     buildRows(products) {
-        this.setState({rows: products.filter(function(p) {
-            return ProductInfo[p.key] == undefined || ProductInfo[p.key].disableFedrampDownload != true
-        }).map(function(p, idx) {
+        this.setState({rows: products.map(function(p, idx) {
             return [
                 (<Text component="p" key={idx}>{p.name}</Text>),
                 /* (<TextContent key={idx+'t'}>
