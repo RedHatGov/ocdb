@@ -5,7 +5,7 @@ import { Flex, FlexItem } from '@patternfly/react-core';
 import VMP from '@app/assets/markdown/vulnerability-management-plan.md';
 import TP from '@app/assets/markdown/training-plan.md';
 import { Markdown } from '@app/lib/markdown';
-import { ATOFedRAMPs } from '@app/ato/Documents/Fedramp';
+import { ComponentFedRAMPTemplates } from '@app/ato/Documents/Fedramp';
 
 const Document: React.FunctionComponent<any> = (props) => {
     var textMod = {modifier: 'flex-2' as 'flex-default', breakpoint: 'md' as 'md'};
@@ -38,4 +38,4 @@ const ATOTrainingPlan: React.FunctionComponent<any> = (props) => {
     return (<Document><TP/></Document>);
 }
 
-export { ATOVulnerabilityManagementPlan, ATOTrainingPlan, ATOFedRAMPs };
+export { ATOVulnerabilityManagementPlan, ATOTrainingPlan, ComponentFedRAMPTemplates };

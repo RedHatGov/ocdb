@@ -32,6 +32,7 @@ const ATODocuments: React.FunctionComponent<any> = (props) => {
 
             <PageSection>
                 <Gallery gutter="md">
+                    
                     <GalleryItem>
                         <Card isHoverable>
                             <CardHeader>
@@ -60,19 +61,6 @@ const ATODocuments: React.FunctionComponent<any> = (props) => {
                         </Card>
                     </GalleryItem>
 
-                    <GalleryItem>
-                        <Card isHoverable>
-                            <CardHeader>
-                                <GhostIcon/>&nbsp;
-                                <NavLink exact={true} to="/ato/documents/fedramp-templates">
-                                    FedRAMP Templates
-                                </NavLink>
-                            </CardHeader>
-                            <CardBody>
-                                Automatically generated FedRAMP templates are available.
-                            </CardBody>
-                        </Card>
-                    </GalleryItem>
                 </Gallery>
             </PageSection>
 
