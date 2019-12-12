@@ -68,7 +68,7 @@ interface NavigationState {
 const staticNavigation:(MyRouterItem)[] = [
     {label: 'Getting Started', to: '/ato/getting_started'},
     {label: 'FedRAMP Resources', routes: [
-        {label: 'SSP Templates', to: '/ato/documents/fedramp-templates'},
+        {label: 'SSP Templates', to: '/ato/fedramp-templates'},
     ]},
     {label: 'Overview', productTo: '/ato/products/select/Overview'},
     {label: 'NIST-800-53', productTo: '/ato/products/select/NIST-800-53', subRoutes: [

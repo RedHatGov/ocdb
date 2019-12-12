@@ -92,7 +92,7 @@ const routes: IAppRoute[] = [
         exact: true,
         icon: null,
         label: 'FedRAMP Templates',
-        path: '/fedramp-templates',
+        path: '/ato/fedramp-templates',
         title: 'FedRAMP Templates',
     },
 
