@@ -39,7 +39,7 @@ class SimpleAboutModal extends React.Component<{}, AboutState> {
                 <AboutModal
                     isOpen={isModalOpen}
                     onClose={() => this.handleModalToggle()}
-                    trademark="Copyright © 2019 Red Hat, Inc."
+                    trademark="Copyright © 2019-2020 Red Hat, Inc."
                     brandImageSrc={redhatLogo}
                     brandImageAlt="Red Hat Logo"
                     productName="ATO Pathways"
