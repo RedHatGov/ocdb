@@ -21,6 +21,6 @@ func ScheduleRefresh() {
 	w.PerformIn(worker.Job{
 		Queue:   "masonry",
 		Handler: "refresh_masonry",
-	}, 6*time.Hour)
+	}, time.Hour)
 
 }
