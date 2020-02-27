@@ -25,7 +25,6 @@ const ProductGalleryItem: React.FunctionComponent<any> = (props) => {
     return (
         <GalleryItem>
             <NavLink exact={true} to={"/ato/products/" + productId + props['params']}>
-                <label>{productId}</label>
                 <Card isHoverable>
                     <CardHead>
                         <img src={logo} alt={"logo of " + productId} />
