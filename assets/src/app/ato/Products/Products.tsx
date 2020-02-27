@@ -24,7 +24,7 @@ const ProductGalleryItem: React.FunctionComponent<any> = (props) => {
     var logo = (ProductInfo[productId] && ProductInfo[productId].image) || redhatLogo;
     return (
         <GalleryItem>
-            <NavLink exact={true} to={"/ato/products/" + productId + props['params']}>
+            <NavLink exact={true} aria-label={productId} to={"/ato/products/" + productId + props['params']}>
                 <Card isHoverable>
                     <CardHead>
                         <img src={logo} alt={"logo of " + productId} />
