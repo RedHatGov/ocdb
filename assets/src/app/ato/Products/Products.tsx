@@ -28,7 +28,7 @@ const ProductGalleryItem: React.FunctionComponent<any> = (props) => {
                 <label>{productId}</label>
                 <Card isHoverable>
                     <CardHead>
-                        <img src={logo} />
+                        <img src={logo} alt={"logo of " + productId} />
                     </CardHead>
                     <CardHeader>{props['product']['name']}</CardHeader>
                     <CardBody><Text component="small">{props['product']['satisfies'].length} controls defined</Text></CardBody>
