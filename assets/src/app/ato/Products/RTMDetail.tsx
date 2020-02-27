@@ -20,7 +20,7 @@ const RTMDetail = React.memo((props: RTMDetailProps) => {
             <TextContent>
                 <div style={{float: 'right'}}>
                     <Tooltip position={TooltipPosition.top} content={"Detailed information about " + c.Key + " is available at NVD (National Vulnerability Database)."}>
-                        <Text component="a" href={"https://nvd.nist.gov/800-53/Rev4/control/" + key + (enhancement ? ("#enhancement-" + enhancement) : "")} target="_new">
+                        <Text component="a" href={"https://nvd.nist.gov/800-53/Rev4/control/" + key + (enhancement ? ("#enhancement-" + enhancement) : "")} target="_new" aria-label="Detailed information published by NIST">
                             <InfoAltIcon alt="Detailed Information at NVD (National Vulnerability Database)" />
                         </Text>
                     </Tooltip>
