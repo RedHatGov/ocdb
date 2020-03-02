@@ -15,18 +15,18 @@ func init() {
 
 func SetUpJob(w worker.Worker, name string, job Job) {
 	w.Register(name, func(args worker.Args) error {
-		RescheduleJob(name)
+		RescheduleJob(name, time.Hour)
 		job()
 		return nil
 	})
-	RescheduleJob("refresh_masonry")
+	RescheduleJob("refresh_masonry", time.Second)
 }
 
-func RescheduleJob(handlerName string) {
+func RescheduleJob(handlerName string, period time.Duration) {
 	w := App().Worker
 	w.PerformIn(worker.Job{
 		Queue:   "masonry",
 		Handler: handlerName,
-	}, time.Hour)
+	}, period)
 
 }
