@@ -9,18 +9,18 @@ import (
 func init() {
 	w := App().Worker
 	w.Register("refresh_masonry", func(args worker.Args) error {
-		RescheduleJob()
+		RescheduleJob("refresh_masonry")
 		masonry.Refresh()
 		return nil
 	})
-	RescheduleJob()
+	RescheduleJob("refresh_masonry")
 }
 
-func RescheduleJob() {
+func RescheduleJob(handlerName string) {
 	w := App().Worker
 	w.PerformIn(worker.Job{
 		Queue:   "masonry",
-		Handler: "refresh_masonry",
+		Handler: handlerName,
 	}, time.Hour)
 
 }
