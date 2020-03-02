@@ -15,9 +15,8 @@ ADD . .
 RUN go get ./...
 RUN buffalo build --ldflags '-linkmode external -extldflags "-static -lz -llzma -licuuc -licudata -ldl -lstdc++ -lm"' -o /bin/app
 
-FROM alpine
-RUN apk add --no-cache bash git
-RUN apk add --no-cache ca-certificates
+FROM fedora:latest
+RUN dnf install -y bash git ca-certificates && dnf clean all
 
 WORKDIR /bin/
 
