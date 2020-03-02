@@ -9,14 +9,14 @@ import (
 func init() {
 	w := App().Worker
 	w.Register("refresh_masonry", func(args worker.Args) error {
-		ScheduleRefresh()
+		RescheduleJob()
 		masonry.Refresh()
 		return nil
 	})
-	ScheduleRefresh()
+	RescheduleJob()
 }
 
-func ScheduleRefresh() {
+func RescheduleJob() {
 	w := App().Worker
 	w.PerformIn(worker.Job{
 		Queue:   "masonry",
