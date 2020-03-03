@@ -8,6 +8,7 @@ import (
 	"github.com/unrolled/secure"
 
 	"github.com/RedHatGov/ocdb/actions/api"
+	"github.com/RedHatGov/ocdb/pkg/cac"
 	"github.com/RedHatGov/ocdb/pkg/static"
 	"github.com/RedHatGov/ocdb/pkg/utils"
 	csrf "github.com/gobuffalo/mw-csrf"
@@ -74,6 +75,7 @@ func App() *buffalo.App {
 		apiV1.GET("/components/{component_id}/controls", api.ComponentControlsHandler)
 		apiV1.GET("/components/{component_id}/fedramp/{level}", api.ComponentFedrampHandler)
 
+		app.ServeFiles("/cac/", cac.HttpFiles())
 		app.ServeFiles("/", static.AssetsBox) // serve files from the public directory
 		utils.SetLogger(app.Logger)
 	}
