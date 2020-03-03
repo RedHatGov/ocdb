@@ -11,6 +11,10 @@ func SetLogger(logger buffalo.Logger) {
 type LogWriter struct{}
 
 func (LogWriter) Write(p []byte) (n int, err error) {
+	length := len(p)
+	if p[length-1] == '\n' {
+		p = p[:length-1]
+	}
 	log.Debug(string(p))
-	return len(p), nil
+	return length, nil
 }
