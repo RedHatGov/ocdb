@@ -9,6 +9,7 @@ import (
 
 	"github.com/RedHatGov/ocdb/actions/api"
 	"github.com/RedHatGov/ocdb/pkg/static"
+	"github.com/RedHatGov/ocdb/pkg/utils"
 	csrf "github.com/gobuffalo/mw-csrf"
 	i18n "github.com/gobuffalo/mw-i18n"
 	"github.com/gobuffalo/packr/v2"
@@ -74,6 +75,7 @@ func App() *buffalo.App {
 		apiV1.GET("/components/{component_id}/fedramp/{level}", api.ComponentFedrampHandler)
 
 		app.ServeFiles("/", static.AssetsBox) // serve files from the public directory
+		utils.SetLogger(app.Logger)
 	}
 
 	return app
