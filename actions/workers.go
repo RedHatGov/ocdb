@@ -1,6 +1,7 @@
 package actions
 
 import (
+	"github.com/RedHatGov/ocdb/pkg/cac"
 	"github.com/RedHatGov/ocdb/pkg/masonry"
 	"github.com/gobuffalo/buffalo/worker"
 	"time"
@@ -11,6 +12,7 @@ type Job func()
 func init() {
 	w := App().Worker
 	SetUpJob(w, "refresh_masonry", masonry.Refresh)
+	SetUpJob(w, "refresh_cac", cac.Refresh)
 }
 
 func SetUpJob(w worker.Worker, name string, job Job) {
@@ -19,7 +21,7 @@ func SetUpJob(w worker.Worker, name string, job Job) {
 		job()
 		return nil
 	})
-	RescheduleJob("refresh_masonry", time.Second)
+	RescheduleJob(name, time.Second)
 }
 
 func RescheduleJob(handlerName string, period time.Duration) {
