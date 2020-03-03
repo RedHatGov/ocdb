@@ -36,9 +36,8 @@ func Refresh() {
 func make() error {
 	makeCmd := exec.Command("make")
 	makeCmd.Dir = contentCache + "/build/"
-	makeCmdOutput := &bytes.Buffer{}
 	makeCmdErr := &bytes.Buffer{}
-	makeCmd.Stdout = makeCmdOutput
+	makeCmd.Stdout = &utils.LogWriter{}
 	makeCmd.Stderr = makeCmdErr
 
 	err := makeCmd.Run()
