@@ -6,14 +6,13 @@ import (
 )
 
 var instance *common.Workspace
-var once sync.Once
 var mux sync.Mutex
 
 // GetInstance gets memory representation of the masonry cache
 func GetInstance() *common.Workspace {
-	once.Do(func() {
+	if instance == nil {
 		Refresh()
-	})
+	}
 	return instance
 }
 
