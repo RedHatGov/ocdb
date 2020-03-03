@@ -7,6 +7,7 @@ import (
 
 var instance *common.Workspace
 var once sync.Once
+var mux sync.Mutex
 
 // GetInstance gets memory representation of the masonry cache
 func GetInstance() *common.Workspace {
@@ -18,6 +19,8 @@ func GetInstance() *common.Workspace {
 
 // Refresh function refreshes masonry data
 func Refresh() {
+	mux.Lock()
+	defer mux.Unlock()
 	data, errors := build()
 	if errors != nil {
 		panic(errors)
