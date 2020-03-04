@@ -9,6 +9,7 @@ import {
 import { NavLink, withRouter } from 'react-router-dom';
 import { GetActiveProductIdFromUrl } from '@app/AppLayout/ProductSelector'
 import { BaseRoute, BaseRouteLink, BasicRoute, ProductRoute, RouterGroup } from '@app/AppLayout/Routes'
+import { ProductInfo } from '@app/ato/Products/Static'
 
 interface NavigationState {
     activeGroup?: string;
@@ -60,9 +61,25 @@ class Navigation extends React.Component<any, NavigationState> {
     }
 
     static links() {
-        return staticNavigation;
+        return staticNavigation.concat(Navigation.productSpecificLinks())
     }
 
+    static productSpecificLinks() {
+        var res = [] as BaseRoute[]
+        var productId = GetActiveProductIdFromUrl();
+        if (productId !== undefined) {
+            var info = ProductInfo[productId]
+            if (info !== undefined) {
+                Object.keys(info.texts).forEach((key) => {
+                    if (key != "Overview") {
+                        res.push(new BasicRoute(key, '/ato/products/' + productId + '/' + key))
+                    }
+                })
+            }
+        }
+
+        return res;
+    }
 
     static getDerivedStateFromProps(props, state) {
         var currentUrl = window.location.pathname;
