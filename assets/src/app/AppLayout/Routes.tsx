@@ -1,53 +1,59 @@
-import * as React from 'react';
-
-interface BaseRouteInterface {
+abstract class BaseRoute {
     label: string;
+    abstract isGroup(): boolean;
+    constructor(label) { this.label = label; }
 }
 
-interface MyRoute extends BaseRouteInterface {
-    to: string;
+class BasicRoute extends BaseRoute {
+    to: string
+    isGroup(): boolean { return false };
+    constructor(label, to) {
+        super(label);
+        this.to = to;
+    }
 }
 
-function IsMyRoute(obj) {
-    return obj.to !== undefined
-}
-
-interface MyProductRoute extends BaseRouteInterface {
+class ProductRoute extends BaseRoute {
     productTo: string;
-    subRoutes?: MyProductRoute[];
+    subRoutes?: ProductRoute[];
+
+    isGroup(): boolean { return false };
+    constructor(label, productTo, subRoutes?) {
+        super(label);
+        this.productTo = productTo;
+        this.subRoutes = subRoutes;
+    }
+}
+type FinalRouteInterface = BasicRoute | ProductRoute;
+
+class RouterGroup extends BaseRoute {
+    routes: BasicRoute[];
+    isGroup(): boolean { return true };
+    constructor(label, routes) {
+        super(label);
+        this.routes = routes;
+    }
 }
 
-type FinalRouteInterface = MyRoute | MyProductRoute;
-
-function IsMyProductRoute(obj) {
-    return obj.productTo !== undefined
-}
-
-interface RouterGroup extends BaseRouteInterface {
-    routes: MyRoute[];
-}
-
-type MyRouterItem = FinalRouteInterface | RouterGroup;
-
-function DoesRouteMatches(route: (FinalRouteInterface), url : string) {
-    if (IsMyRoute(route)) {
-        return (route as MyRoute).to == url
+function DoesRouteMatches(route: FinalRouteInterface, url : string) {
+    if (route.constructor.name == "BasicRoute") {
+        return (route as BasicRoute).to == url
     } else {
-        const matcher = (route as MyProductRoute).productTo.replace('select', '[\\w-]+');
+        const matcher = (route as ProductRoute).productTo.replace('select', '[\\w-]+');
         return url.search(matcher) != -1;
     }
 }
 
 function RoutesTo(route : (FinalRouteInterface), productId:string|undefined) {
-    if (IsMyRoute(route)) {
-        return (route as MyRoute).to
+    if (route.constructor.name == "BasicRoute") {
+        return (route as BasicRoute).to
     } else {
         if (productId) {
-            return (route as MyProductRoute).productTo.replace('select', productId)
+            return (route as ProductRoute).productTo.replace('select', productId)
         } else {
-            return (route as MyProductRoute).productTo
+            return (route as ProductRoute).productTo
         }
     }
 }
 
-export { MyRouterItem, RoutesTo, IsMyRoute, IsMyProductRoute, DoesRouteMatches, RouterGroup, FinalRouteInterface }
+export { BaseRoute, BasicRoute, ProductRoute, RoutesTo, DoesRouteMatches, RouterGroup }

@@ -8,42 +8,42 @@ import {
 } from '@patternfly/react-core';
 import { NavLink, withRouter } from 'react-router-dom';
 import { GetActiveProductIdFromUrl } from '@app/AppLayout/ProductSelector'
-import { MyRouterItem, RoutesTo, IsMyRoute, IsMyProductRoute, DoesRouteMatches, RouterGroup } from '@app/AppLayout/Routes'
+import { BaseRoute, BasicRoute, ProductRoute, RoutesTo, DoesRouteMatches, RouterGroup } from '@app/AppLayout/Routes'
 
 interface NavigationState {
     activeGroup?: string;
     activeItem?: string;
-    links: (MyRouterItem)[];
+    links: BaseRoute[];
     lastUrl?: string;
     productId?: string;
 }
 
 
-const staticNavigation:(MyRouterItem)[] = [
-    {label: 'Getting Started', to: '/ato/getting_started'},
-    {label: 'FedRAMP Resources', routes: [
-        {label: 'SSP Templates', to: '/ato/fedramp-templates'},
-    ]},
-    {label: 'Overview', productTo: '/ato/products/select/Overview'},
-    {label: 'NIST-800-53', productTo: '/ato/products/select/NIST-800-53', subRoutes: [
-        {label: 'Access Control', productTo: '/ato/products/select/NIST-800-53#AC-'},
-        {label: 'Awareness and Training', productTo: '/ato/products/select/NIST-800-53#AT-'},
-        {label: 'Audit and Accountability', productTo: '/ato/products/select/NIST-800-53#AU-'},
-        {label: 'Security Assessment & Authorization', productTo: '/ato/products/select/NIST-800-53#CA-'},
-        {label: 'Configuration Management', productTo: '/ato/products/select/NIST-800-53#CM-'},
-        {label: 'Contingency Planning', productTo: '/ato/products/select/NIST-800-53#CP-'},
-        {label: 'Identification and Authentication', productTo: '/ato/products/select/NIST-800-53#IA-'},
-        {label: 'Incident Response', productTo: '/ato/products/select/NIST-800-53#IR-'},
-        {label: 'Maintenance', productTo: '/ato/products/select/NIST-800-53#MA-'},
-        {label: 'Media Protection', productTo: '/ato/products/select/NIST-800-53#MP-'},
-        {label: 'Physical & Environmental Protection', productTo: '/ato/products/select/NIST-800-53#PE-'},
-        {label: 'Planning', productTo: '/ato/products/select/NIST-800-53#PL-'},
-        {label: 'Personnel Security', productTo: '/ato/products/select/NIST-800-53#PS-'},
-        {label: 'Risk Management', productTo: '/ato/products/select/NIST-800-53#RA-'},
-        {label: 'System and Services Acquisition', productTo: '/ato/products/select/NIST-800-53#SA-'},
-        {label: 'Systems and Communications Protection', productTo: '/ato/products/select/NIST-800-53#SC-'},
-        {label: 'System and Information Integrity', productTo: '/ato/products/select/NIST-800-53#SI-'},
-    ]},
+const staticNavigation:BaseRoute[] = [
+    new BasicRoute('Getting Started', '/ato/getting_started'),
+    new RouterGroup('FedRAMP Resources', [
+        new BasicRoute('SSP Templates', '/ato/fedramp-templates'),
+    ]),
+    new ProductRoute('Overview', '/ato/products/select/Overview'),
+    new ProductRoute('NIST-800-53', '/ato/products/select/NIST-800-53', [
+        new ProductRoute('Access Control', '/ato/products/select/NIST-800-53#AC-'),
+        new ProductRoute('Awareness and Training', '/ato/products/select/NIST-800-53#AT-'),
+        new ProductRoute('Audit and Accountability', '/ato/products/select/NIST-800-53#AU-'),
+        new ProductRoute('Security Assessment & Authorization', '/ato/products/select/NIST-800-53#CA-'),
+        new ProductRoute('Configuration Management', '/ato/products/select/NIST-800-53#CM-'),
+        new ProductRoute('Contingency Planning', '/ato/products/select/NIST-800-53#CP-'),
+        new ProductRoute('Identification and Authentication', '/ato/products/select/NIST-800-53#IA-'),
+        new ProductRoute('Incident Response', '/ato/products/select/NIST-800-53#IR-'),
+        new ProductRoute('Maintenance', '/ato/products/select/NIST-800-53#MA-'),
+        new ProductRoute('Media Protection', '/ato/products/select/NIST-800-53#MP-'),
+        new ProductRoute('Physical & Environmental Protection', '/ato/products/select/NIST-800-53#PE-'),
+        new ProductRoute('Planning', '/ato/products/select/NIST-800-53#PL-'),
+        new ProductRoute('Personnel Security', '/ato/products/select/NIST-800-53#PS-'),
+        new ProductRoute('Risk Management', '/ato/products/select/NIST-800-53#RA-'),
+        new ProductRoute('System and Services Acquisition', '/ato/products/select/NIST-800-53#SA-'),
+        new ProductRoute('Systems and Communications Protection', '/ato/products/select/NIST-800-53#SC-'),
+        new ProductRoute('System and Information Integrity', '/ato/products/select/NIST-800-53#SI-'),
+    ]),
 ];
 
 class Navigation extends React.Component<any, NavigationState> {
@@ -71,11 +71,11 @@ class Navigation extends React.Component<any, NavigationState> {
             return null;
         }
         var activeGroup, activeItem;
-        state.links.forEach((function(l1 : MyRouterItem, i) {
+        state.links.forEach((function(l1 : BaseRoute, i) {
             if (activeItem) {
                 return
             }
-            if (IsMyRoute(l1) || IsMyProductRoute(l1)) {
+            if (!l1.isGroup()) {
                 if ((l1 as any).subRoutes !== undefined) {
                     const subroute = currentUrl + window.location.hash;
                     (l1 as any).subRoutes.forEach((function(l2, j) {
@@ -94,7 +94,7 @@ class Navigation extends React.Component<any, NavigationState> {
                 }
             } else {
                 (l1 as RouterGroup).routes.forEach((function(l2, j) {
-                    if (IsMyRoute(l2) || IsMyProductRoute(l2)) {
+                    if (!l2.isGroup()) {
                         if (DoesRouteMatches(l2 as any, currentUrl)) {
                             activeGroup = 'grp-' + i;
                             activeItem = activeGroup + '_itm-' + j;
@@ -118,9 +118,9 @@ class Navigation extends React.Component<any, NavigationState> {
             <Nav onSelect={this.onSelect} theme="dark">
                 <NavList>
                     { this.state.links.map((function(l1, i){
-                          if (IsMyRoute(l1) || IsMyProductRoute(l1)) {
+                          if (!l1.isGroup()) {
                               var id = 'itm-' + i;
-                              if (IsMyProductRoute(l1) && (activeItem === id || activeGroup === 'grp-' + i) && (l1 as any).subRoutes !== undefined && productId != 'select') {
+                              if (l1.constructor.name == "ProductRoute" && (activeItem === id || activeGroup === 'grp-' + i) && (l1 as any).subRoutes !== undefined && productId != 'select') {
                                   const groupId = 'grp-' + i;
                                   return (
                                       <NavExpandable title={l1.label} groupId={groupId} isActive={true} key={groupId} isExpanded>
