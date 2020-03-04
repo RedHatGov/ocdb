@@ -3,23 +3,35 @@ abstract class BaseRoute {
     constructor(public label: string) { this.label = label; }
 }
 
-class BasicRoute extends BaseRoute {
+abstract class BaseRouteLink extends BaseRoute {
     isGroup(): boolean { return false };
+    abstract routesTo(productId?: string): string;
+}
+
+class BasicRoute extends BaseRouteLink {
     constructor(label: string, public to: string) {
         super(label);
         this.to = to;
     }
+    routesTo(_unused?:string): string {
+        return this.to;
+    }
 }
 
-class ProductRoute extends BaseRoute {
-    isGroup(): boolean { return false };
+class ProductRoute extends BaseRouteLink {
     constructor(label: string, public productTo: string, public subRoutes?: ProductRoute[]) {
         super(label);
         this.productTo = productTo;
         this.subRoutes = subRoutes;
     }
+    routesTo(productId?:string): string {
+        if (productId) {
+            return this.productTo.replace('select', productId)
+        } else {
+            return this.productTo
+        }
+    }
 }
-type FinalRouteInterface = BasicRoute | ProductRoute;
 
 class RouterGroup extends BaseRoute {
     isGroup(): boolean { return true };
@@ -29,7 +41,7 @@ class RouterGroup extends BaseRoute {
     }
 }
 
-function DoesRouteMatches(route: FinalRouteInterface, url : string) {
+function DoesRouteMatches(route: BaseRouteLink, url : string) {
     if (route.constructor.name == "BasicRoute") {
         return (route as BasicRoute).to == url
     } else {
@@ -38,16 +50,4 @@ function DoesRouteMatches(route: FinalRouteInterface, url : string) {
     }
 }
 
-function RoutesTo(route : (FinalRouteInterface), productId:string|undefined) {
-    if (route.constructor.name == "BasicRoute") {
-        return (route as BasicRoute).to
-    } else {
-        if (productId) {
-            return (route as ProductRoute).productTo.replace('select', productId)
-        } else {
-            return (route as ProductRoute).productTo
-        }
-    }
-}
-
-export { BaseRoute, BasicRoute, ProductRoute, RoutesTo, DoesRouteMatches, RouterGroup }
+export { BaseRoute, BaseRouteLink, BasicRoute, ProductRoute, DoesRouteMatches, RouterGroup }

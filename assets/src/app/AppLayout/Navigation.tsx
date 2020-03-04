@@ -8,7 +8,7 @@ import {
 } from '@patternfly/react-core';
 import { NavLink, withRouter } from 'react-router-dom';
 import { GetActiveProductIdFromUrl } from '@app/AppLayout/ProductSelector'
-import { BaseRoute, BasicRoute, ProductRoute, RoutesTo, DoesRouteMatches, RouterGroup } from '@app/AppLayout/Routes'
+import { BaseRoute, BaseRouteLink, BasicRoute, ProductRoute, DoesRouteMatches, RouterGroup } from '@app/AppLayout/Routes'
 
 interface NavigationState {
     activeGroup?: string;
@@ -119,6 +119,7 @@ class Navigation extends React.Component<any, NavigationState> {
                 <NavList>
                     { this.state.links.map((function(l1, i){
                           if (!l1.isGroup()) {
+                              var l = (l1 as BaseRouteLink);
                               var id = 'itm-' + i;
                               if (l1.constructor.name == "ProductRoute" && (activeItem === id || activeGroup === 'grp-' + i) && (l1 as any).subRoutes !== undefined && productId != 'select') {
                                   const groupId = 'grp-' + i;
@@ -129,7 +130,7 @@ class Navigation extends React.Component<any, NavigationState> {
                                                   const id = groupId + '_itm-' + j;
                                                   return (
                                                       <NavItem groupId={groupId} itemId={id} isActive={activeItem === id} key={id}>
-                                                          <NavLink exact={true} to={RoutesTo(l2 as any, productId) + '1'}>
+                                                          <NavLink exact={true} to={l2.routesTo(productId) + '1'}>
                                                               {l2.label}
                                                           </NavLink>
                                                       </NavItem>
@@ -142,7 +143,7 @@ class Navigation extends React.Component<any, NavigationState> {
                               }
                               return (
                                   <NavItem itemId={id} isActive={activeItem === id} key={id}>
-                                      <NavLink exact={true} to={RoutesTo((l1 as any), productId)}>
+                                      <NavLink exact={true} to={l.routesTo(productId)}>
                                           {l1.label}
                                       </NavLink>
                                   </NavItem>
