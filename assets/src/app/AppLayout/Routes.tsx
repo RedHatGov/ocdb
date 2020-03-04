@@ -1,24 +1,19 @@
 abstract class BaseRoute {
-    label: string;
     abstract isGroup(): boolean;
-    constructor(label) { this.label = label; }
+    constructor(public label: string) { this.label = label; }
 }
 
 class BasicRoute extends BaseRoute {
-    to: string
     isGroup(): boolean { return false };
-    constructor(label, to) {
+    constructor(label: string, public to: string) {
         super(label);
         this.to = to;
     }
 }
 
 class ProductRoute extends BaseRoute {
-    productTo: string;
-    subRoutes?: ProductRoute[];
-
     isGroup(): boolean { return false };
-    constructor(label, productTo, subRoutes?) {
+    constructor(label: string, public productTo: string, public subRoutes?: ProductRoute[]) {
         super(label);
         this.productTo = productTo;
         this.subRoutes = subRoutes;
@@ -27,9 +22,8 @@ class ProductRoute extends BaseRoute {
 type FinalRouteInterface = BasicRoute | ProductRoute;
 
 class RouterGroup extends BaseRoute {
-    routes: BasicRoute[];
     isGroup(): boolean { return true };
-    constructor(label, routes) {
+    constructor(label: string, public routes: BasicRoute[]) {
         super(label);
         this.routes = routes;
     }
