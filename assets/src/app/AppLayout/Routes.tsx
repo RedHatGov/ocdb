@@ -7,6 +7,7 @@ abstract class BaseRouteLink extends BaseRoute {
     isGroup(): boolean { return false };
     abstract routesTo(productId?: string): string;
     abstract matches(url: string): boolean;
+    abstract hasChilds(): boolean;
 }
 
 class BasicRoute extends BaseRouteLink {
@@ -20,6 +21,7 @@ class BasicRoute extends BaseRouteLink {
     matches(url: string): boolean {
         return this.to == url
     }
+    hasChilds(): boolean { return false; }
 }
 
 class ProductRoute extends BaseRouteLink {
@@ -39,6 +41,7 @@ class ProductRoute extends BaseRouteLink {
         const matcher = this.productTo.replace('select', '[\\w-]+');
         return url.search(matcher) != -1;
     }
+    hasChilds(): boolean { return this.subRoutes !== undefined }
 }
 
 class RouterGroup extends BaseRoute {

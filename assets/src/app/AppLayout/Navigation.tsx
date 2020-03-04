@@ -77,7 +77,7 @@ class Navigation extends React.Component<any, NavigationState> {
             }
             if (!l1.isGroup()) {
                 var l = l1 as BaseRouteLink;
-                if ((l1 as any).subRoutes !== undefined) {
+                if (l.hasChilds()) {
                     const subroute = currentUrl + window.location.hash;
                     (l1 as any).subRoutes.forEach((function(l2, j) {
                         if (l2.matches(subroute)) {
@@ -122,7 +122,7 @@ class Navigation extends React.Component<any, NavigationState> {
                           if (!l1.isGroup()) {
                               var l = (l1 as BaseRouteLink);
                               var id = 'itm-' + i;
-                              if (l1.constructor.name == "ProductRoute" && (activeItem === id || activeGroup === 'grp-' + i) && (l1 as any).subRoutes !== undefined && productId != 'select') {
+                              if (l1.constructor.name == "ProductRoute" && (activeItem === id || activeGroup === 'grp-' + i) && l.hasChilds() && productId != 'select') {
                                   const groupId = 'grp-' + i;
                                   return (
                                       <NavExpandable title={l1.label} groupId={groupId} isActive={true} key={groupId} isExpanded>
