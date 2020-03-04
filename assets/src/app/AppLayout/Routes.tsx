@@ -17,6 +17,8 @@ interface MyProductRoute extends BaseRouteInterface {
     subRoutes?: MyProductRoute[];
 }
 
+type FinalRouteInterface = MyRoute | MyProductRoute;
+
 function IsMyProductRoute(obj) {
     return obj.productTo !== undefined
 }
@@ -25,9 +27,9 @@ interface RouterGroup extends BaseRouteInterface {
     routes: MyRoute[];
 }
 
-type MyRouterItem = MyRoute | MyProductRoute | RouterGroup;
+type MyRouterItem = FinalRouteInterface | RouterGroup;
 
-function DoesRouteMatches(route: (MyRoute | MyProductRoute), url : string) {
+function DoesRouteMatches(route: (FinalRouteInterface), url : string) {
     if (IsMyRoute(route)) {
         return (route as MyRoute).to == url
     } else {
@@ -36,7 +38,7 @@ function DoesRouteMatches(route: (MyRoute | MyProductRoute), url : string) {
     }
 }
 
-function RoutesTo(route : (MyRoute | MyProductRoute), productId:string|undefined) {
+function RoutesTo(route : (FinalRouteInterface), productId:string|undefined) {
     if (IsMyRoute(route)) {
         return (route as MyRoute).to
     } else {
@@ -48,4 +50,4 @@ function RoutesTo(route : (MyRoute | MyProductRoute), productId:string|undefined
     }
 }
 
-export { MyRouterItem, RoutesTo, IsMyRoute, IsMyProductRoute, DoesRouteMatches, RouterGroup }
+export { MyRouterItem, RoutesTo, IsMyRoute, IsMyProductRoute, DoesRouteMatches, RouterGroup, FinalRouteInterface }
