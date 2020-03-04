@@ -6,6 +6,7 @@ abstract class BaseRoute {
 abstract class BaseRouteLink extends BaseRoute {
     isGroup(): boolean { return false };
     abstract routesTo(productId?: string): string;
+    abstract matches(url: string): boolean;
 }
 
 class BasicRoute extends BaseRouteLink {
@@ -15,6 +16,9 @@ class BasicRoute extends BaseRouteLink {
     }
     routesTo(_unused?:string): string {
         return this.to;
+    }
+    matches(url: string): boolean {
+        return this.to == url
     }
 }
 
@@ -31,6 +35,10 @@ class ProductRoute extends BaseRouteLink {
             return this.productTo
         }
     }
+    matches(url: string): boolean {
+        const matcher = this.productTo.replace('select', '[\\w-]+');
+        return url.search(matcher) != -1;
+    }
 }
 
 class RouterGroup extends BaseRoute {
@@ -41,13 +49,4 @@ class RouterGroup extends BaseRoute {
     }
 }
 
-function DoesRouteMatches(route: BaseRouteLink, url : string) {
-    if (route.constructor.name == "BasicRoute") {
-        return (route as BasicRoute).to == url
-    } else {
-        const matcher = (route as ProductRoute).productTo.replace('select', '[\\w-]+');
-        return url.search(matcher) != -1;
-    }
-}
-
-export { BaseRoute, BaseRouteLink, BasicRoute, ProductRoute, DoesRouteMatches, RouterGroup }
+export { BaseRoute, BaseRouteLink, BasicRoute, ProductRoute, RouterGroup }

@@ -8,7 +8,7 @@ import {
 } from '@patternfly/react-core';
 import { NavLink, withRouter } from 'react-router-dom';
 import { GetActiveProductIdFromUrl } from '@app/AppLayout/ProductSelector'
-import { BaseRoute, BaseRouteLink, BasicRoute, ProductRoute, DoesRouteMatches, RouterGroup } from '@app/AppLayout/Routes'
+import { BaseRoute, BaseRouteLink, BasicRoute, ProductRoute, RouterGroup } from '@app/AppLayout/Routes'
 
 interface NavigationState {
     activeGroup?: string;
@@ -76,10 +76,11 @@ class Navigation extends React.Component<any, NavigationState> {
                 return
             }
             if (!l1.isGroup()) {
+                var l = l1 as BaseRouteLink;
                 if ((l1 as any).subRoutes !== undefined) {
                     const subroute = currentUrl + window.location.hash;
                     (l1 as any).subRoutes.forEach((function(l2, j) {
-                        if (DoesRouteMatches(l2 as any, subroute)) {
+                        if (l2.matches(subroute)) {
                             activeGroup = 'grp-' + i;
                             activeItem = activeGroup + '_itm-' + j;
                         }
@@ -88,14 +89,14 @@ class Navigation extends React.Component<any, NavigationState> {
                 if (activeItem) {
                     return
                 }
-                if (DoesRouteMatches(l1 as any, currentUrl)) {
+                if (l.matches(currentUrl)) {
                     activeGroup = '';
                     activeItem = 'itm-' + i;
                 }
             } else {
                 (l1 as RouterGroup).routes.forEach((function(l2, j) {
                     if (!l2.isGroup()) {
-                        if (DoesRouteMatches(l2 as any, currentUrl)) {
+                        if (l2.matches(currentUrl)) {
                             activeGroup = 'grp-' + i;
                             activeItem = activeGroup + '_itm-' + j;
                         }
