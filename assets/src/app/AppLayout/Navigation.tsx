@@ -13,7 +13,6 @@ import { BaseRoute, BaseRouteLink, BasicRoute, ProductRoute, RouterGroup } from 
 interface NavigationState {
     activeGroup?: string;
     activeItem?: string;
-    links: BaseRoute[];
     lastUrl?: string;
     productId?: string;
 }
@@ -56,11 +55,14 @@ class Navigation extends React.Component<any, NavigationState> {
 
     constructor(props) {
         super(props);
-        this.state = {
-            links: staticNavigation
-        };
+        this.state = {};
         this.onSelect = this.onSelect.bind(this);
     }
+
+    static links() {
+        return staticNavigation;
+    }
+
 
     static getDerivedStateFromProps(props, state) {
         var currentUrl = window.location.pathname;
@@ -71,7 +73,7 @@ class Navigation extends React.Component<any, NavigationState> {
             return null;
         }
         var activeGroup, activeItem;
-        state.links.forEach((function(l1 : BaseRoute, i) {
+        Navigation.links().forEach((function(l1 : BaseRoute, i) {
             if (activeItem) {
                 return
             }
@@ -105,8 +107,7 @@ class Navigation extends React.Component<any, NavigationState> {
             }
         }));
         if (activeItem !== undefined) {
-            return {links: state.links,
-                    activeGroup: activeGroup,
+            return {activeGroup: activeGroup,
                     activeItem: activeItem,
                     productId: GetActiveProductIdFromUrl()};
         }
@@ -118,7 +119,7 @@ class Navigation extends React.Component<any, NavigationState> {
         return (
             <Nav onSelect={this.onSelect} theme="dark">
                 <NavList>
-                    { this.state.links.map((function(l1, i){
+                    { Navigation.links().map((function(l1, i){
                           if (!l1.isGroup()) {
                               var l = (l1 as BaseRouteLink);
                               var id = 'itm-' + i;
