@@ -1,7 +1,10 @@
 import * as React from 'react';
 
-interface MyRoute {
+interface BaseRouteInterface {
     label: string;
+}
+
+interface MyRoute extends BaseRouteInterface {
     to: string;
 }
 
@@ -9,8 +12,7 @@ function IsMyRoute(obj) {
     return obj.to !== undefined
 }
 
-interface MyProductRoute {
-    label: string;
+interface MyProductRoute extends BaseRouteInterface {
     productTo: string;
     subRoutes?: MyProductRoute[];
 }
@@ -19,8 +21,7 @@ function IsMyProductRoute(obj) {
     return obj.productTo !== undefined
 }
 
-interface RouterGroup {
-    label: string;
+interface RouterGroup extends BaseRouteInterface {
     routes: MyRoute[];
 }
 
