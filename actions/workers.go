@@ -21,7 +21,7 @@ func SetUpJob(w worker.Worker, name string, job Job) {
 		job()
 		return nil
 	})
-	RescheduleJob(name, time.Second)
+	RescheduleJob(name, time.Hour)
 }
 
 func RescheduleJob(handlerName string, period time.Duration) {
