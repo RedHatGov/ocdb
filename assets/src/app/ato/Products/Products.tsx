@@ -30,7 +30,9 @@ const ProductGalleryItem: React.FunctionComponent<any> = (props) => {
                         <img src={logo} alt={"logo of " + productId} />
                     </CardHead>
                     <CardHeader>{props['product']['name']}</CardHeader>
-                    <CardBody><Text component="small">{props['product']['satisfies'].length} controls defined</Text></CardBody>
+                    { props.product.satisfies !== undefined ?
+                        <CardBody><Text component="small">{props['product']['satisfies'].length} controls defined</Text></CardBody>
+                        : "" }
                 </Card>
             </NavLink>
         </GalleryItem>

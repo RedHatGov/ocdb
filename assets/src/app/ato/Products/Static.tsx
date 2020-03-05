@@ -69,6 +69,12 @@ const ProductInfo: {[Identifier: string]: ProductTemplate } = {
             'Overview': require('@app/assets/markdown/products/osp13/Overview.md').default
         }
     },
+    'rhel-8': {
+        texts: {
+            'Overview': require('@app/assets/markdown/products/rhel-8/Overview.md').default,
+            'STIG': require('@app/assets/markdown/products/rhel-8/STIG.md').default,
+        }
+    },
     'virtualization-host': {
         texts: {
             'Overview': require('@app/assets/markdown/products/rhvh/Overview.md').default,
