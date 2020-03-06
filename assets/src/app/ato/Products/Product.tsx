@@ -8,6 +8,7 @@ import {
     Text,
 } from '@patternfly/react-core';
 import { Spinner } from '@patternfly/react-core/dist/esm/experimental';
+import { EditAltIcon } from '@patternfly/react-icons'
 
 import * as Api from '@app/lib/api'
 import { Markdown } from '@app/lib/markdown';
@@ -54,7 +55,9 @@ class ProposeChange extends React.Component<ProposeChangeProps, ProposeChangeSta
         ];
         return (
             <div style={{float: 'right'}}>
-                <ApplicationLauncher onSelect={this.onSelect} onToggle={this.onToggle} isOpen={isOpen} items={appLauncherItems} position={DropdownPosition.right}/>
+                <ApplicationLauncher onSelect={this.onSelect} onToggle={this.onToggle}
+                                     isOpen={isOpen} items={appLauncherItems}
+                                     position={DropdownPosition.right} toggleIcon={<EditAltIcon/>} />
             </div>
         );
     }
