@@ -40,8 +40,12 @@ class Product extends React.Component<any, ProductState> {
         return '';
     }
 
+    showingControls(): boolean {
+        return this.state.activeTabKey == 'NIST-800-53' || this.state.activeTabKey == 'nist-800-53'
+    }
+
     renderTabs(){
-        if (this.state.activeTabKey == 'NIST-800-53' || this.state.activeTabKey == 'nist-800-53') {
+        if (this.showingControls()) {
             if (this.state.isLoading) {
                 return <Spinner/>
             } else {
