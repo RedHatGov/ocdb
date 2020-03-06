@@ -24,7 +24,7 @@
   * point your browser to [http://127.0.0.1:3000](http://127.0.0.1:3000)
 
 ## Developer Links
-  * [Patternfly 4 documentation](https://patternfly-react.surge.sh/patternfly-4/) or [slightly different version](https://www.patternfly.org/v4/documentation/react/overview/release-notes)
+  * [Patternfly 4 documentation](https://patternfly-react.surge.sh/) or [slightly different version](https://www.patternfly.org/v4/documentation/react/overview/release-notes)
 
 ## Deployment info
 
