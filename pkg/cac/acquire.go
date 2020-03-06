@@ -31,6 +31,10 @@ func Refresh() {
 	if err != nil {
 		panic(err)
 	}
+	err = makeSrgCsv()
+	if err != nil {
+		panic(err)
+	}
 }
 
 func make() error {
