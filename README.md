@@ -31,5 +31,5 @@
 How to pull new version manually in openshift?
 
 ```
-    oc pull image ocdb
+    oc import-image ocdb
 ```
