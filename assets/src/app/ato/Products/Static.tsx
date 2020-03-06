@@ -29,7 +29,8 @@ const ProductInfo: {[Identifier: string]: ProductTemplate } = {
         image: require('@app/assets/images/ansible-tower-logo.png').default,
         texts: {
             'Overview': require('@app/assets/markdown/products/ansible-tower/Overview.md').default,
-            'ICS-500-27': require('@app/assets/markdown/products/ansible-tower/ICS-500-27.md').default
+            'ICS-500-27': require('@app/assets/markdown/products/ansible-tower/ICS-500-27.md').default,
+            'SCAP': require('@app/assets/markdown/products/ansible-tower/SCAP.md').default,
         }
     },
     'coreos-4': {
