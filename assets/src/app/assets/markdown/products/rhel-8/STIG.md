@@ -6,7 +6,7 @@ Red Hat has submitted the content for the RHEL 8 STIG to DISA. It is currently u
 
 ### Download latest documents
  * [Implementation Guide](/cac/guides/ssg-rhel8-guide-stig.html)
- * SRG Mapping Table: [HTML](/cac/tables/table-rhel8-srgmap-flat.html), [CSV](https://raw.githubusercontent.com/isimluk/rhel8-stig-latest/master/table-rhel8-srgmap-flat.csv)
+ * SRG Mapping Table: [HTML](/cac/tables/table-rhel8-srgmap-flat.html), [CSV](/cac/tables/table-rhel8-srgmap-flat.csv)
  * SCAP DataStream: [version 1.3](/cac/ssg-rhel8-ds.xml), [version 1.2](/cac/ssg-rhel8-ds-1.2.xml)
  * [Configuration shell script](/cac/bash/rhel8-script-stig.sh)
  * [Ansible Playbook](/cac/ansible/rhel8-playbook-stig.yml)
