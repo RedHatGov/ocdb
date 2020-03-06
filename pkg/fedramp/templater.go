@@ -55,7 +55,10 @@ func fedrampTemplate(fedrampLevel string) (*ssp.Document, []error) {
 	if err != nil {
 		return nil, []error{err, errors.New("Assets pack does not contain FEDRAMP template: " + path)}
 	}
-	ioutil.WriteFile("/tmp/"+file, docBytes, 0600)
+	err = ioutil.WriteFile("/tmp/"+file, docBytes, 0600)
+	if err != nil {
+		return nil, []error{err, errors.New("Could not write file %s to /tmp/", file)}
+	}
 
 	doc, err := ssp.Load("/tmp/" + file)
 	if err != nil {
