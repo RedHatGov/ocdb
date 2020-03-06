@@ -2,6 +2,7 @@ package fedramp
 
 import (
 	"errors"
+	"fmt"
 	"github.com/RedHatGov/ocdb/pkg/masonry"
 	"github.com/RedHatGov/ocdb/pkg/static"
 	"github.com/opencontrol/fedramp-templater/opencontrols"
@@ -57,7 +58,7 @@ func fedrampTemplate(fedrampLevel string) (*ssp.Document, []error) {
 	}
 	err = ioutil.WriteFile("/tmp/"+file, docBytes, 0600)
 	if err != nil {
-		return nil, []error{err, errors.New("Could not write file %s to /tmp/", file)}
+		return nil, []error{err, fmt.Errorf("Could not write file %s to /tmp/", file)}
 	}
 
 	doc, err := ssp.Load("/tmp/" + file)
