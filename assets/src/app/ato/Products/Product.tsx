@@ -94,6 +94,14 @@ class Product extends React.Component<any, ProductState> {
         return this.state.activeTabKey == 'NIST-800-53' || this.state.activeTabKey == 'nist-800-53'
     }
 
+    urlForEditing(): string {
+        if (this.showingControls()) {
+            return "https://github.com/ComplianceAsCode/redhat/tree/master/" + this.state.productId
+        } else {
+            return "https://github.com/RedHatGov/ocdb/edit/master/assets/src/app/assets/markdown/products/" + this.state.productId + "/" + this.state.activeTabKey + ".md"
+        }
+    }
+
     renderTabs(){
         if (this.showingControls()) {
             if (this.state.isLoading) {
@@ -110,8 +118,6 @@ class Product extends React.Component<any, ProductState> {
                                        return <Text component="p" key={i}>{error}</Text>;
                                    }))}
                               </Alert>
-                              <br/>
-                              <Text component="p">Go fix the warning on <Text component='a' href={"https://github.com/ComplianceAsCode/redhat/tree/master/" + this.state.productId}>github</Text>.</Text>
                           </React.Fragment>
                         }
                         <Text component="h2">Requirements Traceability Matrix</Text>
@@ -133,7 +139,7 @@ class Product extends React.Component<any, ProductState> {
         return (
             <Page>
                 <PageSection variant={PageSectionVariants.light}>
-                    { this.showingControls() ? "" : <ProposeChange link={"https://github.com/RedHatGov/ocdb/edit/master/assets/src/app/assets/markdown/products/" + this.state.productId + "/" + this.state.activeTabKey + ".md"} /> }
+                    <ProposeChange link={this.urlForEditing()} />
                     { this.state.isLoading ?
                       <Spinner/> :
                       <React.Fragment>
