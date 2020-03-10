@@ -17,8 +17,7 @@ func Init(w worker.Worker) {
 func setUpJob(w worker.Worker, name string, job JobFn) {
 	w.Register(name, func(args worker.Args) error {
 		rescheduleJob(w, name, time.Hour)
-		job()
-		return nil
+		return job()
 	})
 	rescheduleJob(w, name, time.Minute)
 }
