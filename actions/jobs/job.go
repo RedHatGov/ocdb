@@ -38,7 +38,6 @@ func (job *Job) reschedule(w worker.Worker, period time.Duration) {
 }
 
 func (job *Job) run() error {
-	utils.Log.Infof("job pointer inside: %s:   %p", job.Name, job)
 	job.LastStart = time.Now()
 
 	err := job.Fn()
