@@ -16,25 +16,22 @@ var mux sync.Mutex
 const contentCache = "/tmp/.scap_cache"
 
 // Refresh function refreshes masonry data
-func Refresh() {
+func Refresh() error {
 	mux.Lock()
 	defer mux.Unlock()
 	err := refreshRepo()
 	if err != nil {
-		panic(err)
+		return err
 	}
 	err = cmake()
 	if err != nil {
-		panic(err)
+		return err
 	}
 	err = make()
 	if err != nil {
-		panic(err)
+		return err
 	}
-	err = makeSrgCsv()
-	if err != nil {
-		panic(err)
-	}
+	return makeSrgCsv()
 }
 
 func make() error {

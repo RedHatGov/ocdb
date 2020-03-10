@@ -17,12 +17,13 @@ func GetInstance() *common.Workspace {
 }
 
 // Refresh function refreshes masonry data
-func Refresh() {
+func Refresh() error {
 	mux.Lock()
 	defer mux.Unlock()
 	data, err := build()
 	if err != nil {
-		panic(err)
+		return err
 	}
 	instance = &data
+	return nil
 }

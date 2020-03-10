@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-type JobFn func()
+type JobFn func() error
 
 func Init(w worker.Worker) {
 	setUpJob(w, "refresh_masonry", masonry.Refresh)
