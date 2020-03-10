@@ -15,21 +15,21 @@ type Job struct {
 
 func (job *Job) setUpIn(w worker.Worker) {
 	err := w.Register(job.Name, func(args worker.Args) error {
-		rescheduleJob(w, job.Name, time.Hour)
+		job.reschedule(w, time.Hour)
 		return job.Fn()
 	})
 	if err != nil {
 		utils.Log.Fatalf("Could not register job: %v", err)
 	}
-	rescheduleJob(w, job.Name, time.Minute)
+	job.reschedule(w, time.Minute)
 }
 
-func rescheduleJob(w worker.Worker, handlerName string, period time.Duration) {
+func (job *Job) reschedule(w worker.Worker, period time.Duration) {
 	err := w.PerformIn(worker.Job{
 		Queue:   "masonry",
-		Handler: handlerName,
+		Handler: job.Name,
 	}, period)
 	if err != nil {
-		utils.Log.Errorf("Could not reschedule job: %v", err)
+		utils.Log.Errorf("Could not reschedule job %s: %v", job.Name, err)
 	}
 }
