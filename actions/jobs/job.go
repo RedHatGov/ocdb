@@ -12,6 +12,7 @@ type Job struct {
 	Name      string
 	Fn        JobFn `json:"-"`
 	LastStart time.Time
+	LastError string
 }
 
 func (job *Job) setUpIn(w worker.Worker) {
@@ -38,5 +39,12 @@ func (job *Job) reschedule(w worker.Worker, period time.Duration) {
 func (job *Job) run() error {
 	utils.Log.Infof("job pointer inside: %s:   %p", job.Name, job)
 	(*job).LastStart = time.Now()
-	return job.Fn()
+
+	err := job.Fn()
+	if err != nil {
+		job.LastError = err.Error()
+	} else {
+		job.LastError = ""
+	}
+	return err
 }
