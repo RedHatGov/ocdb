@@ -37,13 +37,13 @@ func Refresh() error {
 func make() error {
 	makeCmd := exec.Command("make")
 	makeCmd.Dir = contentCache + "/build/"
-	makeCmdErr := &bytes.Buffer{}
-	makeCmd.Stdout = &utils.LogWriter{}
-	makeCmd.Stderr = makeCmdErr
+	logWriter := utils.LogWriter{}
+	makeCmd.Stdout = logWriter
+	makeCmd.Stderr = logWriter
 
 	err := makeCmd.Run()
-	if err != nil || makeCmdErr.Len() > 0 {
-		return fmt.Errorf("Error running make: %v, stderr was: %s", err, makeCmdErr.String())
+	if err != nil {
+		return fmt.Errorf("Error running make: %v", err)
 	}
 	return nil
 }
