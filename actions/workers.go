@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-type Job func()
+type JobFn func()
 
 func init() {
 	w := App().Worker
@@ -15,7 +15,7 @@ func init() {
 	SetUpJob(w, "refresh_cac", cac.Refresh)
 }
 
-func SetUpJob(w worker.Worker, name string, job Job) {
+func SetUpJob(w worker.Worker, name string, job JobFn) {
 	w.Register(name, func(args worker.Args) error {
 		RescheduleJob(name, time.Hour)
 		job()
