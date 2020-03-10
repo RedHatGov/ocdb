@@ -8,11 +8,11 @@ import (
 
 var List = []Job{
 	Job{
-		Name: "refresh_masonry",
+		Name: "Open Control Masonry Refresh",
 		Fn:   masonry.Refresh,
 	},
 	Job{
-		Name: "refresh_cac",
+		Name: "ComplianceAsCode Rebuild",
 		Fn:   cac.Refresh,
 	},
 }
