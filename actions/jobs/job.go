@@ -10,7 +10,7 @@ type JobFn func() error
 
 type Job struct {
 	Name string
-	Fn   JobFn
+	Fn   JobFn `json:"-"`
 }
 
 func (job *Job) setUpIn(w worker.Worker) {

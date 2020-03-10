@@ -6,7 +6,7 @@ import (
 	"github.com/gobuffalo/buffalo/worker"
 )
 
-var schedule = []Job{
+var List = []Job{
 	Job{
 		Name: "refresh_masonry",
 		Fn:   masonry.Refresh,
@@ -18,7 +18,7 @@ var schedule = []Job{
 }
 
 func Init(worker worker.Worker) {
-	for _, job := range schedule {
+	for _, job := range List {
 		job.setUpIn(worker)
 	}
 }

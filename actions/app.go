@@ -75,6 +75,9 @@ func App() *buffalo.App {
 		apiV1.GET("/components/{component_id}/controls", api.ComponentControlsHandler)
 		apiV1.GET("/components/{component_id}/fedramp/{level}", api.ComponentFedrampHandler)
 
+		admin := apiV1.Group("/admin/")
+		admin.Resource("/jobs", api.JobsResource{&buffalo.BaseResource{}})
+
 		app.ServeFiles("/cac/", cac.HttpFiles())
 		app.ServeFiles("/", static.AssetsBox) // serve files from the public directory
 		utils.SetLogger(app.Logger)
