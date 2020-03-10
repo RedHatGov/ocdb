@@ -2,10 +2,10 @@ package utils
 
 import "github.com/gobuffalo/buffalo"
 
-var log buffalo.Logger
+var Log buffalo.Logger
 
 func SetLogger(logger buffalo.Logger) {
-	log = logger
+	Log = logger
 }
 
 type LogWriter struct{}
@@ -15,6 +15,6 @@ func (LogWriter) Write(p []byte) (n int, err error) {
 	if p[length-1] == '\n' {
 		p = p[:length-1]
 	}
-	log.Debug(string(p))
+	Log.Debug(string(p))
 	return length, nil
 }
