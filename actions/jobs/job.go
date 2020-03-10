@@ -1,8 +1,6 @@
 package jobs
 
 import (
-	"github.com/RedHatGov/ocdb/pkg/cac"
-	"github.com/RedHatGov/ocdb/pkg/masonry"
 	"github.com/RedHatGov/ocdb/pkg/utils"
 	"github.com/gobuffalo/buffalo/worker"
 	"time"
@@ -10,9 +8,9 @@ import (
 
 type JobFn func() error
 
-func Init(w worker.Worker) {
-	setUpJob(w, "refresh_masonry", masonry.Refresh)
-	setUpJob(w, "refresh_cac", cac.Refresh)
+type Job struct {
+	Name string
+	Fn   JobFn
 }
 
 func setUpJob(w worker.Worker, name string, job JobFn) {
