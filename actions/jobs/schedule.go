@@ -17,8 +17,8 @@ var schedule = []Job{
 	},
 }
 
-func Init(w worker.Worker) {
+func Init(worker worker.Worker) {
 	for _, job := range schedule {
-		setUpJob(w, job.Name, job.Fn)
+		job.setUpIn(worker)
 	}
 }
