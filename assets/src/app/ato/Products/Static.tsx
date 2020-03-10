@@ -36,7 +36,8 @@ const ProductInfo: {[Identifier: string]: ProductTemplate } = {
     'coreos-4': {
         image: require('@app/assets/images/coreos-logo.png').default,
         texts: {
-            'Overview': require('@app/assets/markdown/products/coreos-4/Overview.md').default
+            'Overview': require('@app/assets/markdown/products/coreos-4/Overview.md').default,
+            'SCAP': require('@app/assets/markdown/products/coreos-4/SCAP.md').default,
         }
     },
     'identity-management': {
