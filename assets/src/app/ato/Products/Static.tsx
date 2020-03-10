@@ -74,6 +74,12 @@ const ProductInfo: {[Identifier: string]: ProductTemplate } = {
             'Overview': require('@app/assets/markdown/products/openstack-platform-13/Overview.md').default
         }
     },
+    'rhel-7': {
+        texts: {
+            'Overview': require('@app/assets/markdown/products/rhel-7/Overview.md').default,
+            'SCAP': require('@app/assets/markdown/products/rhel-7/SCAP.md').default,
+        }
+    },
     'rhel-8': {
         texts: {
             'Overview': require('@app/assets/markdown/products/rhel-8/Overview.md').default,
