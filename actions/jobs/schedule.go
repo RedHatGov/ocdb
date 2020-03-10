@@ -18,7 +18,8 @@ var List = []Job{
 }
 
 func Init(worker worker.Worker) {
-	for _, job := range List {
+	for i, _ := range List {
+		job := &(List[i])
 		job.setUpIn(worker)
 	}
 }
