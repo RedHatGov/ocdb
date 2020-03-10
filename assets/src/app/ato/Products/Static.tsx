@@ -36,12 +36,12 @@ const ProductInfo: {[Identifier: string]: ProductTemplate } = {
     'coreos-4': {
         image: require('@app/assets/images/coreos-logo.png').default,
         texts: {
-            'Overview': require('@app/assets/markdown/products/coreos4/Overview.md').default
+            'Overview': require('@app/assets/markdown/products/coreos-4/Overview.md').default
         }
     },
     'identity-management': {
         texts: {
-            'Overview': require('@app/assets/markdown/products/idm/Overview.md').default
+            'Overview': require('@app/assets/markdown/products/identity-management/Overview.md').default
         }
     },
     insights: {
@@ -52,7 +52,7 @@ const ProductInfo: {[Identifier: string]: ProductTemplate } = {
     'openshift-container-platform-3': {
         image: require('@app/assets/images/openshift-logo.png').default,
         texts: {
-            'Overview': require('@app/assets/markdown/products/ocp3/Overview.md').default
+            'Overview': require('@app/assets/markdown/products/openshift-container-platform-3/Overview.md').default
         }
     },
     'openshift-container-platform-4': {
@@ -67,7 +67,7 @@ const ProductInfo: {[Identifier: string]: ProductTemplate } = {
     'openstack-platform-13': {
         image: require('@app/assets/images/openstack-logo.png').default,
         texts: {
-            'Overview': require('@app/assets/markdown/products/osp13/Overview.md').default
+            'Overview': require('@app/assets/markdown/products/openstack-platform-13/Overview.md').default
         }
     },
     'rhel-8': {
@@ -78,12 +78,12 @@ const ProductInfo: {[Identifier: string]: ProductTemplate } = {
     },
     'virtualization-host': {
         texts: {
-            'Overview': require('@app/assets/markdown/products/rhvh/Overview.md').default,
+            'Overview': require('@app/assets/markdown/products/virtualization-host/Overview.md').default,
         }
     },
     'virtualization-manager': {
         texts: {
-            'Overview': require('@app/assets/markdown/products/rhvm/Overview.md').default,
+            'Overview': require('@app/assets/markdown/products/virtualization-manager/Overview.md').default,
         }
     }
 };
