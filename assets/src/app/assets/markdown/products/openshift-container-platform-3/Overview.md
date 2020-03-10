@@ -12,7 +12,7 @@ customer support case requesting an evaluation.
 Federal Information Processing Standard 140-2 is a legal requirement ensuring cryptographic tools implement algorithms properly. Vendors must certify their cryptographic implementations through NIST's [Cryptographic Module Validation Program](https://csrc.nist.gov/Projects/Cryptographic-Module-Validation-Program).
 
 FIPS 140-2 validation does not constitute an entire product. Rather, underlying cryptographic
-subsystems or components, such as OpenSSL and OpenSSH, are validated. 
+subsystems or components, such as OpenSSL and OpenSSH, are validated.
 
 When OpenShift Container Platform 3.x runs on Red Hat Enterprise Linux 7.x, the following FIPS 140-2 validations
 are retained:
