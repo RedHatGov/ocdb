@@ -14,3 +14,6 @@ Available downloads:
      * Assessment Details: [OVAL](/cac/ssg-rhel7-oval.xml)
      * Questionnaires: [OCIL](/cac/ssg-rhel7-ocil.xml)
  * All in one remediation script: [Ansible Playbook](/cac/ansible/rhel7-playbook-tower-stig.yml), [Bash](/cac/bash/rhel7-script-tower-stig.sh)
+
+### Download released content available at NIST NVD
+ * [FedRAMP Low for Red Hat Ansible Tower 3.2.x v1 Checklist](https://nvd.nist.gov/ncp/checklist/863)
