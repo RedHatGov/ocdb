@@ -1,6 +1,8 @@
 package masonry
 
 import (
+	"errors"
+	"fmt"
 	"github.com/opencontrol/compliance-masonry/pkg/cli/get/resources"
 	"github.com/opencontrol/compliance-masonry/pkg/lib"
 	"github.com/opencontrol/compliance-masonry/pkg/lib/common"
@@ -20,10 +22,19 @@ func buildCache() error {
 	return getter.GetRemoteResources(destination, "opencontrols", repo)
 }
 
-func build() (common.Workspace, []error) {
+func build() (common.Workspace, error) {
 	err := buildCache()
 	if err != nil {
-		return nil, []error{err}
+		return nil, err
 	}
-	return lib.LoadData("/tmp/.masonry_cache", "/tmp/.masonry_cache/certifications/dhs-4300a.yaml")
+
+	workspace, errs := lib.LoadData("/tmp/.masonry_cache", "/tmp/.masonry_cache/certifications/dhs-4300a.yaml")
+	if errs != nil {
+		msg := "Error occurred during loading open control masonry data"
+		for _, e := range errs {
+			msg = fmt.Sprintf("%s: %v", msg, e)
+		}
+		err = errors.New(msg)
+	}
+	return workspace, err
 }

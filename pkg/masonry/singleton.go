@@ -20,9 +20,9 @@ func GetInstance() *common.Workspace {
 func Refresh() {
 	mux.Lock()
 	defer mux.Unlock()
-	data, errors := build()
-	if errors != nil {
-		panic(errors)
+	data, err := build()
+	if err != nil {
+		panic(err)
 	}
 	instance = &data
 }
