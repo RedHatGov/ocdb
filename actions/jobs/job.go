@@ -9,10 +9,11 @@ import (
 type JobFn func() error
 
 type Job struct {
-	Name      string
-	Fn        JobFn `json:"-"`
-	LastStart time.Time
-	LastError string
+	Name        string
+	Fn          JobFn `json:"-"`
+	LastStart   time.Time
+	LastSuccess time.Time
+	LastError   string
 }
 
 func (job *Job) setUpIn(w worker.Worker) {
@@ -45,6 +46,7 @@ func (job *Job) run() error {
 		job.LastError = err.Error()
 	} else {
 		job.LastError = ""
+		job.LastSuccess = time.Now()
 	}
 	return err
 }
