@@ -72,7 +72,8 @@ const ProductInfo: {[Identifier: string]: ProductTemplate } = {
     'openstack-platform-13': {
         image: require('@app/assets/images/openstack-logo.png').default,
         texts: {
-            'Overview': require('@app/assets/markdown/products/openstack-platform-13/Overview.md').default
+            'Overview': require('@app/assets/markdown/products/openstack-platform-13/Overview.md').default,
+            'SCAP': require('@app/assets/markdown/products/openstack-platform-13/SCAP.md').default,
         }
     },
     'rhel-7': {
