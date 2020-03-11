@@ -17,7 +17,11 @@ func makeSrgCsv() error {
 	if err != nil {
 		return err
 	}
-	return srgToCsv("rhel8")
+	err = srgToCsv("rhel8")
+	if err != nil {
+		return err
+	}
+	return srgToCsv("rhel7")
 }
 
 func srgToCsv(product string) error {
