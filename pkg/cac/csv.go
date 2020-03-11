@@ -17,10 +17,14 @@ func makeSrgCsv() error {
 	if err != nil {
 		return err
 	}
+	return srgToCsv("rhel8")
+}
+
+func srgToCsv(product string) error {
 	cmd := exec.Command("/usr/bin/xsltproc",
-		"--stringparam", "map-to-items", "rhel8/xccdf-linked-srg-overlay.xml",
-		"--stringparam", "ocil-document", "rhel8/ocil-linked.xml",
-		"--output", "tables/table-rhel8-srgmap-flat.csv",
+		"--stringparam", "map-to-items", product+"/xccdf-linked-srg-overlay.xml",
+		"--stringparam", "ocil-document", product+"/ocil-linked.xml",
+		"--output", "tables/table-"+product+"-srgmap-flat.csv",
 		xsltFilename,
 		"../shared/references/disa-os-srg-v1r6.xml")
 	cmd.Dir = contentCache + "/build"
@@ -28,7 +32,7 @@ func makeSrgCsv() error {
 	cmd.Stdout = &utils.LogWriter{}
 	cmd.Stderr = cmdErr
 
-	err = cmd.Run()
+	err := cmd.Run()
 	if err != nil || cmdErr.Len() > 0 {
 		return fmt.Errorf("Error running xsltproc: %v, stderr was: %s", err, cmdErr.String())
 	}
