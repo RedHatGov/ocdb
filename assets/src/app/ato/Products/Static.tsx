@@ -53,7 +53,8 @@ const ProductInfo: {[Identifier: string]: ProductTemplate } = {
     'openshift-container-platform-3': {
         image: require('@app/assets/images/openshift-logo.png').default,
         texts: {
-            'Overview': require('@app/assets/markdown/products/openshift-container-platform-3/Overview.md').default
+            'Overview': require('@app/assets/markdown/products/openshift-container-platform-3/Overview.md').default,
+            'SCAP': require('@app/assets/markdown/products/openshift-container-platform-3/SCAP.md').default,
         }
     },
     'openshift-container-platform-4': {
