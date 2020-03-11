@@ -15,4 +15,4 @@ Available downloads:
    * Checklist: [XCCDF 1.2](/cac/ssg-ocp4-xccdf-1.2.xml), [XCCDF 1.1](/cac/ssg-ocp4-xccdf.xml)
      * Assessment Details: [OVAL](/cac/ssg-ocp4-oval.xml)
      * Questionnaire: [OCIL](/cac/ssg-ocp4-ocil.xml)
- * All in one remediation scripts: [Ansible Playbook](/cac/ansible/ocp4-playbook-coreos-ncp.yml), [Bash](/cac/bash/ocp4-script-coreos-ncp.sh)
+ * All in one remediation scripts: [Ansible Playbook](/cac/ansible/ocp4-playbook-coreos-ncp.yml), [Bash](/cac/bash/ocp4-script-coreos-ncp.sh), [Ignition](/cac/ocp4/ignition-fixes.xml)
