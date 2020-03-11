@@ -45,6 +45,7 @@ const staticNavigation:BaseRoute[] = [
         new ProductRoute('Systems and Communications Protection', '/ato/products/select/NIST-800-53#SC-'),
         new ProductRoute('System and Information Integrity', '/ato/products/select/NIST-800-53#SI-'),
     ]),
+    new ProductRoute('SCAP', '/ato/products/select/SCAP'),
 ];
 
 class Navigation extends React.Component<any, NavigationState> {
@@ -71,7 +72,7 @@ class Navigation extends React.Component<any, NavigationState> {
             var info = ProductInfo[productId]
             if (info !== undefined) {
                 Object.keys(info.texts).forEach((key) => {
-                    if (key != "Overview") {
+                    if (key != "Overview" && key != "SCAP") {
                         res.push(new BasicRoute(key, '/ato/products/' + productId + '/' + key))
                     }
                 })
