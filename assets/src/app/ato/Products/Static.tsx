@@ -83,6 +83,7 @@ const ProductInfo: {[Identifier: string]: ProductTemplate } = {
     'rhel-8': {
         texts: {
             'Overview': require('@app/assets/markdown/products/rhel-8/Overview.md').default,
+            'SCAP': require('@app/assets/markdown/products/rhel-8/SCAP.md').default,
             'STIG': require('@app/assets/markdown/products/rhel-8/STIG.md').default,
         }
     },
