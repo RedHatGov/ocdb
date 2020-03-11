@@ -91,6 +91,7 @@ const ProductInfo: {[Identifier: string]: ProductTemplate } = {
     },
     'virtualization-host': {
         texts: {
+            'SCAP': require('@app/assets/markdown/products/virtualization-host/SCAP.md').default,
             'Overview': require('@app/assets/markdown/products/virtualization-host/Overview.md').default,
         }
     },
