@@ -1,11 +1,10 @@
 package masonry
 
 import (
-	"github.com/opencontrol/compliance-masonry/pkg/lib/common"
 	"sync"
 )
 
-var instance *common.Workspace
+var instance *OpencontrolData
 var mux sync.Mutex
 
 // GetInstance gets memory representation of the masonry cache
@@ -13,7 +12,7 @@ func GetInstance() *OpencontrolData {
 	if instance == nil {
 		Refresh()
 	}
-	return &OpencontrolData{*instance}
+	return instance
 }
 
 // Refresh function refreshes masonry data
@@ -24,6 +23,6 @@ func Refresh() error {
 	if err != nil {
 		return err
 	}
-	instance = &data
+	instance = data
 	return nil
 }
