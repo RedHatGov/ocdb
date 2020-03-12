@@ -28,7 +28,7 @@ func newOpencontrolData() (*OpencontrolData, error) {
 	}
 
 	var errs []error
-	res.workspace, errs = lib.LoadData(res.cacheDir, res.cacheDir+"/certifications/dhs-4300a.yaml")
+	res.workspace, errs = lib.LoadData(res.cacheDir, res.certDir()+"dhs-4300a.yaml")
 	if errs != nil {
 		msg := "Error occurred during loading open control masonry data"
 		for _, e := range errs {
