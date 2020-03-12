@@ -13,7 +13,6 @@ import (
 	"path/filepath"
 )
 
-const masonryPath = "/tmp/.masonry_cache/"
 const fedrampPath = "/tmp/.fedramp_cache/"
 const fedrampDocPath = "/tmp/.fedramp_cache/fedramp.docx"
 
@@ -82,7 +81,8 @@ func buildFor(componentId string, fedramLevel string) ([]byte, []error) {
 	if err != nil {
 		return nil, []error{err}
 	}
-	err = os.Symlink(masonryPath+"/components/"+componentId+"/component.yaml", fedrampPath+"/components/"+componentId+"/component.yaml")
+	ms := masonry.GetInstance()
+	err = os.Symlink(ms.PathToComponentYaml(componentId), fedrampPath+"/components/"+componentId+"/component.yaml")
 	if err != nil {
 		return nil, []error{err}
 	}

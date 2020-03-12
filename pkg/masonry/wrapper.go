@@ -24,3 +24,7 @@ func (d *OpencontrolData) GetAllStandards() []common.Standard {
 func (d *OpencontrolData) GetStandard(id string) (common.Standard, bool) {
 	return d.workspace.GetStandard(id)
 }
+
+func (d *OpencontrolData) PathToComponentYaml(componentId string) string {
+	return d.cacheDir + "/components/" + componentId + "/component.yaml"
+}
