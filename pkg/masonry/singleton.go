@@ -9,11 +9,11 @@ var instance *common.Workspace
 var mux sync.Mutex
 
 // GetInstance gets memory representation of the masonry cache
-func GetInstance() *common.Workspace {
+func GetInstance() *OpencontrolData {
 	if instance == nil {
 		Refresh()
 	}
-	return instance
+	return &OpencontrolData{*instance}
 }
 
 // Refresh function refreshes masonry data

@@ -18,13 +18,13 @@ type ComponentsResource struct {
 // List default implementation.
 func (v ComponentsResource) List(c buffalo.Context) error {
 	ms := masonry.GetInstance()
-	return c.Render(200, r.JSON((*ms).GetAllComponents()))
+	return c.Render(200, r.JSON(ms.GetAllComponents()))
 }
 
 // Show default implementation.
 func (v ComponentsResource) Show(c buffalo.Context) error {
 	ms := masonry.GetInstance()
-	component, found := (*ms).GetComponent(c.Param("component_id"))
+	component, found := ms.GetComponent(c.Param("component_id"))
 	if found {
 		return c.Render(200, r.JSON(component))
 	}
@@ -56,7 +56,7 @@ func standardToLogicalView(s common.Standard) map[string][]CustomControl {
 
 var validImplementationStatuses = []string{"complete", "partial", "not applicable", "planned", "unsatisfied", "unknown", "none"}
 
-func logicalView(ms *common.Workspace, c common.Component) (map[string]map[string][]CustomControl, []string) {
+func logicalView(ms *masonry.OpencontrolData, c common.Component) (map[string]map[string][]CustomControl, []string) {
 	result := make(map[string]map[string][]CustomControl)
 	problems := make([]string, 0)
 
@@ -64,7 +64,7 @@ func logicalView(ms *common.Workspace, c common.Component) (map[string]map[strin
 		standardKey := satisfy.GetStandardKey()
 		_, ok := result[standardKey]
 		if !ok {
-			standard, found := (*ms).GetStandard(standardKey)
+			standard, found := ms.GetStandard(standardKey)
 			if found {
 				result[standardKey] = standardToLogicalView(standard)
 			}
@@ -111,7 +111,7 @@ func logicalView(ms *common.Workspace, c common.Component) (map[string]map[strin
 // ComponentControlsHandler gives logical human readable view of open control items available.
 func ComponentControlsHandler(c buffalo.Context) error {
 	ms := masonry.GetInstance()
-	component, found := (*ms).GetComponent(c.Param("component_id"))
+	component, found := ms.GetComponent(c.Param("component_id"))
 	if found {
 		lv, problems := logicalView(ms, component)
 		result := make(map[string]interface{})

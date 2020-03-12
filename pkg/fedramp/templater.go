@@ -31,7 +31,7 @@ type FedrampCache struct {
 func newFedrampCache() *FedrampCache {
 	ms := masonry.GetInstance()
 	result := FedrampCache{cache: make(map[string]FedrampGuidance)}
-	for _, component := range (*ms).GetAllComponents() {
+	for _, component := range ms.GetAllComponents() {
 		result.cache[component.GetKey()] = make(FedrampGuidance)
 	}
 	return &result
