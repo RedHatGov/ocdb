@@ -22,7 +22,7 @@ func buildCache() error {
 	return getter.GetRemoteResources(destination, "opencontrols", repo)
 }
 
-func build() (*OpencontrolData, error) {
+func newOpencontrolData() (*OpencontrolData, error) {
 	err := buildCache()
 	if err != nil {
 		return nil, err
