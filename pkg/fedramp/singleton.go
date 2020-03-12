@@ -7,7 +7,6 @@ import (
 var instance *FedrampCache
 var once sync.Once
 
-// GetInstance gets memory representation of the masonry cache
 func getInstance() *FedrampCache {
 	once.Do(func() {
 		instance = newFedrampCache()
