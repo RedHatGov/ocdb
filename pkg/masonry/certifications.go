@@ -1,7 +1,9 @@
 package masonry
 
 import (
+	"fmt"
 	"github.com/opencontrol/compliance-masonry/pkg/lib/certifications"
+	"github.com/opencontrol/compliance-masonry/pkg/lib/common"
 	"io/ioutil"
 )
 
@@ -29,7 +31,10 @@ func (d *OpencontrolData) buildCache() error {
 		}
 		controls := map[string]StandardSubset{}
 		for _, name := range cert.GetSortedStandards() {
-			controls[name] = cert.GetControlKeysFor(name)
+			controls[name], err = d.filterKeysInStandard(cert, name)
+			if err != nil {
+				return err
+			}
 		}
 
 		d.certificationsCache[cert.GetKey()] = Certification{
@@ -38,6 +43,22 @@ func (d *OpencontrolData) buildCache() error {
 		}
 	}
 	return nil
+}
+
+func (d *OpencontrolData) filterKeysInStandard(cert common.Certification, standardName string) (StandardSubset, error) {
+	standard, found := d.workspace.GetStandard(standardName)
+	if !found {
+		return nil, fmt.Errorf("Did not found standard %s referenced by certification %s", standardName, cert.GetKey())
+	}
+	validControls := standard.GetControls()
+	res := StandardSubset{}
+	for _, ctrl := range cert.GetControlKeysFor(standardName) {
+		_, found = validControls[ctrl]
+		if found {
+			res = append(res, ctrl)
+		}
+	}
+	return res, nil
 }
 
 func (d *OpencontrolData) certDir() string {
