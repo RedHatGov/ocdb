@@ -5,8 +5,9 @@ import (
 )
 
 type OpencontrolData struct {
-	workspace common.Workspace
-	cacheDir  string
+	workspace           common.Workspace
+	cacheDir            string
+	certificationsCache map[string]Certification
 }
 
 func (d *OpencontrolData) GetAllComponents() []common.Component {

@@ -13,6 +13,5 @@ type CertificationsResource struct {
 // List default implementation.
 func (v CertificationsResource) List(c buffalo.Context) error {
 	ms := masonry.GetInstance()
-	certs, _ := ms.GetAllCertifications()
-	return c.Render(200, r.JSON(certs))
+	return c.Render(200, r.JSON(ms.GetAllCertifications()))
 }

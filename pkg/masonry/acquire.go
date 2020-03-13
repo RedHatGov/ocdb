@@ -34,7 +34,7 @@ func newOpencontrolData() (*OpencontrolData, error) {
 		for _, e := range errs {
 			msg = fmt.Sprintf("%s: %v", msg, e)
 		}
-		err = errors.New(msg)
+		return nil, errors.New(msg)
 	}
-	return &res, err
+	return &res, res.buildCache()
 }
