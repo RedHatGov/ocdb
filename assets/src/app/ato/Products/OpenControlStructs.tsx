@@ -19,3 +19,9 @@ export interface CustomControl {
     Control: Control,
     Satisfies?: Satisfies,
 }
+
+export interface Certification {
+    Key: string,
+    Controls: string[]
+}
+

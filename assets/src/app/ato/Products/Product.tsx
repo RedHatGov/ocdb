@@ -15,6 +15,7 @@ import { Markdown } from '@app/lib/markdown';
 import { ProductIdOverride, ProductInfo } from '@app/ato/Products/Static.tsx'
 import { RTMDataList } from '@app/ato/Products/DataList.tsx'
 import { Products } from '@app/ato/Products/Products'
+import { Certification } from '@app/ato/Products/OpenControlStructs'
 
 interface ProposeChangeProps {
     link: string;
@@ -67,7 +68,7 @@ interface ProductState {
     isLoading: boolean;
     productId: string;
     product: any;
-    certifications: any[];
+    certifications: Certification[];
     activeTabKey: string;
 };
 
@@ -201,7 +202,10 @@ class Product extends React.Component<any, ProductState> {
         this.renderMarkdown = this.renderMarkdown.bind(this);
         this.componentDidUpdate = this.componentDidUpdate.bind(this);
         Api.certifications().then(data => {
-            var certifications = Array.prototype.concat.apply([], Object.keys(data).map(function(k, _) { return data[k]; }));
+            var certifications = Array.prototype.concat.apply([], Object.keys(data).map(function(k, _) {
+                return {Key: k,
+                        Controls: Object.keys(data[k].Controls).map(function(c,_){ return data[k].Controls[c]}) }
+            }));
             this.setState({certifications: certifications})
         })
         this.componentDidUpdate();
