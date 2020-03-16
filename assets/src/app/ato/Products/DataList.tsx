@@ -20,7 +20,7 @@ import {
     DataToolbar, DataToolbarContent, DataToolbarFilter, DataToolbarGroup, DataToolbarItem,
 } from '@patternfly/react-core/dist/esm/experimental';
 
-import { CustomControl } from '@app/ato/Products/OpenControlStructs.tsx'
+import { Certification, CustomControl } from '@app/ato/Products/OpenControlStructs.tsx'
 import { RTMDetail } from '@app/ato/Products/RTMDetail.tsx'
 
 interface RTMToolbarFilters {
@@ -374,6 +374,7 @@ interface ControlWrapper {
 }
 export interface RTMProps {
     content: CustomControl[];
+    certifications: Certification[];
 }
 
 export interface RTMState {

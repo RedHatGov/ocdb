@@ -123,7 +123,7 @@ class Product extends React.Component<any, ProductState> {
                           </React.Fragment>
                         }
                         <Text component="h2">Requirements Traceability Matrix</Text>
-                        <RTMDataList content={this.state.product['controls']}/>
+                        <RTMDataList content={this.state.product['controls']} certifications={this.state.certifications} />
                     </TextContent>
                 )
             }
