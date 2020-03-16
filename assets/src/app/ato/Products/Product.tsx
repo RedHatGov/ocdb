@@ -67,6 +67,7 @@ interface ProductState {
     isLoading: boolean;
     productId: string;
     product: any;
+    certifications: any[];
     activeTabKey: string;
 };
 
@@ -194,10 +195,15 @@ class Product extends React.Component<any, ProductState> {
             isLoading: true,
             productId: productId,
             product: null,
+            certifications: [],
             activeTabKey: props['computedMatch'].params.tabId,
         };
         this.renderMarkdown = this.renderMarkdown.bind(this);
         this.componentDidUpdate = this.componentDidUpdate.bind(this);
+        Api.certifications().then(data => {
+            var certifications = Array.prototype.concat.apply([], Object.keys(data).map(function(k, _) { return data[k]; }));
+            this.setState({certifications: certifications})
+        })
         this.componentDidUpdate();
     }
 }

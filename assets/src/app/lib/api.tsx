@@ -32,3 +32,7 @@ export async function componentControls(componentId: string) {
     return fetch('/api/v1/components/' + componentId + '/controls')
         .then(response => response.json())
 };
+
+export async function certifications() {
+    return fetch('/api/v1/certifications').then(response => response.json())
+}
