@@ -47,6 +47,6 @@ export var componentControls = memoize(async function(componentId: string) {
         })
 });
 
-export async function certifications() {
+export var certifications = memoize(async function() {
     return fetch('/api/v1/certifications').then(response => response.json())
-}
+})
