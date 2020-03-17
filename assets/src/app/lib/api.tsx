@@ -2,7 +2,7 @@ function memoize(method) {
     let cache = {};
     return async function(...argum) {
         let args = JSON.stringify(argum);
-        cache[args] = cache[args] || method.apply(argum);
+        cache[args] = cache[args] || method.apply(undefined, argum);
         return cache[args];
     };
 }
