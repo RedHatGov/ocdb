@@ -53,7 +53,7 @@ export var certifications = memoize(async function() {
         .then(data => {
             return Array.prototype.concat.apply([], Object.keys(data).map(function(k, _) {
                 return {Key: k,
-                        Controls: Object.keys(data[k].Controls['NIST-800-53']).map(function(c,_){ return data[k].Controls['NIST-800-53'][c]})}
+                        Controls: data[k].Controls['NIST-800-53']}
             }))
         })
 })
