@@ -27,7 +27,7 @@ function addExtraProducts(products) {
     )
 }
 
-export async function componentControls(componentId: string) {
+export var componentControls = memoize(async function(componentId: string) {
     if (componentId == 'rhel-8') {
         return new Promise(function(resolve, reject) {
             resolve({'errors': [], 'controls': [], 'name': 'Red Hat Enterprise Linux 8'})
@@ -45,7 +45,7 @@ export async function componentControls(componentId: string) {
             data['controls'] = Array.prototype.concat.apply([], Object.keys(nist80053).map(function(k, _) { return nist80053[k]; }));
             return data
         })
-};
+});
 
 export async function certifications() {
     return fetch('/api/v1/certifications').then(response => response.json())
