@@ -181,8 +181,6 @@ class Product extends React.Component<any, ProductState> {
         if (this.state.isLoading && this.state.productId != 'select') {
             Api.componentControls(this.state.productId)
                .then(data => {
-                   const nist80053 = data['controls']['NIST-800-53'];
-                   data['controls'] = Array.prototype.concat.apply([], Object.keys(nist80053).map(function(k, _) { return nist80053[k]; }));
                    this.setState({product: data, isLoading: false})
                })
         }

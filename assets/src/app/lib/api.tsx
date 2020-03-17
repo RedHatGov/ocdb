@@ -30,16 +30,21 @@ function addExtraProducts(products) {
 export async function componentControls(componentId: string) {
     if (componentId == 'rhel-8') {
         return new Promise(function(resolve, reject) {
-            resolve({'errors': [], 'controls': {'NIST-800-53': []}, 'name': 'Red Hat Enterprise Linux 8'})
+            resolve({'errors': [], 'controls': [], 'name': 'Red Hat Enterprise Linux 8'})
         })
     }
     if (componentId == 'rhel-7') {
         return new Promise(function(resolve, reject) {
-            resolve({'errors': [], 'controls': {'NIST-800-53': []}, 'name': 'Red Hat Enterprise Linux 7'})
+            resolve({'errors': [], 'controls': [], 'name': 'Red Hat Enterprise Linux 7'})
         })
     }
     return fetch('/api/v1/components/' + componentId + '/controls')
         .then(response => response.json())
+        .then((data) => {
+            const nist80053 = data['controls']['NIST-800-53'];
+            data['controls'] = Array.prototype.concat.apply([], Object.keys(nist80053).map(function(k, _) { return nist80053[k]; }));
+            return data
+        })
 };
 
 export async function certifications() {
