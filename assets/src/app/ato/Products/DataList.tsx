@@ -22,19 +22,21 @@ import {
 
 import { Certification, CustomControl } from '@app/ato/Products/OpenControlStructs.tsx'
 import { RTMDetail } from '@app/ato/Products/RTMDetail.tsx'
-import { Memoize } from '@app/lib/Memoize'
+import * as Api from '@app/lib/api'
 
 interface RTMToolbarFilters {
     section: string[];
     status: string[];
     solution: string[];
     search: string[];
+    standard: string[];
 }
 
 interface RTMToolbarState {
     sectionIsExpanded: boolean;
     statusIsExpanded: boolean;
     solutionIsExpanded: boolean;
+    standardIsExpanded: boolean;
     filters: RTMToolbarFilters;
     expanded: boolean;
 }
@@ -91,7 +93,8 @@ class RTMToolbar extends React.PureComponent<RTMToolbarProps, RTMToolbarState> {
             sectionIsExpanded: false,
             statusIsExpanded: false,
             solutionIsExpanded: false,
-            filters: {section: [], status: [], solution: [], search: []},
+            standardIsExpanded: false,
+            filters: {section: [], status: [], solution: [], search: [], standard: []},
             expanded: false,
         };
         this.onSearchInputChange = this.onSearchInputChange.bind(this);
@@ -101,11 +104,18 @@ class RTMToolbar extends React.PureComponent<RTMToolbarProps, RTMToolbarState> {
         this.onStatusSelect = this.onStatusSelect.bind(this);
         this.onSolutionToggle = this.onSolutionToggle.bind(this);
         this.onSolutionSelect = this.onSolutionSelect.bind(this);
+        this.onStandardToggle = this.onStandardToggle.bind(this);
+        this.onStandardSelect = this.onStandardSelect.bind(this);
         this.onDelete = this.onDelete.bind(this);
 
         this.onExpandToggle = this.onExpandToggle.bind(this);
         this.componentDidMount = this.componentDidMount.bind(this)
-        this.standardOptions = props.view.certificationOptions();
+
+        Api.certifications().then((certs) => {
+            this.standardOptions = certs.map((c: Certification) => {
+                return {'value': c.Key}
+            })
+        })
     }
 
     componentDidMount() {
@@ -155,6 +165,23 @@ class RTMToolbar extends React.PureComponent<RTMToolbarProps, RTMToolbarState> {
     onSolutionSelect(event, selection) {
         this.onSelect('solution', event, selection);
     };
+    onStandardToggle(isExpanded) {
+        this.setState({
+            standardIsExpanded: isExpanded
+        });
+    }
+    onStandardSelect(event, selection) {
+        this.setState((prevState, props) => {
+            if (prevState.filters.standard.length == 1 && prevState.filters.standard[0] == selection) {
+                prevState.filters.standard = []
+            } else {
+                prevState.filters.standard = [selection]
+            }
+            this.props.view.recomputeFilters(prevState.filters)
+            return prevState
+        })
+        this.onStandardToggle(false)
+    };
 
     onSearchInputChange(newValue) {
         var filters = this.state.filters;
@@ -179,7 +206,8 @@ class RTMToolbar extends React.PureComponent<RTMToolbarProps, RTMToolbarState> {
                 section: [],
                 status: [],
                 solution: [],
-                search: []
+                search: [],
+                standard: [],
             }
             this.props.view.recomputeFilters(filters);
             this.setState({filters: filters})
@@ -187,7 +215,7 @@ class RTMToolbar extends React.PureComponent<RTMToolbarProps, RTMToolbarState> {
     }
 
     render() {
-        const { sectionIsExpanded, statusIsExpanded, solutionIsExpanded, filters, expanded } = this.state;
+        const { sectionIsExpanded, statusIsExpanded, solutionIsExpanded, standardIsExpanded, filters, expanded } = this.state;
         const searchGroupItems = <React.Fragment>
             <DataToolbarItem variant="label" id="stacked-example-resource-select">Search</DataToolbarItem>
             <DataToolbarFilter chips={filters.search} deleteChip={this.onDelete} categoryName="Search">
@@ -246,6 +274,25 @@ class RTMToolbar extends React.PureComponent<RTMToolbarProps, RTMToolbarState> {
                     placeholderText="Solution"
                 >
                     {this.solutionOptions.map((option, index) => (
+                        <SelectOption
+                            key={index}
+                            value={option.value}
+                        />
+                    ))}
+                </Select>
+            </DataToolbarFilter>
+            <DataToolbarFilter chips={filters.standard} deleteChip={this.onDelete} categoryName="Standard">
+                <Select
+                    variant={SelectVariant.checkbox}
+                    ariaLabelTypeAhead="Certification"
+                    aria-label="Standard"
+                    onToggle={this.onStandardToggle}
+                    onSelect={this.onStandardSelect}
+                    selections={filters.standard}
+                    isExpanded={standardIsExpanded}
+                    placeholderText={filters.standard[0] || "Certification"}
+                >
+                    {this.standardOptions.map((option, index) => (
                         <SelectOption
                             key={index}
                             value={option.value}
@@ -405,16 +452,16 @@ class RTMDataList extends React.Component<RTMProps, RTMState> {
         }
     }
 
-    certificationOptions = Memoize(() => {
-        console.log("Ahoj")
-        return [
-            { value: 'Loading' }
-        ];
-    })
-
-
-
-    static rowMatchesFilters(control: CustomControl, fulltext: string, filters: RTMToolbarFilters) {
+    static rowMatchesFilters(control: CustomControl, fulltext: string, filters: RTMToolbarFilters, certifications: Certification[]) {
+        if (filters.standard.length != 0) {
+            var certification = certifications.find((c) => c.Key == filters.standard[0])
+            if (certification == undefined) {
+                return false
+            }
+            if (certification.Controls.some((c) => {return c == control.Key})== false) {
+                return false
+            }
+        }
         if (filters.section.length != 0) {
             if (filters.section.some((function(selection) {
                 return control.Key.startsWith(selection);
@@ -461,8 +508,9 @@ class RTMDataList extends React.Component<RTMProps, RTMState> {
     recomputeFilters(filters) {
         this.setState((prevState, prosp) => {
             var visibleRows = 0;
+            var certifications = this.props.certifications;
             var data = prevState.data.map(function(c, idx) {
-                c.visible = RTMDataList.rowMatchesFilters(c.control, c.fulltext, filters);
+                c.visible = RTMDataList.rowMatchesFilters(c.control, c.fulltext, filters, certifications);
                 if (c.visible) {
                     visibleRows++;
                 }
