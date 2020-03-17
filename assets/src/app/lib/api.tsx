@@ -1,6 +1,15 @@
-export async function components() {
+function memoize(method) {
+    let cache = {};
+    return async function(...argum) {
+        let args = JSON.stringify(argum);
+        cache[args] = cache[args] || method.apply(argum);
+        return cache[args];
+    };
+}
+
+export var components = memoize(async function components() {
     return fetch('/api/v1/components').then(response => response.json()).then(addExtraProducts)
-};
+});
 
 const extraProducts = [
     {key: 'rhel-8', name: 'Red Hat Enterprise Linux 8'},
