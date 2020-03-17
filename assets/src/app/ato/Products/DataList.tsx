@@ -22,6 +22,7 @@ import {
 
 import { Certification, CustomControl } from '@app/ato/Products/OpenControlStructs.tsx'
 import { RTMDetail } from '@app/ato/Products/RTMDetail.tsx'
+import { Memoize } from '@app/lib/Memoize'
 
 interface RTMToolbarFilters {
     section: string[];
@@ -76,6 +77,9 @@ class RTMToolbar extends React.PureComponent<RTMToolbarProps, RTMToolbarState> {
         { value: 'Available' },
         { value: 'Not available' }
     ];
+    standardOptions = [
+        { value: 'Loading' }
+    ]
     onExpandToggle(isChecked){
         this.setState({expanded: isChecked});
         this.props.view.onExpandToggle(isChecked);
@@ -101,6 +105,7 @@ class RTMToolbar extends React.PureComponent<RTMToolbarProps, RTMToolbarState> {
 
         this.onExpandToggle = this.onExpandToggle.bind(this);
         this.componentDidMount = this.componentDidMount.bind(this)
+        this.standardOptions = props.view.certificationOptions();
     }
 
     componentDidMount() {
@@ -399,6 +404,15 @@ class RTMDataList extends React.Component<RTMProps, RTMState> {
             })
         }
     }
+
+    certificationOptions = Memoize(() => {
+        console.log("Ahoj")
+        return [
+            { value: 'Loading' }
+        ];
+    })
+
+
 
     static rowMatchesFilters(control: CustomControl, fulltext: string, filters: RTMToolbarFilters) {
         if (filters.section.length != 0) {

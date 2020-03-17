@@ -199,13 +199,7 @@ class Product extends React.Component<any, ProductState> {
         };
         this.renderMarkdown = this.renderMarkdown.bind(this);
         this.componentDidUpdate = this.componentDidUpdate.bind(this);
-        Api.certifications().then(data => {
-            var certifications = Array.prototype.concat.apply([], Object.keys(data).map(function(k, _) {
-                return {Key: k,
-                        Controls: Object.keys(data[k].Controls).map(function(c,_){ return data[k].Controls[c]}) }
-            }));
-            this.setState({certifications: certifications})
-        })
+        Api.certifications().then(data => this.setState({certifications: data}))
         this.componentDidUpdate();
     }
 }

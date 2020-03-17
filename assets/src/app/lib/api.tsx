@@ -48,5 +48,12 @@ export var componentControls = memoize(async function(componentId: string) {
 });
 
 export var certifications = memoize(async function() {
-    return fetch('/api/v1/certifications').then(response => response.json())
+    return fetch('/api/v1/certifications')
+        .then(response => response.json())
+        .then(data => {
+            return Array.prototype.concat.apply([], Object.keys(data).map(function(k, _) {
+                return {Key: k,
+                        Controls: Object.keys(data[k].Controls).map(function(c,_){ return data[k].Controls[c]})}
+            }))
+        })
 })
