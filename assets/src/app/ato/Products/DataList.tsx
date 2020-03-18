@@ -458,7 +458,7 @@ class RTMDataList extends React.Component<RTMProps, RTMState> {
             if (certification == undefined) {
                 return false
             }
-            if (certification.Controls.some((c) => {return c == control.Key})== false) {
+            if (certification.Controls[control.Key] != true) {
                 return false
             }
         }

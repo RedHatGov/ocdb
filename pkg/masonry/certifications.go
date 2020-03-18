@@ -7,7 +7,7 @@ import (
 	"io/ioutil"
 )
 
-type StandardSubset []string
+type StandardSubset map[string]bool
 
 type Certification struct {
 	Key      string
@@ -55,7 +55,7 @@ func (d *OpencontrolData) filterKeysInStandard(cert common.Certification, standa
 	for _, ctrl := range cert.GetControlKeysFor(standardName) {
 		_, found = validControls[ctrl]
 		if found {
-			res = append(res, ctrl)
+			res[ctrl] = true
 		}
 	}
 	return res, nil
