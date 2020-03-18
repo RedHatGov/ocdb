@@ -220,7 +220,7 @@ class RTMToolbar extends React.PureComponent<RTMToolbarProps, RTMToolbarState> {
             <DataToolbarItem variant="label" id="stacked-example-resource-select">Search</DataToolbarItem>
             <DataToolbarFilter chips={filters.search} deleteChip={this.onDelete} categoryName="Search">
                 <InputGroup>
-                    <TextInput name="textInput1" id="textInput1" type="search" aria-label="hypertext search NIST-800-53 controls" onChange={this.onSearchInputChange}/>
+                    <TextInput css="" name="textInput1" id="textInput1" type="search" aria-label="hypertext search NIST-800-53 controls" onChange={this.onSearchInputChange}/>
                     <Button variant={ButtonVariant.tertiary} aria-label="search button for search input">
                         <SearchIcon />
                     </Button>
