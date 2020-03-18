@@ -455,10 +455,7 @@ class RTMDataList extends React.Component<RTMProps, RTMState> {
     static rowMatchesFilters(control: CustomControl, fulltext: string, filters: RTMToolbarFilters, certifications: Certification[]) {
         if (filters.standard.length != 0) {
             var certification = certifications.find((c) => c.Key == filters.standard[0])
-            if (certification == undefined) {
-                return false
-            }
-            if (certification.Controls[control.Key] != true) {
+            if (certification == undefined || certification.Controls[control.Key] != true) {
                 return false
             }
         }
