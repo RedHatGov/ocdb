@@ -16,6 +16,7 @@ import { ProductIdOverride, ProductInfo } from '@app/ato/Products/Static.tsx'
 import { RTMDataList } from '@app/ato/Products/DataList.tsx'
 import { Products } from '@app/ato/Products/Products'
 import { Certification } from '@app/ato/Products/OpenControlStructs'
+import { CompletionCharts } from '@app/ato/Charts/CompletionCharts'
 
 interface ProposeChangeProps {
     link: string;
@@ -93,7 +94,11 @@ class Product extends React.Component<any, ProductState> {
     }
 
     showingMarkdown(): boolean {
-        return this.state.activeTabKey != 'NIST-800-53' && this.state.activeTabKey != 'nist-800-53'
+        return this.state.activeTabKey != 'NIST-800-53' && this.state.activeTabKey != 'nist-800-53' && !this.showingCharts()
+    }
+
+    showingCharts(): boolean {
+        return this.state.activeTabKey == 'Charts'
     }
 
     urlForEditing(): string {
@@ -108,6 +113,8 @@ class Product extends React.Component<any, ProductState> {
         if (this.showingMarkdown()) {
             const renderMarkdown = this.renderMarkdown;
             return renderMarkdown(this.state.activeTabKey);
+        } else if (this.showingCharts()) {
+            return this.renderCharts()
         } else {
             if (this.state.isLoading) {
                 return <Spinner/>
@@ -156,6 +163,12 @@ class Product extends React.Component<any, ProductState> {
                 </PageSection>
             </Page>
         );
+    }
+
+    renderCharts() {
+        return (
+            <CompletionCharts product={this.state.product} certifications={this.state.certifications} />
+        )
     }
 
     static getId(props) {
