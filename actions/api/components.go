@@ -33,13 +33,7 @@ func ComponentControlsHandler(c buffalo.Context) error {
 	ms := masonry.GetInstance()
 	component, found := ms.GetComponent(c.Param("component_id"))
 	if found {
-		lv, problems := ms.ComponentLogicalView(component)
-		result := make(map[string]interface{})
-		result["name"] = component.GetName()
-		result["controls"] = lv
-		result["errors"] = problems
-
-		return c.Render(200, r.JSON(result))
+		return c.Render(200, r.JSON(ms.ComponentLogicalView(component)))
 	}
 	return c.Render(404, r.JSON("Not found"))
 }

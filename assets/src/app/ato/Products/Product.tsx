@@ -167,7 +167,7 @@ class Product extends React.Component<any, ProductState> {
 
     renderCharts() {
         return (
-            <CompletionCharts product={this.state.product} certifications={this.state.certifications} />
+            <CompletionCharts productId={this.state.productId} />
         )
     }
 

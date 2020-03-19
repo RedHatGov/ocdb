@@ -1,44 +1,72 @@
 import * as React from 'react';
 import { ChartPie } from '@patternfly/react-charts';
-import { Certification } from '@app/ato/Products/OpenControlStructs'
+import * as Api from '@app/lib/api'
 
 interface CompletionChartsProps {
-    product: any;
-    certifications: Certification[];
+    productId: string;
 }
 
-export const CompletionCharts = React.memo((props :CompletionChartsProps) => {
-    return (
-        <React.Fragment>
-            { props.certifications.map((c) => { return (<CertificationCompletionPieChart key={c.Key} certification={c} product={props.product} />)}) }
-        </React.Fragment>
-    )
-})
+interface CompletionChartsState {
+    isLoading: boolean;
+    statistics: any;
+}
+
+export class CompletionCharts extends React.Component<CompletionChartsProps, CompletionChartsState> {
+    constructor(props) {
+        super(props);
+        this.state = {
+            isLoading: true,
+            statistics: null,
+        }
+        Api.statistics(props.productId).then(data => {
+            this.setState({statistics: data, isLoading: false})})
+    }
+
+    render() {
+        const { statistics } = this.state;
+        if (statistics == null) {
+            return ("")
+        }
+        const certs = statistics.Certifications;
+        return (
+            <React.Fragment>
+                { Object.keys(certs).map((c) => { return (<CertificationCompletionPieChart key={c} statistics={certs[c]} />)}) }
+            </React.Fragment>
+        )
+    }
+}
 
 interface CertificationCompletionPieChartProps {
     product: any;
-    certification: Certification;
+    statistisc: any;
 }
 
 const CertificationCompletionPieChart = React.memo((props: any) => {
+    const res = props.statistics.Results
+    const data = Object.keys(res).map((c) => {
+        return {"x": c, "y": res[c]}
+    })
+    const legend = Object.keys(res).map((c) => {
+        return {"name": c + ": " + res[c]}
+    })
     return (
         <React.Fragment>
-            <p>{props.certification.Key}</p>
+            <p>{props.statistics.Certification}</p>
             <div style={{ height: '230px', width: '350px' }}>
                 <ChartPie
-                    ariaDesc={"Pie chart of " + props.certification.Key}
-                    ariaTitle={"Completion of " + props.certification.Key}
+                    ariaDesc={"Pie chart of " + props.statistics.Certification}
+                    ariaTitle={"Completion of " + props.statistics.Certification}
                     constrainToVisibleArea={true}
-                    data={[{ x: 'Cats', y: 35 }, { x: 'Dogs', y: 55 }, { x: 'Birds', y: 10 }]}
+                    data={data}
                     height={230}
                     labels={({ datum }) => `${datum.x}: ${datum.y}`}
-                    legendData={[{ name: 'Cats: 35' }, { name: 'Dogs: 55' }, { name: 'Birds: 10' }]}
+                    legendData={legend}
                     legendOrientation="vertical"
                     legendPosition="right"
                     padding={{
                         bottom: 20,
                         left: 20,
-                        right: 140, // Adjusted to accommodate legend
+                        right: 180, // Adjusted to accommodate legend
                         top: 20
                     }}
                     width={350}

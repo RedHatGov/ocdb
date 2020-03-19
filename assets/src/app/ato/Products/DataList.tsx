@@ -333,7 +333,7 @@ class RTMToolbar extends React.PureComponent<RTMToolbarProps, RTMToolbarState> {
     }
 }
 
-const StatusColor = {
+export const StatusColor = {
     'unknown': '#e31c3d',
     'unsatisfied': '#e31c3d',
     'none': '#e31c3d',

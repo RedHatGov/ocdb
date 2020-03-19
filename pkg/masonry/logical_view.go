@@ -32,8 +32,13 @@ var validImplementationStatuses = []string{"complete", "partial", "not applicabl
 
 type ControlsByFamilies map[string]map[string][]CustomControl
 
-func (ms *OpencontrolData) ComponentLogicalView(c common.Component) (ControlsByFamilies, []string) {
-	return ms.controlsByFamilies(c)
+func (ms *OpencontrolData) ComponentLogicalView(c common.Component) map[string]interface{} {
+	ctrls, problems := ms.controlsByFamilies(c)
+	result := make(map[string]interface{})
+	result["name"] = c.GetName()
+	result["controls"] = ctrls
+	result["errors"] = problems
+	return result
 }
 
 func (ms *OpencontrolData) controlsByFamilies(c common.Component) (ControlsByFamilies, []string) {
