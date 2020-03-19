@@ -30,8 +30,10 @@ func standardToLogicalView(s common.Standard) map[string][]CustomControl {
 
 var validImplementationStatuses = []string{"complete", "partial", "not applicable", "planned", "unsatisfied", "unknown", "none"}
 
-func (ms *OpencontrolData) ComponentLogicalView(c common.Component) (map[string]map[string][]CustomControl, []string) {
-	result := make(map[string]map[string][]CustomControl)
+type ControlsByFamilies map[string]map[string][]CustomControl
+
+func (ms *OpencontrolData) ComponentLogicalView(c common.Component) (ControlsByFamilies, []string) {
+	result := make(ControlsByFamilies)
 	problems := make([]string, 0)
 
 	for _, satisfy := range c.GetAllSatisfies() {
