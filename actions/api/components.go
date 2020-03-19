@@ -44,6 +44,16 @@ func ComponentControlsHandler(c buffalo.Context) error {
 	return c.Render(404, r.JSON("Not found"))
 }
 
+// ComponentStatisticsHandler gives component completion statistics with regards to available certifications
+func ComponentStatisticsHandler(c buffalo.Context) error {
+	ms := masonry.GetInstance()
+	component, found := ms.GetComponent(c.Param("component_id"))
+	if found {
+		return c.Render(200, r.JSON(ms.ComponentStatistics(component)))
+	}
+	return c.Render(404, r.JSON("Not found"))
+}
+
 // ComponentFedrampHandler returns fedramp DOCX template filled in with current components info
 func ComponentFedrampHandler(c buffalo.Context) error {
 	fedrampLevel := c.Param("level")
