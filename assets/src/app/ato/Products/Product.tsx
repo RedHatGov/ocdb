@@ -92,20 +92,23 @@ class Product extends React.Component<any, ProductState> {
         return '';
     }
 
-    showingControls(): boolean {
-        return this.state.activeTabKey == 'NIST-800-53' || this.state.activeTabKey == 'nist-800-53'
+    showingMarkdown(): boolean {
+        return this.state.activeTabKey != 'NIST-800-53' && this.state.activeTabKey != 'nist-800-53'
     }
 
     urlForEditing(): string {
-        if (this.showingControls()) {
-            return "https://github.com/ComplianceAsCode/redhat/tree/master/" + this.state.productId
-        } else {
+        if (this.showingMarkdown()) {
             return "https://github.com/RedHatGov/ocdb/edit/master/assets/src/app/assets/markdown/products/" + this.state.productId + "/" + this.state.activeTabKey + ".md"
+        } else {
+            return "https://github.com/ComplianceAsCode/redhat/tree/master/" + this.state.productId
         }
     }
 
     renderTabs(){
-        if (this.showingControls()) {
+        if (this.showingMarkdown()) {
+            const renderMarkdown = this.renderMarkdown;
+            return renderMarkdown(this.state.activeTabKey);
+        } else {
             if (this.state.isLoading) {
                 return <Spinner/>
             } else {
@@ -127,9 +130,6 @@ class Product extends React.Component<any, ProductState> {
                     </TextContent>
                 )
             }
-        } else {
-            const renderMarkdown = this.renderMarkdown;
-            return renderMarkdown(this.state.activeTabKey);
         }
     }
 
