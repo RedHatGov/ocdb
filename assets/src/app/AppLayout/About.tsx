@@ -12,7 +12,7 @@ export interface AboutState {
 };
 
 
-class SimpleAboutModal extends React.Component<{}, AboutState> {
+class SimpleAboutModal extends React.PureComponent<{}, AboutState> {
     handleModalToggle() {
     }
 
