@@ -343,10 +343,10 @@ export const StatusColor = {
     'planned': '#02bfe7',
 };
 
-const ImplementationStatus: React.FunctionComponent<any> = (props) => {
+const ImplementationStatus = React.memo((props:any) => {
     var style : React.CSSProperties = { 'backgroundColor': StatusColor[props['status']] };
     return (<Label style={style}>{props['status']}</Label>);
-}
+})
 
 interface RTMDataListItemProps {
     content: CustomControl;
