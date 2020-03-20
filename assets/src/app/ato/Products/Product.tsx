@@ -26,7 +26,7 @@ interface ProposeChangeState {
     isOpen: boolean;
 }
 
-class ProposeChange extends React.Component<ProposeChangeProps, ProposeChangeState> {
+class ProposeChange extends React.PureComponent<ProposeChangeProps, ProposeChangeState> {
     constructor(props) {
         super(props);
         this.state = {
