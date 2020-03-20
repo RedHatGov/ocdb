@@ -73,7 +73,7 @@ interface ProductState {
     activeTabKey: string;
 };
 
-class Product extends React.Component<any, ProductState> {
+class Product extends React.PureComponent<any, ProductState> {
     static texts(productId: string) {
         return ProductInfo[productId] ? ProductInfo[productId].texts : {};
     }
