@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { ChartPie } from '@patternfly/react-charts';
+import { ChartPie, ChartThemeColor, getTheme, ChartThemeVariant } from '@patternfly/react-charts';
 import * as Api from '@app/lib/api'
+import { StatusColor } from '@app/ato/Products/DataList'
 
 interface CompletionChartsProps {
     productId: string;
@@ -49,6 +50,11 @@ const CertificationCompletionPieChart = React.memo((props: any) => {
     const legend = Object.keys(res).map((c) => {
         return {"name": c + ": " + res[c]}
     })
+    const theme = getTheme(ChartThemeColor.blue, ChartThemeVariant.light)
+    data.forEach((status, i) => {
+        theme.pie.colorScale[i] = StatusColor[status.x]
+        theme.legend.colorScale[i] = StatusColor[status.x]
+    })
     return (
         <React.Fragment>
             <p>{props.statistics.Certification}</p>
@@ -69,6 +75,7 @@ const CertificationCompletionPieChart = React.memo((props: any) => {
                         right: 180, // Adjusted to accommodate legend
                         top: 20
                     }}
+                    theme={theme}
                     width={350}
                 />
             </div>
