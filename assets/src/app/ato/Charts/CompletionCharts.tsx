@@ -13,7 +13,7 @@ interface CompletionChartsState {
     statistics: any;
 }
 
-export class CompletionCharts extends React.Component<CompletionChartsProps, CompletionChartsState> {
+export class CompletionCharts extends React.PureComponent<CompletionChartsProps, CompletionChartsState> {
     constructor(props) {
         super(props);
         this.state = {
