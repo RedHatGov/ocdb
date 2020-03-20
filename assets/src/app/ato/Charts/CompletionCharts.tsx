@@ -8,6 +8,7 @@ interface CompletionChartsProps {
 }
 
 interface CompletionChartsState {
+    productId: string;
     isLoading: boolean;
     statistics: any;
 }
@@ -18,9 +19,26 @@ export class CompletionCharts extends React.Component<CompletionChartsProps, Com
         this.state = {
             isLoading: true,
             statistics: null,
+            productId: props.productId,
         }
         Api.statistics(props.productId).then(data => {
             this.setState({statistics: data, isLoading: false})})
+    }
+
+    static getDerivedStateFromProps(props, state) {
+        if (state.productId != props.productId) {
+            return {productId: props.productId, statistics: null}
+        }
+        return null;
+    }
+
+    componentDidUpdate() {
+        if (this.state.statistics == null && this.state.productId != 'select') {
+            Api.statistics(this.state.productId)
+               .then(data => {
+                   this.setState({statistics: data})
+               })
+        }
     }
 
     render() {
