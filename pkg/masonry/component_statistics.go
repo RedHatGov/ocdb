@@ -39,7 +39,7 @@ func (ms *OpencontrolData) ComponentStatistics(c common.Component) ComponentStat
 					}
 					prev, found := stats.Results[status]
 					if !found {
-						prev = -1
+						prev = 0
 					}
 					stats.Results[status] = prev + 1
 				}
