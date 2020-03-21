@@ -71,6 +71,7 @@ const CertificationCompletionPieChart = React.memo((props: any) => {
         theme.pie.colorScale[i] = StatusColor[status.x]
         theme.legend.colorScale[i] = StatusColor[status.x]
     })
+    const baseUrl = window.location.pathname.replace('/Charts', '/NIST-800-53') + "?standard=" + props.statistics.Certification + "&status="
     return (
         <React.Fragment>
             <p>{props.statistics.Certification}</p>
@@ -85,6 +86,20 @@ const CertificationCompletionPieChart = React.memo((props: any) => {
                     legendData={legend}
                     legendOrientation="vertical"
                     legendPosition="right"
+                    events={[{
+                        target: "data",
+                        eventHandlers: {
+                            onClick: () => {
+                                return [{
+                                    target: "data",
+                                    mutation: (props) => {
+                                        window.open(baseUrl + data[props.index].x);
+                                        return null
+                                    }
+                                }];
+                            }
+                        }
+                    }]}
                     padding={{
                         bottom: 20,
                         left: 20,
