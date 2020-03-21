@@ -41,7 +41,7 @@ export class CompletionCharts extends React.PureComponent<CompletionChartsProps,
 
     render() {
         const { statistics } = this.state;
-        if (statistics == null) {
+        if (statistics == null || statistics.Certifications == undefined) {
             return ("")
         }
         const certs = statistics.Certifications;
