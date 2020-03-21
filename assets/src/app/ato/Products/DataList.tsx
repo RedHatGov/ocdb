@@ -112,10 +112,7 @@ class RTMToolbar extends React.PureComponent<RTMToolbarProps, RTMToolbarState> {
         this.onExpandToggle = this.onExpandToggle.bind(this);
         this.componentDidMount = this.componentDidMount.bind(this)
 
-        const params = qs.Parse()
-        if (params.standard != undefined) {
-            this.state.filters.standard = [params.standard]
-        }
+        RTMToolbar.rebuildFiltersBasedOnUrl(props, this.state.filters)
 
         Api.certifications().then((certs) => {
             this.standardOptions = certs.map((c: Certification) => {
@@ -124,11 +121,29 @@ class RTMToolbar extends React.PureComponent<RTMToolbarProps, RTMToolbarState> {
         })
     }
 
+    static rebuildFiltersBasedOnUrl(props, filters) {
+        const params = qs.Parse()
+        var recompute = false;
+        if (params.standard != undefined) {
+            filters.standard = [params.standard]
+            recompute = true
+        }
+        if (params.status != undefined) {
+            filters.status = Array.isArray(params.status) ? params.status : [params.status]
+            recompute = true
+        }
+        if (recompute) {
+            props.view.recomputeFilters(filters)
+        }
+    }
+
     componentDidMount() {
         const hash = window.location.hash.replace('%20', ' ');
         if (hash.length > 1) {
             location.hash = hash;
         }
+        console.log("RTMToolbar.componentDidMount()")
+        console.log(this.props.view)
     }
 
     onSelect(type, event, selection) {
