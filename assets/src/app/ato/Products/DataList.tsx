@@ -142,8 +142,6 @@ class RTMToolbar extends React.PureComponent<RTMToolbarProps, RTMToolbarState> {
         if (hash.length > 1) {
             location.hash = hash;
         }
-        console.log("RTMToolbar.componentDidMount()")
-        console.log(this.props.view)
     }
 
     onSelect(type, event, selection) {
