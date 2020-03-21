@@ -23,6 +23,7 @@ import {
 import { Certification, CustomControl } from '@app/ato/Products/OpenControlStructs.tsx'
 import { RTMDetail } from '@app/ato/Products/RTMDetail.tsx'
 import * as Api from '@app/lib/api'
+import * as qs from '@app/lib/querystring'
 
 interface RTMToolbarFilters {
     section: string[];
@@ -110,6 +111,11 @@ class RTMToolbar extends React.PureComponent<RTMToolbarProps, RTMToolbarState> {
 
         this.onExpandToggle = this.onExpandToggle.bind(this);
         this.componentDidMount = this.componentDidMount.bind(this)
+
+        const params = qs.Parse()
+        if (params.standard != undefined) {
+            this.state.filters.standard = [params.standard]
+        }
 
         Api.certifications().then((certs) => {
             this.standardOptions = certs.map((c: Certification) => {
