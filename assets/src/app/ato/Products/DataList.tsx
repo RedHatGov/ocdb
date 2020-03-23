@@ -534,6 +534,7 @@ class RTMDataList extends React.Component<RTMProps, RTMState> {
             })
             return {data: data, visibleRows: visibleRows}
         });
+        qs.Set(filters)
     };
 
     render () {
