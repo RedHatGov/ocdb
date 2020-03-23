@@ -124,14 +124,12 @@ class RTMToolbar extends React.PureComponent<RTMToolbarProps, RTMToolbarState> {
     static rebuildFiltersBasedOnUrl(props, filters) {
         const params = qs.Parse()
         var recompute = false;
-        if (params.standard != undefined) {
-            filters.standard = [params.standard]
-            recompute = true
-        }
-        if (params.status != undefined) {
-            filters.status = Array.isArray(params.status) ? params.status : [params.status]
-            recompute = true
-        }
+        ['section', 'status', 'solution', 'search', 'standard'].forEach((key) => {
+            if (params[key] != undefined) {
+                filters[key] = Array.isArray(params[key]) ? params[key] : [params[key]]
+                recompute = true
+            }
+        })
         if (recompute) {
             props.view.recomputeFilters(filters)
         }
