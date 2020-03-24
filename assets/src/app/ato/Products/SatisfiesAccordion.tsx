@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Expandable, Text } from '@patternfly/react-core';
 import MDX from '@mdx-js/runtime'
-import { Satisfies } from '@app/ato/Products/OpenControlStructs.tsx'
+import { Satisfies } from '@app/lib/opencontrol'
 
 interface CustomControlProps {
     satisfies?: Satisfies;

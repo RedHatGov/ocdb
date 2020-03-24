@@ -20,7 +20,7 @@ import {
     DataToolbar, DataToolbarContent, DataToolbarFilter, DataToolbarGroup, DataToolbarItem,
 } from '@patternfly/react-core/dist/esm/experimental';
 
-import { Certification, CustomControl } from '@app/ato/Products/OpenControlStructs.tsx'
+import { Certification, CustomControl } from '@app/lib/opencontrol'
 import { RTMDetail } from '@app/ato/Products/RTMDetail.tsx'
 import * as Api from '@app/lib/api'
 import * as qs from '@app/lib/querystring'

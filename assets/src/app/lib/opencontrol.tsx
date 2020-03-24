@@ -24,4 +24,3 @@ export interface Certification {
     Key: string,
     Controls: string[]
 }
-

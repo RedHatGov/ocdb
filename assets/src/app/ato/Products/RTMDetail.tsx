@@ -2,7 +2,7 @@ import * as React from 'react';
 import { PageSection, TextContent, Text, Tooltip, TooltipPosition } from '@patternfly/react-core';
 import { InfoAltIcon } from '@patternfly/react-icons'
 import MDX from '@mdx-js/runtime'
-import { CustomControl } from '@app/ato/Products/OpenControlStructs.tsx'
+import { CustomControl } from '@app/lib/opencontrol'
 import { SatisfiesAccordion } from '@app/ato/Products/SatisfiesAccordion.tsx'
 
 interface RTMDetailProps {

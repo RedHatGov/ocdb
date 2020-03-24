@@ -15,7 +15,7 @@ import { Markdown } from '@app/lib/markdown';
 import { ProductIdOverride, ProductInfo } from '@app/ato/Products/Static.tsx'
 import { RTMDataList } from '@app/ato/Products/DataList.tsx'
 import { Products } from '@app/ato/Products/Products'
-import { Certification } from '@app/ato/Products/OpenControlStructs'
+import { Certification } from '@app/lib/opencontrol'
 import { CompletionCharts } from '@app/ato/Charts/CompletionCharts'
 
 interface ProposeChangeProps {
