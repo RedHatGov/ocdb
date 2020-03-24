@@ -120,21 +120,23 @@ class Product extends React.PureComponent<any, ProductState> {
                 return <Spinner/>
             } else {
                 return (
-                    <TextContent>
-                        { this.state.product['errors'].length == 0 ?
-                          '' :
-                          <React.Fragment>
-                              <Text component="h2">OpenControls Developer Information</Text>
-                              <Alert  variant="warning" title="Metadata Warnings">
-                                  {this.state.product['errors'].map((function(error, i) {
-                                       return <Text component="p" key={i}>{error}</Text>;
-                                   }))}
-                              </Alert>
-                          </React.Fragment>
-                        }
-                        <Text component="h2">Requirements Traceability Matrix</Text>
+                    <React.Fragment>
+                        <TextContent>
+                            { this.state.product['errors'].length == 0 ?
+                              '' :
+                              <React.Fragment>
+                                  <Text component="h2">OpenControls Developer Information</Text>
+                                  <Alert  variant="warning" title="Metadata Warnings">
+                                      {this.state.product['errors'].map((function(error, i) {
+                                           return <Text component="p" key={i}>{error}</Text>;
+                                       }))}
+                                  </Alert>
+                              </React.Fragment>
+                            }
+                            <Text component="h2">Requirements Traceability Matrix</Text>
+                        </TextContent>
                         <RTMDataList content={this.state.product['controls']} certifications={this.state.certifications} />
-                    </TextContent>
+                    </React.Fragment>
                 )
             }
         }
