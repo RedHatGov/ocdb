@@ -62,7 +62,7 @@ class RTMDataToolbarKebab extends React.PureComponent<RTMDataToolbarKebabProps, 
             <DropdownItem key="link2"><p onClick={() => {downloadCsv(false)}}>Download All Controls (CSV)</p></DropdownItem>,
             <DropdownSeparator key="separator" />,
             <DropdownItem key="link3" href={"https://raw.githubusercontent.com/ComplianceAsCode/oscal/master/xml/" + this.state.productId + "-fedramp-High.xml"}>Download All Controls (OSCAL)</DropdownItem>,
-            <DropdownItem isDisabled key="link4">Download All Controls (opencontrols)</DropdownItem>,
+            <DropdownItem key="link4" href={"https://raw.githubusercontent.com/ComplianceAsCode/redhat/master/build/" + this.state.productId + "/component.yaml"}>Download All Controls (OpenControl YAML)</DropdownItem>,
         ];
         return <Dropdown
                    toggle={
