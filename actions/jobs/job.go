@@ -11,6 +11,7 @@ type JobFn func() error
 type Job struct {
 	Name        string
 	Fn          JobFn `json:"-"`
+	Period      time.Duration
 	LastStart   time.Time
 	LastSuccess time.Time
 	LastError   string
@@ -18,7 +19,7 @@ type Job struct {
 
 func (job *Job) setUpIn(w worker.Worker) {
 	err := w.Register(job.Name, func(args worker.Args) error {
-		job.reschedule(w, time.Hour)
+		job.reschedule(w, job.Period)
 		return job.run()
 	})
 	if err != nil {
