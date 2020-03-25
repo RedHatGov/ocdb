@@ -409,7 +409,7 @@ export const StatusColor = {
     'unknown': '#e31c3d',
     'unsatisfied': '#e31c3d',
     'none': '#e31c3d',
-    'not applicable': '#2e8540',
+    'not applicable': '#a9c1a9',
     'complete': '#2e8540',
     'partial': '#fdb81e',
     'planned': '#02bfe7',
