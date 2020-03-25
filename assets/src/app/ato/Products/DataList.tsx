@@ -23,6 +23,7 @@ import {
 
 import { Certification, CustomControl, OpenControlToCSV } from '@app/lib/opencontrol'
 import { RTMDetail } from '@app/ato/Products/RTMDetail.tsx'
+import { GetActiveProductIdFromUrl } from '@app/AppLayout/ProductSelector'
 import * as Api from '@app/lib/api'
 import { ServeCSV } from '@app/lib/csv'
 import * as qs from '@app/lib/querystring'
@@ -33,12 +34,13 @@ interface RTMDataToolbarKebabProps {
 
 interface RTMDataToolbarKebabState {
     open: boolean;
+    productId?: string;
 }
 
 class RTMDataToolbarKebab extends React.PureComponent<RTMDataToolbarKebabProps, RTMDataToolbarKebabState> {
     constructor(props) {
         super(props)
-        this.state = {open: false}
+        this.state = {open: false, productId: GetActiveProductIdFromUrl()}
         this.onToggle = this.onToggle.bind(this);
     }
 
@@ -59,7 +61,7 @@ class RTMDataToolbarKebab extends React.PureComponent<RTMDataToolbarKebabProps, 
             <DropdownItem key="link1"><p onClick={() => {downloadCsv(true)}}>Download Filtered Subset (CSV)</p></DropdownItem>,
             <DropdownItem key="link2"><p onClick={() => {downloadCsv(false)}}>Download All Controls (CSV)</p></DropdownItem>,
             <DropdownSeparator key="separator" />,
-            <DropdownItem isDisabled key="link3">Download All Controls (OSCAL)</DropdownItem>,
+            <DropdownItem key="link3" href={"https://raw.githubusercontent.com/ComplianceAsCode/oscal/master/xml/" + this.state.productId + "-fedramp-High.xml"}>Download All Controls (OSCAL)</DropdownItem>,
             <DropdownItem isDisabled key="link4">Download All Controls (opencontrols)</DropdownItem>,
         ];
         return <Dropdown
