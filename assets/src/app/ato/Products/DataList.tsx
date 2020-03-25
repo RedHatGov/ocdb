@@ -9,22 +9,72 @@ import {
     DataListToggle,
     DataListContent,
     DataListItemCells,
+    Dropdown, DropdownItem, DropdownPosition, DropdownSeparator, DropdownToggle,
     InputGroup,
     Label,
     Select, SelectOption, SelectVariant,
     Switch,
     TextInput,
 } from '@patternfly/react-core';
-import { SearchIcon } from '@patternfly/react-icons'
+import { SearchIcon, DownloadIcon } from '@patternfly/react-icons'
 import {
     DataToolbar, DataToolbarContent, DataToolbarFilter, DataToolbarGroup, DataToolbarItem,
 } from '@patternfly/react-core/dist/esm/experimental';
 
-import { Certification, CustomControl } from '@app/lib/opencontrol'
+import { Certification, CustomControl, OpenControlToCSV } from '@app/lib/opencontrol'
 import { RTMDetail } from '@app/ato/Products/RTMDetail.tsx'
 import * as Api from '@app/lib/api'
+import { ServeCSV } from '@app/lib/csv'
 import * as qs from '@app/lib/querystring'
 
+interface RTMDataToolbarKebabProps {
+    view: RTMDataList;
+}
+
+interface RTMDataToolbarKebabState {
+    open: boolean;
+}
+
+class RTMDataToolbarKebab extends React.PureComponent<RTMDataToolbarKebabProps, RTMDataToolbarKebabState> {
+    constructor(props) {
+        super(props)
+        this.state = {open: false}
+        this.onToggle = this.onToggle.bind(this);
+    }
+
+    onToggle(open) {
+        this.setState({open})
+    }
+
+    downloadCsv(subset) {
+        const state = this.props.view.state;
+        const rows = subset ? state.data.filter((r, idx) => { return r.visible }) : state.data
+        const controls = rows.map((r) => r.control)
+        ServeCSV("controls.csv", OpenControlToCSV(controls))
+    }
+
+    render() {
+        const downloadCsv = this.downloadCsv.bind(this);
+        const dropdownItems = [
+            <DropdownItem key="link1"><p onClick={() => {downloadCsv(true)}}>Download Filtered Subset (CSV)</p></DropdownItem>,
+            <DropdownItem key="link2"><p onClick={() => {downloadCsv(false)}}>Download All Controls (CSV)</p></DropdownItem>,
+            <DropdownSeparator key="separator" />,
+            <DropdownItem isDisabled key="link3">Download All Controls (OSCAL)</DropdownItem>,
+            <DropdownItem isDisabled key="link4">Download All Controls (opencontrols)</DropdownItem>,
+        ];
+        return <Dropdown
+                   toggle={
+                       <DropdownToggle iconComponent={null} onToggle={this.onToggle} aria-label="Downloads">
+                           <DownloadIcon />
+                       </DropdownToggle>
+                   }
+                   isOpen={this.state.open}
+                   position={DropdownPosition.right}
+                   isPlain
+                   dropdownItems={dropdownItems}
+        />
+    }
+}
 interface RTMToolbarFilters {
     section: string[];
     status: string[];
@@ -333,6 +383,9 @@ class RTMToolbar extends React.Component<RTMToolbarProps, RTMToolbarState> {
             <DataToolbarItem variant="separator"></DataToolbarItem>
             <DataToolbarItem>
                 <Switch id="simple-switch" label="Collapse All" labelOff="Expand All" onChange={this.onExpandToggle} isChecked={expanded} />
+            </DataToolbarItem>
+            <DataToolbarItem>
+                <RTMDataToolbarKebab view={this.props.view} />
             </DataToolbarItem>
         </React.Fragment>;
 
