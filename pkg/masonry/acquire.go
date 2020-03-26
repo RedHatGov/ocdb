@@ -10,19 +10,19 @@ import (
 	"github.com/opencontrol/compliance-masonry/pkg/lib/opencontrol/versions/1.0.0"
 )
 
-func (d *OpencontrolData) populateCacheDir() error {
+func (d *OpencontrolData) populateCacheDir(revision string) error {
 	repo := make([]common.RemoteSource, 1)
 	repo[0] = schema.VCSEntry{
 		URL:      "https://github.com/ComplianceAsCode/redhat",
-		Revision: "master",
+		Revision: revision,
 		Path:     ""}
 	getter := resources.NewVCSAndLocalGetter(opencontrol.YAMLParser{})
 	return getter.GetRemoteResources(d.cacheDir, "opencontrols", repo)
 }
 
-func newOpencontrolData() (*OpencontrolData, error) {
+func newOpencontrolData(revision string) (*OpencontrolData, error) {
 	res := OpencontrolData{cacheDir: "/tmp/.masonry_cache"}
-	err := res.populateCacheDir()
+	err := res.populateCacheDir(revision)
 	if err != nil {
 		return nil, err
 	}

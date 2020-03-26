@@ -19,7 +19,7 @@ func GetInstance() *OpencontrolData {
 func Refresh() error {
 	mux.Lock()
 	defer mux.Unlock()
-	data, err := newOpencontrolData()
+	data, err := newOpencontrolData("master")
 	if err != nil {
 		return err
 	}
