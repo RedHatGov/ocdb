@@ -18,6 +18,11 @@ var List = []Job{
 		Fn:     cac.Refresh,
 		Period: time.Hour,
 	},
+	Job{
+		Name:   "Open Control Historical Statistics",
+		Fn:     masonry.RefreshHistoryStatistics,
+		Period: time.Hour * 24,
+	},
 }
 
 func Init(worker worker.Worker) {
