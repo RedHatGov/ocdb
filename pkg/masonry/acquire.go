@@ -20,8 +20,8 @@ func (d *OpencontrolData) populateCacheDir(revision string) error {
 	return getter.GetRemoteResources(d.cacheDir, "opencontrols", repo)
 }
 
-func newOpencontrolData(revision string) (*OpencontrolData, error) {
-	res := OpencontrolData{cacheDir: "/tmp/.masonry_cache"}
+func newOpencontrolData(revision, cacheDir string) (*OpencontrolData, error) {
+	res := OpencontrolData{cacheDir: cacheDir}
 	err := res.populateCacheDir(revision)
 	if err != nil {
 		return nil, err
