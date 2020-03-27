@@ -6,7 +6,6 @@ import (
 	"github.com/RedHatGov/ocdb/pkg/git"
 	"github.com/RedHatGov/ocdb/pkg/utils"
 
-	"os"
 	"os/exec"
 	"sync"
 )
@@ -19,7 +18,7 @@ const contentCache = "/tmp/.scap_cache"
 func Refresh() error {
 	mux.Lock()
 	defer mux.Unlock()
-	err := refreshRepo()
+	err := git.PullOrClone(contentCache, "https://github.com/ComplianceAsCode/content")
 	if err != nil {
 		return err
 	}
@@ -75,10 +74,4 @@ func cmake() error {
 		return fmt.Errorf("Error running cmake: %v, stderr was: %s", err, cmakeCmdErr.String())
 	}
 	return nil
-}
-func refreshRepo() error {
-	if stat, err := os.Stat(contentCache); err == nil && stat.IsDir() {
-		return git.Pull(contentCache)
-	}
-	return git.Clone("https://github.com/ComplianceAsCode/content", contentCache)
 }

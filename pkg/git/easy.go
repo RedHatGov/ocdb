@@ -3,6 +3,7 @@ package git
 import (
 	"fmt"
 	"github.com/RedHatGov/ocdb/pkg/utils"
+	"os"
 	"os/exec"
 )
 
@@ -31,4 +32,11 @@ func Pull(directory string) error {
 		return fmt.Errorf("Error running git pull: %v", err)
 	}
 	return nil
+}
+
+func PullOrClone(directory, gitRepo string) error {
+	if stat, err := os.Stat(directory); err == nil && stat.IsDir() {
+		return Pull(directory)
+	}
+	return Clone(gitRepo, directory)
 }
