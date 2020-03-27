@@ -18,7 +18,7 @@ const contentCache = "/tmp/.scap_cache"
 func Refresh() error {
 	mux.Lock()
 	defer mux.Unlock()
-	err := git.PullOrClone(contentCache, "https://github.com/ComplianceAsCode/content")
+	err := git.PullOrClone(contentCache, "https://github.com/ComplianceAsCode/content", nil)
 	if err != nil {
 		return err
 	}

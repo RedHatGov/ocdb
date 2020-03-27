@@ -3,6 +3,7 @@ package masonry
 import (
 	"fmt"
 	//"github.com/opencontrol/compliance-masonry/pkg/lib/common"
+	"github.com/RedHatGov/ocdb/pkg/git"
 	"time"
 )
 
@@ -10,6 +11,8 @@ const (
 	// how many months back we want to in the statistics?
 	startingYear  = 2019
 	startingMonth = 12
+	ocGit         = "https://github.com/ComplianceAsCode/redhat"
+	ocDir         = "/tmp/.ComplianceAsCode.redhat"
 )
 
 type HistoricalStats struct {
@@ -22,21 +25,27 @@ type SnapshotStats struct {
 }
 
 func RefreshHistoryStatistics() error {
-	genTimeSeries()
+	startDate := time.Date(startingYear, time.Month(startingMonth), 1, 0, 0, 0, 0, time.UTC)
+	gitStartDate := startDate.AddDate(0, -1, 0)
+	err := git.PullOrClone(ocDir, ocGit, &(gitStartDate))
+	if err != nil {
+		return err
+	}
+	for date := range generateDatesMonthly(startDate) {
+		sha, err := git.LastCommitBy(ocDir, date)
+		if err != nil {
+			return err
+		}
+		fmt.Print(sha)
+	}
 	return nil
 }
 
-func genTimeSeries() {
-	for date := range generateDatesMonthly(startingMonth, startingYear) {
-		fmt.Println(date)
-	}
-}
-
-func generateDatesMonthly(startingMonth, startingYear int) chan time.Time {
+func generateDatesMonthly(since time.Time) chan time.Time {
 	today := time.Now()
 	ch := make(chan time.Time)
 	go func() {
-		for date := time.Date(startingYear, time.Month(startingMonth), 1, 0, 0, 0, 0, time.UTC); today.After(date); date = date.AddDate(0, 1, 0) {
+		for date := since; today.After(date); date = date.AddDate(0, 1, 0) {
 			ch <- date
 		}
 		close(ch)
