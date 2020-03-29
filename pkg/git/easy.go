@@ -6,6 +6,7 @@ import (
 	"github.com/RedHatGov/ocdb/pkg/utils"
 	"os"
 	"os/exec"
+	"strings"
 	"time"
 )
 
@@ -61,5 +62,5 @@ func LastCommitBy(directory string, date time.Time) (string, error) {
 		return "", fmt.Errorf("Error running git log: %v; stderr: %s", err, stderr.String())
 	}
 
-	return stdout.String(), nil
+	return strings.Replace(stdout.String(), "\n", "", 1), nil
 }
