@@ -94,21 +94,21 @@ const CompletionStackChart = React.memo((props: CompletionStackChartProps) => {
         theme.legend.colorScale[i] = StatusColor[status]
     })
 
-
     return (
         <React.Fragment>
             <p>{props.certName}</p>
-            <div style={{ height: '580px', width: '500px' }}>
+            <div style={{ height: '450px', width: '750px' }}>
                 <Chart
                     ariaDesc="Average number of pets"
                     ariaTitle="Area chart example"
                     legendData={legendData}
-                    legendPosition="bottom-left"
-                    height={550}
+                    legendOrientation="vertical"
+                    legendPosition="right"
+                    height={300}
                     padding={{
                         bottom: 75, // Adjusted to accomodate legend
                         left: 50,
-                        right: 50,
+                        right: 150,
                         top: 20,
                     }}
                     maxDomain={{y: maxDomain}}
@@ -123,8 +123,6 @@ const CompletionStackChart = React.memo((props: CompletionStackChartProps) => {
                     </ChartStack>
                 </Chart>
             </div>
-            <br/>
-            <br/>
         </React.Fragment>
     );
 })
