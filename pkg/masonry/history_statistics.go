@@ -19,18 +19,24 @@ type HistoricalStats map[string]ComponentStats
 type ComponentStats []ComponentSnapshotStats
 
 type ComponentSnapshotStats struct {
-	time.Time
+	Time  time.Time
 	Stats ComponentStatistics
 }
 
 var hsInstance *HistoricalStats
 var hsMux sync.Mutex
 
-func GetHistoricalStats() *HistoricalStats {
+func getHistoricalStats() *HistoricalStats {
 	if hsInstance == nil {
 		RefreshHistoryStatistics()
 	}
 	return hsInstance
+}
+
+func GetHistoricalStats(componentID string) (ComponentStats, bool) {
+	instance := getHistoricalStats()
+	stats, found := (*instance)[componentID]
+	return stats, found
 }
 
 func RefreshHistoryStatistics() error {
