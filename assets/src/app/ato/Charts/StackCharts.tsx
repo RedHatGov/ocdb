@@ -109,7 +109,7 @@ const CompletionStackChart = React.memo((props: CompletionStackChartProps) => {
                         bottom: 75, // Adjusted to accomodate legend
                         left: 50,
                         right: 50,
-                        top: 50,
+                        top: 20,
                     }}
                     maxDomain={{y: maxDomain}}
                     theme={theme}
