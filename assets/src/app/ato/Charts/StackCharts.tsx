@@ -79,7 +79,7 @@ const CompletionStackChart = React.memo((props: CompletionStackChartProps) => {
     const result = statuses.map((status) => {
         return props.statistics.map((snapshot, k) => {
             const y = snapshot.stats[status]
-            return { 'name': status, 'x': '2020.' + (k + 1), 'y': y == undefined ? 0 : y }
+            return { 'name': status, 'x': new Date(snapshot.time), 'y': y == undefined ? 0 : y }
         })
     })
 
@@ -113,6 +113,7 @@ const CompletionStackChart = React.memo((props: CompletionStackChartProps) => {
                     }}
                     maxDomain={{y: maxDomain}}
                     theme={theme}
+                    scale={{x: 'time'}}
                 >
                     <ChartAxis />
                     <ChartAxis dependentAxis showGrid />
