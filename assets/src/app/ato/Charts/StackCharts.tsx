@@ -3,7 +3,7 @@ import { ChartThemeColor, getTheme, ChartThemeVariant } from '@patternfly/react-
 import * as Api from '@app/lib/api'
 import { StatusColor } from '@app/ato/Products/DataList'
 import { CompletionChartsProps } from '@app/ato/Charts/PieCharts'
-import { Chart, ChartArea, ChartAxis, ChartStack, ChartVoronoiContainer } from '@patternfly/react-charts';
+import { Chart, ChartArea, ChartAxis, ChartStack } from '@patternfly/react-charts';
 
 
 interface CompletionStackChartsState {
