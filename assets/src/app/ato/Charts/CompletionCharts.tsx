@@ -2,6 +2,7 @@ import React from 'react';
 import { PageSection } from '@patternfly/react-core';
 import { Tabs, Tab } from '@patternfly/react-core';
 import { CompletionPieCharts, CompletionChartsProps } from '@app/ato/Charts/PieCharts'
+import { CompletionStackCharts } from '@app/ato/Charts/StackCharts'
 
 interface CompletionChartsState {
     activeTabKey: number;
@@ -13,6 +14,7 @@ export class CompletionCharts extends React.PureComponent<CompletionChartsProps,
         this.state = {
             activeTabKey: 0
         };
+        this.handleTabClick = this.handleTabClick.bind(this);
     }
 
     handleTabClick(event, tabIndex){
@@ -27,6 +29,11 @@ export class CompletionCharts extends React.PureComponent<CompletionChartsProps,
                 <Tab eventKey={0} title="Pie Charts">
                     <PageSection>
                         <CompletionPieCharts productId={this.props.productId} />
+                    </PageSection>
+                </Tab>
+                <Tab eventKey={1} title="Stack Charts">
+                    <PageSection>
+                        <CompletionStackCharts productId={this.props.productId} />
                     </PageSection>
                 </Tab>
             </Tabs>
