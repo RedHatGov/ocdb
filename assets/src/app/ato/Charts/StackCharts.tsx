@@ -88,6 +88,13 @@ const CompletionStackChart = React.memo((props: CompletionStackChartProps) => {
     })
     const maxDomain = Object.values(props.statistics[0].stats).reduce((a, b) => { return (a as number) + (b as number) }) as number
 
+    const theme = getTheme(ChartThemeColor.blue, ChartThemeVariant.light)
+    statuses.forEach((status, i) => {
+        theme.stack.colorScale[i] = StatusColor[status]
+        theme.legend.colorScale[i] = StatusColor[status]
+    })
+
+
     return (
         <React.Fragment>
             <p>{props.certName}</p>
@@ -105,7 +112,7 @@ const CompletionStackChart = React.memo((props: CompletionStackChartProps) => {
                         top: 50,
                     }}
                     maxDomain={{y: maxDomain}}
-                    themeColor={ChartThemeColor.multiUnordered}
+                    theme={theme}
                 >
                     <ChartAxis />
                     <ChartAxis dependentAxis showGrid />
