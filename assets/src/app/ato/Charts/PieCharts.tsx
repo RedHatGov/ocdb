@@ -3,7 +3,7 @@ import { ChartPie, ChartThemeColor, getTheme, ChartThemeVariant } from '@pattern
 import * as Api from '@app/lib/api'
 import { StatusColor } from '@app/ato/Products/DataList'
 
-interface CompletionPieChartsProps {
+export interface CompletionChartsProps {
     productId: string;
 }
 
@@ -12,7 +12,7 @@ interface CompletionPieChartsState {
     statistics: any;
 }
 
-export class CompletionPieCharts extends React.PureComponent<CompletionPieChartsProps, CompletionPieChartsState> {
+export class CompletionPieCharts extends React.PureComponent<CompletionChartsProps, CompletionPieChartsState> {
     constructor(props) {
         super(props);
         this.state = {
