@@ -19,7 +19,6 @@ export class CompletionCharts extends React.PureComponent<CompletionChartsProps,
     constructor(props) {
         super(props);
         const params = qs.Parse()
-        console.log(params)
         this.state = {
             activeTabKey: titleToId[params.tab]
         };
