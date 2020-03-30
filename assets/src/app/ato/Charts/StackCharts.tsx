@@ -102,8 +102,8 @@ const CompletionStackChart = React.memo((props: CompletionStackChartProps) => {
             </TextContent>
             <div style={{ height: '465px', width: '750px' }}>
                 <Chart
-                    ariaDesc="Average number of pets"
-                    ariaTitle="Area chart example"
+                    ariaDesc="Control responses over time"
+                    ariaTitle="Control responses over time"
                     legendData={legendData}
                     legendOrientation="vertical"
                     legendPosition="right"
