@@ -3,21 +3,31 @@ import { PageSection } from '@patternfly/react-core';
 import { Tabs, Tab } from '@patternfly/react-core';
 import { CompletionPieCharts, CompletionChartsProps } from '@app/ato/Charts/PieCharts'
 import { CompletionStackCharts } from '@app/ato/Charts/StackCharts'
+import * as qs from '@app/lib/querystring'
 
 interface CompletionChartsState {
     activeTabKey: number;
 }
 
+const titleToId = {
+    undefined: 0,
+    "0": 0,
+    "1": 1,
+}
+
 export class CompletionCharts extends React.PureComponent<CompletionChartsProps, CompletionChartsState> {
     constructor(props) {
         super(props);
+        const params = qs.Parse()
+        console.log(params)
         this.state = {
-            activeTabKey: 0
+            activeTabKey: titleToId[params.tab]
         };
         this.handleTabClick = this.handleTabClick.bind(this);
     }
 
     handleTabClick(event, tabIndex){
+        qs.Set({'tab': tabIndex})
         this.setState({
             activeTabKey: tabIndex
         });
