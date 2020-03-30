@@ -86,6 +86,7 @@ const CompletionStackChart = React.memo((props: CompletionStackChartProps) => {
     const legendData = statuses.map((status) => {
         return { name: status }
     })
+    const maxDomain = Object.values(props.statistics[0].stats).reduce((a, b) => { return (a as number) + (b as number) }) as number
 
     return (
         <React.Fragment>
@@ -103,7 +104,7 @@ const CompletionStackChart = React.memo((props: CompletionStackChartProps) => {
                         right: 50,
                         top: 50,
                     }}
-                    maxDomain={{y: 622}}
+                    maxDomain={{y: maxDomain}}
                     themeColor={ChartThemeColor.multiUnordered}
                 >
                     <ChartAxis />
