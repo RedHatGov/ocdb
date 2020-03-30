@@ -94,6 +94,7 @@ func generateDatesMonthly(since time.Time) chan time.Time {
 		for date := since; today.After(date); date = date.AddDate(0, 1, 0) {
 			ch <- date
 		}
+		ch <- today
 		close(ch)
 	}()
 	return ch
