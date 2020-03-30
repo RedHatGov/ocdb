@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { TextContent, Text } from '@patternfly/react-core';
-import { ChartThemeColor, getTheme, ChartThemeVariant } from '@patternfly/react-charts';
+import { ChartThemeColor, getTheme, ChartThemeVariant, ChartVoronoiContainer } from '@patternfly/react-charts';
 import * as Api from '@app/lib/api'
 import { StatusColor } from '@app/ato/Products/DataList'
 import { CompletionChartsProps } from '@app/ato/Charts/PieCharts'
@@ -117,6 +117,7 @@ const CompletionStackChart = React.memo((props: CompletionStackChartProps) => {
                     maxDomain={{y: maxDomain}}
                     theme={theme}
                     scale={{x: 'time'}}
+                    containerComponent={<ChartVoronoiContainer labels={({ datum }) => `${datum.name}: ${datum.y}`} constrainToVisibleArea />}
                 >
                     <ChartAxis />
                     <ChartAxis dependentAxis showGrid />
