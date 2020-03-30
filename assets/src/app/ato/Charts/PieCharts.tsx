@@ -54,11 +54,10 @@ export class CompletionPieCharts extends React.PureComponent<CompletionChartsPro
 }
 
 interface CertificationCompletionPieChartProps {
-    product: any;
-    statistisc: any;
+    statistics: any;
 }
 
-const CertificationCompletionPieChart = React.memo((props: any) => {
+const CertificationCompletionPieChart = React.memo((props: CertificationCompletionPieChartProps) => {
     const res = props.statistics.Results
     const data = Object.keys(res).map((c) => {
         return {"x": c, "y": res[c]}
