@@ -100,7 +100,7 @@ const CompletionStackChart = React.memo((props: CompletionStackChartProps) => {
             <TextContent>
                 <Text component="h2">{props.certName}</Text>
             </TextContent>
-            <div style={{ height: '450px', width: '750px' }}>
+            <div style={{ height: '465px', width: '750px' }}>
                 <Chart
                     ariaDesc="Average number of pets"
                     ariaTitle="Area chart example"
