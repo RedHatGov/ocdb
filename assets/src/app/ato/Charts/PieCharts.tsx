@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { TextContent, Text } from '@patternfly/react-core';
 import { ChartPie, ChartThemeColor, getTheme, ChartThemeVariant } from '@patternfly/react-charts';
 import * as Api from '@app/lib/api'
 import { StatusColor } from '@app/ato/Products/DataList'
@@ -73,7 +74,9 @@ const CertificationCompletionPieChart = React.memo((props: CertificationCompleti
     const baseUrl = window.location.pathname.replace('/Charts', '/NIST-800-53') + "?standard=" + props.statistics.Certification + "&status="
     return (
         <React.Fragment>
-            <p>{props.statistics.Certification}</p>
+            <TextContent>
+                <Text component="h2">{props.statistics.Certification}</Text>
+            </TextContent>
             <div style={{ height: '230px', width: '350px' }}>
                 <ChartPie
                     ariaDesc={"Pie chart of " + props.statistics.Certification}

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { TextContent, Text } from '@patternfly/react-core';
 import { ChartThemeColor, getTheme, ChartThemeVariant } from '@patternfly/react-charts';
 import * as Api from '@app/lib/api'
 import { StatusColor } from '@app/ato/Products/DataList'
@@ -96,7 +97,9 @@ const CompletionStackChart = React.memo((props: CompletionStackChartProps) => {
 
     return (
         <React.Fragment>
-            <p>{props.certName}</p>
+            <TextContent>
+                <Text component="h2">{props.certName}</Text>
+            </TextContent>
             <div style={{ height: '450px', width: '750px' }}>
                 <Chart
                     ariaDesc="Average number of pets"
