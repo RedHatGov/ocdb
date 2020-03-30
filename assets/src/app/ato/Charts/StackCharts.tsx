@@ -91,13 +91,13 @@ const CompletionStackChart = React.memo((props: CompletionStackChartProps) => {
     return (
         <React.Fragment>
             <p>{props.certName}</p>
-            <div style={{ height: '700px', width: '500px' }}>
+            <div style={{ height: '580px', width: '500px' }}>
                 <Chart
                     ariaDesc="Average number of pets"
                     ariaTitle="Area chart example"
                     legendData={legendData}
                     legendPosition="bottom-left"
-                    height={700}
+                    height={550}
                     padding={{
                         bottom: 75, // Adjusted to accomodate legend
                         left: 50,
