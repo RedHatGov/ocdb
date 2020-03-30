@@ -26,12 +26,12 @@ export class CompletionCharts extends React.PureComponent<CompletionChartsProps,
     render() {
         return (
             <Tabs activeKey={this.state.activeTabKey} onSelect={this.handleTabClick}>
-                <Tab eventKey={0} title="Pie Charts">
+                <Tab eventKey={0} title="Certification Completion">
                     <PageSection>
                         <CompletionPieCharts productId={this.props.productId} />
                     </PageSection>
                 </Tab>
-                <Tab eventKey={1} title="Stack Charts">
+                <Tab eventKey={1} title="History of Completion">
                     <PageSection>
                         <CompletionStackCharts productId={this.props.productId} />
                     </PageSection>
