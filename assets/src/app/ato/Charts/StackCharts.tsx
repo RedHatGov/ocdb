@@ -94,6 +94,7 @@ const CompletionStackChart = React.memo((props: CompletionStackChartProps) => {
         theme.stack.colorScale[i] = StatusColor[status]
         theme.legend.colorScale[i] = StatusColor[status]
     })
+    const baseUrl = window.location.pathname.replace('/Charts', '/NIST-800-53') + "?standard=" + props.certName + "&status="
 
     return (
         <React.Fragment>
@@ -123,7 +124,22 @@ const CompletionStackChart = React.memo((props: CompletionStackChartProps) => {
                     <ChartAxis dependentAxis showGrid />
                     <ChartStack>
                         { result.map((statusArea) => {
-                            return (<ChartArea key={statusArea[0].name} data={statusArea} interpolation="monotoneX" />)
+                            return (<ChartArea key={statusArea[0].name} data={statusArea} interpolation="monotoneX"
+                                               events={[{
+                                                   target: "data",
+                                                   eventHandlers: {
+                                                       onClick: () => {
+                                                           return [{
+                                                               target: "data",
+                                                               mutation: (props) => {
+                                                                   window.open(baseUrl + props.data[0].name);
+                                                                   return null
+                                                               }
+                                                           }];
+                                                       }
+                                                   }
+                                               }]}
+                            />)
                         }) }
                     </ChartStack>
                 </Chart>
