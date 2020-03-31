@@ -95,6 +95,20 @@ const CompletionStackChart = React.memo((props: CompletionStackChartProps) => {
         theme.legend.colorScale[i] = StatusColor[status]
     })
     const baseUrl = window.location.pathname.replace('/Charts', '/NIST-800-53') + "?standard=" + props.certName + "&status="
+    const eventHandlers = [{
+        target: "data",
+        eventHandlers: {
+            onClick: () => {
+                return [{
+                    target: "data",
+                    mutation: (props) => {
+                        window.open(baseUrl + props.data[0].name);
+                        return null
+                    }
+                }];
+            }
+        }
+    }]
 
     return (
         <React.Fragment>
@@ -124,22 +138,7 @@ const CompletionStackChart = React.memo((props: CompletionStackChartProps) => {
                     <ChartAxis dependentAxis showGrid />
                     <ChartStack>
                         { result.map((statusArea) => {
-                            return (<ChartArea key={statusArea[0].name} data={statusArea} interpolation="monotoneX"
-                                               events={[{
-                                                   target: "data",
-                                                   eventHandlers: {
-                                                       onClick: () => {
-                                                           return [{
-                                                               target: "data",
-                                                               mutation: (props) => {
-                                                                   window.open(baseUrl + props.data[0].name);
-                                                                   return null
-                                                               }
-                                                           }];
-                                                       }
-                                                   }
-                                               }]}
-                            />)
+                            return (<ChartArea key={statusArea[0].name} data={statusArea} interpolation="monotoneX" events={eventHandlers} />)
                         }) }
                     </ChartStack>
                 </Chart>
