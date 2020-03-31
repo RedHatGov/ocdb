@@ -40,7 +40,7 @@ export class CompletionCharts extends React.PureComponent<CompletionChartsProps,
                         <CompletionPieCharts productId={this.props.productId} />
                     </PageSection>
                 </Tab>
-                <Tab eventKey={1} title="History of Completion">
+                <Tab eventKey={1} title="Progress over time">
                     <PageSection>
                         <CompletionStackCharts productId={this.props.productId} />
                     </PageSection>
