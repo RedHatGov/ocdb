@@ -1,7 +1,8 @@
 import React from 'react';
 import { PageSection } from '@patternfly/react-core';
 import { Tabs, Tab } from '@patternfly/react-core';
-import { CompletionPieCharts, CompletionChartsProps } from '@app/ato/Charts/PieCharts'
+import { CompletionChartsProps } from '@app/ato/Charts/common'
+import { CompletionPieCharts} from '@app/ato/Charts/PieCharts'
 import { CompletionStackCharts } from '@app/ato/Charts/StackCharts'
 import * as qs from '@app/lib/querystring'
 

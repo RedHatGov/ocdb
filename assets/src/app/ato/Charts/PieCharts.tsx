@@ -3,10 +3,7 @@ import { TextContent, Text } from '@patternfly/react-core';
 import { ChartPie, ChartThemeColor, getTheme, ChartThemeVariant } from '@patternfly/react-charts';
 import * as Api from '@app/lib/api'
 import { StatusColor } from '@app/ato/Products/DataList'
-
-export interface CompletionChartsProps {
-    productId: string;
-}
+import { CompletionChartsProps } from '@app/ato/Charts/common'
 
 interface CompletionPieChartsState {
     productId: string;
