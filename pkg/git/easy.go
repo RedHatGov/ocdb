@@ -11,9 +11,9 @@ import (
 )
 
 func Clone(gitRepo, directory string, since *time.Time) error {
-	gitCmd := exec.Command("git", "clone", "--shallow-since", since.AddDate(0, 0, -1).String(), gitRepo, directory)
-	if since == nil {
-		gitCmd = exec.Command("git", "clone", "--depth", "1", gitRepo, directory)
+	gitCmd := exec.Command("git", "clone", "--depth", "1", gitRepo, directory)
+	if since != nil {
+		gitCmd = exec.Command("git", "clone", "--shallow-since", since.AddDate(0, 0, -1).String(), gitRepo, directory)
 	}
 	logWriter := utils.LogWriter{}
 	gitCmd.Stdout = &logWriter
