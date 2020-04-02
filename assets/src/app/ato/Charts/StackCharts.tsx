@@ -37,7 +37,7 @@ export class CompletionStackCharts extends React.PureComponent<CompletionChartsP
         Api.statisticsHistory(this.state.productId)
            .then(data => {
                var result = {};
-               data.map((snapshot) => {
+               data.History.map((snapshot) => {
                    Object.keys(snapshot.Stats.Certifications).map((certName) => {
                        if (result[certName] == undefined) {
                          result[certName] = []

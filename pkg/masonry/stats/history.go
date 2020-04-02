@@ -17,7 +17,9 @@ const (
 
 type HistoricalStats map[string]ComponentStats
 
-type ComponentStats []ComponentSnapshotStats
+type ComponentStats struct {
+	History []ComponentSnapshotStats
+}
 
 type ComponentSnapshotStats struct {
 	Time  time.Time
@@ -45,7 +47,7 @@ func GetStats(componentID string) (*masonry.ComponentStatistics, bool) {
 	if !found {
 		return nil, found
 	}
-	return &componentStats[len(componentStats)-1].Stats, true
+	return &componentStats.History[len(componentStats.History)-1].Stats, true
 }
 
 func RefreshHistoryStatistics() error {
@@ -71,9 +73,11 @@ func RefreshHistoryStatistics() error {
 		for componentID, snapshot := range snapshots {
 			_, found := res[componentID]
 			if !found {
-				res[componentID] = ComponentStats{}
+				res[componentID] = ComponentStats{History: []ComponentSnapshotStats{}}
 			}
-			res[componentID] = append(res[componentID], snapshot)
+			cStats := res[componentID]
+			cStats.History = append(cStats.History, snapshot)
+			res[componentID] = cStats
 		}
 	}
 	hsInstance = &res
