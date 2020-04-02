@@ -39,15 +39,6 @@ func ComponentControlsHandler(c buffalo.Context) error {
 	return c.Render(404, r.JSON("Not found"))
 }
 
-// ComponentStatisticsHandler gives component completion statistics with regards to available certifications
-func ComponentStatisticsHandler(c buffalo.Context) error {
-	stats, found := stats.GetStats(c.Param("component_id"))
-	if found {
-		return c.Render(200, r.JSON(stats))
-	}
-	return c.Render(404, r.JSON("Not found"))
-}
-
 // ComponentStatisticsHistoryHandler gives overview of component completion statistics over time
 func ComponentStatisticsHistoryHandler(c buffalo.Context) error {
 	stats, found := stats.GetHistoricalStats(c.Param("component_id"))

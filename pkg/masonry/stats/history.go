@@ -42,14 +42,6 @@ func GetHistoricalStats(componentID string) (ComponentStats, bool) {
 	return stats, found
 }
 
-func GetStats(componentID string) (*masonry.ComponentStatistics, bool) {
-	componentStats, found := GetHistoricalStats(componentID)
-	if !found {
-		return nil, found
-	}
-	return &componentStats.History[len(componentStats.History)-1].Stats, true
-}
-
 func RefreshHistoryStatistics() error {
 	hsMux.Lock()
 	defer hsMux.Unlock()
