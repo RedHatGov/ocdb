@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { TextContent, Text } from '@patternfly/react-core';
-import { ChartPie, ChartThemeColor, getTheme, ChartThemeVariant } from '@patternfly/react-charts';
+import { ChartPie } from '@patternfly/react-charts';
 import * as Api from '@app/lib/api'
 import { StatusColor } from '@app/ato/Products/DataList'
-import { CompletionChartsProps, controlsBaseUrl } from '@app/ato/Charts/common'
+import { CompletionChartsProps, controlsBaseUrl, customTheme } from '@app/ato/Charts/common'
 
 interface CompletionPieChartsState {
     productId: string;
@@ -63,11 +63,6 @@ const CertificationCompletionPieChart = React.memo((props: CertificationCompleti
     const legend = Object.keys(res).map((c) => {
         return {"name": c + ": " + res[c]}
     })
-    const theme = getTheme(ChartThemeColor.blue, ChartThemeVariant.light)
-    data.forEach((status, i) => {
-        theme.pie.colorScale[i] = StatusColor[status.x]
-        theme.legend.colorScale[i] = StatusColor[status.x]
-    })
     const baseUrl = controlsBaseUrl(props.statistics.Certification)
     return (
         <React.Fragment>
@@ -105,7 +100,7 @@ const CertificationCompletionPieChart = React.memo((props: CertificationCompleti
                         right: 180, // Adjusted to accommodate legend
                         top: 20
                     }}
-                    theme={theme}
+                    theme={customTheme(data.map((s) => s.x) , 'pie')}
                     width={350}
                />
             </div>

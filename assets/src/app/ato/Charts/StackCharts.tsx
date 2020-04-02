@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { TextContent, Text } from '@patternfly/react-core';
-import { ChartThemeColor, getTheme, ChartThemeVariant, ChartVoronoiContainer } from '@patternfly/react-charts';
+import { ChartVoronoiContainer } from '@patternfly/react-charts';
 import * as Api from '@app/lib/api'
-import { StatusColor } from '@app/ato/Products/DataList'
-import { CompletionChartsProps, controlsBaseUrl } from '@app/ato/Charts/common'
+import { CompletionChartsProps, controlsBaseUrl, customTheme } from '@app/ato/Charts/common'
 import { Chart, ChartArea, ChartAxis, ChartStack } from '@patternfly/react-charts';
 
 interface CompletionStackChartsState {
@@ -87,12 +86,6 @@ const CompletionStackChart = React.memo((props: CompletionStackChartProps) => {
         return { name: status }
     })
     const maxDomain = Object.values(props.statistics[0].stats).reduce((a, b) => { return (a as number) + (b as number) }) as number
-
-    const theme = getTheme(ChartThemeColor.blue, ChartThemeVariant.light)
-    statuses.forEach((status, i) => {
-        theme.stack.colorScale[i] = StatusColor[status]
-        theme.legend.colorScale[i] = StatusColor[status]
-    })
     const baseUrl = controlsBaseUrl(props.certName)
     const eventHandlers = [{
         target: "data",
@@ -129,7 +122,7 @@ const CompletionStackChart = React.memo((props: CompletionStackChartProps) => {
                         top: 20,
                     }}
                     maxDomain={{y: maxDomain}}
-                    theme={theme}
+                    theme={customTheme(statuses, 'stack')}
                     scale={{x: 'time'}}
                     containerComponent={<ChartVoronoiContainer labels={({ datum }) => `${datum.name}: ${datum.y}`} constrainToVisibleArea />}
                 >
