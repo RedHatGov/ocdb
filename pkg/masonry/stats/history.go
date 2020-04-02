@@ -1,7 +1,8 @@
-package masonry
+package stats
 
 import (
 	"github.com/RedHatGov/ocdb/pkg/git"
+	"github.com/RedHatGov/ocdb/pkg/masonry"
 	"sync"
 	"time"
 )
@@ -20,7 +21,7 @@ type ComponentStats []ComponentSnapshotStats
 
 type ComponentSnapshotStats struct {
 	Time  time.Time
-	Stats ComponentStatistics
+	Stats masonry.ComponentStatistics
 }
 
 var hsInstance *HistoricalStats
@@ -73,7 +74,7 @@ func RefreshHistoryStatistics() error {
 
 func newSnapshotStats(date time.Time, gitSha string) (map[string]ComponentSnapshotStats, error) {
 	res := map[string]ComponentSnapshotStats{}
-	oc, err := newOpencontrolData(gitSha, "/tmp/.ComplianceAsCode.content.rev")
+	oc, err := masonry.NewOpencontrolData(gitSha, "/tmp/.ComplianceAsCode.content.rev")
 	if err != nil {
 		return nil, err
 	}

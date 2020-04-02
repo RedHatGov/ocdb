@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"github.com/RedHatGov/ocdb/pkg/fedramp"
 	"github.com/RedHatGov/ocdb/pkg/masonry"
+	"github.com/RedHatGov/ocdb/pkg/masonry/stats"
 	"github.com/gobuffalo/buffalo"
 )
 
@@ -50,7 +51,7 @@ func ComponentStatisticsHandler(c buffalo.Context) error {
 
 // ComponentStatisticsHistoryHandler gives overview of component completion statistics over time
 func ComponentStatisticsHistoryHandler(c buffalo.Context) error {
-	stats, found := masonry.GetHistoricalStats(c.Param("component_id"))
+	stats, found := stats.GetHistoricalStats(c.Param("component_id"))
 	if found {
 		return c.Render(200, r.JSON(stats))
 	}

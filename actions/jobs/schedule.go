@@ -3,6 +3,7 @@ package jobs
 import (
 	"github.com/RedHatGov/ocdb/pkg/cac"
 	"github.com/RedHatGov/ocdb/pkg/masonry"
+	"github.com/RedHatGov/ocdb/pkg/masonry/stats"
 	"github.com/gobuffalo/buffalo/worker"
 	"time"
 )
@@ -20,7 +21,7 @@ var List = []Job{
 	},
 	Job{
 		Name:   "Open Control Historical Statistics",
-		Fn:     masonry.RefreshHistoryStatistics,
+		Fn:     stats.RefreshHistoryStatistics,
 		Period: time.Hour * 24,
 	},
 }
