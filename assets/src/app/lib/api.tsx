@@ -58,7 +58,7 @@ export var certifications = memoize(async function() {
         })
 })
 
-export var statisticsHistory = memoize(async function(componentId: string) {
-        return fetch('/api/v1/components/' + componentId + '/statistics/history')
+export var statistics = memoize(async function(componentId: string) {
+        return fetch('/api/v1/components/' + componentId + '/statistics')
             .then(response => response.json())
 })

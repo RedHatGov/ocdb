@@ -39,8 +39,8 @@ func ComponentControlsHandler(c buffalo.Context) error {
 	return c.Render(404, r.JSON("Not found"))
 }
 
-// ComponentStatisticsHistoryHandler gives overview of component completion statistics over time
-func ComponentStatisticsHistoryHandler(c buffalo.Context) error {
+// ComponentStatisticsHandler gives overview of component completion statistics over time
+func ComponentStatisticsHandler(c buffalo.Context) error {
 	stats, found := stats.GetHistoricalStats(c.Param("component_id"))
 	if found {
 		return c.Render(200, r.JSON(stats))

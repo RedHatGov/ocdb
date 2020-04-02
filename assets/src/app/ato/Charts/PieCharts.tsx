@@ -17,7 +17,7 @@ export class CompletionPieCharts extends React.PureComponent<CompletionChartsPro
             statistics: null,
             productId: props.productId,
         }
-        Api.statisticsHistory(props.productId).then(data => {
+        Api.statistics(props.productId).then(data => {
             this.setState({statistics: data.History[data.History.length - 1].Stats})})
     }
 
@@ -30,7 +30,7 @@ export class CompletionPieCharts extends React.PureComponent<CompletionChartsPro
 
     componentDidUpdate() {
         if (this.state.statistics == null && this.state.productId != 'select') {
-            Api.statisticsHistory(this.state.productId)
+            Api.statistics(this.state.productId)
                .then(data => {
                    this.setState({statistics: data.History[data.History.length - 1].Stats})
                })

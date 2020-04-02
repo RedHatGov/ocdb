@@ -34,7 +34,7 @@ export class CompletionStackCharts extends React.PureComponent<CompletionChartsP
     }
 
     reloadData() {
-        Api.statisticsHistory(this.state.productId)
+        Api.statistics(this.state.productId)
            .then(data => {
                var result = {};
                data.History.map((snapshot) => {
