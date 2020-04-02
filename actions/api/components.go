@@ -41,10 +41,9 @@ func ComponentControlsHandler(c buffalo.Context) error {
 
 // ComponentStatisticsHandler gives component completion statistics with regards to available certifications
 func ComponentStatisticsHandler(c buffalo.Context) error {
-	ms := masonry.GetInstance()
-	component, found := ms.GetComponent(c.Param("component_id"))
+	stats, found := stats.GetStats(c.Param("component_id"))
 	if found {
-		return c.Render(200, r.JSON(ms.ComponentStatistics(component)))
+		return c.Render(200, r.JSON(stats))
 	}
 	return c.Render(404, r.JSON("Not found"))
 }
