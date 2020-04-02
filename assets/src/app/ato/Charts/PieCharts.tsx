@@ -3,7 +3,7 @@ import { TextContent, Text } from '@patternfly/react-core';
 import { ChartPie, ChartThemeColor, getTheme, ChartThemeVariant } from '@patternfly/react-charts';
 import * as Api from '@app/lib/api'
 import { StatusColor } from '@app/ato/Products/DataList'
-import { CompletionChartsProps } from '@app/ato/Charts/common'
+import { CompletionChartsProps, controlsBaseUrl } from '@app/ato/Charts/common'
 
 interface CompletionPieChartsState {
     productId: string;
@@ -68,7 +68,7 @@ const CertificationCompletionPieChart = React.memo((props: CertificationCompleti
         theme.pie.colorScale[i] = StatusColor[status.x]
         theme.legend.colorScale[i] = StatusColor[status.x]
     })
-    const baseUrl = window.location.pathname.replace('/Charts', '/NIST-800-53') + "?standard=" + props.statistics.Certification + "&status="
+    const baseUrl = controlsBaseUrl(props.statistics.Certification)
     return (
         <React.Fragment>
             <TextContent>

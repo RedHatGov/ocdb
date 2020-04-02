@@ -3,7 +3,7 @@ import { TextContent, Text } from '@patternfly/react-core';
 import { ChartThemeColor, getTheme, ChartThemeVariant, ChartVoronoiContainer } from '@patternfly/react-charts';
 import * as Api from '@app/lib/api'
 import { StatusColor } from '@app/ato/Products/DataList'
-import { CompletionChartsProps } from '@app/ato/Charts/common'
+import { CompletionChartsProps, controlsBaseUrl } from '@app/ato/Charts/common'
 import { Chart, ChartArea, ChartAxis, ChartStack } from '@patternfly/react-charts';
 
 interface CompletionStackChartsState {
@@ -93,7 +93,7 @@ const CompletionStackChart = React.memo((props: CompletionStackChartProps) => {
         theme.stack.colorScale[i] = StatusColor[status]
         theme.legend.colorScale[i] = StatusColor[status]
     })
-    const baseUrl = window.location.pathname.replace('/Charts', '/NIST-800-53') + "?standard=" + props.certName + "&status="
+    const baseUrl = controlsBaseUrl(props.certName)
     const eventHandlers = [{
         target: "data",
         eventHandlers: {
