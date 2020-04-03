@@ -2,19 +2,19 @@ import * as React from 'react';
 import { TextContent, Text } from '@patternfly/react-core';
 import { ChartVoronoiContainer } from '@patternfly/react-charts';
 import * as Api from '@app/lib/api'
-import { CompletionChartProps, CompletionChartsProps, controlsBaseUrl, customTheme } from '@app/ato/Charts/common'
+import { CertificationStats, CompletionChartProps, CompletionChartsProps, controlsBaseUrl, customTheme } from '@app/ato/Charts/common'
 import { Chart, ChartArea, ChartAxis, ChartStack } from '@patternfly/react-charts';
 
 interface CompletionStackChartsState {
     productId: string;
-    data: any[];
+    data: {[certID: string]:CertificationStats};
 }
 
 export class CompletionStackCharts extends React.PureComponent<CompletionChartsProps, CompletionStackChartsState> {
     constructor(props) {
         super(props);
         this.state = {
-            data: [],
+            data: {},
             productId: props.productId,
         }
         this.reloadData()
@@ -43,9 +43,6 @@ export class CompletionStackCharts extends React.PureComponent<CompletionChartsP
 
     render() {
         const { data } = this.state;
-        if (data.length == 0) {
-            return ("")
-        }
         return (
             <React.Fragment>
                 { Object.keys(data).map((c) => { return (<CompletionStackChart key={c} cs={data[c]} />)}) }

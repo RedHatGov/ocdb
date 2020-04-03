@@ -7,14 +7,14 @@ import { CertificationStats, CompletionChartProps, CompletionChartsProps, contro
 
 interface CompletionPieChartsState {
     productId: string;
-    statistics: any[];
+    statistics: {[certID: string]:CertificationStats};
 }
 
 export class CompletionPieCharts extends React.PureComponent<CompletionChartsProps, CompletionPieChartsState> {
     constructor(props) {
         super(props);
         this.state = {
-            statistics: [],
+            statistics: {},
             productId: props.productId,
         }
         Api.statistics(props.productId).then(data => {
@@ -39,9 +39,6 @@ export class CompletionPieCharts extends React.PureComponent<CompletionChartsPro
 
     render() {
         const { statistics } = this.state;
-        if (statistics.length == 0) {
-            return ("")
-        }
         return (
             <React.Fragment>
                 { Object.keys(statistics).map((c) => { return (<CertificationCompletionPieChart key={c} cs={statistics[c]} />)}) }
