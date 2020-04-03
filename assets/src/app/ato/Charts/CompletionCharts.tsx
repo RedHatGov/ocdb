@@ -53,12 +53,20 @@ export class CompletionCharts extends React.PureComponent<CompletionChartsProps,
 
     componentDidUpdate() {
         if (Object.keys(this.state.data).length == 0 && this.state.productId != 'select') {
+            if (this.state.productId.startsWith('rhel-')) {
+                return
+            }
             this.reloadData()
         }
     }
 
     reloadData() {
-        Api.statistics(this.state.productId).then(data => {this.setState({data: data})})
+        Api.statistics(this.state.productId).then(data => {
+            if (data == "Not found") {
+                data = {}
+            }
+            this.setState({data: data})
+        })
     }
 
     render() {
