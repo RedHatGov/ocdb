@@ -2,19 +2,19 @@ import * as React from 'react';
 import { TextContent, Text } from '@patternfly/react-core';
 import { ChartVoronoiContainer } from '@patternfly/react-charts';
 import * as Api from '@app/lib/api'
-import { CompletionChartsProps, controlsBaseUrl, customTheme } from '@app/ato/Charts/common'
+import { CompletionChartProps, CompletionChartsProps, controlsBaseUrl, customTheme } from '@app/ato/Charts/common'
 import { Chart, ChartArea, ChartAxis, ChartStack } from '@patternfly/react-charts';
 
 interface CompletionStackChartsState {
     productId: string;
-    data: any;
+    data: any[];
 }
 
 export class CompletionStackCharts extends React.PureComponent<CompletionChartsProps, CompletionStackChartsState> {
     constructor(props) {
         super(props);
         this.state = {
-            data: null,
+            data: [],
             productId: props.productId,
         }
         this.reloadData()
@@ -37,56 +37,40 @@ export class CompletionStackCharts extends React.PureComponent<CompletionChartsP
         Api.statistics(this.state.productId)
            .then(data => {
                var result = {};
-               data.History.map((snapshot) => {
-                   Object.keys(snapshot.Stats.Certifications).map((certName) => {
-                       if (result[certName] == undefined) {
-                         result[certName] = []
-                       }
-                       result[certName].push({
-                           'time': snapshot.Time,
-                           'stats': snapshot.Stats.Certifications[certName].Results,
-                       })
-                   })
-               })
-               this.setState({data: result})
+               this.setState({data: data})
            })
     }
 
     render() {
         const { data } = this.state;
-        if (data == null) {
+        if (data.length == 0) {
             return ("")
         }
         return (
             <React.Fragment>
-                { Object.keys(data).map((c) => { return (<CompletionStackChart key={c} certName={c} statistics={data[c]} />)}) }
+                { Object.keys(data).map((c) => { return (<CompletionStackChart key={c} cs={data[c]} />)}) }
             </React.Fragment>
         )
     }
 }
 
-interface CompletionStackChartProps {
-    certName: string;
-    statistics: any;
-}
-
-const CompletionStackChart = React.memo((props: CompletionStackChartProps) => {
-    const statuses = props.statistics.map((s) => Object.keys(s.stats)).flat().filter((value, index, self) => {
+const CompletionStackChart = React.memo((props: CompletionChartProps) => {
+    const statuses = props.cs.History.map((s) => Object.keys(s.Stats)).reduce((a, b) => a.concat(b)).filter((value, index, self) => {
         return self.indexOf(value) === index;
     })
 
     const result = statuses.map((status) => {
-        return props.statistics.map((snapshot, k) => {
-            const y = snapshot.stats[status]
-            return { 'name': status, 'x': new Date(snapshot.time), 'y': y == undefined ? 0 : y }
+        return props.cs.History.map((snapshot, k) => {
+            const y = snapshot.Stats[status]
+            return { 'name': status, 'x': new Date(snapshot.Time), 'y': y == undefined ? 0 : y }
         })
     })
 
     const legendData = statuses.map((status) => {
         return { name: status }
     })
-    const maxDomain = Object.values(props.statistics[0].stats).reduce((a, b) => { return (a as number) + (b as number) }) as number
-    const baseUrl = controlsBaseUrl(props.certName)
+    const maxDomain = Object.values(props.cs.History[0].Stats).reduce((a, b) => { return (a as number) + (b as number) }) as number
+    const baseUrl = controlsBaseUrl(props.cs.Certification)
     const eventHandlers = [{
         target: "data",
         eventHandlers: {
@@ -105,7 +89,7 @@ const CompletionStackChart = React.memo((props: CompletionStackChartProps) => {
     return (
         <React.Fragment>
             <TextContent>
-                <Text component="h2">{props.certName}</Text>
+                <Text component="h2">{props.cs.Certification}</Text>
             </TextContent>
             <div style={{ height: '465px', width: '750px' }}>
                 <Chart

@@ -3,6 +3,7 @@ package stats
 import (
 	"github.com/RedHatGov/ocdb/pkg/git"
 	"github.com/RedHatGov/ocdb/pkg/masonry"
+	"github.com/opencontrol/compliance-masonry/pkg/lib/common"
 	"sync"
 	"time"
 )
@@ -17,14 +18,19 @@ const (
 
 type HistoricalStats map[string]ComponentStats
 
-type ComponentStats struct {
-	History []ComponentSnapshotStats
+type ComponentStats map[string]CertificationStats
+
+type CertificationStats struct {
+	Certification string
+	History       []ResultSnapshot
 }
 
-type ComponentSnapshotStats struct {
+type ResultSnapshot struct {
 	Time  time.Time
-	Stats masonry.ComponentStatistics
+	Stats ControlResponses
 }
+
+type ControlResponses map[string]int
 
 var hsInstance *HistoricalStats
 var hsMux sync.Mutex
@@ -54,42 +60,74 @@ func RefreshHistoryStatistics() error {
 	}
 	res := HistoricalStats{}
 	for date := range generateDatesMonthly(startDate) {
-		sha, err := git.LastCommitBy(ocDir, date)
+		oc, err := opencontrolsByDate(ocDir, date)
 		if err != nil {
 			return err
 		}
-		snapshots, err := newSnapshotStats(date, sha)
-		if err != nil {
-			return err
-		}
-		for componentID, snapshot := range snapshots {
-			_, found := res[componentID]
-			if !found {
-				res[componentID] = ComponentStats{History: []ComponentSnapshotStats{}}
-			}
-			cStats := res[componentID]
-			cStats.History = append(cStats.History, snapshot)
-			res[componentID] = cStats
+
+		for _, component := range oc.GetAllComponents() {
+			res.AddData(date, oc.GetAllCertifications(), component)
 		}
 	}
 	hsInstance = &res
 	return nil
 }
 
-func newSnapshotStats(date time.Time, gitSha string) (map[string]ComponentSnapshotStats, error) {
-	res := map[string]ComponentSnapshotStats{}
-	oc, err := masonry.NewOpencontrolData(gitSha, "/tmp/.ComplianceAsCode.content.rev")
+func (stats HistoricalStats) AddData(date time.Time, certifications map[string]masonry.Certification, component common.Component) {
+	_, found := stats[component.GetKey()]
+	if !found {
+		stats[component.GetKey()] = ComponentStats{}
+	}
+	stats[component.GetKey()].AddData(date, certifications, component)
+}
+
+func (stats ComponentStats) AddData(date time.Time, certifications map[string]masonry.Certification, component common.Component) {
+	satisfiesMap := map[string]string{}
+	for _, sat := range component.GetAllSatisfies() {
+		satisfiesMap[sat.GetControlKey()] = sat.GetImplementationStatus()
+	}
+
+	for _, cert := range certifications {
+		_, found := stats[cert.Key]
+		if !found {
+			stats[cert.Key] = CertificationStats{Certification: cert.Key, History: []ResultSnapshot{}}
+		}
+		cs := stats[cert.Key]
+		cs.History = append(cs.History, resultSnapshot(date, cert, satisfiesMap))
+		stats[cert.Key] = cs
+	}
+}
+
+func resultSnapshot(date time.Time, cert masonry.Certification, satisfiesMap map[string]string) ResultSnapshot {
+	res := ResultSnapshot{Time: date, Stats: ControlResponses{}}
+	for standardName, subSet := range cert.Controls {
+		if standardName == "NIST-800-53" {
+			for ctrlID, _ := range subSet {
+				res.Stats.AddData(ctrlID, satisfiesMap)
+			}
+		}
+	}
+	return res
+}
+
+func (responses ControlResponses) AddData(ctrlID string, satisfiesMap map[string]string) {
+	status, found := satisfiesMap[ctrlID]
+	if !found {
+		status = "unknown"
+	}
+	prev, found := responses[status]
+	if !found {
+		prev = 0
+	}
+	responses[status] = prev + 1
+}
+
+func opencontrolsByDate(ocDir string, date time.Time) (*masonry.OpencontrolData, error) {
+	gitSha, err := git.LastCommitBy(ocDir, date)
 	if err != nil {
 		return nil, err
 	}
-	for _, component := range oc.GetAllComponents() {
-		res[component.GetKey()] = ComponentSnapshotStats{
-			Time:  date,
-			Stats: oc.ComponentStatistics(component),
-		}
-	}
-
-	return res, nil
+	return masonry.NewOpencontrolData(gitSha, "/tmp/.ComplianceAsCode.content.rev")
 }
 
 func generateDatesMonthly(since time.Time) chan time.Time {

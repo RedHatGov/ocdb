@@ -3,22 +3,22 @@ import { TextContent, Text } from '@patternfly/react-core';
 import { ChartPie } from '@patternfly/react-charts';
 import * as Api from '@app/lib/api'
 import { StatusColor } from '@app/ato/Products/DataList'
-import { CompletionChartsProps, controlsBaseUrl, customTheme } from '@app/ato/Charts/common'
+import { CertificationStats, CompletionChartProps, CompletionChartsProps, controlsBaseUrl, customTheme } from '@app/ato/Charts/common'
 
 interface CompletionPieChartsState {
     productId: string;
-    statistics: any;
+    statistics: any[];
 }
 
 export class CompletionPieCharts extends React.PureComponent<CompletionChartsProps, CompletionPieChartsState> {
     constructor(props) {
         super(props);
         this.state = {
-            statistics: null,
+            statistics: [],
             productId: props.productId,
         }
         Api.statistics(props.productId).then(data => {
-            this.setState({statistics: data.History[data.History.length - 1].Stats})})
+            this.setState({statistics: data})})
     }
 
     static getDerivedStateFromProps(props, state) {
@@ -32,47 +32,42 @@ export class CompletionPieCharts extends React.PureComponent<CompletionChartsPro
         if (this.state.statistics == null && this.state.productId != 'select') {
             Api.statistics(this.state.productId)
                .then(data => {
-                   this.setState({statistics: data.History[data.History.length - 1].Stats})
+                   this.setState({statistics: data})
                })
         }
     }
 
     render() {
         const { statistics } = this.state;
-        if (statistics == null || statistics.Certifications == undefined) {
+        if (statistics.length == 0) {
             return ("")
         }
-        const certs = statistics.Certifications;
         return (
             <React.Fragment>
-                { Object.keys(certs).map((c) => { return (<CertificationCompletionPieChart key={c} statistics={certs[c]} />)}) }
+                { Object.keys(statistics).map((c) => { return (<CertificationCompletionPieChart key={c} cs={statistics[c]} />)}) }
             </React.Fragment>
         )
     }
 }
 
-interface CertificationCompletionPieChartProps {
-    statistics: any;
-}
-
-const CertificationCompletionPieChart = React.memo((props: CertificationCompletionPieChartProps) => {
-    const res = props.statistics.Results
+const CertificationCompletionPieChart = React.memo((props: CompletionChartProps) => {
+    const res = props.cs.History[props.cs.History.length - 1].Stats
     const data = Object.keys(res).map((c) => {
         return {"x": c, "y": res[c]}
     })
     const legend = Object.keys(res).map((c) => {
         return {"name": c + ": " + res[c]}
     })
-    const baseUrl = controlsBaseUrl(props.statistics.Certification)
+    const baseUrl = controlsBaseUrl(props.cs.Certification)
     return (
         <React.Fragment>
             <TextContent>
-                <Text component="h2">{props.statistics.Certification}</Text>
+                <Text component="h2">{props.cs.Certification}</Text>
             </TextContent>
             <div style={{ height: '230px', width: '350px' }}>
                 <ChartPie
-                    ariaDesc={"Pie chart of " + props.statistics.Certification}
-                    ariaTitle={"Completion of " + props.statistics.Certification}
+                    ariaDesc={"Pie chart of " + props.cs.Certification}
+                    ariaTitle={"Completion of " + props.cs.Certification}
                     constrainToVisibleArea={true}
                     data={data}
                     height={230}

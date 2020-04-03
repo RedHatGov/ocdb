@@ -5,6 +5,10 @@ export interface CompletionChartsProps {
     productId: string;
 }
 
+export interface CompletionChartProps {
+    cs: CertificationStats;
+}
+
 export function controlsBaseUrl(standardName: string) {
     return window.location.pathname.replace('/Charts', '/NIST-800-53') + "?standard=" + standardName + "&status="
 }
@@ -16,4 +20,14 @@ export function customTheme(statuses: any[], chartType: string) {
         theme.legend.colorScale[i] = StatusColor[status]
     })
     return theme
+}
+
+export interface CertificationStats {
+    Certification: string;
+    History: ResultSnapshot[];
+}
+
+interface ResultSnapshot {
+    Time: string;
+    Stats: {[CtrlId: string]: number};
 }
