@@ -2,7 +2,7 @@ import { ChartThemeColor, getTheme, ChartThemeVariant } from '@patternfly/react-
 import { StatusColor } from '@app/ato/Products/DataList'
 
 export interface CompletionChartsProps {
-    productId: string;
+    data: ComponentStats;
 }
 
 export interface CompletionChartProps {

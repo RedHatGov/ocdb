@@ -1,50 +1,16 @@
 import * as React from 'react';
 import { TextContent, Text } from '@patternfly/react-core';
 import { ChartPie } from '@patternfly/react-charts';
-import * as Api from '@app/lib/api'
-import { ComponentStats, CompletionChartProps, CompletionChartsProps, controlsBaseUrl, customTheme } from '@app/ato/Charts/common'
+import { CompletionChartProps, CompletionChartsProps, controlsBaseUrl, customTheme } from '@app/ato/Charts/common'
 
-interface CompletionPieChartsState {
-    productId: string;
-    statistics: ComponentStats;
-}
-
-export class CompletionPieCharts extends React.PureComponent<CompletionChartsProps, CompletionPieChartsState> {
-    constructor(props) {
-        super(props);
-        this.state = {
-            statistics: {},
-            productId: props.productId,
-        }
-        Api.statistics(props.productId).then(data => {
-            this.setState({statistics: data})})
-    }
-
-    static getDerivedStateFromProps(props, state) {
-        if (state.productId != props.productId) {
-            return {productId: props.productId, statistics: null}
-        }
-        return null;
-    }
-
-    componentDidUpdate() {
-        if (this.state.statistics == null && this.state.productId != 'select') {
-            Api.statistics(this.state.productId)
-               .then(data => {
-                   this.setState({statistics: data})
-               })
-        }
-    }
-
-    render() {
-        const { statistics } = this.state;
-        return (
-            <React.Fragment>
-                { Object.keys(statistics).map((c) => { return (<CertificationCompletionPieChart key={c} cs={statistics[c]} />)}) }
-            </React.Fragment>
-        )
-    }
-}
+export const CompletionPieCharts = React.memo((props: CompletionChartsProps) => {
+    const { data } = props;
+    return (
+        <React.Fragment>
+            { Object.keys(data).map((c) => { return (<CertificationCompletionPieChart key={c} cs={data[c]} />)}) }
+        </React.Fragment>
+    )
+})
 
 const CertificationCompletionPieChart = React.memo((props: CompletionChartProps) => {
     const res = props.cs.History[props.cs.History.length - 1].Stats

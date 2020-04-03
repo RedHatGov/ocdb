@@ -1,13 +1,20 @@
 import React from 'react';
 import { PageSection } from '@patternfly/react-core';
 import { Tabs, Tab } from '@patternfly/react-core';
-import { CompletionChartsProps } from '@app/ato/Charts/common'
+import { ComponentStats } from '@app/ato/Charts/common'
 import { CompletionPieCharts} from '@app/ato/Charts/PieCharts'
 import { CompletionStackCharts } from '@app/ato/Charts/StackCharts'
+import * as Api from '@app/lib/api'
 import * as qs from '@app/lib/querystring'
+
+interface CompletionChartsProps {
+    productId: string;
+}
 
 interface CompletionChartsState {
     activeTabKey: number;
+    productId: string;
+    data: ComponentStats;
 }
 
 const titleToId = {
@@ -21,9 +28,13 @@ export class CompletionCharts extends React.PureComponent<CompletionChartsProps,
         super(props);
         const params = qs.Parse()
         this.state = {
-            activeTabKey: titleToId[params.tab]
+            activeTabKey: titleToId[params.tab],
+            data: {},
+            productId: props.productId,
+
         };
         this.handleTabClick = this.handleTabClick.bind(this);
+        this.reloadData()
     }
 
     handleTabClick(event, tabIndex){
@@ -33,17 +44,35 @@ export class CompletionCharts extends React.PureComponent<CompletionChartsProps,
         });
     };
 
+    static getDerivedStateFromProps(props, state) {
+        if (state.productId != props.productId) {
+            return {productId: props.productId, data: null}
+        }
+        return null;
+    }
+
+    componentDidUpdate() {
+        if (this.state.data == null && this.state.productId != 'select') {
+            this.reloadData()
+        }
+    }
+
+    reloadData() {
+        Api.statistics(this.state.productId).then(data => {this.setState({data: data})})
+    }
+
+
     render() {
         return (
             <Tabs activeKey={this.state.activeTabKey} onSelect={this.handleTabClick}>
                 <Tab eventKey={0} title="Certification Completion">
                     <PageSection>
-                        <CompletionPieCharts productId={this.props.productId} />
+                        <CompletionPieCharts data={this.state.data} />
                     </PageSection>
                 </Tab>
                 <Tab eventKey={1} title="Progress over time">
                     <PageSection>
-                        <CompletionStackCharts productId={this.props.productId} />
+                        <CompletionStackCharts data={this.state.data} />
                     </PageSection>
                 </Tab>
             </Tabs>

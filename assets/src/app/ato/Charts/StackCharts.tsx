@@ -1,55 +1,17 @@
 import * as React from 'react';
 import { TextContent, Text } from '@patternfly/react-core';
 import { ChartVoronoiContainer } from '@patternfly/react-charts';
-import * as Api from '@app/lib/api'
-import { ComponentStats, CompletionChartProps, CompletionChartsProps, controlsBaseUrl, customTheme } from '@app/ato/Charts/common'
+import { CompletionChartProps, CompletionChartsProps, controlsBaseUrl, customTheme } from '@app/ato/Charts/common'
 import { Chart, ChartArea, ChartAxis, ChartStack } from '@patternfly/react-charts';
 
-interface CompletionStackChartsState {
-    productId: string;
-    data: ComponentStats;
-}
-
-export class CompletionStackCharts extends React.PureComponent<CompletionChartsProps, CompletionStackChartsState> {
-    constructor(props) {
-        super(props);
-        this.state = {
-            data: {},
-            productId: props.productId,
-        }
-        this.reloadData()
-    }
-
-    static getDerivedStateFromProps(props, state) {
-        if (state.productId != props.productId) {
-            return {productId: props.productId, data: null}
-        }
-        return null;
-    }
-
-    componentDidUpdate() {
-        if (this.state.data == null && this.state.productId != 'select') {
-            this.reloadData()
-        }
-    }
-
-    reloadData() {
-        Api.statistics(this.state.productId)
-           .then(data => {
-               var result = {};
-               this.setState({data: data})
-           })
-    }
-
-    render() {
-        const { data } = this.state;
-        return (
-            <React.Fragment>
-                { Object.keys(data).map((c) => { return (<CompletionStackChart key={c} cs={data[c]} />)}) }
-            </React.Fragment>
-        )
-    }
-}
+export const CompletionStackCharts = React.memo((props: CompletionChartsProps) => {
+    const { data } = props;
+    return (
+        <React.Fragment>
+            { Object.keys(data).map((c) => { return (<CompletionStackChart key={c} cs={data[c]} />)}) }
+        </React.Fragment>
+    )
+})
 
 const CompletionStackChart = React.memo((props: CompletionChartProps) => {
     const statuses = props.cs.History.map((s) => Object.keys(s.Stats)).reduce((a, b) => a.concat(b)).filter((value, index, self) => {
