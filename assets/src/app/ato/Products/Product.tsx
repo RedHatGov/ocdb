@@ -113,6 +113,10 @@ class Product extends React.PureComponent<any, ProductState> {
         if (this.showingMarkdown()) {
             const renderMarkdown = this.renderMarkdown;
             return renderMarkdown(this.state.activeTabKey);
+        } else if (this.state.product != null && this.state.product.controls.length == 0) {
+            return (
+                <Text>NIST-800-53 responses for {this.state.product.name} are not available in a form of open controls and/or oscal.</Text>
+            )
         } else if (this.showingCharts()) {
             return this.renderCharts()
         } else {
