@@ -22,6 +22,8 @@ export function customTheme(statuses: any[], chartType: string) {
     return theme
 }
 
+export type ComponentStats = {[certID: string]: CertificationStats}
+
 export interface CertificationStats {
     Certification: string;
     History: ResultSnapshot[];

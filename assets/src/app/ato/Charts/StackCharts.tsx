@@ -2,12 +2,12 @@ import * as React from 'react';
 import { TextContent, Text } from '@patternfly/react-core';
 import { ChartVoronoiContainer } from '@patternfly/react-charts';
 import * as Api from '@app/lib/api'
-import { CertificationStats, CompletionChartProps, CompletionChartsProps, controlsBaseUrl, customTheme } from '@app/ato/Charts/common'
+import { ComponentStats, CompletionChartProps, CompletionChartsProps, controlsBaseUrl, customTheme } from '@app/ato/Charts/common'
 import { Chart, ChartArea, ChartAxis, ChartStack } from '@patternfly/react-charts';
 
 interface CompletionStackChartsState {
     productId: string;
-    data: {[certID: string]:CertificationStats};
+    data: ComponentStats;
 }
 
 export class CompletionStackCharts extends React.PureComponent<CompletionChartsProps, CompletionStackChartsState> {

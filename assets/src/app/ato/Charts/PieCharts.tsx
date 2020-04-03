@@ -2,11 +2,11 @@ import * as React from 'react';
 import { TextContent, Text } from '@patternfly/react-core';
 import { ChartPie } from '@patternfly/react-charts';
 import * as Api from '@app/lib/api'
-import { CertificationStats, CompletionChartProps, CompletionChartsProps, controlsBaseUrl, customTheme } from '@app/ato/Charts/common'
+import { ComponentStats, CompletionChartProps, CompletionChartsProps, controlsBaseUrl, customTheme } from '@app/ato/Charts/common'
 
 interface CompletionPieChartsState {
     productId: string;
-    statistics: {[certID: string]:CertificationStats};
+    statistics: ComponentStats;
 }
 
 export class CompletionPieCharts extends React.PureComponent<CompletionChartsProps, CompletionPieChartsState> {
