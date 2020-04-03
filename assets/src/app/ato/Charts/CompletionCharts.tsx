@@ -46,13 +46,13 @@ export class CompletionCharts extends React.PureComponent<CompletionChartsProps,
 
     static getDerivedStateFromProps(props, state) {
         if (state.productId != props.productId) {
-            return {productId: props.productId, data: null}
+            return {productId: props.productId, data: {}}
         }
         return null;
     }
 
     componentDidUpdate() {
-        if (this.state.data == null && this.state.productId != 'select') {
+        if (Object.keys(this.state.data).length == 0 && this.state.productId != 'select') {
             this.reloadData()
         }
     }
@@ -60,7 +60,6 @@ export class CompletionCharts extends React.PureComponent<CompletionChartsProps,
     reloadData() {
         Api.statistics(this.state.productId).then(data => {this.setState({data: data})})
     }
-
 
     render() {
         return (
