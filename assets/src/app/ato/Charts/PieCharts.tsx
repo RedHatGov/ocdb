@@ -2,7 +2,6 @@ import * as React from 'react';
 import { TextContent, Text } from '@patternfly/react-core';
 import { ChartPie } from '@patternfly/react-charts';
 import * as Api from '@app/lib/api'
-import { StatusColor } from '@app/ato/Products/DataList'
 import { CertificationStats, CompletionChartProps, CompletionChartsProps, controlsBaseUrl, customTheme } from '@app/ato/Charts/common'
 
 interface CompletionPieChartsState {
