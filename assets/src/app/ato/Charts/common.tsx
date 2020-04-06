@@ -52,3 +52,23 @@ export function statusSort(statuses: string[]) {
         return statusOrder[a] - statusOrder[b]
     })
 }
+
+export const sectionNames = {
+    'AC': 'Access Control',
+    'AT': 'Awareness and Training',
+    'AU': 'Audit and Accountability',
+    'CA': 'Security Assessment & Authorization',
+    'CM': 'Configuration Management',
+    'CP': 'Contingency Planning',
+    'IA': 'Identification and Authentication',
+    'IR': 'Incident Response',
+    'MA': 'Maintenance',
+    'MP': 'Media Protection',
+    'PE': 'Physical & Environmental Protection',
+    'PL': 'Planning',
+    'PS': 'Personnel Security',
+    'RA': 'Risk Management',
+    'SA': 'System and Services Acquisition',
+    'SC': 'Systems and Communications Protection',
+    'SI': 'System and Information Integrity',
+};
