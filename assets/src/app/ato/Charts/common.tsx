@@ -27,9 +27,12 @@ export type ComponentStats = {[certID: string]: CertificationStats}
 export interface CertificationStats {
     Certification: string;
     History: ResultSnapshot[];
+    PerFamily: {[FamilyId: string]: ControlResponses};
 }
 
 interface ResultSnapshot {
     Time: string;
-    Stats: {[CtrlId: string]: number};
+    Stats: ControlResponses;
 }
+
+type ControlResponses = {[CtrlId: string]: number};
