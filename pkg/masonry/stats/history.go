@@ -113,7 +113,7 @@ func (stats *CertificationStats) buildPerFamilyStats(cert masonry.Certification,
 	stats.PerFamily = map[string]ControlResponses{}
 	for standardName, subSet := range cert.Controls {
 		if standardName == "NIST-800-53" {
-			for ctrlID, _ := range subSet {
+			for ctrlID := range subSet {
 				family := ctrlID[0:2]
 				_, found := stats.PerFamily[family]
 				if !found {
@@ -130,7 +130,7 @@ func resultSnapshot(date time.Time, cert masonry.Certification, satisfiesMap map
 	res := ResultSnapshot{Time: date, Stats: ControlResponses{}}
 	for standardName, subSet := range cert.Controls {
 		if standardName == "NIST-800-53" {
-			for ctrlID, _ := range subSet {
+			for ctrlID := range subSet {
 				res.Stats.AddData(ctrlID, satisfiesMap)
 			}
 		}
