@@ -53,24 +53,33 @@ func RefreshHistoryStatistics() error {
 	defer hsMux.Unlock()
 
 	startDate := time.Date(startingYear, time.Month(startingMonth), 1, 0, 0, 0, 0, time.UTC)
-	gitStartDate := startDate.AddDate(0, -1, 0)
-	err := git.PullOrClone(ocDir, ocGit, &(gitStartDate))
+	res, err := buildHistoricalStats(startDate)
 	if err != nil {
 		return err
 	}
+	hsInstance = &res
+	return nil
+}
+
+func buildHistoricalStats(startDate time.Time) (HistoricalStats, error) {
 	res := HistoricalStats{}
+	gitStartDate := startDate.AddDate(0, -1, 0)
+	err := git.PullOrClone(ocDir, ocGit, &(gitStartDate))
+	if err != nil {
+		return res, err
+	}
+
 	for date := range generateDatesMonthly(startDate) {
 		oc, err := opencontrolsByDate(ocDir, date)
 		if err != nil {
-			return err
+			return res, err
 		}
 
 		for _, component := range oc.GetAllComponents() {
 			res.AddData(date, oc.GetAllCertifications(), component)
 		}
 	}
-	hsInstance = &res
-	return nil
+	return res, nil
 }
 
 func (stats HistoricalStats) AddData(date time.Time, certifications map[string]masonry.Certification, component common.Component) {
