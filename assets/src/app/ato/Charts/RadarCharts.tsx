@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { TextContent, Text } from '@patternfly/react-core';
 import { ChartVoronoiContainer } from '@patternfly/react-charts';
-import { CompletionChartProps, CompletionChartsProps, controlsBaseUrl, customTheme } from '@app/ato/Charts/common'
+import { CompletionChartProps, CompletionChartsProps, controlsBaseUrl, customTheme, statusSort } from '@app/ato/Charts/common'
 import { VictoryChart, VictoryBar, VictoryPolarAxis, VictoryStack, VictoryTheme, LineSegment } from 'victory'
 import { StatusColor } from '@app/ato/Products/DataList'
 
@@ -16,9 +16,9 @@ export const CompletionRadarCharts = React.memo((props: CompletionChartsProps) =
 
 const CompletionRadarChart = React.memo((props: CompletionChartProps) => {
     const pf = props.cs.PerFamily;
-    const statuses = Object.keys(pf).map((family) => Object.keys(pf[family])).reduce((a, b) => a.concat(b)).filter((value, index, self) => {
+    const statuses = statusSort(Object.keys(pf).map((family) => Object.keys(pf[family])).reduce((a, b) => a.concat(b)).filter((value, index, self) => {
         return self.indexOf(value) === index;
-    })
+    }))
     const controlsPerFamily = Object.keys(pf).reduce((map, family) => {
         map[family] =Object.keys(pf[family]).map((status) => pf[family][status]).reduce((a, b) => a + b);
         return map;

@@ -36,3 +36,19 @@ interface ResultSnapshot {
 }
 
 type ControlResponses = {[CtrlId: string]: number};
+
+const statusOrder = {
+    'complete': 1,
+    'not applicable': 2,
+    'partial': 3,
+    'planned': 4,
+    'unsatisfied': 5,
+    'unknown': 6,
+    'none': 7,
+}
+
+export function statusSort(statuses: string[]) {
+    return statuses.sort((a, b) => {
+        return statusOrder[a] - statusOrder[b]
+    })
+}
