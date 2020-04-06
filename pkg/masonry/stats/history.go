@@ -23,6 +23,7 @@ type ComponentStats map[string]CertificationStats
 type CertificationStats struct {
 	Certification string
 	History       []ResultSnapshot
+	PerFamily     map[string]ControlResponses
 }
 
 type ResultSnapshot struct {
@@ -103,7 +104,34 @@ func (stats ComponentStats) AddData(date time.Time, certifications map[string]ma
 		}
 		cs := stats[cert.Key]
 		cs.History = append(cs.History, resultSnapshot(date, cert, satisfiesMap))
+		cs.buildPerFamilyStats(cert, satisfiesMap)
 		stats[cert.Key] = cs
+	}
+}
+
+func (stats *CertificationStats) buildPerFamilyStats(cert masonry.Certification, satisfiesMap map[string]string) {
+	stats.PerFamily = map[string]ControlResponses{}
+	for standardName, subSet := range cert.Controls {
+		if standardName == "NIST-800-53" {
+			for ctrlID, _ := range subSet {
+				status, found := satisfiesMap[ctrlID]
+				if !found {
+					status = "unknown"
+				}
+				family := ctrlID[0:2]
+
+				_, found = stats.PerFamily[family]
+				if !found {
+					stats.PerFamily[family] = ControlResponses{}
+				}
+
+				prev, found := stats.PerFamily[family][status]
+				if !found {
+					prev = 0
+				}
+				stats.PerFamily[family][status] = prev + 1
+			}
+		}
 	}
 }
 
