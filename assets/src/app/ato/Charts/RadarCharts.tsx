@@ -2,7 +2,7 @@ import * as React from 'react';
 import { TextContent, Text } from '@patternfly/react-core';
 import { ChartVoronoiContainer } from '@patternfly/react-charts';
 import { CompletionChartProps, CompletionChartsProps, controlsBaseUrl, customTheme, statusSort } from '@app/ato/Charts/common'
-import { VictoryChart, VictoryBar, VictoryPolarAxis, VictoryStack, VictoryTheme, LineSegment } from 'victory'
+import { VictoryChart, VictoryBar, VictoryPolarAxis, VictoryStack, VictoryTheme, VictoryTooltip, LineSegment } from 'victory'
 import { StatusColor } from '@app/ato/Products/DataList'
 
 export const CompletionRadarCharts = React.memo((props: CompletionChartsProps) => {
@@ -27,7 +27,7 @@ const CompletionRadarChart = React.memo((props: CompletionChartProps) => {
         return Object.keys(pf).map((family) => {
             var y = pf[family][status]
             y = y == undefined ? 0 : y
-            return { x: family, y: y / controlsPerFamily[family], status: status }
+            return { x: family, y: y / controlsPerFamily[family], status: status, count: y }
         });
     })
     const baseUrl = controlsBaseUrl(props.cs.Certification)
@@ -74,6 +74,9 @@ const CompletionRadarChart = React.memo((props: CompletionChartProps) => {
                         style={{ data: { width: 20} }}
                     >
                         { data.map((statusData) => { return (<VictoryBar
+                                                                 labels={({ datum }) => `${datum.count} ${datum.status} responses for ${datum.x}`}
+
+                                                                 labelComponent={<VictoryTooltip/>}
                                                                  events={eventHandlers}
                                                                  key={statusData[0].x} data={statusData} />) } ) }
                     </VictoryStack>
