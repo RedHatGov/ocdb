@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { TextContent, Text } from '@patternfly/react-core';
-import { ChartVoronoiContainer } from '@patternfly/react-charts';
-import { CompletionChartProps, CompletionChartsProps, controlsBaseUrl, customTheme, statusSort, sectionNames } from '@app/ato/Charts/common'
-import { VictoryChart, VictoryBar, VictoryPolarAxis, VictoryStack, VictoryTheme, VictoryTooltip, LineSegment } from 'victory'
+import { CompletionChartProps, CompletionChartsProps, controlsBaseUrl, statusSort, sectionNames } from '@app/ato/Charts/common'
+import { VictoryChart, VictoryBar, VictoryPolarAxis, VictoryStack, VictoryTheme, VictoryTooltip } from 'victory'
 import { StatusColor } from '@app/ato/Products/DataList'
 
 export const CompletionRadarCharts = React.memo((props: CompletionChartsProps) => {
