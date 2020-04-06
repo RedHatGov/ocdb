@@ -27,9 +27,24 @@ const CompletionRadarChart = React.memo((props: CompletionChartProps) => {
         return Object.keys(pf).map((family) => {
             var y = pf[family][status]
             y = y == undefined ? 0 : y
-            return { x: family, y: y / controlsPerFamily[family] }
+            return { x: family, y: y / controlsPerFamily[family], status: status }
         });
     })
+    const baseUrl = controlsBaseUrl(props.cs.Certification)
+    const eventHandlers = [{
+        target: "data",
+        eventHandlers: {
+            onClick: () => {
+                return [{
+                    target: "data",
+                    mutation: (props) => {
+                        window.open(baseUrl + props.datum.status + "&section=" + props.datum.x);
+                        return null
+                    }
+                }];
+            }
+        }
+    }]
 
     return (
         <React.Fragment>
@@ -58,7 +73,9 @@ const CompletionRadarChart = React.memo((props: CompletionChartProps) => {
                         colorScale={statuses.map((status) => StatusColor[status]) }
                         style={{ data: { width: 20} }}
                     >
-                        { data.map((statusData) => { return (<VictoryBar key={statusData[0].x} data={statusData} />) } ) }
+                        { data.map((statusData) => { return (<VictoryBar
+                                                                 events={eventHandlers}
+                                                                 key={statusData[0].x} data={statusData} />) } ) }
                     </VictoryStack>
                 </VictoryChart>
             </div>
