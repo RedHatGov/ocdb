@@ -63,7 +63,7 @@ const CompletionBarChart = React.memo((props: CompletionChartProps) => {
                 bottom: 50, // Adjusted to accommodate legend
                 left: 50,
                 right: 140,
-                top: 50
+                top: 10
             }}
             width={700}
         >
