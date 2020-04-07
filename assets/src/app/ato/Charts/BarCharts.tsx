@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { TextContent, Text } from '@patternfly/react-core';
 import { Chart, ChartAxis, ChartBar, ChartStack, ChartVoronoiContainer } from '@patternfly/react-charts';
 import { CompletionChartProps, CompletionChartsProps, controlsBaseUrl, customTheme, statusSort, sectionNames } from '@app/ato/Charts/common'
 import { StatusColor } from '@app/ato/Products/DataList'
@@ -7,7 +8,14 @@ export const CompletionBarCharts = React.memo((props: CompletionChartsProps) => 
     const { data } = props;
     return (
         <React.Fragment>
-            { Object.keys(data).map((c) => { return (<CompletionBarChart key={c} cs={data[c]} />)}) }
+            { Object.keys(data).map((c) => { return (
+                  <React.Fragment>
+                      <TextContent>
+                          <Text component="h2">{data[c].Certification}</Text>
+                      </TextContent>
+                      <CompletionBarChart key={c} cs={data[c]} />
+                  </React.Fragment>
+            )}) }
         </React.Fragment>
     )
 })
