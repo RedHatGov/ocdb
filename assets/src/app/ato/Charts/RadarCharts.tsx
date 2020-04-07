@@ -8,7 +8,14 @@ export const CompletionRadarCharts = React.memo((props: CompletionChartsProps) =
     const { data } = props;
     return (
         <React.Fragment>
-            { Object.keys(data).map((c) => { return (<CompletionRadarChart key={c} cs={data[c]} />)}) }
+            { Object.keys(data).map((c) => { return (
+                  <React.Fragment>
+                      <TextContent>
+                          <Text component="h2">{data[c].Certification}</Text>
+                      </TextContent>
+                      <CompletionRadarChart key={c} cs={data[c]} />
+                  </React.Fragment>
+            )}) }
         </React.Fragment>
     )
 })
@@ -46,41 +53,36 @@ const CompletionRadarChart = React.memo((props: CompletionChartProps) => {
     }]
 
     return (
-        <React.Fragment>
-            <TextContent>
-                <Text component="h2">{props.cs.Certification}</Text>
-            </TextContent>
-            <div style={{ height: '500px', width: '500px' }}>
-                <VictoryChart polar
-                              theme={VictoryTheme.material}
+        <div style={{ height: '500px', width: '500px' }}>
+            <VictoryChart polar
+                          theme={VictoryTheme.material}
+            >
+                {
+                    Object.keys(pf).map((d, i) => {
+                        return (
+                            <VictoryPolarAxis dependentAxis
+                                              key={i}
+                                              label={d}
+                                              labelPlacement="perpendicular"
+                                              style={{ tickLabels: { fill: "none" } }}
+                                              axisValue={d}
+                            />
+                        );
+                    })
+                }
+
+                <VictoryStack
+                    colorScale={statuses.map((status) => StatusColor[status]) }
+                    style={{ data: { width: 20} }}
                 >
-                    {
-                        Object.keys(pf).map((d, i) => {
-                            return (
-                                <VictoryPolarAxis dependentAxis
-                                                  key={i}
-                                                  label={d}
-                                                  labelPlacement="perpendicular"
-                                                  style={{ tickLabels: { fill: "none" } }}
-                                                  axisValue={d}
-                                />
-                            );
-                        })
-                    }
+                    { data.map((statusData) => { return (<VictoryBar
+                                                             labels={({ datum }) => `${datum.count} ${datum.status} responses for ${datum.x} (${sectionNames[datum.x]})`}
 
-                    <VictoryStack
-                        colorScale={statuses.map((status) => StatusColor[status]) }
-                        style={{ data: { width: 20} }}
-                    >
-                        { data.map((statusData) => { return (<VictoryBar
-                                                                 labels={({ datum }) => `${datum.count} ${datum.status} responses for ${datum.x} (${sectionNames[datum.x]})`}
-
-                                                                 labelComponent={<VictoryTooltip/>}
-                                                                 events={eventHandlers}
-                                                                 key={statusData[0].x} data={statusData} />) } ) }
-                    </VictoryStack>
-                </VictoryChart>
-            </div>
-        </React.Fragment>
+                                                             labelComponent={<VictoryTooltip/>}
+                                                             events={eventHandlers}
+                                                             key={statusData[0].x} data={statusData} />) } ) }
+                </VictoryStack>
+            </VictoryChart>
+        </div>
     );
 })

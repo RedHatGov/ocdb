@@ -8,7 +8,14 @@ export const CompletionStackCharts = React.memo((props: CompletionChartsProps) =
     const { data } = props;
     return (
         <React.Fragment>
-            { Object.keys(data).map((c) => { return (<CompletionStackChart key={c} cs={data[c]} />)}) }
+            { Object.keys(data).map((c) => { return (
+                  <React.Fragment>
+                      <TextContent>
+                          <Text component="h2">{data[c].Certification}</Text>
+                      </TextContent>
+                      <CompletionStackChart key={c} cs={data[c]} />
+                  </React.Fragment>
+            )}) }
         </React.Fragment>
     )
 })
@@ -46,38 +53,33 @@ const CompletionStackChart = React.memo((props: CompletionChartProps) => {
     }]
 
     return (
-        <React.Fragment>
-            <TextContent>
-                <Text component="h2">{props.cs.Certification}</Text>
-            </TextContent>
-            <div style={{ height: '465px', width: '750px' }}>
-                <Chart
-                    ariaDesc="Control responses over time"
-                    ariaTitle="Control responses over time"
-                    legendData={legendData}
-                    legendOrientation="vertical"
-                    legendPosition="right"
-                    height={300}
-                    padding={{
-                        bottom: 75, // Adjusted to accomodate legend
-                        left: 50,
-                        right: 150,
-                        top: 20,
-                    }}
-                    maxDomain={{y: maxDomain}}
-                    theme={customTheme(statuses, 'stack')}
-                    scale={{x: 'time'}}
-                    containerComponent={<ChartVoronoiContainer labels={({ datum }) => `${datum.name}: ${datum.y}`} constrainToVisibleArea />}
-                >
-                    <ChartAxis />
-                    <ChartAxis dependentAxis showGrid />
-                    <ChartStack>
-                        { result.map((statusArea) => {
-                            return (<ChartArea key={statusArea[0].name} data={statusArea} interpolation="monotoneX" events={eventHandlers} />)
-                        }) }
-                    </ChartStack>
-                </Chart>
-            </div>
-        </React.Fragment>
+        <div style={{ height: '465px', width: '750px' }}>
+            <Chart
+                ariaDesc="Control responses over time"
+                ariaTitle="Control responses over time"
+                legendData={legendData}
+                legendOrientation="vertical"
+                legendPosition="right"
+                height={300}
+                padding={{
+                    bottom: 75, // Adjusted to accomodate legend
+                    left: 50,
+                    right: 150,
+                    top: 20,
+                }}
+                maxDomain={{y: maxDomain}}
+                theme={customTheme(statuses, 'stack')}
+                scale={{x: 'time'}}
+                containerComponent={<ChartVoronoiContainer labels={({ datum }) => `${datum.name}: ${datum.y}`} constrainToVisibleArea />}
+            >
+                <ChartAxis />
+                <ChartAxis dependentAxis showGrid />
+                <ChartStack>
+                    { result.map((statusArea) => {
+                        return (<ChartArea key={statusArea[0].name} data={statusArea} interpolation="monotoneX" events={eventHandlers} />)
+                    }) }
+                </ChartStack>
+            </Chart>
+        </div>
     );
 })

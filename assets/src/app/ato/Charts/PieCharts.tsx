@@ -7,7 +7,14 @@ export const CompletionPieCharts = React.memo((props: CompletionChartsProps) => 
     const { data } = props;
     return (
         <React.Fragment>
-            { Object.keys(data).map((c) => { return (<CertificationCompletionPieChart key={c} cs={data[c]} />)}) }
+            { Object.keys(data).map((c) => { return (
+                  <React.Fragment>
+                      <TextContent>
+                          <Text component="h2">{data[c].Certification}</Text>
+                      </TextContent>
+                      <CertificationCompletionPieChart key={c} cs={data[c]} />
+                  </React.Fragment>
+            )}) }
         </React.Fragment>
     )
 })
@@ -22,45 +29,40 @@ const CertificationCompletionPieChart = React.memo((props: CompletionChartProps)
     })
     const baseUrl = controlsBaseUrl(props.cs.Certification)
     return (
-        <React.Fragment>
-            <TextContent>
-                <Text component="h2">{props.cs.Certification}</Text>
-            </TextContent>
-            <div style={{ height: '230px', width: '350px' }}>
-                <ChartPie
-                    ariaDesc={"Pie chart of " + props.cs.Certification}
-                    ariaTitle={"Completion of " + props.cs.Certification}
-                    constrainToVisibleArea={true}
-                    data={data}
-                    height={230}
-                    labels={({ datum }) => `${datum.x}: ${datum.y}`}
-                    legendData={legend}
-                    legendOrientation="vertical"
-                    legendPosition="right"
-                    events={[{
-                        target: "data",
-                        eventHandlers: {
-                            onClick: () => {
-                                return [{
-                                    target: "data",
-                                    mutation: (props) => {
-                                        window.open(baseUrl + data[props.index].x);
-                                        return null
-                                    }
-                                }];
-                            }
+        <div style={{ height: '230px', width: '350px' }}>
+            <ChartPie
+                ariaDesc={"Pie chart of " + props.cs.Certification}
+                ariaTitle={"Completion of " + props.cs.Certification}
+                constrainToVisibleArea={true}
+                data={data}
+                height={230}
+                labels={({ datum }) => `${datum.x}: ${datum.y}`}
+                legendData={legend}
+                legendOrientation="vertical"
+                legendPosition="right"
+                events={[{
+                    target: "data",
+                    eventHandlers: {
+                        onClick: () => {
+                            return [{
+                                target: "data",
+                                mutation: (props) => {
+                                    window.open(baseUrl + data[props.index].x);
+                                    return null
+                                }
+                            }];
                         }
-                    }]}
-                    padding={{
-                        bottom: 20,
-                        left: 20,
-                        right: 180, // Adjusted to accommodate legend
-                        top: 20
-                    }}
-                    theme={customTheme(data.map((s) => s.x) , 'pie')}
-                    width={350}
-               />
-            </div>
-        </React.Fragment>
+                    }
+                }]}
+                padding={{
+                    bottom: 20,
+                    left: 20,
+                    right: 180, // Adjusted to accommodate legend
+                    top: 20
+                }}
+                theme={customTheme(data.map((s) => s.x) , 'pie')}
+                width={350}
+           />
+        </div>
     )
 })
