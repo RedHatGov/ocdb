@@ -5,6 +5,7 @@ import { ComponentStats } from '@app/ato/Charts/common'
 import { CompletionPieCharts} from '@app/ato/Charts/PieCharts'
 import { CompletionStackCharts } from '@app/ato/Charts/StackCharts'
 import { CompletionRadarCharts } from '@app/ato/Charts/RadarCharts'
+import { CompletionBarCharts } from '@app/ato/Charts/BarCharts'
 import * as Api from '@app/lib/api'
 import * as qs from '@app/lib/querystring'
 
@@ -23,6 +24,7 @@ const titleToId = {
     "0": 0,
     "1": 1,
     "2": 2,
+    "3": 3,
 }
 
 export class CompletionCharts extends React.PureComponent<CompletionChartsProps, CompletionChartsState> {
@@ -76,7 +78,12 @@ export class CompletionCharts extends React.PureComponent<CompletionChartsProps,
                         <CompletionStackCharts data={this.state.data} />
                     </PageSection>
                 </Tab>
-                <Tab eventKey={2} title="Radar charts">
+                <Tab eventKey={2} title="Per Section Details">
+                    <PageSection>
+                        <CompletionBarCharts data={this.state.data} />
+                    </PageSection>
+                </Tab>
+                <Tab eventKey={3} title="Radar charts">
                     <PageSection>
                         <CompletionRadarCharts data={this.state.data} />
                     </PageSection>
