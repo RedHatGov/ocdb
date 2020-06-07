@@ -61,6 +61,7 @@ func cmake() error {
 		"-DCMAKE_BUILD_TYPE=Debug",
 		"-DSSG_CENTOS_DERIVATIVES_ENABLED:BOOL=OFF",
 		"-DSSG_SCIENTIFIC_LINUX_DERIVATIVES_ENABLED:BOOL=OFF",
+		"-DSSG_OVAL_SCHEMATRON_VALIDATION_ENABLED=FALSE",
 		"../",
 	}
 	cmakeCmd := exec.Command("cmake", cmakeParams...)
