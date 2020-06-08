@@ -15,6 +15,7 @@ type Job struct {
 	LastStart   time.Time
 	LastSuccess time.Time
 	LastError   string
+	ErrorCount  uint
 }
 
 func (job *Job) SetUpIn(w worker.Worker) {
@@ -44,9 +45,15 @@ func (job *Job) run() error {
 	err := job.Fn()
 	if err != nil {
 		job.LastError = err.Error()
+		job.ErrorCount += 1
+		if job.ErrorCount < 10 {
+			utils.Log.Errorf("Job '%s' Failed: %s. Re-trying", job.Name, job.LastError)
+			return job.run()
+		}
 	} else {
 		job.LastError = ""
 		job.LastSuccess = time.Now()
+		job.ErrorCount = 0
 	}
 	return err
 }
