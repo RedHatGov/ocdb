@@ -1,4 +1,4 @@
-package jobs
+package job
 
 import (
 	"github.com/RedHatGov/ocdb/pkg/utils"
@@ -17,7 +17,7 @@ type Job struct {
 	LastError   string
 }
 
-func (job *Job) setUpIn(w worker.Worker) {
+func (job *Job) SetUpIn(w worker.Worker) {
 	err := w.Register(job.Name, func(args worker.Args) error {
 		job.reschedule(w, job.Period)
 		return job.run()

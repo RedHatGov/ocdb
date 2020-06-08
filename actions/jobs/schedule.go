@@ -1,6 +1,7 @@
 package jobs
 
 import (
+	"github.com/RedHatGov/ocdb/pkg/backend/job"
 	"github.com/RedHatGov/ocdb/pkg/cac"
 	"github.com/RedHatGov/ocdb/pkg/masonry"
 	"github.com/RedHatGov/ocdb/pkg/masonry/stats"
@@ -8,18 +9,18 @@ import (
 	"time"
 )
 
-var List = []Job{
-	Job{
+var List = []job.Job{
+	job.Job{
 		Name:   "Open Control Masonry Refresh",
 		Fn:     masonry.Refresh,
 		Period: time.Hour,
 	},
-	Job{
+	job.Job{
 		Name:   "ComplianceAsCode Rebuild",
 		Fn:     cac.Refresh,
 		Period: time.Hour,
 	},
-	Job{
+	job.Job{
 		Name:   "Open Control Historical Statistics",
 		Fn:     stats.RefreshHistoryStatistics,
 		Period: time.Hour * 24,
@@ -28,7 +29,7 @@ var List = []Job{
 
 func Init(worker worker.Worker) {
 	for i, _ := range List {
-		job := &(List[i])
-		job.setUpIn(worker)
+		j := &(List[i])
+		j.SetUpIn(worker)
 	}
 }
