@@ -34,7 +34,7 @@ func Refresh() error {
 }
 
 func make() error {
-	makeCmd := exec.Command("make")
+	makeCmd := exec.Command("make", "install")
 	makeCmd.Dir = contentCache + "/build/"
 	logWriter := utils.LogWriter{}
 	makeCmd.Stdout = logWriter
@@ -62,6 +62,7 @@ func cmake() error {
 		"-DSSG_CENTOS_DERIVATIVES_ENABLED:BOOL=OFF",
 		"-DSSG_SCIENTIFIC_LINUX_DERIVATIVES_ENABLED:BOOL=OFF",
 		"-DSSG_OVAL_SCHEMATRON_VALIDATION_ENABLED=FALSE",
+		"-DCMAKE_INSTALL_PREFIX=/tmp/.ComplianceAsCode.content_install",
 		"../",
 	}
 	cmakeCmd := exec.Command("cmake", cmakeParams...)
