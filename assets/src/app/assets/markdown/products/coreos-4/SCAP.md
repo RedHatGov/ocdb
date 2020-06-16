@@ -10,7 +10,7 @@ This is a *draft* content. This profile reflects U.S. Government consensus conte
 Available profiles:
  * Australian Cyber Security Centre (ACSC) Essential Eight: [HTML](/cac/guides/ssg-rhcos4-guide-e8.html), [Ansible Playbook](/cac/ansible/rhcos4-playbook-e8.yml), [Bash](/cac/bash/rhcos4-script-e8.sh), [Ignition](/cac/rhcos4/ignition-fixes.xml)
  * NIST 800-53 Moderate-Impact Baseline for Red Hat Enterprise Linux CoreOS: [HTML](/cac/guides/ssg-rhcos4-guide-moderate.html), [Ansible Playbook](/cac/ansible/rhcos4-playbook-moderate.yml), [Bash](/cac/bash/rhcos4-script-moderate.sh), [Ignition](/cac/rhcos4/ignition-fixes.xml)
- * NIST National Checklist for Red Hat Enterprise Linux CoreOS: [HTML](/cac/guides/ssg-rhcos4-guide-coreos-ncp.html), [Ansible Playbook](/cac/ansible/rhcos4-playbook-coreos-ncp.yml), [Bash](/cac/bash/rhcos4-script-coreos-ncp.sh), [Ignition](/cac/rhcos4/ignition-fixes.xml)
+ * NIST National Checklist for Red Hat Enterprise Linux CoreOS: [HTML](/cac/guides/ssg-rhcos4-guide-ncp.html), [Ansible Playbook](/cac/ansible/rhcos4-playbook-ncp.yml), [Bash](/cac/bash/rhcos4-script-ncp.sh), [Ignition](/cac/rhcos4/ignition-fixes.xml)
 
 SCAP content:
  * All in one DataStream: [SCAP 1.3](/cac/ssg-rhcos4-ds.xml), [SCAP 1.2](/cac/ssg-rhcos4-ds-1.2.xml)
