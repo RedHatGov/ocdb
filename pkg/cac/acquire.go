@@ -12,13 +12,13 @@ import (
 
 var mux sync.Mutex
 
-const contentCache = "/tmp/.scap_cache"
+const gitCache = "/tmp/.scap_cache"
 
 // Refresh function refreshes masonry data
 func Refresh() error {
 	mux.Lock()
 	defer mux.Unlock()
-	err := git.PullOrClone(contentCache, "https://github.com/ComplianceAsCode/content", nil)
+	err := git.PullOrClone(gitCache, "https://github.com/ComplianceAsCode/content", nil)
 	if err != nil {
 		return err
 	}
@@ -35,7 +35,7 @@ func Refresh() error {
 
 func make() error {
 	makeCmd := exec.Command("make", "install")
-	makeCmd.Dir = contentCache + "/build/"
+	makeCmd.Dir = gitCache + "/build/"
 	logWriter := utils.LogWriter{}
 	makeCmd.Stdout = logWriter
 	makeCmd.Stderr = logWriter
@@ -67,7 +67,7 @@ func cmake() error {
 		"../",
 	}
 	cmakeCmd := exec.Command("cmake", cmakeParams...)
-	cmakeCmd.Dir = contentCache + "/build/"
+	cmakeCmd.Dir = gitCache + "/build/"
 	cmakeCmdErr := &bytes.Buffer{}
 	cmakeCmd.Stdout = &utils.LogWriter{}
 	cmakeCmd.Stderr = cmakeCmdErr
