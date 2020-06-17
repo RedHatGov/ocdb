@@ -12,7 +12,10 @@ import (
 
 var mux sync.Mutex
 
-const gitCache = "/tmp/.scap_cache"
+const (
+	gitCache   = "/tmp/.scap_cache"
+	buildCache = gitCache + "/build/"
+)
 
 // Refresh function refreshes masonry data
 func Refresh() error {
@@ -35,7 +38,7 @@ func Refresh() error {
 
 func make() error {
 	makeCmd := exec.Command("make", "install")
-	makeCmd.Dir = gitCache + "/build/"
+	makeCmd.Dir = buildCache
 	logWriter := utils.LogWriter{}
 	makeCmd.Stdout = logWriter
 	makeCmd.Stderr = logWriter
@@ -67,7 +70,7 @@ func cmake() error {
 		"../",
 	}
 	cmakeCmd := exec.Command("cmake", cmakeParams...)
-	cmakeCmd.Dir = gitCache + "/build/"
+	cmakeCmd.Dir = buildCache
 	cmakeCmdErr := &bytes.Buffer{}
 	cmakeCmd.Stdout = &utils.LogWriter{}
 	cmakeCmd.Stderr = cmakeCmdErr

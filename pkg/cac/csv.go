@@ -31,7 +31,7 @@ func srgToCsv(product string) error {
 		"--output", "tables/table-"+product+"-srgmap-flat.csv",
 		xsltFilename,
 		"../shared/references/disa-os-srg-v1r6.xml")
-	cmd.Dir = gitCache + "/build"
+	cmd.Dir = buildCache
 	cmdErr := &bytes.Buffer{}
 	cmd.Stdout = &utils.LogWriter{}
 	cmd.Stderr = cmdErr
@@ -48,5 +48,5 @@ func unbundleXslt() error {
 	if err != nil {
 		return fmt.Errorf("Assets pack does not contain %s: %v", xsltFilename, err)
 	}
-	return ioutil.WriteFile(gitCache+"/build/"+xsltFilename, xsltBytes, 0600)
+	return ioutil.WriteFile(buildCache+xsltFilename, xsltBytes, 0600)
 }
