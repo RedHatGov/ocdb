@@ -80,7 +80,7 @@ func App() *buffalo.App {
 		admin := apiV1.Group("/admin/")
 		admin.Resource("/jobs", api.JobsResource{&buffalo.BaseResource{}})
 
-		app.ServeFiles("/cac/", cac.HttpFiles())
+		app.ServeFiles("/cac/", cac.BuildFiles())
 		app.ServeFiles("/", static.AssetsBox) // serve files from the public directory
 		utils.SetLogger(app.Logger)
 	}

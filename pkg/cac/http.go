@@ -2,6 +2,6 @@ package cac
 
 import "net/http"
 
-func HttpFiles() http.FileSystem {
+func BuildFiles() http.FileSystem {
 	return http.Dir(contentCache + "/build")
 }
