@@ -13,9 +13,10 @@ import (
 var mux sync.Mutex
 
 const (
-	gitCache     = "/tmp/.scap_cache"
-	buildCache   = gitCache + "/build/"
-	installCache = "/tmp/.ComplianceAsCode.content_install/"
+	gitCache         = "/tmp/.scap_cache"
+	buildCache       = gitCache + "/build/"
+	installCache     = "/tmp/.ComplianceAsCode.content_install/"
+	installScapCache = installCache + "share/xml/scap/ssg/content/"
 )
 
 // Refresh function refreshes masonry data

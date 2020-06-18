@@ -81,6 +81,7 @@ func App() *buffalo.App {
 		admin.Resource("/jobs", api.JobsResource{&buffalo.BaseResource{}})
 
 		app.ServeFiles("/cac/", cac.BuildFiles())
+		app.ServeFiles("/compliance-as-code/scap/", cac.InstalledScapFiles())
 		app.ServeFiles("/", static.AssetsBox) // serve files from the public directory
 		utils.SetLogger(app.Logger)
 	}
