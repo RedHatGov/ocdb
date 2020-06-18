@@ -13,8 +13,9 @@ import (
 var mux sync.Mutex
 
 const (
-	gitCache   = "/tmp/.scap_cache"
-	buildCache = gitCache + "/build/"
+	gitCache     = "/tmp/.scap_cache"
+	buildCache   = gitCache + "/build/"
+	installCache = "/tmp/.ComplianceAsCode.content_install/"
 )
 
 // Refresh function refreshes masonry data
@@ -66,7 +67,7 @@ func cmake() error {
 		"-DSSG_CENTOS_DERIVATIVES_ENABLED:BOOL=OFF",
 		"-DSSG_SCIENTIFIC_LINUX_DERIVATIVES_ENABLED:BOOL=OFF",
 		"-DSSG_OVAL_SCHEMATRON_VALIDATION_ENABLED=FALSE",
-		"-DCMAKE_INSTALL_PREFIX=/tmp/.ComplianceAsCode.content_install",
+		"-DCMAKE_INSTALL_PREFIX=" + installCache,
 		"../",
 	}
 	cmakeCmd := exec.Command("cmake", cmakeParams...)
