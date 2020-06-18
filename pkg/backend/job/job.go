@@ -46,7 +46,7 @@ func (job *Job) run() error {
 	if err != nil {
 		job.LastError = err.Error()
 		job.ErrorCount += 1
-		if job.ErrorCount < 10 {
+		if job.ErrorCount < 16 {
 			utils.Log.Errorf("Job '%s' Failed: %s. Re-trying", job.Name, job.LastError)
 			return job.run()
 		}
