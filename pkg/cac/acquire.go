@@ -35,6 +35,10 @@ func Refresh() error {
 	if err != nil {
 		return err
 	}
+	err = buildRolieFeed()
+	if err != nil {
+		return err
+	}
 	return makeSrgCsv()
 }
 
