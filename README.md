@@ -1,4 +1,4 @@
-# OpenControl Database
+# ATO Pathways
 
 [![Docker Repository on Quay](https://quay.io/repository/slukasik/ocdb/status "Docker Repository on Quay")](https://quay.io/repository/slukasik/ocdb)
 
