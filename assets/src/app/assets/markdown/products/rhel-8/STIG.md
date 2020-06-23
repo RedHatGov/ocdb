@@ -17,3 +17,4 @@ Available downloads:
 
 ### Download released content available at NIST NVD
  * [NIST National Checklist for Red Hat Enterprise Linux 8.x content v0.1.48 Checklist Details](https://nvd.nist.gov/ncp/checklist/909)
+ * [Red Hat KCS Article](https://access.redhat.com/articles/5067391)
