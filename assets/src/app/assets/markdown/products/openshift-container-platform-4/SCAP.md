@@ -5,13 +5,12 @@ SCAP content for OpenShift Container Platform 4 is being developed under [Compli
 ### Open Computing Information Security Profile
 Available downloads:
  * Implementation Guide
-   * for Master Node [HTML](/cac/guides/ssg-ocp4-guide-opencis-master.html)
-   * for a Node [HTML](/cac/guides/ssg-ocp4-guide-opencis-node.html)
+   * Australian Cyber Security Centre (ACSC) Essential Eight [HTML](/cac/guides/ssg-ocp4-guide-e8.html)
+   * CIS Red Hat OpenShift Container Platform 4 Benchmark [HTML](/cac/guides/ssg-ocp4-guide-cis.html)
+   * NIST 800-53 Moderate-Impact Baseline for Red Hat OpenShift [HTML](/cac/guides/ssg-ocp4-guide-moderate.html)
+   * NIST National Checklist for Red Hat OpenShift Container Platform [HTML](/cac/guides/ssg-ocp4-guide-index.html)
  * SCAP content
    * All in one DataStream: [SCAP 1.3](/cac/ssg-ocp4-ds.xml), [SCAP 1.2](/cac/ssg-ocp4-ds-1.2.xml)
    * Checklist: [XCCDF 1.2](/cac/ssg-ocp4-xccdf-1.2.xml), [XCCDF 1.1](/cac/ssg-ocp4-xccdf.xml)
      * Assessment Details: [OVAL](/cac/ssg-ocp4-oval.xml)
      * Questionnaire: [OCIL](/cac/ssg-ocp4-ocil.xml)
- * All in one remediation scripts:
-   * for Master Node [Ansible Playbook](/cac/ansible/ocp4-playbook-opencis-master.yml), [Bash](/cac/bash/ocp4-script-opencis-master.sh)
-   * for a Node [Ansible Playbook](/cac/ansible/ocp4-playbook-opencis-node.yml), [Bash](/cac/bash/ocp4-script-opencis-node.sh)
