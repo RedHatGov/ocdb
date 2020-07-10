@@ -15,7 +15,7 @@ ADD . .
 RUN go get ./...
 RUN buffalo build --ldflags '-linkmode external -extldflags "-static -lz -llzma -licuuc -licudata -ldl -lstdc++ -lm"' -o /bin/app
 
-FROM fedora:31
+FROM registry.access.redhat.com/ubi8/ubi:latest
 RUN dnf install -y bash git ca-certificates cmake make openscap-scanner python3-pyyaml python3-jinja2 && dnf clean all
 
 WORKDIR /bin/
