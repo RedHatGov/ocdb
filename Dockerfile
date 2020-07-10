@@ -1,6 +1,6 @@
 # This is a multi-stage Dockerfile and requires >= Docker 17.05
 # https://docs.docker.com/engine/userguide/eng-image/multistage-build/
-FROM gobuffalo/buffalo:v0.15.5 as builder
+FROM gobuffalo/buffalo:v0.16.10 as builder
 ENV GO111MODULE=on
 
 RUN mkdir -p $GOPATH/src/github.com/RedHatGov/ocdb
@@ -13,7 +13,7 @@ ADD yarn.lock .
 RUN yarn install --no-progress
 ADD . .
 RUN go get ./...
-RUN buffalo build --ldflags '-linkmode external -extldflags "-static -lz -llzma -licuuc -licudata -ldl -lstdc++ -lm"' -o /bin/app
+RUN buffalo build --verbose --ldflags '-linkmode external -extldflags "-static -lz -llzma -licuuc -licudata -ldl -lstdc++ -lm"' -o /bin/app
 
 FROM fedora:latest
 RUN dnf install -y bash git ca-certificates cmake make openscap-scanner python3-pyyaml python3-jinja2 && dnf clean all
