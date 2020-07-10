@@ -11,6 +11,13 @@ RUN apt-get update && apt-get install -y libxml2-dev zlib1g-dev liblzma-dev libi
 ADD package.json .
 ADD yarn.lock .
 RUN yarn install --no-progress
+# Copy the Go Modules manifests
+COPY go.mod go.mod
+COPY go.sum go.sum
+# cache deps before building and copying source so that we don't need to re-download as much
+# and so that source changes don't invalidate our downloaded layer
+RUN go mod download
+
 ADD . .
 RUN go get ./...
 RUN buffalo build --ldflags '-linkmode external -extldflags "-static -lz -llzma -licuuc -licudata -ldl -lstdc++ -lm"' -o /bin/app
