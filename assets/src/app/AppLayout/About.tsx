@@ -45,7 +45,7 @@ class SimpleAboutModal extends React.PureComponent<{}, AboutState> {
                     productName="ATO Pathways"
                 >
                     <TextContent>
-                        <Text component="p">This microsite, and resources contained within, are reflect open source projects on GitHub.</Text>
+                        <Text component="p">This microsite, and resources contained within, reflect open source projects on GitHub.</Text>
                         <TextList component="dl">
                             <TextListItem component="dt">ComplianceAsCode</TextListItem>
                             <TextListItem component="dd"><Text component="a" href="https://github.com/ComplianceAsCode/content/"><EmptyStateIcon icon={GithubIcon}/></Text></TextListItem>

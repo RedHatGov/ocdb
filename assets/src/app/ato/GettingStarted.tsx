@@ -29,7 +29,7 @@ const GettingStarted: React.FunctionComponent<any> = (props) => {
                       </GalleryItem>
                   </Gallery>
                   <Text component="h2">Open Source</Text>
-                  <Text component="p">This microsite, and resources contained within, are reflect open source projects on GitHub.</Text>
+                  <Text component="p">This microsite, and resources contained within, reflect open source projects on GitHub.</Text>
                   <TextList>
                       <TextListItem>
                           <Text component={TextVariants.a} href="https://github.com/RedHatGov/ocdb">
