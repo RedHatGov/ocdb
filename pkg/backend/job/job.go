@@ -26,7 +26,7 @@ func (job *Job) SetUpIn(w worker.Worker) {
 	if err != nil {
 		utils.Log.Fatalf("Could not register job: %v", err)
 	}
-	job.reschedule(w, time.Minute)
+	job.reschedule(w, time.Second)
 }
 
 func (job *Job) reschedule(w worker.Worker, period time.Duration) {
