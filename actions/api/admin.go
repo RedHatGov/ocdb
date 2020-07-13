@@ -16,9 +16,6 @@ func (v JobsResource) List(c buffalo.Context) error {
 
 func ReadinessHandler(c buffalo.Context) error {
 	for _, j := range jobs.List {
-		if j.LastError != "" {
-			return c.Render(500, r.JSON(fmt.Sprintf("Error occurred in job %s: '%s'. Already retried job %d times.", j.Name, j.LastError, j.ErrorCount+1)))
-		}
 		if j.LastSuccess.IsZero() {
 			return c.Render(500, r.JSON(fmt.Sprintf("Waiting for unfinished job: %s", j.Name)))
 		}
