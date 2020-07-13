@@ -79,6 +79,7 @@ func App() *buffalo.App {
 
 		admin := apiV1.Group("/admin/")
 		admin.Resource("/jobs", api.JobsResource{&buffalo.BaseResource{}})
+		admin.GET("/readiness", api.ReadinessHandler)
 
 		app.ServeFiles("/cac/", cac.BuildFiles())
 		app.ServeFiles("/compliance-as-code/scap/", cac.InstalledScapFiles())
