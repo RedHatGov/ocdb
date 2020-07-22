@@ -22,7 +22,9 @@ class ComponentFedRAMPTemplates extends React.Component<any, FedRAMPsState> {
         }
     }
     buildRows(products) {
-        this.setState({rows: products.map(function(p, idx) {
+        this.setState({rows: products.filter((p) => {
+                return p.satisfies
+            }).map(function(p, idx) {
             return [
                 (<Text component="p" key={idx}>{p.name}</Text>),
                 /* (<TextContent key={idx+'t'}>
