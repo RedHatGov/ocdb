@@ -12,8 +12,6 @@ export var components = memoize(async function components() {
 });
 
 const extraProducts = [
-    {key: 'rhel-8', name: 'Red Hat Enterprise Linux 8'},
-    {key: 'rhel-7', name: 'Red Hat Enterprise Linux 7'},
 ];
 
 function addExtraProducts(products) {
