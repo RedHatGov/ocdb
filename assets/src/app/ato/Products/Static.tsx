@@ -2,12 +2,9 @@ export const ProductIdOverridesMap: {[Identifier: string]: string} = {
     coreos4: 'coreos-4',
     idm: 'identity-management',
     ocp3: 'openshift-container-platform-3',
-    ocp4: 'openshift-container-platform-4',
     osp13: 'openstack-platform-13',
-    rhel7: 'enterprise-linux-7',
-    rhel8: 'enterprise-linux-8',
     rhvh: 'virtualization-host',
-    rhvm: 'virtualization-manager',
+    rhvm: 'virtualization-manager'
 }
 
 function ProductIdOverride(id) {
@@ -79,13 +76,13 @@ const ProductInfo: {[Identifier: string]: ProductTemplate } = {
             'SCAP': require('@app/assets/markdown/products/openstack-platform-13/SCAP.md').default,
         }
     },
-    'enterprise-linux-7': {
+    'rhel-7': {
         texts: {
             'Overview': require('@app/assets/markdown/products/rhel-7/Overview.md').default,
             'SCAP': require('@app/assets/markdown/products/rhel-7/SCAP.md').default,
         }
     },
-    'enterprise-linux-8': {
+    'rhel-8': {
         texts: {
             'Overview': require('@app/assets/markdown/products/rhel-8/Overview.md').default,
             'SCAP': require('@app/assets/markdown/products/rhel-8/SCAP.md').default,
