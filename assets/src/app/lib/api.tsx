@@ -26,16 +26,6 @@ function addExtraProducts(products) {
 }
 
 export var componentControls = memoize(async function(componentId: string) {
-    if (componentId == 'rhel-8') {
-        return new Promise(function(resolve, reject) {
-            resolve({'errors': [], 'controls': [], 'name': 'Red Hat Enterprise Linux 8'})
-        })
-    }
-    if (componentId == 'rhel-7') {
-        return new Promise(function(resolve, reject) {
-            resolve({'errors': [], 'controls': [], 'name': 'Red Hat Enterprise Linux 7'})
-        })
-    }
     return fetch('/api/v1/components/' + componentId + '/controls')
         .then(response => response.json())
         .then((data) => {
