@@ -14,7 +14,6 @@ require (
 	github.com/gobuffalo/pop v4.13.1+incompatible
 	github.com/gobuffalo/suite v2.8.2+incompatible
 	github.com/gocomply/scap v0.0.0-20200611111220-27dcc4e20641 // indirect
-	github.com/jbowtie/gokogiri v0.0.0-20190301021639-37f655d3078f // indirect
 	github.com/markbates/grift v1.5.0
 	github.com/opencontrol/compliance-masonry v1.1.6
 	github.com/opencontrol/compliance-masonry/commands/docs v0.0.0-00010101000000-000000000000 // indirect
