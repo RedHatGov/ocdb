@@ -13,13 +13,13 @@ require (
 	github.com/gobuffalo/packr/v2 v2.8.0
 	github.com/gobuffalo/pop v4.13.1+incompatible
 	github.com/gobuffalo/suite v2.8.2+incompatible
-	github.com/gocomply/scap v0.0.0-20200611111220-27dcc4e20641 // indirect
+        github.com/jbowtie/gokogiri v0.0.0-20190301021639-37f655d3078f // indirect
 	github.com/markbates/grift v1.5.0
 	github.com/opencontrol/compliance-masonry v1.1.6
 	github.com/opencontrol/compliance-masonry/commands/docs v0.0.0-00010101000000-000000000000 // indirect
 	github.com/opencontrol/compliance-masonry/models v0.0.0-00010101000000-000000000000 // indirect
 	github.com/opencontrol/fedramp-templater v0.0.0-00010101000000-000000000000
-	github.com/rolieup/golie v0.0.0-20200617162306-0b44ef84da3a
+	github.com/rolieup/golie v0.1.2
 	github.com/unrolled/secure v1.0.7
 	github.com/xlab/handysort v0.0.0-20150421192137-fb3537ed64a1 // indirect
 )
