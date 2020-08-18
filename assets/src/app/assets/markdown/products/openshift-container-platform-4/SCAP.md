@@ -8,7 +8,7 @@ Available downloads:
    * Australian Cyber Security Centre (ACSC) Essential Eight [HTML](/cac/guides/ssg-ocp4-guide-e8.html)
    * CIS Red Hat OpenShift Container Platform 4 Benchmark [HTML](/cac/guides/ssg-ocp4-guide-cis.html)
    * NIST 800-53 Moderate-Impact Baseline for Red Hat OpenShift [HTML](/cac/guides/ssg-ocp4-guide-moderate.html)
-   * NIST National Checklist for Red Hat OpenShift Container Platform [HTML](/cac/guides/ssg-ocp4-guide-index.html)
+   * NIST National Checklist for Red Hat OpenShift Container Platform [HTML](/cac/guides/ssg-ocp4-guide-ncp.html)
  * SCAP content
    * All in one DataStream: [SCAP 1.3](/cac/ssg-ocp4-ds.xml), [SCAP 1.2](/cac/ssg-ocp4-ds-1.2.xml)
    * Checklist: [XCCDF 1.2](/cac/ssg-ocp4-xccdf-1.2.xml), [XCCDF 1.1](/cac/ssg-ocp4-xccdf.xml)
