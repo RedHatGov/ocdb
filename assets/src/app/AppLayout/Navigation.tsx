@@ -150,10 +150,8 @@ class Navigation extends React.Component<any, NavigationState> {
                                           (l1 as any).subRoutes.map((function(l2, j) {
                                                   const id = groupId + '_itm-' + j;
                                                   return (
-                                                      <NavItem groupId={groupId} itemId={id} isActive={activeItem === id} key={id}>
-                                                          <NavLink exact={true} to={l2.routesTo(productId) + '1'}>
-                                                              {l2.label}
-                                                          </NavLink>
+                                                      <NavItem to={l2.routesTo(productId) + '1'} groupId={groupId} itemId={id} isActive={activeItem === id} key={id}>
+                                                            {l2.label}
                                                       </NavItem>
                                                   );
                                               }
@@ -163,10 +161,8 @@ class Navigation extends React.Component<any, NavigationState> {
                                   )
                               }
                               return (
-                                  <NavItem itemId={id} isActive={activeItem === id} key={id}>
-                                      <NavLink exact={true} to={l.routesTo(productId)}>
-                                          {l1.label}
-                                      </NavLink>
+                                  <NavItem itemId={id} to={l.routesTo(productId)} isActive={activeItem === id} key={id}>
+                                        {l1.label}
                                   </NavItem>
                               );
                           } else {
@@ -178,10 +174,8 @@ class Navigation extends React.Component<any, NavigationState> {
                                           (l1 as RouterGroup).routes.map((function(l2, j) {
                                               var id = groupId + '_itm-' + j;
                                               return (
-                                                  <NavItem groupId={groupId} itemId={id} isActive={activeItem === id} key={id}>
-                                                      <NavLink exact={true} to={l2.to}>
-                                                          {l2.label}
-                                                      </NavLink>
+                                                  <NavItem to={l2.to} groupId={groupId} itemId={id} isActive={activeItem === id} key={id}>
+                                                        {l2.label}
                                                   </NavItem>
                                               );
                                           }))
