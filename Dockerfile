@@ -1,7 +1,6 @@
 # This is a multi-stage Dockerfile and requires >= Docker 17.05
 # https://docs.docker.com/engine/userguide/eng-image/multistage-build/
-FROM gobuffalo/buffalo:v0.15.5 as builder
-ENV GO111MODULE=on
+FROM gobuffalo/buffalo:v0.16.15 as builder
 
 RUN mkdir -p $GOPATH/src/github.com/RedHatGov/ocdb
 WORKDIR $GOPATH/src/github.com/RedHatGov/ocdb
