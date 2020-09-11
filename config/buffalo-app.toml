@@ -1,7 +1,7 @@
 name = "ocdb"
 bin = "bin/ocdb"
 vcs = "git"
-with_pop = true
+with_pop = false
 with_sqlite = false
 with_dep = false
 with_webpack = true
