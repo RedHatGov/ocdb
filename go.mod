@@ -9,7 +9,6 @@ require (
 	github.com/gobuffalo/envy v1.9.0
 	github.com/gobuffalo/fizz v1.13.0 // indirect
 	github.com/gobuffalo/mw-csrf v1.0.0
-	github.com/gobuffalo/mw-forcessl v0.0.0-20200131175327-94b2bd771862
 	github.com/gobuffalo/mw-i18n v1.1.0
 	github.com/gobuffalo/mw-paramlogger v1.0.0
 	github.com/gobuffalo/nulls v0.4.0 // indirect
@@ -38,7 +37,6 @@ require (
 	github.com/sirupsen/logrus v1.6.0 // indirect
 	github.com/spf13/cobra v1.0.0 // indirect
 	github.com/stretchr/testify v1.6.1 // indirect
-	github.com/unrolled/secure v1.0.7
 	github.com/xlab/handysort v0.0.0-20150421192137-fb3537ed64a1 // indirect
 	golang.org/x/crypto v0.0.0-20200820211705-5c72a883971a // indirect
 	golang.org/x/net v0.0.0-20200904194848-62affa334b73 // indirect
