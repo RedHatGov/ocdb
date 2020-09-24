@@ -28,25 +28,6 @@ const GettingStarted: React.FunctionComponent<any> = (props) => {
                           </Text>
                       </GalleryItem>
                   </Gallery>
-                  <Text component="h2">Open Source</Text>
-                  <Text component="p">This microsite, and resources contained within, reflect open source projects on GitHub.</Text>
-                  <TextList>
-                      <TextListItem>
-                          <Text component={TextVariants.a} href="https://github.com/RedHatGov/ocdb">
-                              OpenControl Database
-                          </Text>
-                      </TextListItem>
-                      <TextListItem>
-                          <Text component={TextVariants.a} href="https://github.com/ComplianceAsCode/redhat">
-                              OpenControl Content for Red Hat products
-                          </Text>
-                      </TextListItem>
-                      <TextListItem>
-                          <Text component={TextVariants.a} href="https://github.com/ComplianceAsCode/content">
-                              Library of SCAP, Ansible & Bash Compliance Content
-                          </Text>
-                      </TextListItem>
-                  </TextList>
               </TextContent>
           </PageSection>
       </Page>
