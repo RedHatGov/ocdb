@@ -26,7 +26,7 @@ export interface ProductTemplate {
 
 const ProductInfo: {[Identifier: string]: ProductTemplate } = {
     'ansible-tower': {
-        image: require('@app/assets/images/ansible-tower-logo.png').default,
+        image: require('@app/assets/images/rh-tower.png').default,
         texts: {
             'Overview': require('@app/assets/markdown/products/ansible-tower/Overview.md').default,
             'ICS-500-27': require('@app/assets/markdown/products/ansible-tower/ICS-500-27.md').default,
@@ -34,7 +34,7 @@ const ProductInfo: {[Identifier: string]: ProductTemplate } = {
         }
     },
     'coreos-4': {
-        image: require('@app/assets/images/coreos-logo.png').default,
+        image: require('@app/assets/images/rh-coreos.png').default,
         texts: {
             'Overview': require('@app/assets/markdown/products/coreos-4/Overview.md').default,
             'SCAP': require('@app/assets/markdown/products/coreos-4/SCAP.md').default,
@@ -51,38 +51,41 @@ const ProductInfo: {[Identifier: string]: ProductTemplate } = {
         }
     },
     'openshift-container-platform-3': {
-        image: require('@app/assets/images/openshift-logo.png').default,
+        image: require('@app/assets/images/rh-openshift.png').default,
         texts: {
             'Overview': require('@app/assets/markdown/products/openshift-container-platform-3/Overview.md').default,
             'SCAP': require('@app/assets/markdown/products/openshift-container-platform-3/SCAP.md').default,
         }
     },
     'openshift-container-platform-4': {
-        image: require('@app/assets/images/openshift-logo.png').default,
+        image: require('@app/assets/images/rh-openshift.png').default,
         texts: {
             'Overview': require('@app/assets/markdown/products/openshift-container-platform-4/Overview.md').default,
             'SCAP': require('@app/assets/markdown/products/openshift-container-platform-4/SCAP.md').default,
         }
     },
     'openshift-dedicated': {
+        image: require('@app/assets/images/rh-openshift.png').default,
         texts: {
             'Overview': require('@app/assets/markdown/products/openshift-dedicated/Overview.md').default
         }
     },
     'openstack-platform-13': {
-        image: require('@app/assets/images/openstack-logo.png').default,
+        image: require('@app/assets/images/rh-openstack.png').default,
         texts: {
             'Overview': require('@app/assets/markdown/products/openstack-platform-13/Overview.md').default,
             'SCAP': require('@app/assets/markdown/products/openstack-platform-13/SCAP.md').default,
         }
     },
     'rhel-7': {
+        image: require('@app/assets/images/rh-rhel.png').default,
         texts: {
             'Overview': require('@app/assets/markdown/products/rhel-7/Overview.md').default,
             'SCAP': require('@app/assets/markdown/products/rhel-7/SCAP.md').default,
         }
     },
     'rhel-8': {
+        image: require('@app/assets/images/rh-rhel8.png').default,
         texts: {
             'Overview': require('@app/assets/markdown/products/rhel-8/Overview.md').default,
             'SCAP': require('@app/assets/markdown/products/rhel-8/SCAP.md').default,
@@ -90,12 +93,14 @@ const ProductInfo: {[Identifier: string]: ProductTemplate } = {
         }
     },
     'virtualization-host': {
+        image: require('@app/assets/images/rh-virtualization.png').default,
         texts: {
             'SCAP': require('@app/assets/markdown/products/virtualization-host/SCAP.md').default,
             'Overview': require('@app/assets/markdown/products/virtualization-host/Overview.md').default,
         }
     },
     'virtualization-manager': {
+        image: require('@app/assets/images/rh-virtualization.png').default,
         texts: {
             'Overview': require('@app/assets/markdown/products/virtualization-manager/Overview.md').default,
         }

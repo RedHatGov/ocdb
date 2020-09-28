@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { PageSection, PageSectionVariants } from '@patternfly/react-core';
+import { Brand, PageSection, PageSectionVariants } from '@patternfly/react-core';
 import {
   Page,
   Gallery,
@@ -8,6 +8,7 @@ import {
   Text,
   Card,
   CardBody,
+  CardFooter,
   CardHead,
   CardHeader,
 } from '@patternfly/react-core';
@@ -17,7 +18,7 @@ import { GetProductParamsFromUrl } from '@app/AppLayout/ProductSelector'
 import { ProductInfo } from '@app/ato/Products/Static.tsx'
 
 import * as Api from '@app/lib/api'
-import redhatLogo from '@app/assets/images/red-hat-logo-a.png';
+import redhatLogo from '@app/assets/images/rh-hat.png';
 
 const ProductGalleryItem: React.FunctionComponent<any> = (props) => {
     var productId = props['product']['key'];
@@ -25,13 +26,13 @@ const ProductGalleryItem: React.FunctionComponent<any> = (props) => {
     return (
         <GalleryItem>
             <NavLink exact={true} aria-label={productId} to={"/ato/products/" + productId + props['params']}>
-                <Card isHoverable>
-                    <CardHead>
-                        <img src={logo} alt={"logo of " + productId} />
+                <Card isHoverable style={{ minHeight: '15em' }}>
+                    <CardHead >
+                        <Brand src={logo} alt={"logo of " + productId} style={{ height: '5em' }} />
                     </CardHead>
-                    <CardHeader>{props['product']['name']}</CardHeader>
+                    <CardBody>{props['product']['name']}</CardBody>
                     { props.product.satisfies !== undefined ?
-                        <CardBody><Text component="small">{props['product']['satisfies'].length} controls defined</Text></CardBody>
+                        <CardFooter><Text component="small">{props['product']['satisfies'].length} controls defined</Text></CardFooter>
                         : "" }
                 </Card>
             </NavLink>
