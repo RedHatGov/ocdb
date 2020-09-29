@@ -56,10 +56,10 @@ class ProposeChange extends React.PureComponent<ProposeChangeProps, ProposeChang
             </ApplicationLauncherItem>,
         ];
         return (
-            <div style={{float: 'right'}}>
+            <div style={{ float: 'right' }}>
                 <ApplicationLauncher onSelect={this.onSelect} onToggle={this.onToggle}
-                                     isOpen={isOpen} items={appLauncherItems}
-                                     position={DropdownPosition.right} toggleIcon={<EditAltIcon/>} />
+                    isOpen={isOpen} items={appLauncherItems}
+                    position={DropdownPosition.right} toggleIcon={<EditAltIcon />} />
             </div>
         );
     }
@@ -87,7 +87,7 @@ class Product extends React.PureComponent<any, ProductState> {
         const Element = texts[textId] as any;
         if (Element) {
             return <React.Fragment>
-                <Markdown><Element/></Markdown>
+                <Markdown><Element /></Markdown>
             </React.Fragment>
         }
         return '';
@@ -109,7 +109,7 @@ class Product extends React.PureComponent<any, ProductState> {
         }
     }
 
-    renderTabs(){
+    renderTabs() {
         if (this.showingMarkdown()) {
             const renderMarkdown = this.renderMarkdown;
             return renderMarkdown(this.state.activeTabKey);
@@ -121,21 +121,21 @@ class Product extends React.PureComponent<any, ProductState> {
             return this.renderCharts()
         } else {
             if (this.state.isLoading) {
-                return <Spinner/>
+                return <Spinner />
             } else {
                 return (
                     <React.Fragment>
                         <TextContent>
-                            { this.state.product['errors'].length == 0 ?
-                              '' :
-                              <React.Fragment>
-                                  <Text component="h2">OpenControls Developer Information</Text>
-                                  <Alert  variant="warning" title="Metadata Warnings">
-                                      {this.state.product['errors'].map((function(error, i) {
-                                           return <Text component="p" key={i}>{error}</Text>;
-                                       }))}
-                                  </Alert>
-                              </React.Fragment>
+                            {this.state.product['errors'].length == 0 ?
+                                '' :
+                                <React.Fragment>
+                                    <Text component="h2">OpenControls Developer Information</Text>
+                                    <Alert variant="warning" title="Metadata Warnings">
+                                        {this.state.product['errors'].map((function (error, i) {
+                                            return <Text component="p" key={i}>{error}</Text>;
+                                        }))}
+                                    </Alert>
+                                </React.Fragment>
                             }
                             <Text component="h2">Requirements Traceability Matrix</Text>
                         </TextContent>
@@ -146,25 +146,25 @@ class Product extends React.PureComponent<any, ProductState> {
         }
     }
 
-    render(){
+    render() {
         if (this.state.productId == 'select') {
-            return <Products/>
+            return <Products />
         }
 
         return (
             <Page>
                 <PageSection variant={PageSectionVariants.light}>
                     <ProposeChange link={this.urlForEditing()} />
-                    { this.state.isLoading ?
-                      <Spinner/> :
-                      <React.Fragment>
-                          <TextContent>
-                              <Text component="h1">{this.state.product['name']}</Text>
-                          </TextContent>
-                      </React.Fragment>
+                    {this.state.isLoading ?
+                        <Spinner /> :
+                        <React.Fragment>
+                            <TextContent>
+                                <Text component="h1">{this.state.product['name']}</Text>
+                            </TextContent>
+                        </React.Fragment>
                     }
 
-                    { this.renderTabs() }
+                    {this.renderTabs()}
 
                 </PageSection>
             </Page>
@@ -192,16 +192,16 @@ class Product extends React.PureComponent<any, ProductState> {
             }
         }
         if (state.activeTabKey != activeTabKey) {
-            return {activeTabKey};
+            return { activeTabKey };
         }
         return null;
     }
     componentDidUpdate() {
         if (this.state.isLoading && this.state.productId != 'select') {
             Api.componentControls(this.state.productId)
-               .then(data => {
-                   this.setState({product: data, isLoading: false})
-               })
+                .then(data => {
+                    this.setState({ product: data, isLoading: false })
+                })
         }
     }
 
@@ -218,7 +218,7 @@ class Product extends React.PureComponent<any, ProductState> {
         };
         this.renderMarkdown = this.renderMarkdown.bind(this);
         this.componentDidUpdate = this.componentDidUpdate.bind(this);
-        Api.certifications().then(data => this.setState({certifications: data}))
+        Api.certifications().then(data => this.setState({ certifications: data }))
         this.componentDidUpdate();
     }
 }
