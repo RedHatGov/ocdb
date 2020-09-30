@@ -17,6 +17,7 @@ import { RTMDataList } from '@app/ato/Products/DataList.tsx'
 import { Products } from '@app/ato/Products/Products'
 import { Certification } from '@app/lib/opencontrol'
 import { CompletionCharts } from '@app/ato/Charts/CompletionCharts'
+import { ComponentSSPTemplates } from '@app/ato/Documents/SSPTemplates'
 
 interface ProposeChangeProps {
     link: string;
@@ -94,7 +95,11 @@ class Product extends React.PureComponent<any, ProductState> {
     }
 
     showingMarkdown(): boolean {
-        return this.state.activeTabKey != 'NIST-800-53' && this.state.activeTabKey != 'nist-800-53' && !this.showingCharts()
+        return this.state.activeTabKey != 'NIST-800-53' && this.state.activeTabKey != 'nist-800-53' && !this.showingCharts() && !this.showingSSPTemplates()
+    }
+
+    showingSSPTemplates(): boolean {
+        return this.state.activeTabKey == 'ssp-templates'
     }
 
     showingCharts(): boolean {
@@ -117,6 +122,8 @@ class Product extends React.PureComponent<any, ProductState> {
             return (
                 <Text>NIST-800-53 responses for {this.state.product.name} are not available in a form of open controls and/or oscal.</Text>
             )
+        } else if (this.showingSSPTemplates()) {
+            return this.renderSSPTemplates()
         } else if (this.showingCharts()) {
             return this.renderCharts()
         } else {
@@ -174,6 +181,12 @@ class Product extends React.PureComponent<any, ProductState> {
     renderCharts() {
         return (
             <CompletionCharts productId={this.state.productId} />
+        )
+    }
+
+    renderSSPTemplates() {
+        return (
+            <ComponentSSPTemplates productID={this.state.productId} />
         )
     }
 

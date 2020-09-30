@@ -43,7 +43,7 @@ const staticNavigation: BaseRoute[] = [
         new ProductRoute('System and Information Integrity', '/ato/products/select/NIST-800-53#SI-'),
     ]),
     new ProductRoute('SCAP', '/ato/products/select/SCAP'),
-    new BasicRoute('SSP Templates', '/ato/fedramp-templates'),
+    new ProductRoute('SSP Templates', '/ato/products/select/ssp-templates'),
     new ProductRoute('Certification Progress', '/ato/products/select/Charts'),
 ];
 
