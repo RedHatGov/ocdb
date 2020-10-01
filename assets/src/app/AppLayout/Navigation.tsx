@@ -138,60 +138,66 @@ class Navigation extends React.Component<any, NavigationState> {
         return (
             <Nav onSelect={this.onSelect} theme="dark">
                 <NavList>
-                    {Navigation.links().map((function (l1, i) {
-                        if (!l1.isGroup()) {
-                            var l = (l1 as BaseRouteLink);
-                            var id = 'itm-' + i;
-                            if ((activeItem === id || activeGroup === 'grp-' + i) && l.hasChilds() && productId != 'select') {
-                                const groupId = 'grp-' + i;
-                                return (
-                                    <NavExpandable title={l1.label} groupId={groupId} isActive={true} key={groupId} isExpanded>
-                                        {
-                                            (l1 as any).subRoutes.map((function (l2, j) {
-                                                const id = groupId + '_itm-' + j;
-                                                return (
-                                                    <NavItem to={l2.routesTo(productId) + '1'} groupId={groupId} itemId={id} isActive={activeItem === id} key={id}>
-                                                        {l2.label}
-                                                    </NavItem>
-                                                );
-                                            }
-                                            ))
-                                        }
-                                    </NavExpandable>
-                                )
-                            }
-                            return (
+                    { Navigation.links().map((function(l1, i){
+                          if (!l1.isGroup()) {
+                              var l = (l1 as BaseRouteLink);
+                              var id = 'itm-' + i;
+                              if ((activeItem === id || activeGroup === 'grp-' + i) && l.hasChilds() && productId != 'select') {
+                                  const groupId = 'grp-' + i;
+                                  return (
+                                      <NavExpandable title={l1.label} groupId={groupId} isActive={true} key={groupId} isExpanded>
+                                          {
+                                          (l1 as any).subRoutes.map((function(l2, j) {
+                                                  const id = groupId + '_itm-' + j;
+                                                  return (
+                                                      <NavItem groupId={groupId} itemId={id} isActive={activeItem === id} key={id}>
+                                                          <NavLink exact={true} to={l2.routesTo(productId) + '1'}>
+                                                              {l2.label}
+                                                          </NavLink>
+                                                      </NavItem>
+                                                  );
+                                              }
+                                          ))
+                                          }
+                                      </NavExpandable>
+                                  )
+                              }
+                              return (
                                 <React.Fragment key={id}>
-                                    <NavItem itemId={id} to={l.routesTo(productId)} isActive={activeItem === id} key={id}>
-                                        {l1.label}
+                                    <NavItem itemId={id} isActive={activeItem === id} key={id}>
+                                        <NavLink exact={true} to={l.routesTo(productId)}>
+                                            {l1.label}
+                                        </NavLink>
                                     </NavItem>
                                     { id === "itm-0" ?
                                         <NavGroup title="Product Specific Assets" />
                                     : ""}
                                 </React.Fragment>
-                            );
-                        } else {
-                            var groupId = 'grp-' + i;
-                            return (
-                                <React.Fragment key={groupId}>
-                                    <NavExpandable title={l1.label} groupId={groupId} isActive={activeGroup === groupId} key={groupId} isExpanded>
-                                        {
-                                            (l1 as RouterGroup).routes.map((function (l2, j) {
-                                                var id = groupId + '_itm-' + j;
-                                                return (
-                                                    <NavItem to={l2.to} groupId={groupId} itemId={id} isActive={activeItem === id} key={id}>
-                                                        {l2.label}
-                                                    </NavItem>
-                                                );
-                                            }))
-                                        }
-                                    </NavExpandable>
-                                    <br />
-                                    <NavGroup title="Product Specific Assets" />
-                                </React.Fragment>
-                            );
-                        }
-                    }))}
+                              );
+                          } else {
+                              var groupId = 'grp-' + i;
+                              return (
+                                  <React.Fragment key={groupId}>
+                                  <NavExpandable title={l1.label} groupId={groupId} isActive={activeGroup === groupId} key={groupId} isExpanded>
+                                      {
+                                          (l1 as RouterGroup).routes.map((function(l2, j) {
+                                              var id = groupId + '_itm-' + j;
+                                              return (
+                                                  <NavItem groupId={groupId} itemId={id} isActive={activeItem === id} key={id}>
+                                                      <NavLink exact={true} to={l2.to}>
+                                                          {l2.label}
+                                                      </NavLink>
+                                                  </NavItem>
+                                              );
+                                          }))
+                                      }
+                                  </NavExpandable>
+                                  <br/>
+                                  <NavGroup title="Product Specific Assets"/>
+                                  </React.Fragment>
+                              );
+                          }
+                      }))}
                 </NavList>
             </Nav>
         );
