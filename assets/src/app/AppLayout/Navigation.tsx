@@ -162,8 +162,10 @@ class Navigation extends React.Component<any, NavigationState> {
                             }
                             return (
                                 <React.Fragment key={id}>
-                                    <NavItem itemId={id} to={l.routesTo(productId)} isActive={activeItem === id} key={id}>
-                                        {l1.label}
+                                    <NavItem itemId={id} isActive={activeItem === id} key={id}>
+                                        <NavLink exact={true} to={l.routesTo(productId)}>
+                                            {l1.label}
+                                        </NavLink>
                                     </NavItem>
                                     { id === "itm-0" ?
                                         <NavGroup title="Product Specific Assets" />
@@ -179,8 +181,10 @@ class Navigation extends React.Component<any, NavigationState> {
                                             (l1 as RouterGroup).routes.map((function (l2, j) {
                                                 var id = groupId + '_itm-' + j;
                                                 return (
-                                                    <NavItem to={l2.to} groupId={groupId} itemId={id} isActive={activeItem === id} key={id}>
-                                                        {l2.label}
+                                                    <NavItem groupId={groupId} itemId={id} isActive={activeItem === id} key={id}>
+                                                        <NavLink exact={true} to={l2.to}>
+                                                            {l2.label}
+                                                        </NavLink>
                                                     </NavItem>
                                                 );
                                             }))
