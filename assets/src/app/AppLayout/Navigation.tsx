@@ -37,6 +37,7 @@ const staticNavigation: BaseRoute[] = [
         new ProductRoute('Physical & Environmental Protection', '/ato/products/select/NIST-800-53#PE-'),
         new ProductRoute('Planning', '/ato/products/select/NIST-800-53#PL-'),
         new ProductRoute('Personnel Security', '/ato/products/select/NIST-800-53#PS-'),
+        new ProductRoute('Program Management', '/ato/products/select/NIST-800-53#PM-'),
         new ProductRoute('Risk Management', '/ato/products/select/NIST-800-53#RA-'),
         new ProductRoute('System and Services Acquisition', '/ato/products/select/NIST-800-53#SA-'),
         new ProductRoute('Systems and Communications Protection', '/ato/products/select/NIST-800-53#SC-'),
