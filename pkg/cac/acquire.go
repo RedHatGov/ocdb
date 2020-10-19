@@ -13,9 +13,9 @@ import (
 var mux sync.Mutex
 
 const (
-	gitCache         = "/tmp/.scap_cache"
+	gitCache         = "/var/tmp/.scap_cache"
 	buildCache       = gitCache + "/build/"
-	installCache     = "/tmp/.ComplianceAsCode.content_install/"
+	installCache     = "/var/tmp/.ComplianceAsCode.content_install/"
 	installScapCache = installCache + "share/xml/scap/ssg/content/"
 )
 
