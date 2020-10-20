@@ -70,7 +70,7 @@ func buildHistoricalStats(startDate time.Time) (HistoricalStats, error) {
 		return res, err
 	}
 
-	for date := range generateDatesMonthly(startDate) {
+	for date := range generateDatesBiMonthly(startDate) {
 		oc, err := opencontrolsByDate(ocDir, date)
 		if err != nil {
 			return res, err
@@ -158,11 +158,11 @@ func opencontrolsByDate(ocDir string, date time.Time) (*masonry.OpencontrolData,
 	return masonry.NewOpencontrolData(gitSha, "/tmp/.ComplianceAsCode.redhat.rev")
 }
 
-func generateDatesMonthly(since time.Time) chan time.Time {
+func generateDatesBiMonthly(since time.Time) chan time.Time {
 	today := time.Now()
 	ch := make(chan time.Time)
 	go func() {
-		for date := since; today.After(date); date = date.AddDate(0, 1, 0) {
+		for date := since; today.After(date); date = date.AddDate(0, 2, 0) {
 			ch <- date
 		}
 		ch <- today
