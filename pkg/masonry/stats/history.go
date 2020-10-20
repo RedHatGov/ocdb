@@ -155,7 +155,7 @@ func opencontrolsByDate(ocDir string, date time.Time) (*masonry.OpencontrolData,
 	if err != nil {
 		return nil, err
 	}
-	return masonry.NewOpencontrolData(gitSha, "/tmp/.ComplianceAsCode.content.rev")
+	return masonry.NewOpencontrolData(gitSha, "/tmp/.ComplianceAsCode.redhat.rev")
 }
 
 func generateDatesMonthly(since time.Time) chan time.Time {
