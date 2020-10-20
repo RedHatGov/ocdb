@@ -77,6 +77,11 @@ const ProductInfo: {[Identifier: string]: ProductTemplate } = {
             'SCAP': require('@app/assets/markdown/products/openstack-platform-13/SCAP.md').default,
         }
     },
+    'rhacm': {
+        texts: {
+            'Overview': require('@app/assets/markdown/products/rhacm/Overview.md').default,
+        }
+    },
     'rhel-7': {
         image: require('@app/assets/images/rh-rhel.png').default,
         texts: {
