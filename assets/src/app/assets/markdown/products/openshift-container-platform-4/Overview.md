@@ -24,8 +24,7 @@ can be consulted to review the latest developments on this front.
 OpenShift Container Platform v4.x does not have any US Government IPv6 certifications.
 
 ### Section 508 / VPAT
-OpenShift Container Platform 4.x does not currently have a VPAT document. This is planned for a future
-release.
+[Red Hat Accessibility Conformance Report](https://access.redhat.com/sites/default/files/attachments/openshift-4-vpat.pdf) is available as of July 10, 2020. Full listings of VPAT guides can be seen at [Red Hat Knowledge Base](https://access.redhat.com/articles/2918071).
 
 ### Configuration Guides
 A NIST National Checklist for OpenShift Container Platform v4.x is currently being developed.
