@@ -16,7 +16,7 @@ FIPS 140-2 validation does not constitute an entire product. Rather, underlying 
 or components, such as OpenSSL and OpenSSH, are validated.
 
 Currently, Red Hat Advanced Cluster Management for Kubernetes does not have any FIPS validations and does not
-use FIPS validated cryptography. Those features are roadmapped for a future releases.
+use FIPS validated cryptography. Those features are road-mapped for future releases.
 
 ### USGv6 / IPv6
 Red Hat Advanced Cluster Management for Kubernetes does not have any US Government IPv6 certifications.
@@ -31,7 +31,7 @@ A NIST National Checklist for Red Hat Advanced Cluster Management for Kubernetes
 
 ## NIST 800-53
 NIST 800-53 control responses are available to the general public in [interactive form](/ato/products/rhacm/NIST-800-53).
-For immediate evaluation of certification responses progress review [NIST-800-53 visuals](/ato/products/rhacs/Charts?tab=0)
+For immediate evaluation of certification responses progress, review [NIST-800-53 visuals](/ato/products/rhacs/Charts?tab=0).
 
 ## SCAP
 SCAP content for automated assessment of Red Hat Advanced Cluster Management is not available at the moment.
