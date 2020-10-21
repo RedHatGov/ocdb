@@ -15,14 +15,13 @@ require (
 	github.com/gobuffalo/pop/v5 v5.2.4 // indirect
 	github.com/gobuffalo/suite v2.8.2+incompatible
 	github.com/gobuffalo/validate/v3 v3.3.0 // indirect
+	github.com/gocomply/fedramp v0.1.2-0.20201021131522-addd51608827
 	github.com/gofrs/uuid v3.3.0+incompatible // indirect
-	github.com/google/go-cmp v0.5.2 // indirect
 	github.com/gorilla/handlers v1.5.0 // indirect
 	github.com/gorilla/mux v1.8.0 // indirect
 	github.com/gorilla/sessions v1.2.1 // indirect
 	github.com/jackc/pgproto3/v2 v2.0.4 // indirect
 	github.com/jackc/pgx/v4 v4.8.1 // indirect
-	github.com/jbowtie/gokogiri v0.0.0-20190301021639-37f655d3078f // indirect
 	github.com/karrick/godirwalk v1.16.1 // indirect
 	github.com/lib/pq v1.8.0 // indirect
 	github.com/markbates/grift v1.5.0
@@ -34,7 +33,6 @@ require (
 	github.com/opencontrol/fedramp-templater v0.0.0-00010101000000-000000000000
 	github.com/rogpeppe/go-internal v1.6.2 // indirect
 	github.com/rolieup/golie v0.2.1
-	github.com/sirupsen/logrus v1.6.0 // indirect
 	github.com/stretchr/testify v1.6.1 // indirect
 	golang.org/x/crypto v0.0.0-20200820211705-5c72a883971a // indirect
 	golang.org/x/net v0.0.0-20200904194848-62affa334b73 // indirect
