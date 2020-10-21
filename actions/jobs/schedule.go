@@ -3,6 +3,7 @@ package jobs
 import (
 	"github.com/RedHatGov/ocdb/pkg/backend/job"
 	"github.com/RedHatGov/ocdb/pkg/cac"
+	"github.com/RedHatGov/ocdb/pkg/cac_oscal"
 	"github.com/RedHatGov/ocdb/pkg/masonry"
 	"github.com/RedHatGov/ocdb/pkg/masonry/stats"
 	"github.com/gobuffalo/buffalo/worker"
@@ -23,6 +24,11 @@ var List = []job.Job{
 	job.Job{
 		Name:   "Open Control Historical Statistics",
 		Fn:     stats.RefreshHistoryStatistics,
+		Period: time.Hour * 24,
+	},
+	job.Job{
+		Name:   "Refresh OSCAL resources and Rebuild DOCX templates",
+		Fn:     cac_oscal.Refresh,
 		Period: time.Hour * 24,
 	},
 }
