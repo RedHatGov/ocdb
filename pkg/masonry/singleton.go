@@ -10,7 +10,11 @@ var mux sync.Mutex
 // GetInstance gets memory representation of the masonry cache
 func GetInstance() *OpencontrolData {
 	if instance == nil {
-		Refresh()
+		mux.Lock()
+		mux.Unlock()
+		if instance == nil {
+			Refresh()
+		}
 	}
 	return instance
 }
