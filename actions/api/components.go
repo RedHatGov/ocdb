@@ -1,8 +1,7 @@
 package api
 
 import (
-	"bytes"
-	"github.com/RedHatGov/ocdb/pkg/fedramp"
+	"github.com/RedHatGov/ocdb/pkg/cac_oscal"
 	"github.com/RedHatGov/ocdb/pkg/masonry"
 	"github.com/RedHatGov/ocdb/pkg/masonry/stats"
 	"github.com/gobuffalo/buffalo"
@@ -56,21 +55,12 @@ func ComponentFedrampHandler(c buffalo.Context) error {
 			". Please use High, Moderate, or Low"))
 	}
 
-	document := fedramp.Get(c.Param("component_id"), fedrampLevel)
-	if document != nil {
-		if len(document.Bytes) > 0 {
-			return c.Render(200,
-				r.Download(c,
-					"FedRAMP-"+fedrampLevel+"-"+c.Param("component_id")+".docx",
-					bytes.NewReader(document.Bytes)))
-		}
-
-		strErrors := make([]string, len(document.Errors))
-		for i, err := range document.Errors {
-			strErrors[i] = err.Error()
-		}
-		return c.Render(404, r.JSON(strErrors))
-
+	document, err := cac_oscal.FedrampDocx(c.Param("component_id"), fedrampLevel)
+	if err != nil {
+		return c.Render(500, r.JSON(err))
 	}
-	return c.Render(404, r.JSON("Not found"))
+	defer document.Close()
+	return c.Render(200,
+		r.Download(c, "FedRAMP-"+fedrampLevel+"-"+c.Param("component_id")+".docx",
+			document))
 }

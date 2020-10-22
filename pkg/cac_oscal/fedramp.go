@@ -3,8 +3,24 @@ package cac_oscal
 import (
 	"fmt"
 	"github.com/gocomply/fedramp/pkg/templater"
+	"io"
 	"os"
 )
+
+func FedrampDocx(componentId, level string) (io.ReadCloser, error) {
+	docxPath := fmt.Sprintf("%s/FedRAMP-%s-%s.docx", docxCache, level, componentId)
+	file, err := os.Open(docxPath)
+	if err != nil {
+		err = buildFedrampDocx(componentId, level)
+		if err != nil {
+			return nil, err
+		}
+		file, err = os.Open(docxPath)
+	}
+
+	return file, err
+
+}
 
 func buildFedrampDocx(componentId, level string) error {
 	oscalPath := fmt.Sprintf("%s/xml/%s-fedramp-%s.xml", gitCache, componentId, level)
