@@ -28,9 +28,6 @@ require (
 	github.com/mattn/go-colorable v0.1.7 // indirect
 	github.com/microcosm-cc/bluemonday v1.0.4 // indirect
 	github.com/opencontrol/compliance-masonry v1.1.7-0.20200827173050-70bb3370161e
-	github.com/opencontrol/compliance-masonry/commands/docs v0.0.0-00010101000000-000000000000 // indirect
-	github.com/opencontrol/compliance-masonry/models v0.0.0-00010101000000-000000000000 // indirect
-	github.com/opencontrol/fedramp-templater v0.0.0-00010101000000-000000000000
 	github.com/rogpeppe/go-internal v1.6.2 // indirect
 	github.com/rolieup/golie v0.2.1
 	github.com/stretchr/testify v1.6.1 // indirect
