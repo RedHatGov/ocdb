@@ -8,7 +8,7 @@ import (
 
 func buildFedrampDocx(componentId, level string) error {
 	oscalPath := fmt.Sprintf("%s/xml/%s-fedramp-%s.xml", gitCache, componentId, level)
-	docxPath := fmt.Sprintf("%s/FedRAMP-%s-%s.docx", docxCache, level, componentId)
+	docxPath := fedrampDocxPath(componentId, level)
 	newer := fileNewerThan(oscalPath, docxPath)
 	if newer {
 		err := templater.ConvertFile(oscalPath, docxPath)
@@ -17,6 +17,10 @@ func buildFedrampDocx(componentId, level string) error {
 		}
 	}
 	return nil
+}
+
+func fedrampDocxPath(componentId, level string) string {
+	return fmt.Sprintf("%s/FedRAMP-%s-%s.docx", docxCache, level, componentId)
 }
 
 func fileNewerThan(a, b string) bool {
