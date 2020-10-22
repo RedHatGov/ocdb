@@ -5,7 +5,6 @@ import (
 	"sync"
 
 	"github.com/RedHatGov/ocdb/pkg/git"
-	"github.com/RedHatGov/ocdb/pkg/masonry"
 )
 
 var mux sync.Mutex
@@ -23,35 +22,5 @@ func Refresh() error {
 	if err != nil {
 		return err
 	}
-	return buildDocxs()
-}
-
-func buildDocxs() error {
-	err := os.MkdirAll(docxCache, os.FileMode(0722))
-	if err != nil {
-		return err
-	}
-
-	for componentId := range knownComponents() {
-		for _, level := range []string{"Low", "Moderate", "High"} {
-			err := buildFedrampDocx(componentId, level)
-			if err != nil {
-				return err
-			}
-		}
-	}
-	return nil
-}
-
-func knownComponents() <-chan string {
-	out := make(chan string)
-
-	go func() {
-		ms := masonry.GetInstance()
-		for _, comp := range ms.GetAllComponents() {
-			out <- comp.GetKey()
-		}
-		close(out)
-	}()
-	return out
+	return os.MkdirAll(docxCache, os.FileMode(0722))
 }
