@@ -9,13 +9,14 @@ import (
 type JobFn func() error
 
 type Job struct {
-	Name        string
-	Fn          JobFn `json:"-"`
-	Period      time.Duration
-	LastStart   time.Time
-	LastSuccess time.Time
-	LastError   string
-	ErrorCount  uint
+	Name         string
+	Fn           JobFn `json:"-"`
+	Period       time.Duration
+	DelayedStart time.Duration
+	LastStart    time.Time
+	LastSuccess  time.Time
+	LastError    string
+	ErrorCount   uint
 }
 
 func (job *Job) SetUpIn(w worker.Worker) {
@@ -26,7 +27,7 @@ func (job *Job) SetUpIn(w worker.Worker) {
 	if err != nil {
 		utils.Log.Fatalf("Could not register job: %v", err)
 	}
-	job.reschedule(w, time.Second)
+	job.reschedule(w, job.DelayedStart+time.Second)
 }
 
 func (job *Job) reschedule(w worker.Worker, period time.Duration) {
