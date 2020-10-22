@@ -21,7 +21,7 @@ func Clone(gitRepo, directory string, since *time.Time) error {
 
 	err := gitCmd.Run()
 	if err != nil {
-		return fmt.Errorf("Error running git clone: %v", err)
+		return fmt.Errorf("Error running git clone %s: %v", gitRepo, err)
 	}
 	return nil
 }
@@ -35,7 +35,7 @@ func Pull(directory string) error {
 
 	err := gitCmd.Run()
 	if err != nil {
-		return fmt.Errorf("Error running git pull: %v", err)
+		return fmt.Errorf("Error running git pull in %s: %v", directory, err)
 	}
 	return nil
 }
