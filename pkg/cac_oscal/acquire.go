@@ -38,12 +38,14 @@ func buildDocxs() error {
 		for _, level := range []string{"Low", "Moderate", "High"} {
 			oscalPath := fmt.Sprintf("%s/xml/%s-fedramp-%s.xml", gitCache, componentId, level)
 			docxPath := fmt.Sprintf("%s/FedRAMP-%s-%s.docx", docxCache, level, componentId)
-			err := templater.ConvertFile(oscalPath, docxPath)
-			if err != nil {
-				return err
+			newer := fileNewerThan(oscalPath, docxPath)
+			if newer {
+				err := templater.ConvertFile(oscalPath, docxPath)
+				if err != nil {
+					return err
+				}
 			}
 		}
-
 	}
 	return nil
 }
@@ -59,4 +61,17 @@ func knownComponents() <-chan string {
 		close(out)
 	}()
 	return out
+}
+
+func fileNewerThan(a, b string) bool {
+	aInfo, err := os.Stat(a)
+	if err != nil {
+		return true
+	}
+	bInfo, err := os.Stat(b)
+	if err != nil {
+		return true
+	}
+	return aInfo.ModTime().After(bInfo.ModTime())
+
 }
