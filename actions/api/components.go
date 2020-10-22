@@ -57,7 +57,7 @@ func ComponentFedrampHandler(c buffalo.Context) error {
 
 	document, err := cac_oscal.FedrampDocx(c.Param("component_id"), fedrampLevel)
 	if err != nil {
-		return c.Render(500, r.JSON(err))
+		return c.Render(404, r.JSON(err.Error()))
 	}
 	defer document.Close()
 	return c.Render(200,
