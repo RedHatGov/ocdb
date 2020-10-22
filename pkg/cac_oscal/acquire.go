@@ -1,13 +1,11 @@
 package cac_oscal
 
 import (
-	"fmt"
 	"os"
 	"sync"
 
 	"github.com/RedHatGov/ocdb/pkg/git"
 	"github.com/RedHatGov/ocdb/pkg/masonry"
-	"github.com/gocomply/fedramp/pkg/templater"
 )
 
 var mux sync.Mutex
@@ -36,14 +34,9 @@ func buildDocxs() error {
 
 	for componentId := range knownComponents() {
 		for _, level := range []string{"Low", "Moderate", "High"} {
-			oscalPath := fmt.Sprintf("%s/xml/%s-fedramp-%s.xml", gitCache, componentId, level)
-			docxPath := fmt.Sprintf("%s/FedRAMP-%s-%s.docx", docxCache, level, componentId)
-			newer := fileNewerThan(oscalPath, docxPath)
-			if newer {
-				err := templater.ConvertFile(oscalPath, docxPath)
-				if err != nil {
-					return err
-				}
+			err := buildFedrampDocx(componentId, level)
+			if err != nil {
+				return err
 			}
 		}
 	}
@@ -61,17 +54,4 @@ func knownComponents() <-chan string {
 		close(out)
 	}()
 	return out
-}
-
-func fileNewerThan(a, b string) bool {
-	aInfo, err := os.Stat(a)
-	if err != nil {
-		return true
-	}
-	bInfo, err := os.Stat(b)
-	if err != nil {
-		return true
-	}
-	return aInfo.ModTime().After(bInfo.ModTime())
-
 }
