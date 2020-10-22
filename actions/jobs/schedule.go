@@ -30,7 +30,7 @@ var List = []job.Job{
 		Name:         "Refresh OSCAL resources and Rebuild DOCX templates",
 		Fn:           cac_oscal.Refresh,
 		Period:       time.Hour * 24,
-		DelayedStart: 30 * time.Minute,
+		DelayedStart: 15 * time.Minute,
 	},
 }
 
