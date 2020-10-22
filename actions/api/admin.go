@@ -16,7 +16,7 @@ func (v JobsResource) List(c buffalo.Context) error {
 
 func ReadinessHandler(c buffalo.Context) error {
 	for _, j := range jobs.List {
-		if j.LastSuccess.IsZero() && j.DelayedStart != 0 {
+		if j.LastSuccess.IsZero() && j.DelayedStart == 0 {
 			return c.Render(500, r.JSON(fmt.Sprintf("Waiting for unfinished job: %s", j.Name)))
 		}
 	}
