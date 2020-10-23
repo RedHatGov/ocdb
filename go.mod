@@ -15,7 +15,7 @@ require (
 	github.com/gobuffalo/pop/v5 v5.2.4 // indirect
 	github.com/gobuffalo/suite v2.8.2+incompatible
 	github.com/gobuffalo/validate/v3 v3.3.0 // indirect
-	github.com/gocomply/fedramp v0.1.2-0.20201022125545-daa88096dbe9
+	github.com/gocomply/fedramp v0.1.2-0.20201023144948-7b7dcb4ebb15
 	github.com/gofrs/uuid v3.3.0+incompatible // indirect
 	github.com/gorilla/handlers v1.5.0 // indirect
 	github.com/gorilla/mux v1.8.0 // indirect

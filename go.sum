@@ -609,8 +609,8 @@ github.com/gobuffalo/x v0.0.0-20181025192250-1ef645d63fe8/go.mod h1:AIlnMGlYXOCs
 github.com/gobuffalo/x v0.0.0-20181109195216-5b3131238124/go.mod h1:GpdLUY6/Ztf/3FfxfwsLkDqAGZ0brhlh7LzIibHyZp0=
 github.com/gobuffalo/x v0.0.0-20181110221217-14085ca3e1a9/go.mod h1:ig5vdn4+5IPtxgESlZWo1SSDyHKKef8EjVVKhY9kkIQ=
 github.com/gobuffalo/x v0.0.0-20190224155809-6bb134105960/go.mod h1:ig5vdn4+5IPtxgESlZWo1SSDyHKKef8EjVVKhY9kkIQ=
-github.com/gocomply/fedramp v0.1.2-0.20201022125545-daa88096dbe9 h1:33b/0BzIvWL1oOy6jMZ0FsmVGsN+OAUbZuzPLEipQEM=
-github.com/gocomply/fedramp v0.1.2-0.20201022125545-daa88096dbe9/go.mod h1:ZXCU6qe8ok4Nuct6bdG3+Qtq9ssyCmJdbtS5XMMn8Gc=
+github.com/gocomply/fedramp v0.1.2-0.20201023144948-7b7dcb4ebb15 h1:fACy+4EaFPSyPEAZeKRrdGidBk6hTy115CwUzG5GaSc=
+github.com/gocomply/fedramp v0.1.2-0.20201023144948-7b7dcb4ebb15/go.mod h1:ZXCU6qe8ok4Nuct6bdG3+Qtq9ssyCmJdbtS5XMMn8Gc=
 github.com/gocomply/oscalkit v0.3.3-0.20200927143409-89cbe4b1eaa2 h1:WeUvdoLlaMRQuhs6O2hxdoQYvItV8YGEFTIA7rKixfU=
 github.com/gocomply/oscalkit v0.3.3-0.20200927143409-89cbe4b1eaa2/go.mod h1:GaU6tviVYTq3nlp0GVIPSUOgCxxyeI5SrBt/XkGZokA=
 github.com/gocomply/scap v0.1.0 h1:qlBuDwS4kOApbqsPjjytyQDYXFXrxpT+BKfleO0LN5I=
