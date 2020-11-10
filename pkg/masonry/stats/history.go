@@ -13,7 +13,7 @@ const (
 	startingYear  = 2020
 	startingMonth = 01
 	ocGit         = "https://github.com/ComplianceAsCode/redhat"
-	ocDir         = "/tmp/.ComplianceAsCode.redhat"
+	ocDir         = "/var/tmp/ocdb/ComplianceAsCode.redhat"
 )
 
 type HistoricalStats map[string]ComponentStats
@@ -155,7 +155,7 @@ func opencontrolsByDate(ocDir string, date time.Time) (*masonry.OpencontrolData,
 	if err != nil {
 		return nil, err
 	}
-	return masonry.NewOpencontrolData(gitSha, "/tmp/.ComplianceAsCode.redhat.rev")
+	return masonry.NewOpencontrolData(gitSha, "/var/tmp/ocdb/ComplianceAsCode.redhat.rev")
 }
 
 func generateDatesBiMonthly(since time.Time) chan time.Time {

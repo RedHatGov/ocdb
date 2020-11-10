@@ -23,7 +23,7 @@ func GetInstance() *OpencontrolData {
 func Refresh() error {
 	mux.Lock()
 	defer mux.Unlock()
-	data, err := NewOpencontrolData("master", "/tmp/.masonry_cache")
+	data, err := NewOpencontrolData("master", "/var/tmp/ocdb/masonry_cache")
 	if err != nil {
 		return err
 	}
