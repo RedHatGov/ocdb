@@ -8,7 +8,7 @@ ENV GO111MODULE on
 ENV GOPROXY http://proxy.golang.org
 
 RUN dnf update -y && \
-    dnf install -y libxml2-devel golang-bin yarnpkg nodejs
+    dnf install -y libxml2-devel golang-bin yarnpkg nodejs libsass-devel
 # RUN apt-get update && apt-get install -y libxml2-dev zlib1g-dev liblzma-dev libicu-dev
 
 # this will cache the npm install step, unless package.json changes
