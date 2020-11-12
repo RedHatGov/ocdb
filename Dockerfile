@@ -17,6 +17,7 @@ ADD package.json .
 ADD yarn.lock .
 RUN yarn install --no-progress
 ADD . .
+RUN go get github.com/gobuffalo/buffalo/buffalo
 RUN go get ./...
 RUN ls ~/go/bin/
 RUN echo $PATH
