@@ -9,7 +9,7 @@ ENV GOPROXY http://proxy.golang.org
 ENV PATH ~/go/bin/:$PATH
 
 RUN dnf update -y && \
-    dnf install -y libxml2-devel golang-bin yarnpkg nodejs libsass-devel
+    dnf install -y libxml2-devel golang-bin yarnpkg nodejs
 # RUN apt-get update && apt-get install -y libxml2-dev zlib1g-dev liblzma-dev libicu-dev
 
 # this will cache the npm install step, unless package.json changes
@@ -21,7 +21,7 @@ RUN go get github.com/gobuffalo/buffalo/buffalo
 RUN go get ./...
 RUN ls ~/go/bin/
 RUN echo $PATH
-RUN buffalo build --ldflags '-linkmode external -extldflags "-static -lz -llzma -licuuc -licudata -ldl -lstdc++ -lm"' -o /bin/app
+RUN buffalo build --ldflags '-linkmode external' -o /bin/app
 
 FROM registry.centos.org/centos:8
 RUN \
