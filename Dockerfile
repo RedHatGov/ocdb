@@ -6,10 +6,9 @@ RUN mkdir -p $GOPATH/src/github.com/RedHatGov/ocdb
 WORKDIR $GOPATH/src/github.com/RedHatGov/ocdb
 ENV GO111MODULE on
 ENV GOPROXY http://proxy.golang.org
-ENV PATH ~/go/bin/:$PATH
 
 RUN dnf update -y && \
-    dnf install -y libxml2-devel golang-bin yarnpkg nodejs
+    dnf install -y libxml2-devel golang-bin yarnpkg nodejs libtool
 # RUN apt-get update && apt-get install -y libxml2-dev zlib1g-dev liblzma-dev libicu-dev
 
 # this will cache the npm install step, unless package.json changes
@@ -19,9 +18,7 @@ RUN yarn install --no-progress
 ADD . .
 RUN go get github.com/gobuffalo/buffalo/buffalo
 RUN go get ./...
-RUN ls ~/go/bin/
-RUN echo $PATH
-RUN buffalo build --ldflags '-linkmode external' -o /bin/app
+RUN ~/go/bin/buffalo build --ldflags '-linkmode external' -o /bin/app
 
 FROM registry.centos.org/centos:8
 RUN \
