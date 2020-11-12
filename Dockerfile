@@ -6,6 +6,7 @@ RUN mkdir -p $GOPATH/src/github.com/RedHatGov/ocdb
 WORKDIR $GOPATH/src/github.com/RedHatGov/ocdb
 ENV GO111MODULE on
 ENV GOPROXY http://proxy.golang.org
+ENV PATH ~/go/bin/:$PATH
 
 RUN dnf update -y && \
     dnf install -y libxml2-devel golang-bin yarnpkg nodejs libsass-devel
@@ -17,6 +18,8 @@ ADD yarn.lock .
 RUN yarn install --no-progress
 ADD . .
 RUN go get ./...
+RUN ls ~/go/bin/
+RUN echo $PATH
 RUN buffalo build --ldflags '-linkmode external -extldflags "-static -lz -llzma -licuuc -licudata -ldl -lstdc++ -lm"' -o /bin/app
 
 FROM registry.centos.org/centos:8
