@@ -9,6 +9,7 @@ SCAP content for Red Hat Virtualization Host is being developed under [Complianc
 Available profiles:
  * [DRAFT] DISA STIG for Red Hat Enterprise Linux Virtualization Host (RHELH) [HTML](/cac/guides/ssg-rhel8-guide-rhelh-stig.html)
  * VPP - Protection Profile for Virtualization v. 1.0 for Red Hat Enterprise Linux Hypervisor (RHELH) [HTML](/cac/guides/ssg-rhel8-guide-rhelh-vpp.html)
+
 SCAP content
  * All in one DataStream: [SCAP 1.3](/cac/ssg-rhel8-ds.xml), [SCAP 1.2](/cac/ssg-rhel8-ds-1.2.xml)
  * Checklist: [XCCDF 1.2](/cac/ssg-rhel8-xccdf-1.2.xml), [XCCDF 1.1](/cac/ssg-rhel8-xccdf.xml)
@@ -19,6 +20,7 @@ SCAP content
 Available Profiles:
  * [DRAFT] DISA STIG for Red Hat Enterprise Linux Virtualization Host (RHELH) [HTML](/cac/guides/ssg-rhel7-guide-rhelh-stig.html)
  * VPP - Protection Profile for Virtualization v. 1.0 for Red Hat Enterprise Linux Hypervisor (RHELH) [HTML](/cac/guides/ssg-rhel7-guide-rhelh-vpp.html)
+
 SCAP content
  * All in one DataStream: [SCAP 1.3](/cac/ssg-rhel7-ds.xml), [SCAP 1.2](/cac/ssg-rhel7-ds-1.2.xml)
  * Checklist: [XCCDF 1.2](/cac/ssg-rhel7-xccdf-1.2.xml), [XCCDF 1.1](/cac/ssg-rhel7-xccdf.xml)
