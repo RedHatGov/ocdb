@@ -17,6 +17,10 @@ ADD . .
 RUN go get ./...
 RUN buffalo build --ldflags '-linkmode external -extldflags "-static -lz -llzma -licuuc -licudata -ldl -lstdc++ -lm"' -o /bin/app
 
+RUN mkdir -p /var/tmp/ocdb
+WORKDIR /var/tmp/ocdb
+RUN git clone --depth 1 https://github.com/ComplianceAsCode/oscal ComplianceAsCode.oscal
+
 FROM centos:8
 RUN \
 	dnf install -y 'dnf-command(copr)' && \
@@ -28,6 +32,9 @@ RUN \
 WORKDIR /bin/
 
 COPY --from=builder /bin/app .
+
+WORKDIR /var/tmp/
+COPY --from=builder /var/tmp/ocdb ocdb
 
 # Uncomment to run the binary in "production" mode:
 # ENV GO_ENV=production
