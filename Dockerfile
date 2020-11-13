@@ -22,19 +22,20 @@ WORKDIR /var/tmp/ocdb
 RUN git clone --depth 1 https://github.com/ComplianceAsCode/oscal ComplianceAsCode.oscal
 
 FROM centos:8
+
+WORKDIR /bin/
+COPY --from=builder /bin/app .
+
+WORKDIR /var/tmp/
+COPY --from=builder /var/tmp/ocdb ocdb
+
 RUN \
 	dnf install -y 'dnf-command(copr)' && \
 	dnf copr enable -y openscapmaint/openscap-latest && \
 	dnf install --setopt=tsflags=nodocs -y \
 		bash git ca-certificates cmake make openscap-scanner python3-pyyaml python3-jinja2 python3 && \
-	dnf clean all
-
-WORKDIR /bin/
-
-COPY --from=builder /bin/app .
-
-WORKDIR /var/tmp/
-COPY --from=builder /var/tmp/ocdb ocdb
+	dnf clean all && \
+  chmod o+w /var/tmp/ocdb
 
 # Uncomment to run the binary in "production" mode:
 # ENV GO_ENV=production
