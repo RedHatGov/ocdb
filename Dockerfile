@@ -35,7 +35,7 @@ RUN \
 	dnf install --setopt=tsflags=nodocs -y \
 		bash git ca-certificates cmake make openscap-scanner python3-pyyaml python3-jinja2 python3 && \
 	dnf clean all && \
-  chmod o+w /var/tmp/ocdb
+  chmod og+w /var/tmp/ocdb
 
 # Uncomment to run the binary in "production" mode:
 # ENV GO_ENV=production
