@@ -21,7 +21,7 @@ RUN mkdir -p /var/tmp/ocdb
 WORKDIR /var/tmp/ocdb
 RUN git clone --depth 1 https://github.com/ComplianceAsCode/oscal ComplianceAsCode.oscal
 
-FROM centos:8
+FROM registry.centos.org/centos:8
 
 WORKDIR /bin/
 COPY --from=builder /bin/app .
