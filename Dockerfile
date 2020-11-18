@@ -2,12 +2,14 @@
 # https://docs.docker.com/engine/userguide/eng-image/multistage-build/
 FROM quay.io/slukasik/buffalo-builder as builder
 
+RUN apt-get update && apt-get install -y libxml2-dev zlib1g-dev liblzma-dev libicu-dev
+
+RUN GO111MODULE=off go get -u -v github.com/gocomply/fedramp/cli/gocomply_fedramp
+
 RUN mkdir -p $GOPATH/src/github.com/RedHatGov/ocdb
 WORKDIR $GOPATH/src/github.com/RedHatGov/ocdb
 ENV GO111MODULE on
 ENV GOPROXY http://proxy.golang.org
-
-RUN apt-get update && apt-get install -y libxml2-dev zlib1g-dev liblzma-dev libicu-dev
 
 # this will cache the npm install step, unless package.json changes
 ADD package.json .
@@ -24,7 +26,7 @@ RUN git clone --depth 1 https://github.com/ComplianceAsCode/oscal ComplianceAsCo
 FROM registry.centos.org/centos:8
 
 WORKDIR /bin/
-COPY --from=builder /bin/app .
+COPY --from=builder /bin/app /go/bin/gocomply_fedramp ./
 
 WORKDIR /var/tmp/
 COPY --from=builder /var/tmp/ocdb ocdb
