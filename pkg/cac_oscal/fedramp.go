@@ -8,7 +8,7 @@ import (
 )
 
 func FedrampDocx(componentId, level string) (io.ReadCloser, error) {
-	docxPath := fmt.Sprintf("%s/FedRAMP-%s-%s.docx", docxCache, level, componentId)
+	docxPath := fedrampDocxPath(componentId, level)
 	file, err := os.Open(docxPath)
 	if err != nil {
 		err = buildFedrampDocx(componentId, level)
