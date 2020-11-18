@@ -36,7 +36,7 @@ func buildFedrampDocx(componentId, level string) error {
 }
 
 func fedrampDocxPath(componentId, level string) string {
-	return fmt.Sprintf("%s/FedRAMP-%s-%s.docx", docxCache, level, componentId)
+	return fmt.Sprintf("%s/%s-fedramp-%s.docx", docxCache, componentId, level)
 }
 
 func fileNewerThan(a, b string) bool {

@@ -11,7 +11,7 @@ var mux sync.Mutex
 
 const (
 	gitCache  = "/var/tmp/ocdb/ComplianceAsCode.oscal"
-	docxCache = "/var/tmp/ocdb/docx_cache"
+	docxCache = gitCache + "/docx"
 )
 
 // Refresh function refreshes masonry data
