@@ -8,7 +8,7 @@ import (
 )
 
 func FedrampDocx(componentId, level string) (io.ReadCloser, error) {
-	docxPath := fmt.Sprintf("%s/FedRAMP-%s-%s.docx", docxCache, level, componentId)
+	docxPath := fedrampDocxPath(componentId, level)
 	file, err := os.Open(docxPath)
 	if err != nil {
 		err = buildFedrampDocx(componentId, level)
@@ -36,7 +36,7 @@ func buildFedrampDocx(componentId, level string) error {
 }
 
 func fedrampDocxPath(componentId, level string) string {
-	return fmt.Sprintf("%s/FedRAMP-%s-%s.docx", docxCache, level, componentId)
+	return fmt.Sprintf("%s/%s-fedramp-%s.docx", docxCache, componentId, level)
 }
 
 func fileNewerThan(a, b string) bool {

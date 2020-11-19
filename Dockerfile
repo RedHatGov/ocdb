@@ -22,6 +22,7 @@ RUN buffalo build --ldflags '-linkmode external -extldflags "-static -lz -llzma 
 RUN mkdir -p /var/tmp/ocdb
 WORKDIR /var/tmp/ocdb
 RUN git clone --depth 1 https://github.com/ComplianceAsCode/oscal ComplianceAsCode.oscal
+RUN cd ComplianceAsCode.oscal && PATH=$GOPATH:$PATH make docx
 
 FROM registry.centos.org/centos:8
 
