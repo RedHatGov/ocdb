@@ -2,7 +2,6 @@ package cac_oscal
 
 import (
 	"fmt"
-	"github.com/gocomply/fedramp/pkg/templater"
 	"io"
 	"os"
 )
@@ -27,16 +26,18 @@ func buildFedrampDocx(componentId, level string) error {
 	docxPath := fedrampDocxPath(componentId, level)
 	newer := fileNewerThan(oscalPath, docxPath)
 	if newer {
-		err := templater.ConvertFile(oscalPath, docxPath)
-		if err != nil {
-			return err
-		}
+		return make("docx/" + fedrampDocxFilename(componentId, level))
 	}
 	return nil
 }
 
 func fedrampDocxPath(componentId, level string) string {
-	return fmt.Sprintf("%s/%s-fedramp-%s.docx", docxCache, componentId, level)
+	return fmt.Sprintf("%s/%s", docxCache, fedrampDocxFilename(componentId, level))
+}
+
+func fedrampDocxFilename(componentId, level string) string {
+	return fmt.Sprintf("%s-fedramp-%s.docx", componentId, level)
+
 }
 
 func fileNewerThan(a, b string) bool {

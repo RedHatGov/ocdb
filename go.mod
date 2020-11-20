@@ -15,8 +15,8 @@ require (
 	github.com/gobuffalo/pop/v5 v5.2.4 // indirect
 	github.com/gobuffalo/suite v2.8.2+incompatible
 	github.com/gobuffalo/validate/v3 v3.3.0 // indirect
-	github.com/gocomply/fedramp v0.1.2-0.20201023144948-7b7dcb4ebb15
 	github.com/gofrs/uuid v3.3.0+incompatible // indirect
+	github.com/google/go-cmp v0.5.2 // indirect
 	github.com/gorilla/handlers v1.5.0 // indirect
 	github.com/gorilla/mux v1.8.0 // indirect
 	github.com/gorilla/sessions v1.2.1 // indirect
@@ -30,6 +30,7 @@ require (
 	github.com/opencontrol/compliance-masonry v1.1.7-0.20200827173050-70bb3370161e
 	github.com/rogpeppe/go-internal v1.6.2 // indirect
 	github.com/rolieup/golie v0.2.1
+	github.com/sirupsen/logrus v1.6.0 // indirect
 	github.com/stretchr/testify v1.6.1 // indirect
 	golang.org/x/crypto v0.0.0-20200820211705-5c72a883971a // indirect
 	golang.org/x/net v0.0.0-20200904194848-62affa334b73 // indirect
