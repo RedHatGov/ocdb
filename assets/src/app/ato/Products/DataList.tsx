@@ -15,6 +15,8 @@ import {
     Select, SelectOption, SelectVariant,
     Switch,
     TextInput,
+    ToolbarChipGroup,
+    ToolbarChip,
 } from '@patternfly/react-core';
 import { SearchIcon, DownloadIcon } from '@patternfly/react-icons'
 import {
@@ -264,23 +266,26 @@ class RTMToolbar extends React.Component<RTMToolbarProps, RTMToolbarState> {
         this.setState({filters: filters});
     }
 
-    onDelete(type="", id="") {
+    onDelete(type: string | ToolbarChipGroup = '', id: ToolbarChip | string = '') {
         if (type) {
-            var filters = this.state.filters;
-            filters[type.toLowerCase()] = filters[type.toLowerCase()].filter(s => s !== id);
-            this.setState({filters: filters});
-            this.props.view.recomputeFilters(filters);
-
-        } else {
-            const filters = {
-                section: [],
-                status: [],
-                solution: [],
-                search: [],
-                standard: [],
-            }
-            this.props.view.recomputeFilters(filters);
-            this.setState({filters: filters})
+            const lowerCaseType = typeof type === 'string' ? type.toLowerCase() : type.name.toLowerCase();
+            this.setState(prevState => {
+              const newState = Object.assign(prevState);
+              newState.filters[lowerCaseType] = newState.filters[lowerCaseType].filter((s: string) => s !== id);
+              return {
+                filters: newState.filters
+              };
+            });
+          } else {
+            this.setState({
+                filters: {
+                    section: [],
+                    status: [],
+                    solution: [],
+                    search: [],
+                    standard: []
+                }
+            });
         }
     }
 
