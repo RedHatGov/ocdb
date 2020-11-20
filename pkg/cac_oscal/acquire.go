@@ -1,7 +1,6 @@
 package cac_oscal
 
 import (
-	"os"
 	"sync"
 
 	"github.com/RedHatGov/ocdb/pkg/git"
@@ -18,9 +17,5 @@ const (
 func Refresh() error {
 	mux.Lock()
 	defer mux.Unlock()
-	err := git.PullOrClone(gitCache, "https://github.com/ComplianceAsCode/oscal", nil)
-	if err != nil {
-		return err
-	}
-	return os.MkdirAll(docxCache, os.FileMode(0722))
+	return git.PullOrClone(gitCache, "https://github.com/ComplianceAsCode/oscal", nil)
 }
