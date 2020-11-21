@@ -55,13 +55,13 @@ class ComponentSSPTemplates extends React.Component<FedRAMPsProps> {
     }
 
     render() {
-        const textMod = {modifier: 'flex-2' as 'flex-default', breakpoint: 'md' as 'md'};
-        const emptyMod = {modifier: 'flex-1' as 'flex-default', breakpoint: 'md' as 'md'};
+        // const textMod = {modifier: 'flex-2' as 'flex-default', breakpoint: 'md' as 'md'};
+        // const emptyMod = {modifier: 'flex-1' as 'flex-default', breakpoint: 'md' as 'md'};
         return (
             <Page>
                 <PageSection variant={PageSectionVariants.light}>
                     <Flex>
-                        <Flex breakpointMods={[textMod]}>
+                        <Flex>
                             <FlexItem>
                                 <TextContent>
                                     <Text component="h1">SSP Templates</Text>
@@ -71,7 +71,7 @@ class ComponentSSPTemplates extends React.Component<FedRAMPsProps> {
                                 </TextContent>
                             </FlexItem>
                         </Flex>
-                        <Flex breakpointMods={[emptyMod]}>
+                        <Flex>
                             <FlexItem/>
                         </Flex>
                     </Flex>
