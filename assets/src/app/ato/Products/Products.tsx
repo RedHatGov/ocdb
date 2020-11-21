@@ -26,10 +26,10 @@ const ProductGalleryItem: React.FunctionComponent<any> = (props) => {
     return (
         <GalleryItem>
             <NavLink exact={true} aria-label={productId} to={"/ato/products/" + productId + props['params']}>
-                <Card isHoverable>
+                <Card isHoverable style={{ minHeight: '15em' }}>
                     <CardHeader>
-			<CardHeaderMain>
-                            <img src={logo} alt={"logo of " + productId} />
+			            <CardHeaderMain>
+                            <img src={logo} alt={"logo of " + productId} style={{ height: '5em' }} />
                         </CardHeaderMain>
                     </CardHeader>
                     <CardTitle>{props['product']['name']}</CardTitle>
