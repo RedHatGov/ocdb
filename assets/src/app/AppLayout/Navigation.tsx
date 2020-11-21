@@ -160,20 +160,25 @@ class Navigation extends React.Component<any, NavigationState> {
                                         }
                                     </NavExpandable>
                                 )
-                            }
-                            return (
-                                <React.Fragment key={id}>
-                                    <NavItem itemId={id} isActive={activeItem === id} key={id}>
-                                        <NavLink exact={true} to={l.routesTo(productId)}>
+                            } else {
+                                //   Add NavGroup Title after first iteration "Getting Started"
+                                    if (id === "itm-1") {
+                                        return (
+                                            <React.Fragment>
+                                                <NavGroup title="Product Specific Assets" />
+                                                <NavItem itemId={id} to={l.routesTo(productId)} isActive={activeItem === id} key={id}>
+                                                    {l1.label}
+                                                </NavItem>
+                                            </React.Fragment>
+                                        )
+                                    }
+                                    return (
+                                        <NavItem itemId={id} to={l.routesTo(productId)} isActive={activeItem === id} key={id}>
                                             {l1.label}
-                                        </NavLink>
-                                    </NavItem>
-                                    { id === "itm-0" ?
-                                        <NavGroup title="Product Specific Assets" />
-                                    : ""}
-                                </React.Fragment>
-                            );
-                        } else {
+                                        </NavItem>
+                                    );
+                              }
+                            } else {
                             var groupId = 'grp-' + i;
                             return (
                                 <React.Fragment key={groupId}>
