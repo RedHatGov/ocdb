@@ -32,13 +32,7 @@ func FedrampDocx(componentId, level string) (io.ReadCloser, error) {
 }
 
 func buildFedrampDocx(componentId, level string) error {
-	oscalPath := fmt.Sprintf("%s/xml/%s-fedramp-%s.xml", gitCache, componentId, level)
-	docxPath := fedrampDocxPath(componentId, level)
-	newer := fileNewerThan(oscalPath, docxPath)
-	if newer {
-		return make("docx/" + fedrampFilename(componentId, level, "docx"))
-	}
-	return nil
+	return make("docx/" + fedrampFilename(componentId, level, "docx"))
 }
 
 func fedrampDocxPath(componentId, level string) string {
@@ -47,17 +41,4 @@ func fedrampDocxPath(componentId, level string) string {
 
 func fedrampFilename(componentId, level, format string) string {
 	return fmt.Sprintf("%s-fedramp-%s.%s", componentId, level, format)
-}
-
-func fileNewerThan(a, b string) bool {
-	aInfo, err := os.Stat(a)
-	if err != nil {
-		return true
-	}
-	bInfo, err := os.Stat(b)
-	if err != nil {
-		return true
-	}
-	return aInfo.ModTime().After(bInfo.ModTime())
-
 }
