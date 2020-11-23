@@ -3,7 +3,7 @@ import {
     Page, PageSection, PageSectionVariants,
     Text, TextContent
 } from '@patternfly/react-core';
-import { FileWordIcon } from '@patternfly/react-icons';
+import { FileCodeIcon, FileWordIcon } from '@patternfly/react-icons';
 import { Table, TableBody, TableHeader, TableVariant } from '@patternfly/react-table';
 import * as React from 'react';
 
@@ -15,17 +15,30 @@ class ComponentSSPTemplates extends React.Component<FedRAMPsProps> {
     columns = ['FedRAMP Low', 'FedRAMP Moderate', 'FedRAMP High'];
 
     buildRows(products) {
-             return [[
+        return [
+            [
                 (<TextContent key={products+'l'}>
-                    <Text component="a" href={'/api/v1/components/' + products + '/fedramp/Low'}><FileWordIcon/> .docx</Text>
+                    <Text component="a" href={'/api/v1/components/' + products + '/fedramp/oscal/docx/Low'}><FileWordIcon/> .docx</Text>
                 </TextContent>),
                 (<TextContent key={products+'m'}>
-                    <Text component="a" href={'/api/v1/components/' + products + '/fedramp/Moderate'}><FileWordIcon/> .docx</Text>
+                    <Text component="a" href={'/api/v1/components/' + products + '/fedramp/oscal/docx/Moderate'}><FileWordIcon/> .docx</Text>
                 </TextContent>),
                 (<TextContent key={products+'h'}>
-                    <Text component="a" href={'/api/v1/components/' + products + '/fedramp/High'}><FileWordIcon/> .docx</Text>
+                    <Text component="a" href={'/api/v1/components/' + products + '/fedramp/oscal/docx/High'}><FileWordIcon/> .docx</Text>
                 </TextContent>),
-            ]]
+            ],
+            [
+                (<TextContent key={products+'l'}>
+                    <Text component="a" href={'/api/v1/components/' + products + '/fedramp/oscal/xml/Low'}><FileCodeIcon/> .oscal.xml</Text>
+                </TextContent>),
+                (<TextContent key={products+'m'}>
+                    <Text component="a" href={'/api/v1/components/' + products + '/fedramp/oscal/xml/Moderate'}><FileCodeIcon/> .oscal.xml</Text>
+                </TextContent>),
+                (<TextContent key={products+'h'}>
+                    <Text component="a" href={'/api/v1/components/' + products + '/fedramp/oscal/xml/High'}><FileCodeIcon/> .oscal.xml</Text>
+                </TextContent>),
+            ]
+        ]
     }
 
     render() {
