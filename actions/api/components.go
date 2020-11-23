@@ -70,21 +70,3 @@ func ComponentFedrampOscalHandler(c buffalo.Context) error {
 		r.Download(c, "FedRAMP-"+fedrampLevel+"-"+c.Param("component_id")+"."+fedrampFormat,
 			document))
 }
-
-// ComponentFedrampHandler returns fedramp DOCX template filled in with current components info
-func ComponentFedrampHandler(c buffalo.Context) error {
-	fedrampLevel := c.Param("level")
-	if fedrampLevel != "High" && fedrampLevel != "Moderate" && fedrampLevel != "Low" {
-		return c.Render(404, r.JSON("Unknown level specified "+fedrampLevel+
-			". Please use High, Moderate, or Low"))
-	}
-
-	document, err := cac_oscal.FedrampDocument(c.Param("component_id"), fedrampLevel, "docx")
-	if err != nil {
-		return c.Render(404, r.JSON(err.Error()))
-	}
-	defer document.Close()
-	return c.Render(200,
-		r.Download(c, "FedRAMP-"+fedrampLevel+"-"+c.Param("component_id")+".docx",
-			document))
-}

@@ -70,7 +70,6 @@ func App() *buffalo.App {
 		apiV1.Resource("/certifications", api.CertificationsResource{&buffalo.BaseResource{}})
 		apiV1.GET("/components/{component_id}/controls", api.ComponentControlsHandler)
 		apiV1.GET("/components/{component_id}/statistics", api.ComponentStatisticsHandler)
-		apiV1.GET("/components/{component_id}/fedramp/{level}", api.ComponentFedrampHandler)
 		apiV1.GET("/components/{component_id}/fedramp/oscal/{format}/{level}", api.ComponentFedrampOscalHandler)
 
 		admin := apiV1.Group("/admin/")
