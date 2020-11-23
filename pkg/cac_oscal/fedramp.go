@@ -9,7 +9,7 @@ import (
 func FedrampDocument(componentId, level, format string) (io.ReadCloser, error) {
 	switch format {
 	case "xml":
-		path := fmt.Sprintf("%s/xml/%s-fedramp-%s.xml", gitCache, componentId, level)
+		path := fedrampPath(componentId, level, format)
 		return os.Open(path)
 	default:
 		return nil, fmt.Errorf("Unsupported FedRAMP formatting: %s", format)
@@ -17,7 +17,7 @@ func FedrampDocument(componentId, level, format string) (io.ReadCloser, error) {
 }
 
 func FedrampDocx(componentId, level string) (io.ReadCloser, error) {
-	docxPath := fedrampDocxPath(componentId, level)
+	docxPath := fedrampPath(componentId, level, "docx")
 	file, err := os.Open(docxPath)
 	if err != nil {
 		err = buildFedrampDocx(componentId, level)
@@ -35,8 +35,8 @@ func buildFedrampDocx(componentId, level string) error {
 	return make("docx/" + fedrampFilename(componentId, level, "docx"))
 }
 
-func fedrampDocxPath(componentId, level string) string {
-	return fmt.Sprintf("%s/%s", docxCache, fedrampFilename(componentId, level, "docx"))
+func fedrampPath(componentId, level, format string) string {
+	return fmt.Sprintf("%s/%s/%s", gitCache, format, fedrampFilename(componentId, level, format))
 }
 
 func fedrampFilename(componentId, level, format string) string {
