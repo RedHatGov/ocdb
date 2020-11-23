@@ -36,18 +36,17 @@ func buildFedrampDocx(componentId, level string) error {
 	docxPath := fedrampDocxPath(componentId, level)
 	newer := fileNewerThan(oscalPath, docxPath)
 	if newer {
-		return make("docx/" + fedrampDocxFilename(componentId, level))
+		return make("docx/" + fedrampFilename(componentId, level, "docx"))
 	}
 	return nil
 }
 
 func fedrampDocxPath(componentId, level string) string {
-	return fmt.Sprintf("%s/%s", docxCache, fedrampDocxFilename(componentId, level))
+	return fmt.Sprintf("%s/%s", docxCache, fedrampFilename(componentId, level, "docx"))
 }
 
-func fedrampDocxFilename(componentId, level string) string {
-	return fmt.Sprintf("%s-fedramp-%s.docx", componentId, level)
-
+func fedrampFilename(componentId, level, format string) string {
+	return fmt.Sprintf("%s-fedramp-%s.%s", componentId, level, format)
 }
 
 func fileNewerThan(a, b string) bool {
