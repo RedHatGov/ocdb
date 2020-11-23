@@ -1,6 +1,8 @@
 package api
 
 import (
+	"strings"
+
 	"github.com/RedHatGov/ocdb/pkg/cac_oscal"
 	"github.com/RedHatGov/ocdb/pkg/masonry"
 	"github.com/RedHatGov/ocdb/pkg/masonry/stats"
@@ -45,6 +47,28 @@ func ComponentStatisticsHandler(c buffalo.Context) error {
 		return c.Render(200, r.JSON(stats))
 	}
 	return c.Render(404, r.JSON("Not found"))
+}
+
+// ComponentFedrampOscalHandler returns OSCAL documents for given fedramp
+func ComponentFedrampOscalHandler(c buffalo.Context) error {
+	fedrampFormat := strings.ToLower(c.Param("format"))
+	if fedrampFormat != "xml" {
+		return c.Render(404, r.JSON("Unknown oscal format specified "+fedrampFormat+
+			". Please use 'xml' instead."))
+	}
+	fedrampLevel := c.Param("level")
+	if fedrampLevel != "High" && fedrampLevel != "Moderate" && fedrampLevel != "Low" {
+		return c.Render(404, r.JSON("Unknown level specified "+fedrampLevel+
+			". Please use High, Moderate, or Low"))
+	}
+	document, err := cac_oscal.FedrampDocument(c.Param("component_id"), fedrampLevel, fedrampFormat)
+	if err != nil {
+		return c.Render(404, r.JSON(err.Error()))
+	}
+	defer document.Close()
+	return c.Render(200,
+		r.Download(c, "FedRAMP-"+fedrampLevel+"-"+c.Param("component_id")+"."+fedrampFormat,
+			document))
 }
 
 // ComponentFedrampHandler returns fedramp DOCX template filled in with current components info
