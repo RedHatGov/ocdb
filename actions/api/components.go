@@ -79,7 +79,7 @@ func ComponentFedrampHandler(c buffalo.Context) error {
 			". Please use High, Moderate, or Low"))
 	}
 
-	document, err := cac_oscal.FedrampDocx(c.Param("component_id"), fedrampLevel)
+	document, err := cac_oscal.FedrampDocument(c.Param("component_id"), fedrampLevel, "docx")
 	if err != nil {
 		return c.Render(404, r.JSON(err.Error()))
 	}
