@@ -52,9 +52,9 @@ func ComponentStatisticsHandler(c buffalo.Context) error {
 // ComponentFedrampOscalHandler returns OSCAL documents for given fedramp
 func ComponentFedrampOscalHandler(c buffalo.Context) error {
 	fedrampFormat := strings.ToLower(c.Param("format"))
-	if fedrampFormat != "xml" && fedrampFormat != "docx" {
+	if fedrampFormat != "xml" && fedrampFormat != "docx" && fedrampFormat != "json" {
 		return c.Render(404, r.JSON("Unknown oscal format specified "+fedrampFormat+
-			". Please use 'xml', or 'docx' instead."))
+			". Please use 'xml', 'json', or 'docx' instead."))
 	}
 	fedrampLevel := c.Param("level")
 	if fedrampLevel != "High" && fedrampLevel != "Moderate" && fedrampLevel != "Low" {

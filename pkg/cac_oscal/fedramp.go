@@ -21,6 +21,8 @@ func FedrampDocument(componentId, level, format string) (io.ReadCloser, error) {
 		return file, err
 	case "xml":
 		return os.Open(path)
+	case "json":
+		return os.Open(path)
 	default:
 		return nil, fmt.Errorf("Unsupported FedRAMP formatting: %s", format)
 	}
