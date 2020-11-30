@@ -3,7 +3,7 @@ import {
     Page, PageSection, PageSectionVariants,
     Text, TextContent
 } from '@patternfly/react-core';
-import { FileCodeIcon, FileWordIcon } from '@patternfly/react-icons';
+import { FileAltIcon, FileCodeIcon, FileWordIcon } from '@patternfly/react-icons';
 import { Table, TableBody, TableHeader, TableVariant } from '@patternfly/react-table';
 import * as React from 'react';
 
@@ -36,6 +36,17 @@ class ComponentSSPTemplates extends React.Component<FedRAMPsProps> {
                 </TextContent>),
                 (<TextContent key={products+'h'}>
                     <Text component="a" href={'/api/v1/components/' + products + '/fedramp/oscal/xml/High'}><FileCodeIcon/> .oscal.xml</Text>
+                </TextContent>),
+            ],
+            [
+                (<TextContent key={products+'l'}>
+                    <Text component="a" href={'/api/v1/components/' + products + '/fedramp/oscal/json/Low'}><FileCodeIcon/> .oscal.json</Text>
+                </TextContent>),
+                (<TextContent key={products+'m'}>
+                    <Text component="a" href={'/api/v1/components/' + products + '/fedramp/oscal/json/Moderate'}><FileCodeIcon/> .oscal.json</Text>
+                </TextContent>),
+                (<TextContent key={products+'h'}>
+                    <Text component="a" href={'/api/v1/components/' + products + '/fedramp/oscal/json/High'}><FileAltIcon/> .oscal.json</Text>
                 </TextContent>),
             ]
         ]
