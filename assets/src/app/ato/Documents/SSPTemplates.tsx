@@ -14,42 +14,44 @@ interface FedRAMPsProps {
 class ComponentSSPTemplates extends React.Component<FedRAMPsProps> {
     columns = ['FedRAMP Low', 'FedRAMP Moderate', 'FedRAMP High'];
 
-    buildRows(products) {
+    buildRows(product: string) {
         return [
             [
-                (<TextContent key={products+'l'}>
-                    <Text component="a" href={'/api/v1/components/' + products + '/fedramp/oscal/docx/Low'}><FileWordIcon/> .docx</Text>
-                </TextContent>),
-                (<TextContent key={products+'m'}>
-                    <Text component="a" href={'/api/v1/components/' + products + '/fedramp/oscal/docx/Moderate'}><FileWordIcon/> .docx</Text>
-                </TextContent>),
-                (<TextContent key={products+'h'}>
-                    <Text component="a" href={'/api/v1/components/' + products + '/fedramp/oscal/docx/High'}><FileWordIcon/> .docx</Text>
-                </TextContent>),
+                this.FedRAMPLink(product, "Low", "docx"),
+                this.FedRAMPLink(product, "Moderate", "docx"),
+                this.FedRAMPLink(product, "High", "docx"),
             ],
             [
-                (<TextContent key={products+'l'}>
-                    <Text component="a" href={'/api/v1/components/' + products + '/fedramp/oscal/xml/Low'}><FileCodeIcon/> .oscal.xml</Text>
-                </TextContent>),
-                (<TextContent key={products+'m'}>
-                    <Text component="a" href={'/api/v1/components/' + products + '/fedramp/oscal/xml/Moderate'}><FileCodeIcon/> .oscal.xml</Text>
-                </TextContent>),
-                (<TextContent key={products+'h'}>
-                    <Text component="a" href={'/api/v1/components/' + products + '/fedramp/oscal/xml/High'}><FileCodeIcon/> .oscal.xml</Text>
-                </TextContent>),
+                this.FedRAMPLink(product, "Low", "xml"),
+                this.FedRAMPLink(product, "Moderate", "xml"),
+                this.FedRAMPLink(product, "High", "xml"),
             ],
             [
-                (<TextContent key={products+'l'}>
-                    <Text component="a" href={'/api/v1/components/' + products + '/fedramp/oscal/json/Low'}><FileCodeIcon/> .oscal.json</Text>
-                </TextContent>),
-                (<TextContent key={products+'m'}>
-                    <Text component="a" href={'/api/v1/components/' + products + '/fedramp/oscal/json/Moderate'}><FileCodeIcon/> .oscal.json</Text>
-                </TextContent>),
-                (<TextContent key={products+'h'}>
-                    <Text component="a" href={'/api/v1/components/' + products + '/fedramp/oscal/json/High'}><FileAltIcon/> .oscal.json</Text>
-                </TextContent>),
+                this.FedRAMPLink(product, "Low", "json"),
+                this.FedRAMPLink(product, "Moderate", "json"),
+                this.FedRAMPLink(product, "High", "json"),
             ]
         ]
+    }
+
+    private FedRAMPLink(product: string, _level: string, _format: string) {
+        var icon = <FileAltIcon/>
+
+        switch (_format) {
+            case "xml":
+                icon = <FileCodeIcon/>;
+                break;
+            case "docx":
+                icon = <FileWordIcon/>;
+                break;
+        }
+        var oscal = _format != "docx"
+
+        return (
+            <TextContent key={product + _level}>
+                <Text component="a" href={'/api/v1/components/' + product + '/fedramp/oscal/' + _format + '/' + _level}>{icon} {oscal ? ".oscal" : ""}.{_format}</Text>
+            </TextContent>
+        );
     }
 
     render() {
