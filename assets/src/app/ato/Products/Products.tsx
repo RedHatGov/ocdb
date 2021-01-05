@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Brand, PageSection, PageSectionVariants } from '@patternfly/react-core';
+import { Brand, CardBody, PageSection, PageSectionVariants } from '@patternfly/react-core';
 import {
   Page,
   Gallery,
@@ -25,14 +25,15 @@ const ProductGalleryItem: React.FunctionComponent<any> = (props) => {
     var logo = (ProductInfo[productId] && ProductInfo[productId].image) || redhatLogo;
     return (
         <GalleryItem>
-            <NavLink exact={true} aria-label={productId} to={"/ato/products/" + productId + props['params']}>
-                <Card isHoverable style={{ minHeight: '15em' }}>
+            <NavLink className='prod-navlink' exact={true} aria-label={productId} to={"/ato/products/" + productId + props['params']}>
+                <Card className='prod-card' isHoverable>
                     <CardHeader>
 			            <CardHeaderMain>
-                            <img src={logo} alt={"logo of " + productId} style={{ height: '5em' }} />
+                            <Brand src={logo} alt={"logo of " + productId} style={{ height: '5em' }} />
                         </CardHeaderMain>
                     </CardHeader>
-                    <CardTitle>{props['product']['name']}</CardTitle>
+                    {/* <CardTitle>{props['product']['name']}</CardTitle> */}
+                    <CardBody className='prod-cardbody'>{props['product']['name']}</CardBody>
                     { props.product.satisfies !== undefined ?
                         <CardFooter><Text component="small">{props['product']['satisfies'].length} controls defined</Text></CardFooter>
                         : "" }
@@ -55,7 +56,7 @@ class Products extends React.Component {
                 </PageSection>
 
                 <PageSection>
-                    <Gallery hasGutter>
+                    <Gallery className='prod-gallery' hasGutter>
                         { (this.state['isLoading'] ? <Spinner/> : this.state['products'].map((function(object, i){
                             return (<ProductGalleryItem key={object['key']} product={object} params={params} />);
                         })))}

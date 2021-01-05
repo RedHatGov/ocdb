@@ -33,12 +33,12 @@ const GettingStarted: React.FunctionComponent<any> = () => {
 
                     {/* ATO PROCESS Picture + Ordered List */}
                     <Flex>
-                        <Flex className='rmf' spacer={{ default: 'spacer2xl' }}>
+                        <Flex className='rmf' spaceItems={{ default: 'spaceItems2xl' }}>
                             <FlexItem>
                                 <Brand src={pic} alt="testing" style={{ maxHeight: '25em' }} />
                             </FlexItem>
                             <FlexItem>
-                                <TextList component={TextListVariants.ol}>
+                                <TextList className='vertical-center' component={TextListVariants.ol}>
                                     <TextListItem>Prepare</TextListItem>
                                     <TextListItem>Categorize Information System</TextListItem>
                                     <TextListItem>Select Security Controls</TextListItem>
