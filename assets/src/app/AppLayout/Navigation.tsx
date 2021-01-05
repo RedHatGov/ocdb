@@ -162,19 +162,23 @@ class Navigation extends React.Component<any, NavigationState> {
                                 )
                             } else {
                                 //   Add NavGroup Title after first iteration "Getting Started"
-                                    if (id === "itm-1") {
+                                    if (id === "itm-0") {
                                         return (
                                             <React.Fragment>
-                                                <NavGroup title="Product Specific Assets" />
-                                                <NavItem itemId={id} to={l.routesTo(productId)} isActive={activeItem === id} key={id}>
-                                                    {l1.label}
+                                                <NavItem className='navitm' itemId={id} isActive={activeItem === id} key={id}>
+                                                    <NavLink to={l.routesTo(productId)} exact={true}>
+                                                        {l1.label}
+                                                    </NavLink>
                                                 </NavItem>
+                                                <NavGroup title="Product Specific Assets" />
                                             </React.Fragment>
                                         )
                                     }
                                     return (
-                                        <NavItem itemId={id} to={l.routesTo(productId)} isActive={activeItem === id} key={id}>
-                                            {l1.label}
+                                        <NavItem className='navitm' itemId={id} isActive={activeItem === id} key={id}>
+                                            <NavLink to={l.routesTo(productId)} exact={true}>
+                                                {l1.label}
+                                            </NavLink>
                                         </NavItem>
                                     );
                               }
@@ -196,8 +200,8 @@ class Navigation extends React.Component<any, NavigationState> {
                                             }))
                                         }
                                     </NavExpandable>
-                                    <br />
-                                    <NavGroup title="Product Specific Assets" />
+                                    {/* <br />
+                                    <NavGroup title="Product Specific Assets" /> */}
                                 </React.Fragment>
                             );
                         }
