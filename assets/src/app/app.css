@@ -52,3 +52,7 @@ like CardTitle */
 .prod-cardbody {
   font-weight: bold;
 }
+
+.nav-grouplink {
+  font-size: var(--pf-global--FontSize--md);
+}

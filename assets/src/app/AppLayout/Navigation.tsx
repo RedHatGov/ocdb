@@ -151,7 +151,7 @@ class Navigation extends React.Component<any, NavigationState> {
                                             (l1 as any).subRoutes.map((function (l2, j) {
                                                 const id = groupId + '_itm-' + j;
                                                 return (
-                                                    <NavItem to={l2.routesTo(productId) + '1'} groupId={groupId} itemId={id} isActive={activeItem === id} key={id}>
+                                                    <NavItem className='nav-grouplink' to={l2.routesTo(productId) + '1'} groupId={groupId} itemId={id} isActive={activeItem === id} key={id}>
                                                         {l2.label}
                                                     </NavItem>
                                                 );

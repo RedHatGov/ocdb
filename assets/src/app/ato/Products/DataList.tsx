@@ -277,15 +277,15 @@ class RTMToolbar extends React.Component<RTMToolbarProps, RTMToolbarState> {
               };
             });
           } else {
-            this.setState({
-                filters: {
-                    section: [],
-                    status: [],
-                    solution: [],
-                    search: [],
-                    standard: []
-                }
-            });
+            var filters = {
+                section: [],
+                status: [],
+                solution: [],
+                search: [],
+                standard: [],
+            }
+            this.props.view.recomputeFilters(filters);
+            this.setState({filters: filters});
         }
     }
 
