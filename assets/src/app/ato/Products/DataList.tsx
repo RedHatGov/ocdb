@@ -272,6 +272,7 @@ class RTMToolbar extends React.Component<RTMToolbarProps, RTMToolbarState> {
             this.setState(prevState => {
               const newState = Object.assign(prevState);
               newState.filters[lowerCaseType] = newState.filters[lowerCaseType].filter((s: string) => s !== id);
+              this.props.view.recomputeFilters(newState.filters);
               return {
                 filters: newState.filters
               };
