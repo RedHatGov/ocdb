@@ -5,7 +5,7 @@ go 1.13
 require (
 	github.com/Masterminds/semver/v3 v3.1.1 // indirect
 	github.com/fatih/color v1.10.0 // indirect
-	github.com/gobuffalo/buffalo v0.16.19
+	github.com/gobuffalo/buffalo v0.16.20
 	github.com/gobuffalo/envy v1.9.0
 	github.com/gobuffalo/fizz v1.13.0 // indirect
 	github.com/gobuffalo/mw-csrf v1.0.0
