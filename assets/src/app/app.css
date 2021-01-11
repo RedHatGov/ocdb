@@ -5,4 +5,54 @@ html, body, #root {
 .pf-l-flex.rmf {
   align-items: unset;
   --pf-l-flex--AlignItems: unset;
+  margin-top: auto;
+}
+
+/* Use this to vertically center content in a div. This is what is on the
+Getting Started page for the list */
+.vertical-center {
+  margin: 0;
+  position: relative;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+/* Fix color for Nav Section Titles */
+.pf-c-nav__section-title {
+  border-bottom: var(--pf-c-nav__section-title--BorderBottomWidth) solid #ffffff;
+  color: #c3bfbf;
+}
+
+.navitm {
+  --pf-c-nav__link--before--BorderColor: transparent;
+}
+
+.prod-card {
+  height: 15em;
+}
+
+.prod-gallery {
+  --pf-l-gallery--GridTemplateColumns: repeat(auto-fill, minmax(256px, 1fr));
+}
+
+/* Add more space to the grid gutter */
+.pf-l-gallery.pf-m-gutter.prod-gallery {
+  grid-gap: 1.5rem;
+}
+
+a.prod-navlink {
+  color: #151515;
+  text-decoration: none;
+}
+
+/* Since using a CardTitle causes spacing issues with footer, the solution is to
+just use CardBody for the prod title - then add some font boldness to look just
+like CardTitle */
+.prod-cardbody {
+  font-weight: bold;
+}
+
+.nav-grouplink {
+  font-size: var(--pf-global--FontSize--md);
 }

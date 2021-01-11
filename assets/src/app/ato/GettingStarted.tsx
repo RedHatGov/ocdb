@@ -1,6 +1,6 @@
 import * as React from 'react';
 import pic from 'assets/src/app/assets/images/RMF-steps-all.png';
-import { Brand, Flex, FlexItem, FlexModifiers, PageSection, PageSectionVariants, TextListVariants } from '@patternfly/react-core';
+import { Brand, Flex, FlexItem, PageSection, PageSectionVariants, TextListVariants } from '@patternfly/react-core';
 import {
     Page, TextContent, Text, TextList, TextListItem, TextVariants,
 } from '@patternfly/react-core';
@@ -33,12 +33,12 @@ const GettingStarted: React.FunctionComponent<any> = () => {
 
                     {/* ATO PROCESS Picture + Ordered List */}
                     <Flex>
-                        <Flex className='rmf' breakpointMods={[{ modifier: FlexModifiers["space-items-2xl"] }]}>
+                        <Flex className='rmf' spaceItems={{ default: 'spaceItems2xl' }}>
                             <FlexItem>
                                 <Brand src={pic} alt="testing" style={{ maxHeight: '25em' }} />
                             </FlexItem>
                             <FlexItem>
-                                <TextList component={TextListVariants.ol}>
+                                <TextList className='vertical-center' component={TextListVariants.ol}>
                                     <TextListItem>Prepare</TextListItem>
                                     <TextListItem>Categorize Information System</TextListItem>
                                     <TextListItem>Select Security Controls</TextListItem>

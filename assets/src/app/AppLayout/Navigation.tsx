@@ -151,7 +151,7 @@ class Navigation extends React.Component<any, NavigationState> {
                                             (l1 as any).subRoutes.map((function (l2, j) {
                                                 const id = groupId + '_itm-' + j;
                                                 return (
-                                                    <NavItem to={l2.routesTo(productId) + '1'} groupId={groupId} itemId={id} isActive={activeItem === id} key={id}>
+                                                    <NavItem className='nav-grouplink' to={l2.routesTo(productId) + '1'} groupId={groupId} itemId={id} isActive={activeItem === id} key={id}>
                                                         {l2.label}
                                                     </NavItem>
                                                 );
@@ -160,20 +160,29 @@ class Navigation extends React.Component<any, NavigationState> {
                                         }
                                     </NavExpandable>
                                 )
-                            }
-                            return (
-                                <React.Fragment key={id}>
-                                    <NavItem itemId={id} isActive={activeItem === id} key={id}>
-                                        <NavLink exact={true} to={l.routesTo(productId)}>
-                                            {l1.label}
-                                        </NavLink>
-                                    </NavItem>
-                                    { id === "itm-0" ?
-                                        <NavGroup title="Product Specific Assets" />
-                                    : ""}
-                                </React.Fragment>
-                            );
-                        } else {
+                            } else {
+                                //   Add NavGroup Title after first iteration "Getting Started"
+                                    if (id === "itm-0") {
+                                        return (
+                                            <React.Fragment>
+                                                <NavItem className='navitm' itemId={id} isActive={activeItem === id} key={id}>
+                                                    <NavLink to={l.routesTo(productId)} exact={true}>
+                                                        {l1.label}
+                                                    </NavLink>
+                                                </NavItem>
+                                                <NavGroup title="Product Specific Assets" />
+                                            </React.Fragment>
+                                        )
+                                    }
+                                    return (
+                                        <NavItem className='navitm' itemId={id} isActive={activeItem === id} key={id}>
+                                            <NavLink to={l.routesTo(productId)} exact={true}>
+                                                {l1.label}
+                                            </NavLink>
+                                        </NavItem>
+                                    );
+                              }
+                            } else {
                             var groupId = 'grp-' + i;
                             return (
                                 <React.Fragment key={groupId}>
@@ -191,8 +200,8 @@ class Navigation extends React.Component<any, NavigationState> {
                                             }))
                                         }
                                     </NavExpandable>
-                                    <br />
-                                    <NavGroup title="Product Specific Assets" />
+                                    {/* <br />
+                                    <NavGroup title="Product Specific Assets" /> */}
                                 </React.Fragment>
                             );
                         }
