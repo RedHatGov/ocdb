@@ -18,8 +18,8 @@ interface IAppLayout {
 
 const AppLayout: React.FunctionComponent<IAppLayout> = ({children}) => {
   const logoProps = {
-    href: '/',
-    target: '_blank'
+    href: '/ato/getting_started',
+    target: '_self'
   };
   const [isNavOpen, setIsNavOpen] = React.useState(true);
   const [isMobileView, setIsMobileView] = React.useState(true);
