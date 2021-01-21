@@ -10,7 +10,7 @@ import {
   PageHeaderToolsItem,
 } from '@patternfly/react-core';
 import { InteractiveNavigation } from '@app/AppLayout/Navigation'
-import { ProductSelector } from '@app/AppLayout/ProductSelector'
+// import { ProductSelector } from '@app/AppLayout/ProductSelector'
 
 interface IAppLayout {
   children: React.ReactNode;
@@ -38,7 +38,7 @@ const AppLayout: React.FunctionComponent<IAppLayout> = ({children}) => {
         <PageHeaderTools>
             <PageHeaderToolsGroup>
                 <PageHeaderToolsItem>
-                    <ProductSelector/>
+                    {/* <ProductSelector/> */}
                 </PageHeaderToolsItem>
             </PageHeaderToolsGroup>
             <PageHeaderToolsGroup>
