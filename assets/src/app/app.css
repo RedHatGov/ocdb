@@ -56,3 +56,14 @@ like CardTitle */
 .nav-grouplink {
   font-size: var(--pf-global--FontSize--md);
 }
+
+/* Product Page Header config */
+.pf-c-page__header.product-header {
+  color: black;
+  background-color: var(--pf-c-page__main-section--m-light--BackgroundColor);
+}
+
+h1.pf-c-page__header-brand-link {
+  font-size: x-large;
+  font-weight: bold;
+}
