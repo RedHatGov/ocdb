@@ -5,7 +5,7 @@
 ## Quick Demo
   * run demo in container
   ```
-  podman run -it -p "3000:3000" quay.io/slukasik/ocdb
+  podman run -it -p "3000:3000" quay.io/redhatgov/ocdb
   ```
   * point your browser to [http://127.0.0.1:3000](http://127.0.0.1:3000)
 
