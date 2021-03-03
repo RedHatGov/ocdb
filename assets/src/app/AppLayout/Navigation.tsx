@@ -22,6 +22,7 @@ interface NavigationState {
 
 const staticNavigation: BaseRoute[] = [
     new BasicRoute('Getting Started', '/ato/getting_started'),
+    new BasicRoute('Products', '/ato/products/select/Overview'),
     new ProductRoute('Overview', '/ato/products/select/Overview'),
     new ProductRoute('NIST-800-53', '/ato/products/select/NIST-800-53', [
         new ProductRoute('Access Control', '/ato/products/select/NIST-800-53#AC-'),
@@ -161,8 +162,8 @@ class Navigation extends React.Component<any, NavigationState> {
                                     </NavExpandable>
                                 )
                             } else {
-                                //   Add NavGroup Title after first iteration "Getting Started"
-                                    if (id === "itm-0") {
+                                //   Add NavGroup Title after Products Nav
+                                    if (id === "itm-1") {
                                         return (
                                             <React.Fragment>
                                                 <NavItem className='navitm' itemId={id} isActive={activeItem === id} key={id}>

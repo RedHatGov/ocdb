@@ -6,6 +6,7 @@ import {
     Page, PageSection, PageSectionVariants,
     TextContent,
     Text,
+    PageHeader,
 } from '@patternfly/react-core';
 import { Spinner } from '@patternfly/react-core';
 import { EditAltIcon } from '@patternfly/react-icons'
@@ -158,18 +159,29 @@ class Product extends React.PureComponent<any, ProductState> {
             return <Products />
         }
 
+        // const Header = (
+        //     <PageHeader
+        //       logo={"Hello" + this.state.product['name']}
+        //     />
+        //   );
+        while (this.state.isLoading) {
+            return (
+                <Page>
+                    <PageSection variant={PageSectionVariants.light}>
+                    <ProposeChange link={this.urlForEditing()} />
+                    <Spinner />
+                    </PageSection>
+                </Page>
+            )
+        }
         return (
-            <Page>
+            <Page header={<PageHeader
+                className="product-header"
+                logo={this.state.product['name']}
+                logoComponent="h1"
+              />}>
                 <PageSection variant={PageSectionVariants.light}>
                     <ProposeChange link={this.urlForEditing()} />
-                    {this.state.isLoading ?
-                        <Spinner /> :
-                        <React.Fragment>
-                            <TextContent>
-                                <Text component="h1">{this.state.product['name']}</Text>
-                            </TextContent>
-                        </React.Fragment>
-                    }
 
                     {this.renderTabs()}
 

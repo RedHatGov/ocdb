@@ -50,8 +50,8 @@ class Products extends React.Component {
             <Page>
                 <PageSection variant={PageSectionVariants.light}>
                     <TextContent>
-                        <Text component="h1">Product Documents</Text>
-                        <Text component="p">Product-specific security documentation.</Text>
+                        <Text component="h1">Products</Text>
+                        <Text component="p">Select a product to view its security-relevant documentation.</Text>
                     </TextContent>
                 </PageSection>
 
