@@ -1,6 +1,6 @@
 # ATO Pathways
 
-[![Docker Repository on Quay](https://quay.io/repository/slukasik/ocdb/status "Docker Repository on Quay")](https://quay.io/repository/slukasik/ocdb)
+[![Docker Repository on Quay](https://quay.io/repository/redhatgov/ocdb/status "Docker Repository on Quay")](https://quay.io/repository/redhatgov/ocdb)
 
 ## Quick Demo
   * run demo in container
