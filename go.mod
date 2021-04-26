@@ -5,7 +5,7 @@ go 1.13
 require (
 	github.com/Masterminds/semver/v3 v3.1.1 // indirect
 	github.com/fatih/color v1.10.0 // indirect
-	github.com/gobuffalo/buffalo v0.16.19
+	github.com/gobuffalo/buffalo v0.16.22
 	github.com/gobuffalo/envy v1.9.0
 	github.com/gobuffalo/fizz v1.13.0 // indirect
 	github.com/gobuffalo/mw-csrf v1.0.0
@@ -13,7 +13,6 @@ require (
 	github.com/gobuffalo/mw-paramlogger v1.0.0
 	github.com/gobuffalo/nulls v0.4.0 // indirect
 	github.com/gobuffalo/packr/v2 v2.8.1
-	github.com/gobuffalo/pop/v5 v5.3.1 // indirect
 	github.com/gobuffalo/suite v2.8.2+incompatible
 	github.com/gobuffalo/validate/v3 v3.3.0 // indirect
 	github.com/gocomply/scap v0.1.1 // indirect
