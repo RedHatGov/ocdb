@@ -10,14 +10,13 @@ Federal Information Processing Standard 140-2 is a legal requirement ensuring cr
 FIPS 140-2 validation does not constitute an entire product. Rather, underlying cryptographic
 subsystems or components, such as OpenSSL and OpenSSH, are validated. 
 
-Currently, CoreOS 4.x does not have any FIPS validations and does not use FIPS validated cryptography. Those features are roadmapped
-for a future CoreOS 4.x release.
+CoreOS 4.3+ provides FIPS validated cryptographc functions to Red Hat Openshift Container Platform via FIPS validated RHEL libraries when [properly configured](https://docs.openshift.com/container-platform/4.3/installing/installing-fips.html) before initial cluster boot. FIPS 140-2 validated crytpographic functions are used by critical portions of Openshift which store data, including the etcd database when encrypted and containerized workloads when configured to use the CRI-O container runtimes.
 
 ### USGv6 / IPv6
 CoreOS v4.x does not have any US Government IPv6 certifications.
 
 ### Section 508 / VPAT
-CoreOS 4.x does not currently have a VPAT document. This is planned for a future release.
+CoreOS 4.x does not currently have a VPAT document. CoreOS is designed to provide operating system services for Openshift, which provides the primary user interfaces. Refer to the corresponding [Openshift overview and VPAT](https://atopathways.redhatgov.io/ato/products/openshift-container-platform-4/Overview).
 
 ### Configuration Guides
 A NIST National Checklist for CoreOS v4.x is currently being developed. 
