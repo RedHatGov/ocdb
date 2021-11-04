@@ -6,7 +6,7 @@ require (
 	github.com/Masterminds/semver/v3 v3.1.1 // indirect
 	github.com/fatih/color v1.10.0 // indirect
 	github.com/gobuffalo/buffalo v0.16.19
-	github.com/gobuffalo/envy v1.9.0
+	github.com/gobuffalo/envy v1.10.1
 	github.com/gobuffalo/fizz v1.13.0 // indirect
 	github.com/gobuffalo/mw-csrf v1.0.0
 	github.com/gobuffalo/mw-i18n v1.1.0
@@ -32,11 +32,9 @@ require (
 	github.com/monoculum/formam v0.0.0-20200923020755-6f187e4ffe27 // indirect
 	github.com/opencontrol/compliance-masonry v1.1.7-0.20200827173050-70bb3370161e
 	github.com/pelletier/go-toml v1.8.1 // indirect
-	github.com/rogpeppe/go-internal v1.6.2 // indirect
 	github.com/rolieup/golie v0.2.1
 	github.com/sirupsen/logrus v1.7.0 // indirect
 	github.com/spf13/cobra v1.1.1 // indirect
-	github.com/stretchr/testify v1.6.1 // indirect
 	golang.org/x/crypto v0.0.0-20201221181555-eec23a3978ad // indirect
 	golang.org/x/net v0.0.0-20201224014010-6772e930b67b // indirect
 	golang.org/x/sync v0.0.0-20201207232520-09787c993a3a // indirect
